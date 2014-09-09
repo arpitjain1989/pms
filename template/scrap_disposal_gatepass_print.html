@@ -1,0 +1,98 @@
+<!--BeginDisplayScrapDisposalGatePassBlock-->
+<div style="border:1px solid">
+	<table width="100%" cellpadding="2">
+		<tr>
+			<td align="center">
+				<b style="font-size:22px;">Gate Pass</b>
+				<span style="float:right;">Non - Returnable</span>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<table width="100%" cellpadding="2">
+					<tr>
+						<td colspan="2" rowspan="3">
+							<img src="images/transform-logo.jpg" height="45px;" />
+						</td>
+						<!--td colspan="2">Non - Returnable</td-->
+					</tr>
+					<tr>
+						<td width="50px">No.:</td>
+						<td style="border-bottom:1px solid;">{gatepassid}</td>
+					</tr>
+					<tr>
+						<td width="5%">Date:</td>
+						<td width="45%" style="border-bottom:1px solid;">{disposal_date}</td>
+					</tr>
+					<tr>
+						<td width="70px">Allow Mr.</td>
+						<td colspan="3" style="border-bottom:1px solid;"></td>
+					</tr>
+					<tr>
+						<td width="20px">Of</td>
+						<td style="border-bottom:1px solid;"></td>
+						<td>Phone:</td>
+						<td style="border-bottom:1px solid;"></td>
+					</tr>
+					<tr>
+						<td colspan="2">with the following item to move out of TSPL premises.</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%" border="1px solid;" cellspacing="0" cellpadding="2">
+					<tr>
+						<th width="30px">No.</th>
+						<th>Description</th>
+						<th width="30px">Quantity</th>
+					</tr>
+					<!--BeginDisplayInventoryInformationBlock-->
+					<tr>
+						<td>{srno}</td>
+						<td>{description}</td>
+						<td>{quantity}</td>
+					</tr>
+					<!--EndDisplayInventoryInformationBlock-->
+					<!--BeginDisplayNoInventoryInformationBlock-->
+					<tr>
+						<td colspan="3" align="center">No inventory information</td>
+					</tr>
+					<!--EndDisplayNoInventoryInformationBlock-->
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table width="100%" cellpadding="2">
+					<tr>
+						<td width="120px">Receiver' Signature: </td>
+						<td style="border-bottom:1px solid;"></td>
+						<td width="10px"></td>
+						<td width="70px">Issued By: </td>
+						<td style="border-bottom:1px solid;"></td>
+						<td width="10px"></td>
+						<td width="100px">Authorised Sign: </td>
+						<td style="border-bottom:1px solid;"></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td style="height:10px;"></td>
+		</tr>
+		<tr>
+			<td style="border-top:1px solid; text-align:center;">
+				<b>TransForm Solution Pvt. Ltd.</b><br/>
+				4th Floor, Ahura Mazda, Siddiq Street, Timaliyawad, Nanpura, Surat - 395 001.<br/>
+				Contact No.: +91-261-247 8000, 3291 000
+			</td>
+		</tr>
+	</table>
+</div>
+<br/><br/>
+<!--EndDisplayScrapDisposalGatePassBlock-->
+<script type="text/javascript">
+	window.print();
+</script>

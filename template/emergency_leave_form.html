@@ -1,0 +1,202 @@
+<!-- Build page from here: -->
+
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Team Member:</b><br>Select the team member for whom you are adding an emergency leave.
+			</li>
+			<li>                                                    
+				<b>Date:</b><br>Select the date for which the emergency leave is added.<br><br>
+				<b>* Note: </b>Night Shift Employees/ Shift falling in two dates will select the WORK DATE (payday).
+			</li>
+			<li>                                                    
+				<b>Reason for Leave:</b><br>Let us know the reason for which your team member is on emergency leave.
+			</li>
+			<li>
+				<b>Address while on leave:</b><br>Enter the address of the team member while the team member is on leave, so that we can communicate.
+			</li>
+			<li>                                                    
+				<b>Contact number while on Leave:</b><br>Enter the contact number of the team member while the team member is on leave, so that we can communicate.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="" onsubmit="return fnValidate();" >
+			
+			<input type="hidden" name="action" id="action" value="AddEmergencyLeave" />
+			<input type="hidden" name="hdndesignation" id="hdndesignation" value="{curdesignation}" />
+
+			<input type="hidden" name="curdt" id="curdt" value="{movement_date}" />
+			<input type="hidden" name="prevdt" id="prevdt" value="{previous_date}" />
+			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Team Member:</label>
+						<select name="employee_id" id="employee_id" onchange="javascript: fnGetDetails($(this));fnGetDelegate(); fnChangeEmployee();"> 
+							<option value="">Please Select</option>
+							<!--BeginFillTeamMembers-->
+							<option value="{teammember_id}">{teammember_name}</option>
+							<!--EndFillTeamMembers-->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Leave Balance:</label>
+						<div id="divLeaveBalance">-</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Date:</label>
+						<div id="divMovementDate">
+							<input class="span4" name="leave_date" id="leave_date" type="text" value="{curdate}" readonly="readonly" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Reason for Leave:
+						</label>
+						<textarea id="reason" name="reason" class="span4 uniform">{reason}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Address while on leave:
+						</label>
+						<textarea id="address" name="address" class="span4 uniform">{address}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Contact number while on Leave:
+						</label>
+						<input class="span4" name="contact" id="contact" type="text" value="{contact}"/>
+					</div>
+				</div>
+			</div>
+			<div id='delegatedBlock'></div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='emergency_leave_list.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+	});
+
+	function fnValidate()
+	{
+		if(!checkblank($("#reason"),"Please enter Reason for Leave")) return false;
+		if(!checkblank($("#address"),"Please enter Address while on leave")) return false;
+		if(!checkblank($("#contact"),"Please enter Contact number while on Leave")) return false;
+		if(document.getElementById("delegate"))
+		{
+			if(!checkblank($("#delegate"),"Please select Delegated To.")) return false;
+		}
+	}
+	
+	function fnGetDelegate()
+	{
+		$("#delegatedBlock").load("getdelegated.php?des="+$("#hdndesignation").val()+"&empid="+escape($("#employee_id").val()),"",function(data){
+			$("#employee_id").val();
+			$("#hdndesignation").val();
+			$("#delegate").uniform();
+		});
+	}
+
+	function fnChangeEmployee()
+	{
+		$.ajax({
+			url: 'get_employee_official_shift.php',
+			data: 'id='+escape($("#employee_id").val()),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				$("#shift_start").val(data.start);
+				$("#shift_end").val(data.end);
+				
+				var shift_start_minutes = hour2min(data.start);
+				var shift_end_minutes = hour2min(data.end);
+				
+				if(shift_end_minutes < shift_start_minutes)
+				{
+					/* If shift end time is less than start time, display dropdown for 2 days current and previous */
+					var curdt = $("#curdt").val()
+					var prevdt = $("#prevdt").val()
+					
+					var $objSelect = $("<select>").attr("name","movement_date").attr("id","movement_date").addClass("span4").html("<option value='"+curdt+"'>"+curdt+"</option><option value='"+prevdt+"'>"+prevdt+"</option>");
+					$("#divMovementDate").html($objSelect);
+					$("#movement_date").uniform();
+				}
+				else
+				{
+					/* If shift start time is less than end time, display textbox for the current date */
+					var $objInput = $("<input type='text'>").attr("name","movement_date").attr("id","movement_date").attr("readonly","readonly").addClass("span4").val($("#curdt").val());
+					$("#divMovementDate").html($objInput);
+					$("#movement_date").uniform();
+				}
+			}
+		});
+	}
+
+	function fnGetDetails($obj)
+	{
+		$("#address").val('');
+		$("#contact").val('');
+		$("#divLeaveBalance").html('-');
+		
+		$.ajax({
+				url: 'getdetails.php',
+				data: 'id='+$obj.val(),
+				dataType: 'json',
+				async: false,
+				success: function(data){
+					$("#address").val(data.ad);
+					$("#contact").val(data.ph);
+					$("#divLeaveBalance").html(data.leave_bal);
+				}
+			});
+	}
+
+</script>

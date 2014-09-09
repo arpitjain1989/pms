@@ -1,0 +1,123 @@
+<form action='joinees_view.php' method='post'>
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayJoineesInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Name:</b></label>
+						<label class="form-label span3 clsleft">{emptitle}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>DOJ:</b></label>
+						<label class="form-label span3 clsleft">{exp_joining_date}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Team Leader Name:</b></label>
+						<label class="form-label span3 clsleft">{teamLeaderName}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Shift Time:</b></label>
+						<label class="form-label span3 clsleft">{recommendedShift}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span7" for="education"><b>Document Details</label></b>
+						
+					</div>
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="photo"><b>Photos:</b></label>
+					<span class="{photoes_class}" aria-hidden="true"></span>{showNa}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="ssc"><b>SSC:</b></label>
+					<span class="{ssc_class}" aria-hidden="true"></span>{showNa1}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="hsc"><b>HSC:</b></label>
+					<span class="{hsc_class}" aria-hidden="true"></span>{showNa2}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="lc"><b>LC:</b></label>
+					<span class="{lc_class}" aria-hidden="true"></span>{showNa3}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="degree"><b>Graduation:</b></label>
+					<span class="{degree_class}" aria-hidden="true"></span>{showNa4}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="pg"><b>PG:</b></label>
+					<span class="{pg_class}" aria-hidden="true"></span>{showNa5}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="add_cert"><b>Additional Certificate:</b></label>
+					<span class="{add_cert_class}" aria-hidden="true"></span>{showNa6}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="id_proof"><b>Id Proof:</b></label>
+					<span class="{id_proof_class}" aria-hidden="true"></span>{showNa7}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="id_proof"><b>Extra Id Proof:</b></label>
+					<span class="{extra_id_proof_class}" aria-hidden="true"></span>{showNa11}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="address_proof"><b>Address Proof:</b></label>
+					<span class="{address_proof_class}" aria-hidden="true"></span>{showNa8}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="bgr"><b>BGR:</b></label>
+					<span class="{bgr_class}" aria-hidden="true"></span>{showNa9}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="education"><b>Pre. Co. Docs:</b></label>
+					<span class="{prv_comp_doc_class}" aria-hidden="true"></span>{showNa10}
+				</div>
+			</div>
+			<!--EndDisplayJoineesInformationBlock-->
+			<!--BeginDisplayNoJoineesBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>No joinees information.</b></label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoJoineesBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span2"></div>
+							<div class="span4 controls">
+								<input type='hidden' name='hdnAction' id= 'hdnAction' value='complete_joining'/>
+								<input type='hidden' name='hdnId' id= 'hdnId' value='{empid}'/>
+								<!--BeginFillSubmitButton-->
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Confirm Joining</button>
+								<!--EndFillSubmitButton-->
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='joinees_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+

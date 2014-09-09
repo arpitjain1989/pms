@@ -1,0 +1,112 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Call status wise monthly report</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<form name="frmCallStatusWiseMonthlyReport" id="frmCallStatusWiseMonthlyReport" method="post" action="call_status_wise_monthly_report.php">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Month:</label>
+								<select name='search_month' id='search_month'>
+									<option value="01">January</option>
+									<option value="02">Feburary</option>
+									<option value="03">March</option>
+									<option value="04">April</option>
+									<option value="05">May</option>
+									<option value="06">June</option>
+									<option value="07">July</option>
+									<option value="08">August</option>
+									<option value="09">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+								<script type="text/javascript">
+									if("{search_month}" != "")
+										$("#search_month").val("{search_month}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">	
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Year:</label>
+								<select name='search_year' id='search_year'>
+									<!--BeginFillYearDropdown-->
+									<option value="{year_value}">{year_value}</option>
+									<!--EndFillYearDropdown-->
+								</select>
+								<script type="text/javascript">
+									if("{search_year}" != "")
+										$("#search_year").val("{search_year}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<input type="hidden" name="action" id="action" value="CallStatusWiseMonthlyReport" />
+										<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Call status wise ticket tracking report</span>
+					<!--a href="inventory_purchase_report.php?action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+					</a-->
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Issue Status</th>
+							<th>Count</th>
+							<th>Option</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillCallStatusWiseTicketInformation-->
+						<tr class="odd gradeX">
+							<td>{resolution_status_text}</td>
+							<td>{cnt_issue_status}</td>
+							<td>
+								<a href="call_status_wise_monthly_report_view.php?status={resolution_status}&month={search_month}&year={search_year}" name="view" id="view" title="View Issue Status wise Issue Tracking" class="tip"><span class="icon12 brocco-icon-search"></span></a>
+							</td>
+						</tr>
+						<!--EndFillCallStatusWiseTicketInformation-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search_ticket_date_from, #search_ticket_date_to").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+</script>

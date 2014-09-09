@@ -1,0 +1,108 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Title: </b><br>Enter the title for the RCT Division.
+			</li>
+			<li>
+				<b>Description: </b><br>Enter the description for the RCT Division.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="salary_offered.add.php">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+		<!--<input type="hidden" name="id" id="id" value="{RCTDivisionid}" />-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Designation:
+					</label>
+					<select id="designation" name="designation" onchange="javascript: fnDisplayTeamShifts($(this));">
+						<option value="0">Please select</option>
+						<!--BeginFillDesignation-->
+						<option value="{id}">{title}</option>
+						<!--EndFillDesignation-->
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div id="divSalaryOffered"></div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='salary_offered.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	//alert('hello');alert($("#designation").val());
+	if($("#designation").val() == '0')
+	{
+		alert('Please select designation.');
+		$("#designation").focus();
+		return false;
+	}
+	if($("#lowest_amount").val() == '')
+	{
+		alert('Please insert lowest amount.');
+		$("#lowest_amount").focus();
+		return false;
+	}
+	if($("#highest_amount").val() == '')
+	{
+		alert('Please insert highest amount.');
+		$("#highest_amount").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>
+
+<script type="text/javascript">
+	function fnDisplayTeamShifts($obj)
+	{
+		//alert('as');
+		if($obj.val() == "")
+		{
+			$("#divSalaryOffered").html("No team selected");
+		}
+		else
+		{
+			$("#divSalaryOffered").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+			$("#divSalaryOffered").load("salary_offered_detail.php?v="+escape($obj.val()),"",function(){
+				$("#divTeamShiftDetail").find("input[type='checkbox']").uniform();
+			});
+		}
+	}
+</script>

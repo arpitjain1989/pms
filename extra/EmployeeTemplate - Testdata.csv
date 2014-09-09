@@ -1,0 +1,36 @@
+EmployeeCode,Name,E-Mail,Contact,Address,Department,Designation,TeamLeader,Password,Status
+EMP-1,Asfaq Shiliwala,asfaq@transformsolution.com,,,Non-voice,CEO,,123456,Active
+EMP-2,Mukesh Tiwari,mukesh.tiwari@transformsolution.net,,,Non-voice,AsstManager-Operation,Asfaq Shiliwala,123456,Active
+EMP-3,Vikas Sharma,vikas.sharma@transformsolution.net,,,Non-voice,AsstManager-Operation,Asfaq Shiliwala,123456,Active
+EMP-4,Gaurang Patel,gaurang@transformsolution.net,,,Non-voice,AsstManager-Operation,Asfaq Shiliwala,123456,Active
+EMP-5,Nilesh Kota,nileshkota@transformsolution.net,,,Non-voice,TeamLeader,Mukesh Tiwari,123456,Active
+EMP-6,Divakar Chaturvedi,divakar.chaturvedi@transformsolution.net,,,Non-voice,TeamLeader,Vikas Sharma,123456,Active
+EMP-7,Mazharahmed Retiwala,mazhar.ahmed@transformsolution.net,,,Non-voice,TeamLeader,Gaurang Patel,123456,Active
+EMP-8,Abhilasha Dheniya,abhilasha.dheniya@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-9,Akram Patel,akram.patel@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-10,Aakash Bhavsar,akash.bhavsar@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-11,Ali Saiyed,ali.saiyed@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-12,Arpita Maity,arpita.maity@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-13,Bindusagar Senapati,bindusagar.senapati@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-14,Imran Patel,imran.patel@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-15,Imtiaz Ansari,imtiyaz.ansari@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-16,Jyoti Malhotra,jyoti.malhotra@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-17,Khyati Patel,khyati.patel@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-18,Mital Nayi,mital.nayi@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-19,Shailesh Singh,shailesh.singh@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-20,Shobhan Mistry,shobhan.mistry@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-21,Suraj Khedekar,suraj.khedekar@transformsolution.net,,,Non-voice,BPOExecutive,Nilesh Kota,123456,Active
+EMP-22,Hamid Chandiwala,hamid.chandiwala@transformsolution.net,,,Non-voice,BPOExecutive,Divakar Chaturvedi,123456,Active
+EMP-23,Chirag Majethia,chirag.majethia@transformsolution.net,,,Non-voice,BPO-Trainee,Divakar Chaturvedi,123456,Active
+EMP-24,Jasdeep Bedi,jasdeep.bedi@transformsolution.net,,,Non-voice,BPOExecutive,Divakar Chaturvedi,123456,Active
+EMP-25,Niral Ramani,niral.ramani@transformsolution.net,,,Non-voice,Sr.BPOExecutive,Divakar Chaturvedi,123456,Active
+EMP-26,Prateek Gairola,prateek.gairola@transformsolution.net,,,Non-voice,Sr.BPOExecutive,Divakar Chaturvedi,123456,Active
+EMP-27,Amiteshkumar Rajput,amiteshkumar.rajput@transformsolution.net,,,Non-voice,BPO-Trainee,Divakar Chaturvedi,123456,Active
+EMP-28,Mohd Aslam Shaikh,mohdaslam.shaikh@transformsolution.net,,,Non-voice,BPOExecutive,Mazharahmed Retiwala,123456,Active
+EMP-29,Juned Multani,juned.multani@transformsolution.net,,,Non-voice,BPOExecutive,Mazharahmed Retiwala,123456,Active
+EMP-30,Pratik Rashmikant Patel,pratikrashmikant.patel@transformsolution.net,,,Non-voice,BPOExecutive,Mazharahmed Retiwala,123456,Active
+EMP-31,Nisarg Patel,nisarg.patel@transformsolution.net,,,Non-voice,BPOExecutive,Mazharahmed Retiwala,123456,Active
+EMP-32,Krunal Dhimmar,krunal.dhimmar@transformsolution.net,,,Non-voice,BPOExecutive,Mazharahmed Retiwala,123456,Active
+EMP-33,Manoj Mangukiya,manoj.mangukiya@transformsolution.net,,,Non-voice,BPO-Trainee,Mazharahmed Retiwala,123456,Active
+EMP-34,Boni Paronigar,boni.paronigar@transformsolution.net,,,Non-voice,BPO-Trainee,Mazharahmed Retiwala,123456,Active
+EMP-35,Miraz Sarkar,miraz.sarkar@transformsolution.net,,,Non-voice,BPOExecutive,Mazharahmed Retiwala,123456,Active

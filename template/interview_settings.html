@@ -1,0 +1,95 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Interviewer Designations:</b><br>Select designations for interviewer.
+			</li>
+			<li>
+				<b>Managers Designations:</b><br>Select designations for managers.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmInterviewSettings" id="frmInterviewSettings" class="form-horizontal seperator" method="post" action="interview_settings.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<!--BeginDisplayMessageBlock-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="alert {message_class}">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{message}</strong>
+			</div>
+		</div>
+	</div>
+	<!--EndDisplayMessageBlock-->
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Interviewer Designations:</label>
+					<div class="span4 controls">   
+						<select name="interviewer_designations[]" id="interviewer_designations" multiple="multiple" class="nostyle" size="10">
+							<!--BeginFillInterviewerDesignationsBlock-->
+							<option {selected_interviewer} value="{designation_id}">{designation_title}</option>
+							<!--EndFillInterviewerDesignationsBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Managers Designations:</label>
+					<div class="span4 controls">   
+						<select name="managers_designations[]" id="managers_designations" multiple="multiple" class="nostyle" size="10">
+							<!--BeginFillManagersDesignationsBlock-->
+							<option {selected_managers} value="{designation_id}">{designation_title}</option>
+							<!--EndFillManagersDesignationsBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SaveInterviewSettings" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	function fnValidate()
+	{
+		if($("#interviewer_designations option:selected").length == 0)
+		{
+			alert("Please select Interviewer Designations");
+			return false;
+		}
+
+		if($("#managers_designations option:selected").length == 0)
+		{
+			alert("Please select Managers Designations");
+			return false;
+		}
+	}
+
+</script>

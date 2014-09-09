@@ -1,0 +1,187 @@
+<form name="frmCompensationRequest" id="frmCompensationRequest" method="post" action="time_compensation_request_view.php" onsubmit="javascript: return fnvalidate()">
+	
+	<input type="hidden" name="id" id="id" value="{compensationid}" />
+	
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayCompensationReqestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Employee Name:</b></label>
+						<label class="form-label span3 clsleft">{employeename}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Late on date:</b></label>
+						<label class="form-label span3 clsleft">{attendancedate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Late for time:</b></label>
+						<label class="form-label span3 clsleft">{compensationfortime}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Compensation date:</b></label>
+						<label class="form-label span3 clsleft">{compensation_date}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Compensation Time:</b></label>
+						<label class="form-label span3 clsleft">{compensation_fromtime} - {compensation_totime}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayHeadEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting head's Approval:</b></label>
+						<select name="approvedby_tl" id="approvedby_tl">
+							<option value="">Please Select</option>
+							<option value="0">Pending</option>
+							<option value="1">Approved</option>
+							<option value="2">Unapproved</option>
+						</select>
+						<script type="text/javascript">
+							if("{approvedby_tl}" != "")
+								$("#approvedby_tl").val("{approvedby_tl}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting head's Comment:</b></label>
+						<textarea name="tl_comment" id="tl_comment" class="span4"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayHeadEntryBlock-->
+			<!--BeginDisplayHeadDisplayBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting head's Approval:</b></label>
+						<label class="form-label span3 clsleft">{approvedby_tl_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting head's Comment:</b></label>
+						<label class="form-label span3 clsleft">{tl_comment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayHeadDisplayBlock-->
+			<!--BeginDisplayDelegatedTeamleaderEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate reporting head's Approval:</b></label>
+						<select name="delegatedtl_status" id="delegatedtl_status">
+							<option value="">Please Select</option>
+							<option value="0">Pending</option>
+							<option value="1">Approved</option>
+							<option value="2">Unapproved</option>
+						</select>
+						<script type="text/javascript">
+							if("{delegatedtl_status}" != "")
+								$("#delegatedtl_status").val("{delegatedtl_status}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate reporting head's Comment:</b></label>
+						<textarea name="delegatedtl_comment" id="delegatedtl_comment" class="span4">{delegatedtl_comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegatedTeamleaderEntryBlock-->
+			<!--BeginDisplayDelegatedTeamleaderDisplayBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate reporting head's Approval:</b></label>
+						<label class="form-label span3 clsleft">{approvedby_delegatedtl_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate reporting head's Comment:</b></label>
+						<label class="form-label span3 clsleft">{delegatedtl_comment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegatedTeamleaderDisplayBlock-->
+			<!--EndDisplayCompensationReqestInformationBlock-->
+			<!--BeginDisplayNoCompensationtRequestBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						Compensation information not found
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoCompensationtRequestBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<!--BeginDisplayDelegatedTeamLeaderBlock-->
+								<input type="hidden" name="delegatedtl_id" id="delegatedtl_id" value="{curdelegatedtl_id}" />
+								<!--EndDisplayDelegatedTeamLeaderBlock-->
+								
+								<!--BeginDisplaySubmitButtonBlock-->
+								<input type="hidden" name="action" id="action" value="CompensationRequest" />
+								<button type="submit" class="btn btn-info marginR10" name="back" id="back" >Save</button>
+								<!--EndDisplaySubmitButtonBlock-->
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='time_compensation_requests.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	function fnvalidate()
+	{
+		if(document.getElementById("approvedby_tl"))
+		{
+			if(!checkblank($("#approvedby_tl"),"Please select reporting head's approval status")) return false;
+			if(!checkblank($("#tl_comment"),"Please enter comment")) return false;
+		}
+		else if(document.getElementById("delegatedtl_status"))
+		{
+			if(!checkblank($("#delegatedtl_status"),"Please select reporting head's approval status")) return false;
+			if(!checkblank($("#delegatedtl_comment"),"Please enter comment")) return false;
+		}
+		else
+			return false;
+	}
+</script>

@@ -1,0 +1,93 @@
+<div id="content" class="clearfix" style="margin: 0; padding: 0;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box">
+					<div class="title">
+						<h4>
+						<span class="icon16 brocco-icon-grid"></span>
+						<span>Level Report : {date}</span>
+						</h4>
+					</div>
+					<div class="content newdivforlevelreport" style="overflow-x: scroll;">
+						<table class="responsive table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Record Id</th>
+                                    <!--BeginFillParameter-->
+									<th>{title}</th>
+									<!--EndFillParameter-->
+                                  </tr>
+                                </thead>
+                                <tbody>
+								 <!--BeginFillRecords-->
+                                  <tr>
+                                    <td>{recordid}</td>
+									 <!--BeginFillAfds-->
+									 <td>{haserrorinfo} 
+									 	<!--BeginShowErrorInfo-->
+										|| {title} 
+										<!--EndShowErrorInfo-->
+										<!--BeginShowCommentInfo-->
+										|| {comment} 
+										<!--EndShowCommentInfo-->
+										<br /><a id="link_{recordid}_{para_id}_{date}_{afdid}" class="viewmore">View All</a><br />
+										<div id="view_{recordid}_{para_id}_{date}_{afdid}"></div>
+									 </td>
+									 <!--EndFillAfds-->
+                                  </tr>
+								  <!--EndFillRecords-->
+								  <!--BeginFillNoRecord-->
+									<tr>
+									<td colspan="5">Record not marked</td>
+									</tr>
+									<!--EndFillNoRecord-->
+                                </tbody>
+                            </table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+jQuery(".viewmore").click(function(e) { 
+
+	e.preventDefault();
+
+	var id = jQuery(this).attr("id");
+	var arrId = id.split('_');
+	var recid = arrId[1];
+	var paraid = arrId[2];
+	var date = arrId[3];
+	
+	var afdid = arrId[4];
+	//alert("#view_" + recid + '_' + paraid + '_' + date + '_' + afdid);
+	
+	if(document.getElementById("view_" + recid + '_' + paraid + '_' + date + '_' + afdid) && $.trim(document.getElementById("view_" + recid + '_' + paraid + '_' + date + '_' + afdid).innerHTML) == "")
+	{
+		$.ajax({
+			url: 'leveldetail.php?paraid=' + escape(paraid) + '&recid=' + escape(recid) + '&date=' + escape(date) + '&afdid=' + escape(afdid),
+			success: function(data){
+				if(document.getElementById("view_" + recid + '_' + paraid + '_' + date + '_' + afdid))
+					document.getElementById("view_" + recid + '_' + paraid + '_' + date + '_' + afdid).innerHTML = data;
+			},
+			error: function(){
+			}
+		})
+		
+		/*jQuery("#view_" + recid + '_' + paraid + '_' + date + '_' + afdid).load('leveldetail.php?paraid=' + escape(paraid) + '&recid=' + escape(recid) + '&date=' + escape(date) + '&afdid=' + escape(afdid),"",function(data){
+			alert(data);
+		});*/
+		jQuery(this).html("Hide");
+	}
+	else
+	{
+		if(document.getElementById("view_" + recid + '_' + paraid + '_' + date + '_' + afdid))
+					document.getElementById("view_" + recid + '_' + paraid + '_' + date + '_' + afdid).innerHTML = '';
+		jQuery(this).html("View All");
+	}
+	
+	
+});
+</script>

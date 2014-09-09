@@ -1,0 +1,15 @@
+<!--BeginDisplayInventoryAttributesBlock-->
+<div>
+	<label class="form-label span3" style="clear:both;">{parent_attribute_name} :</label>
+	<select name='inventory_type_attributes[{parent_attribute_id}]' id='inventory_type_attributes_{parent_attribute_id}' class="clsInventoryAttributes">
+		<option value=''>Please select</option>
+		<!--BeginFillSubAttributes-->
+		<option value='{sub_menu_id}' {strSeleceted}>{sub_menu_name}</option>
+		<!--EndFillSubAttributes-->
+	</select>
+</div>
+<br/>
+<!--EndDisplayInventoryAttributesBlock-->
+<!--BeginDisplayNoInventoryAttributesBlock-->
+No attributes specified.
+<!--EndDisplayNoInventoryAttributesBlock-->

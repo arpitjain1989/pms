@@ -1,0 +1,87 @@
+<!-- Build page from here: -->
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{add}" />
+		<input type="hidden" name="id" id="id" value="{attendanceid}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Team Leaders:
+					</label>
+					<select id="designation" name="designation">
+						<option value="">Please select</option>
+						<!--BeginEmployeeValues-->
+						<option value="{employee_id}">{employee_name}</option>
+						<!--EndEmployeeValues-->
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Title:
+					</label>
+					 <input type="text" id="datepicker" name="startdatepicker" class="span4 text" value="{currentdate}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" id="getdata" class="btn marginR10">View</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='attendance.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="form-row row-fluid" id="ajaxdatahere">
+							</div>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+function validateform()
+{
+	var valid = true
+	/*if($.trim($("#designation").val()) == '')
+	{
+		alert('Please select Designation.');
+		$("#designation").focus();
+		valid = false;
+		return false;
+	}*/
+	if($.trim($("#datepicker").val()) == '')
+	{
+		alert('Please select date.');
+		$("#datepicker").focus();
+		valid = false;
+		return false;
+	}
+	return valid;
+}
+
+$(document).ready(function()
+{	
+	$("#getdata").click(function() 
+	{
+	
+		if(validateform())
+		{
+			$('#ajaxdatahere').load('attendance_form.php?date=' +$("#datepicker").val() +'&designation=' +$("#designation").val());
+		}
+	});
+	$("#getdata").trigger("click");
+});
+
+</script>

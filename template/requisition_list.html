@@ -1,0 +1,69 @@
+<span class="right">
+	<a href="requisition.php">
+		<h4><span class="icon16 entypo-icon-add"></span>Add Requisition</h4>
+	</a>
+</span>
+	
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Requisition</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblRequisition">
+					<thead>
+						<tr>
+							<th>Requisition For</th>
+							<th>Project Name</th>
+							<th>Added on</th>
+							<th>Status</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillRequisitionList-->
+						<tr class="odd gradeX">
+							<td>{requisition_for_title}</td>
+							<td>{project_name}</td>
+							<td>{addeddate}</td>
+							<td>{requisition_status}</td>
+							<td>
+								<a href="requisition_view.php?id={requisitionid}" name="view" id="view" title="View Requisition" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillRequisitionList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblRequisition').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 2, "desc" ]],
+			"aoColumns": [
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				null
+			]
+		});
+	});
+</script>

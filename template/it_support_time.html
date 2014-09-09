@@ -1,0 +1,121 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Support start time:</b><br>Select start time for support team.
+			</li>
+			<li>
+				<b>Support end time:</b><br>Select end time for support team.
+			</li>
+			<li>
+				<b>Limited support start time:</b><br>Select start time for support team when the support members are on leave.
+			</li>
+			<li>
+				<b>Limited support end time:</b><br>Select end time for support team when the support members are on leave.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmSupportTime" id="frmSupportTime" class="form-horizontal seperator" method="post" action="it_support_time.php" onsubmit="return fnValidate();" />
+
+	<!--BeginDisplayMessageBlock-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="alert {message_class}">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{message}</strong>
+			</div>
+		</div>
+	</div>
+	<!--EndDisplayMessageBlock-->
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Support start time:</label>
+					<input class="span4 timepicker" name="support_start_time" id="support_start_time" type="text" value="{support_start_time}" readonly="readonly"  />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Support end time:</label>
+					<input class="span4 timepicker" name="support_end_time" id="support_end_time" type="text" value="{support_end_time}" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Limited support start time:</label>
+					<input class="span4 timepicker" name="limited_support_start_time" id="limited_support_start_time" type="text" value="{limited_support_start_time}" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Limited support end time:</label>
+					<input class="span4 timepicker" name="limited_support_end_time" id="limited_support_end_time" type="text" value="{limited_support_end_time}" readonly="readonly" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">IT Support Designations:</label>
+					<div class="span4 controls">   
+						<select name="support_designations[]" id="support_designations" multiple="multiple" class="nostyle" size="10">
+							<!--BeginFillDesignationBlock-->
+							<option {selected} value="{designation_id}">{designation_title}</option>
+							<!--EndFillDesignationBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SaveSupportTimings" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('.timepicker').timepicker();
+	});
+	
+	function fnValidate()
+	{
+		if(!checkblank($("#support_start_time"),"Please select Support start time")) return false;
+		if(!checkblank($("#support_end_time"),"Please select Support end time")) return false;
+		if(!checkblank($("#limited_support_start_time"),"Please select Limited support start time")) return false;
+		if(!checkblank($("#limited_support_end_time"),"Please select Limited support end time")) return false;
+		
+		if($("#support_designations option:selected").length == 0)
+		{
+			alert("Please select IT Support Designations");
+			return false;
+		}
+		
+	}
+
+</script>

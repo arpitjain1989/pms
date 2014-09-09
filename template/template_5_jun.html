@@ -1,0 +1,891 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>TransForm admin</title>
+<meta name="author" content="gagan.mahatma" />
+<!-- Mobile Specific Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Le styles -->
+<!-- Use new way for google web fonts
+    http://www.smashingmagazine.com/2012/07/11/avoiding-faux-weights-styles-google-web-fonts -->
+<!-- Headings -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css' />  -->
+<!-- Text -->
+<!-- <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' /> -->
+<!--[if lt IE 9]>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:400" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans:700" rel="stylesheet" type="text/css" />
+    <![endif]-->
+<link href="css/bootstrap/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="css/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+<link href="css/supr-theme/jquery.ui.supr.css" rel="stylesheet" type="text/css" />
+<link href="css/icons.css" rel="stylesheet" type="text/css" />
+<!-- Plugin stylesheets -->
+<link href="plugins/qtip/jquery.qtip.css" rel="stylesheet" type="text/css" />
+<link href="plugins/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css" />
+<link href="plugins/jpages/jPages.css" rel="stylesheet" type="text/css" />
+<link href="plugins/prettify/prettify.css" type="text/css" rel="stylesheet" />
+<link href="plugins/inputlimiter/jquery.inputlimiter.css" type="text/css" rel="stylesheet" />
+<link href="plugins/ibutton/jquery.ibutton.css" type="text/css" rel="stylesheet" />
+<link href="plugins/uniform/uniform.default.css" type="text/css" rel="stylesheet" />
+<link href="plugins/color-picker/color-picker.css" type="text/css" rel="stylesheet" />
+<link href="plugins/select/select2.css" type="text/css" rel="stylesheet" />
+<link href="plugins/validate/validate.css" type="text/css" rel="stylesheet" />
+<link href="plugins/pnotify/jquery.pnotify.default.css" type="text/css" rel="stylesheet" />
+<link href="plugins/pretty-photo/prettyPhoto.css" type="text/css" rel="stylesheet" />
+<link href="plugins/smartWizzard/smart_wizard.css" type="text/css" rel="stylesheet" />
+<link href="plugins/dataTables/jquery.dataTables.css" type="text/css" rel="stylesheet" />
+<link href="plugins/elfinder/elfinder.css" type="text/css" rel="stylesheet" />
+<link href="plugins/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css" type="text/css" rel="stylesheet" />
+<!-- Main stylesheets -->
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/colorpicker.css" rel="stylesheet" type="text/css" />
+<link href="css/layout.css" rel="stylesheet" type="text/css" />
+<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/DateTimePicker.js"></script>
+<script type="text/javascript" src="plugins/dataTables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="js/custom.js"></script>
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="images/favicon.ico" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57-precomposed.png" />
+<script type="text/javascript">
+        //adding load class to body and hide page
+        document.documentElement.className += 'loadstate';
+    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<!-- loading animation -->
+<div id="qLoverlay"></div>
+<div id="qLbar"></div>
+<div id="header">
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid"> <a class="brand" href="dashboard.php">TransForm<span class="slogan">admin</span></a>
+				<div class="nav-no-collapse">
+					<ul class="nav pull-right usernav">
+						<!--li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="icon16 icomoon-icon-bell"></span><span class="notification">3</span> </a>
+							<ul class="dropdown-menu">
+								<li class="menu">
+									<ul class="notif">
+										<li class="header"><strong>Notifications</strong> (3) items</li>
+										<li> <a href="#"> <span class="icon"><span class="icon16 icomoon-icon-user-2"></span></span> <span class="event">1 User is registred</span> </a> </li>
+										<li> <a href="#"> <span class="icon"><span class="icon16 icomoon-icon-comments-4"></span></span> <span class="event">Jony add 1 comment</span> </a> </li>
+										<li> <a href="#"> <span class="icon"><span class="icon16 icomoon-icon-new"></span></span> <span class="event">admin Julia added post</span> </a> </li>
+										<li class="view-all"><a href="#">View all notifications <span class="icon16  icomoon-icon-arrow-right-7"></span></a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li class="dropdown"> <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"> <img src="images/avatar.jpg" alt="" class="image" /> <span class="txt">admin@transformsolution.com</span> <b class="caret"></b> </a>
+							<ul class="dropdown-menu">
+								<li class="menu">
+									<ul>
+										<li> <a href="#"><span class="icon16 icomoon-icon-user-3"></span>Edit profile</a> </li>
+										<li> <a href="#"><span class="icon16 icomoon-icon-comments-2"></span>Approve comments</a> </li>
+										<li> <a href="#"><span class="icon16 entypo-icon-contact"></span>Add user</a> </li>
+									</ul>
+								</li>
+							</ul>
+						</li-->
+						<li><a href="logout.php" class="tip" title="Logout"><span class="icon16 icomoon-icon-exit"></span> Logout</a></li>
+					</ul>
+				</div>
+				<!-- /.nav-collapse -->
+			</div>
+		</div>
+		<!-- /navbar-inner -->
+	</div>
+	<!-- /navbar -->
+</div>
+<!-- End #header -->
+<div id="wrapper">
+	<!--Responsive navigation button-->
+	<div class="resBtn"> <a href="#"><span class="icon16 minia-icon-list-3"></span></a> </div>
+	<!--Sidebar collapse button-->
+	<div class="collapseBtn"> <a href="#" class="tipR" title="Hide sidebar"><span class="icon12 minia-icon-layout"></span></a> </div>
+	<!--Sidebar background-->
+	<div id="sidebarbg"></div>
+	<!--Sidebar content-->
+	<div id="sidebar">
+		<!--div class="shortcuts">
+			<ul>
+				<li><a href="#" title="Support section" class="tip"><span class="icon24 icomoon-icon-support"></span></a></li>
+				<li><a href="#" title="Database backup" class="tip"><span class="icon24 icomoon-icon-database"></span></a></li>
+				<li><a href="#" title="Sales statistics" class="tip"><span class="icon24 iconic-icon-chart"></span></a></li>
+				<li><a href="#" title="Write post" class="tip"><span class="icon24 icomoon-icon-pencil"></span></a></li>
+			</ul>
+		</div-->
+		<!-- End search -->
+		<div class="sidenav">
+			<div class="sidebar-widget" style="margin: -1px 0 0 0;">
+				<h5 class="title" style="margin-bottom:0">Navigation</h5>
+			</div>
+			<!-- End .sidenav-widget -->
+			<div class="mainnav">
+				<ul>
+					<!--BeginAdminProfileModule-->
+					<li><a href="profile.php"><span class="icon16 iconic-icon-user"></span>Profile</a></li>
+					<!--EndAdminProfileModule-->
+					<!--BeginEmployeeProfileModule-->
+					<li><a href="employee_profile.php"><span class="icon16 iconic-icon-user"></span>Profile</a></li>
+					<!--EndEmployeeProfileModule-->
+					<!--BeginEmployeeListModule-->
+					<li><a href="employee_list.php"><span class="icon16 entypo-icon-users"></span>Employee List</a></li>
+					<!--EndEmployeeListModule-->
+					<!--BeginSiteSettingsModule-->
+					<!--li><a href="settings.php"><span class="icon16 brocco-icon-wrench"></span>Site Settings</a></li-->
+					<!--EndSiteSettingsModule-->
+					<!--BeginHolidaysModule-->
+					<li><a href="holiday_list.php"><span class="icon16  silk-icon-list"></span>Holidays</a></li>
+					<!--EndHolidaysModule-->
+					<!--BeginRolesModule-->
+					<li><a href="roles.php"><span class="icon16 silk-icon-checklist"></span>Role Settings</a></li>
+					<!--EndRolesModule-->
+					<!--BeginDepartmentsModule-->
+					<li><a href="departments.php"><span class="icon16 silk-icon-icons"></span>Departments</a></li>
+					<!--EndDepartmentsModule-->
+					<!--BeginDesignationModule-->
+					<li><a href="designation.php"><span class="icon16 icomoon-icon-tree-view"></span>Designation Settings</a></li>
+					<!--EndDesignationModule-->
+					<!--BeginEmployeeModule-->
+					<li><a href="employee.php"><span class="icon16 entypo-icon-users "></span>Employee</a></li>
+					<!--EndEmployeeModule-->
+					<!--BeginProjectModule-->
+					<!--li><a href="project.php"><span class="icon16 icomoon-icon-grid-view"></span>Projects</a></li-->
+					<!--EndProjectModule-->
+					<!--BeginBillingMethodModule-->
+					<!--li><a href="job_type.php"><span class="icon16 entypo-icon-list"></span>Billing Method</a></li-->
+					<!--EndBillingMethodModule-->
+					<!--BeginTaskModule-->
+					<!--li><a href="task.php"><span class="icon16 silk-icon-checklist"></span>Task</a></li-->
+					<!--EndTaskModule-->
+					<!--BeginClientsModule-->
+					<!--li><a href="clients.php"><span class="icon16 icomoon-icon-user-3"></span>Clients</a></li-->
+					<!--EndClientsModule-->
+					<!--BeginFormFieldsModule-->
+					<!--li><a href="form_field.php"><span class="icon16 silk-icon-icons"></span>Form Fields</a></li-->
+					<!--EndFormFieldsModule-->
+					
+					<!--BeginLeaveTypeModule-->
+					<li><a href="leave_type.php"><span class="icon16 entypo-icon-list"></span>Leave Type</a></li>
+					<!--EndLeaveTypeModule-->
+					
+					<!--BeginShiftModule-->
+					<li><a href="shifts.php"><span class="icon16  entypo-icon-clock"></span>Shift Times</a></li>
+					<!--EndShiftModule-->
+					<!--BeginTeamShiftsModule-->
+					<li><a href="team_shift_time.php"><span class="icon16  entypo-icon-clock"></span>Team Shifts</a></li>
+					<!--EndTeamShiftsModule-->
+					
+					
+					<!--BeginManageLeavesBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Manage Leaves</a>
+						<ul class="sub">
+							<!--BeginLeaveFormModule-->
+							<li><a href="leave_form.php"><span class="icon16 silk-icon-notes-2"></span>Leave Form</a></li>
+							<!--EndLeaveFormModule-->
+							<!--BeginHalfLeaveFormModule-->
+							<li><a href="halfleave_form.php"><span class="icon16 silk-icon-notes-2"></span>Half Leave Form</a></li>
+							<!--EndHalfLeaveFormModule-->
+							<!--BeginEmergencyLeaveFormModule-->
+							<li><a href="emergency_leave_list.php"><span class="icon16 silk-icon-notes-2"></span>Emergency Leave</a></li>
+							<!--EndEmergencyLeaveFormModule-->
+							<!--BeginLeaveRequestModule-->
+							<li><a href="leave_request.php"><span class="icon16 silk-icon-notes-2"></span>Leave Requests</a></li>
+							<!--EndLeaveRequestModule-->
+							<!--BeginHalfLeaveRequestModule-->
+							<li><a href="halfleave_request.php"><span class="icon16 silk-icon-notes-2"></span>Half Leave Requests</a></li>
+							<!--EndHalfLeaveRequestModule-->
+							<!--BeginAdminLeaveFormModule-->
+							<li><a href="admin_leave_form.php"><span class="icon16 silk-icon-notes-2"></span>Admin Leave Form</a></li>
+							<!--EndAdminLeaveFormModule-->
+							<!--BeginAdminHalfLeaveFormModule-->
+							<li><a href="admin_half_leave_form.php"><span class="icon16 silk-icon-notes-2"></span>Admin Half Leave Form</a></li>
+							<!--EndAdminHalfLeaveFormModule-->
+							<!--BeginAdminApprovedLWPFormModule-->
+							<li><a href="admin_approved_lwp_form.php"><span class="icon16 silk-icon-notes-2"></span>Approved LWP Form</a></li>
+							<!--EndAdminApprovedLWPFormModule-->
+							<!--BeginAdminLeaveRequestModule-->
+							<li><a href="admin_leave_requests.php"><span class="icon16 silk-icon-notes-2"></span>Admin Leave Request</a></li>
+							<!--EndAdminLeaveRequestModule-->
+							<!--BeginAdminHalfLeaveRequestModule-->
+							<li><a href="admin_half_leave_requests.php"><span class="icon16 silk-icon-notes-2"></span>Admin Half Leave Request</a></li>
+							<!--EndAdminHalfLeaveRequestModule-->
+							<!--BeginAdminApprovedLWPRequestModule-->
+							<li><a href="admin_approved_lwp_requests.php"><span class="icon16 silk-icon-notes-2"></span>Approved LWP Request</a></li>
+							<!--EndAdminApprovedLWPRequestModule-->
+						</ul>
+					</li>
+					<!--EndManageLeavesBlock-->
+					
+					<!--BeginAttendanceModule-->
+					<li><a href="attendance.php"><span class="icon16 brocco-icon-calendar"></span>Attendance</a></li>
+					<!--EndAttendanceModule-->
+					<!--BeginWorkhoursCalendarModule-->
+					<li><a href="workhours_calendar.php"><span class="icon16 minia-icon-calendar"></span>Workhours Approval</a></li>
+					<!--EndWorkhoursCalendarModule-->
+					<!--BeginAttendanceCalendarModule-->
+					<!--BeginDisplayOneCalendar-->
+					<li><a href="attendance_calendar.php"><span class="icon16 minia-icon-calendar"></span>Attendance Calendar</a></li>
+					<!--EndDisplayOneCalendar-->
+					<!--BeginDisplayTwoCalendar-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Attendance Calendar</a>
+						<ul class="sub">
+							<li><a href="attendance_calendar.php"><span class="icon16 minia-icon-calendar"></span>Self</a></li>
+							<li><a href="attendance_calendar.php?type=team"><span class="icon16 minia-icon-calendar"></span>Team</a></li>
+						</ul>
+					</li>
+					<!--EndDisplayTwoCalendar-->
+					<!--EndAttendanceCalendarModule-->
+					
+					<!--BeginDisplayShiftMovementBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Shift Movement</a>
+						<ul class="sub">
+							<!--BeginShiftMovementModule-->
+							<li><a href="shift_movement_list.php"><span class="icon16 minia-icon-refresh"></span>Application</a></li>
+							<!--EndShiftMovementModule-->
+							<!--BeginEmergencyShiftMovementModule-->
+							<li><a href="emergency_shift_movement_list.php"><span class="icon16 minia-icon-refresh"></span>Emergency</a></li>
+							<!--EndEmergencyShiftMovementModule-->
+							<!--BeginShiftMovementRequestModule-->
+							<li><a href="shift_movement_request.php"><span class="icon16 minia-icon-refresh"></span>Shift Movement Request</a></li>
+							<!--EndShiftMovementRequestModule-->
+							<!--BeginShiftMovementCancellationModule-->
+							<li><a href="shift_movement_cancel.php"><span class="icon16 icomoon-icon-calendar"></span>Cancel Shift Movement</a></li>
+							<!--EndShiftMovementCancellationModule-->
+							<!--BeginShiftMovementCompensationModule-->
+							<li><a href="shift_movement_compensation_list.php"><span class="icon16 icomoon-icon-calendar"></span>Compensation</a></li>
+							<!--EndShiftMovementCompensationModule-->
+							<!--BeginShiftMovementCompensationRequestModule-->
+							<li><a href="shift_movement_compensation_requests.php"><span class="icon16 icomoon-icon-calendar"></span>SM Comp Request</a></li>
+							<!--EndShiftMovementCompensationRequestModule-->
+							<!--BeginAdminShiftMovementModule-->
+							<li><a href="admin_shift_movement_list.php"><span class="icon16 icomoon-icon-calendar"></span>Admin Shift Movement</a></li>
+							<!--EndAdminShiftMovementModule-->
+							<!--BeginAdminShiftMovementCompensationModule-->
+							<li><a href="admin_shift_movement_compensation_list.php"><span class="icon16 icomoon-icon-calendar"></span>Admin SM Compensation</a></li>
+							<!--EndAdminShiftMovementCompensationModule-->
+							<!--BeginLateCommingCompensationRequestModule-->
+							<li><a href="time_compensation_requests.php"><span class="icon16 silk-icon-notes-2"></span>Late Comp Request</a></li>
+							<!--EndLateCommingCompensationRequestModule-->
+						</ul>
+					</li>
+					<!--EndDisplayShiftMovementBlock-->
+					<!--BeginLateCommingCompensationModule-->
+					<li><a href="time_compensation_list.php"><span class="icon16 silk-icon-notes-2"></span>Late Coming Compensation</a></li>
+					<!--EndLateCommingCompensationModule-->
+					
+					<!--BeginRosterModule-->
+					<li><a href="roster_list.php"><span class="icon16 icomoon-icon-calendar"></span>Roster</a></li>
+					<!--EndRosterModule-->
+					<!--BeginViewAllRosterModule-->
+					<li><a href="all_roster_list.php"><span class="icon16 icomoon-icon-calendar"></span>Roster</a></li>
+					<!--EndViewAllRosterModule-->
+					<!--BeginManagerRosterModule-->
+					<li><a href="manager_roster_list.php"><span class="icon16 icomoon-icon-calendar"></span>Roster</a></li>
+					<!--EndManagerRosterModule-->
+					<!--BeginInventoryBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Inventory</a>
+						<ul class="sub">
+							<!--BeginInventoryMakeModule-->
+							<li><a href="inventory_make_list.php"><span class="icon16 minia-icon-refresh"></span>Make</a></li>
+							<!--EndInventoryMakeModule-->
+							<!--BeginInventoryAttributesModule-->
+							<li><a href="inventory_attributes_list.php"><span class="icon16 minia-icon-refresh"></span>Attributes</a></li>
+							<!--EndInventoryAttributesModule-->
+							<!--BeginInventoryTypeModule-->
+							<li><a href="inventory_type_list.php"><span class="icon16 minia-icon-refresh"></span>Type</a></li>
+							<!--EndInventoryTypeModule-->
+							<!--BeginInventoryLocationModule-->
+							<li><a href="inventory_location_list.php"><span class="icon16 minia-icon-refresh"></span>Location</a></li>
+							<!--EndInventoryLocationModule-->
+							<!--BeginInventoryVendorModule-->
+							<li><a href="inventory_vendor_list.php"><span class="icon16 minia-icon-refresh"></span>Vendor</a></li>
+							<!--EndInventoryVendorModule-->
+							<!--BeginStockRegisterModule-->
+							<li><!--a href="stock_register_list.php"--><a href="stock_summary.php"><span class="icon16 minia-icon-refresh"></span>Stock Register</a></li>
+							<!--EndStockRegisterModule-->
+							<!--BeginRequisitionInventoryModule-->
+							<li><a href="requisition_inventory_list.php"><span class="icon16 minia-icon-refresh"></span>Requisition Inventory</a></li>
+							<!--EndRequisitionInventoryModule-->
+						</ul>
+					</li>
+					<!--EndInventoryBlock-->
+					<!--BeginInventoryReportBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Inventory Report</a>
+						<ul class="sub">
+							<!--BeginInventoryRepairReportModule-->
+							<li><a href="inventory_repair_report.php"><span class="icon16 minia-icon-refresh"></span>Inventory Repair</a></li>
+							<!--EndInventoryRepairReportModule-->
+							<!--BeginInventoryPurchaseReportModule-->
+							<li><a href="inventory_purchase_report.php"><span class="icon16 minia-icon-refresh"></span>Inventory Purchase</a></li>
+							<!--EndInventoryPurchaseReportModule-->
+							<!--BeginStockSummaryReportModule-->
+							<li><a href="stock_summary_report.php"><span class="icon16 minia-icon-refresh"></span>Stock Summary</a></li>
+							<!--EndStockSummaryReportModule-->
+							<!--BeginLocationWiseInventoryReportModule-->
+							<li><a href="location_wise_inventory_report.php"><span class="icon16 minia-icon-refresh"></span>Location wise inventory</a></li>
+							<!--EndLocationWiseInventoryReportModule-->
+							<!--BeginScrapDisposalReportModule-->
+							<li><a href="scrap_disposal_report.php"><span class="icon16 minia-icon-refresh"></span>Scrap Disposal</a></li>
+							<!--EndScrapDisposalReportModule-->
+							<!--BeginCurrentInventoryExportModule-->
+							<li><a href="export_inventory.php"><span class="icon16 minia-icon-refresh"></span>Inventory Export</a></li>
+							<!--EndCurrentInventoryExportModule-->
+						</ul>
+					</li>
+					<!--EndInventoryReportBlock-->
+					
+					<!--BeginScrapDisposalModule-->
+					<li><a href="scrap_disposal.php"><span class="icon16 minia-icon-refresh"></span>Scrap Disposal</a></li>
+					<!--EndScrapDisposalModule-->
+
+					<!--BeginITTicketingBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>IT Ticketing</a>
+						<ul class="sub">
+							<!--BeginIssueCategoryModule-->
+							<li><a href="issue_category_list.php"><span class="icon16 minia-icon-refresh"></span>Issue Category</a></li>
+							<!--EndIssueCategoryModule-->
+							<!--BeginITIssuesModule-->
+							<li><a href="issue_list.php"><span class="icon16 minia-icon-refresh"></span>IT Issue</a></li>
+							<!--EndITIssuesModule-->
+							<!--BeginIssueAccessModule-->
+							<li><a href="issue_access.php"><span class="icon16 minia-icon-refresh"></span>Issue Access</a></li>
+							<!--EndIssueAccessModule-->
+							<!--BeginPendingTicketModule-->
+							<li><a href="pending_ticket_list.php"><span class="icon16 minia-icon-refresh"></span>Pending IT Ticket</a></li>
+							<!--EndPendingTicketModule-->
+							<!--BeginTicketModule-->
+							<li><a href="ticket_list.php"><span class="icon16 minia-icon-refresh"></span>IT Support Ticket</a></li>
+							<!--EndTicketModule-->
+							<!--BeginITSupportDesignationModule-->
+							<li><a href="it_support_designations.php"><span class="icon16 minia-icon-refresh"></span>IT Support Designation</a></li>
+							<!--EndITSupportDesignationModule-->
+							<!--BeginRequisitionModule-->
+							<li><a href="requisition_list.php"><span class="icon16 minia-icon-refresh"></span>Requisition</a></li>
+							<!--EndRequisitionModule-->
+							<!--BeginRequisitionRequestModule-->
+							<li><a href="requisition_request_list.php"><span class="icon16 minia-icon-refresh"></span>Requisition Request</a></li>
+							<!--EndRequisitionRequestModule-->
+							<!--BeginITRequisitionModule-->
+							<li><a href="it_requisition_list.php"><span class="icon16 minia-icon-refresh"></span>IT Requisition</a></li>
+							<!--EndITRequisitionModule-->
+							<!--BeginITExpiredRequisitionModule-->
+							<li><a href="it_expired_requisition_list.php"><span class="icon16 minia-icon-refresh"></span>Pending Requisition</a></li>
+							<!--EndITExpiredRequisitionModule-->
+							
+							<!--BeginITSupportRosterModule-->
+							<li><a href="it_support_roster.php"><span class="icon16 minia-icon-refresh"></span>IT Support Roster</a></li>
+							<!--EndITSupportRosterModule-->
+						</ul>
+					</li>
+					<!--EndITTicketingBlock-->
+					<!--BeginITTicketingOneBlock-->
+					<!--BeginTicketModule-->
+					<li><a href="ticket_list.php"><span class="icon16 minia-icon-refresh"></span>IT Support Ticket</a></li>
+					<!--EndTicketModule-->
+					<!--EndITTicketingOneBlock-->
+					
+					<!--BeginITTicketingReportBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>IT Ticket Reports</a>
+						<ul class="sub">
+							<!--BeginTicketCallHistoryModule-->
+							<li><a href="call_history.php"><span class="icon16 minia-icon-refresh"></span>IT Ticket History</a></li>
+							<!--EndTicketCallHistoryModule-->
+							<!--BeginUserWiseIssueTrackingReportModule-->
+							<li><a href="user_issue_tracking_report.php"><span class="icon16 minia-icon-refresh"></span>Tickets - User wise</a></li>
+							<!--EndUserWiseIssueTrackingReportModule-->
+							<!--BeginIssueCategoryWiseIssueTrackingReportModule-->
+							<li><a href="issue_category_tracking_report.php"><span class="icon16 minia-icon-refresh"></span>Tickets - Category wise</a></li>
+							<!--EndIssueCategoryWiseIssueTrackingReportModule-->
+							<!--BeginLocationWiseIssueTrackingReportModule-->
+							<li><a href="location_issue_tracking_report.php"><span class="icon16 minia-icon-refresh"></span>Tickets - Location wise</a></li>
+							<!--EndLocationWiseIssueTrackingReportModule-->
+							<!--BeginCallStatusWiseMonthlyReportModule-->
+							<li><a href="call_status_wise_monthly_report.php"><span class="icon16 minia-icon-refresh"></span>Call status wise Report</a></li>
+							<!--EndCallStatusWiseMonthlyReportModule-->
+							<!--BeginDateWiseTicketGraphModule-->
+							<li><a href="ticket_log_graph.php"><span class="icon16 minia-icon-refresh"></span>Ticket Log Graph</a></li>
+							<!--EndDateWiseTicketGraphModule-->
+							<!--BeginIssueCategoryWiseTicketGraphModule-->
+							<li><a href="issue_category_wise_ticket_log_graph.php"><span class="icon16 minia-icon-refresh"></span>Tickets category - Graph</a></li>
+							<!--EndIssueCategoryWiseTicketGraphModule-->
+							<!--BeginTicketResolutionReportModule-->
+							<li><a href="ticket_resolution_report.php"><span class="icon16 minia-icon-refresh"></span>Tickets Resolution Report</a></li>
+							<!--EndTicketResolutionReportModule-->
+							<!--BeginTicketAttendingReportModule-->
+							<li><a href="ticket_attending_report.php"><span class="icon16 minia-icon-refresh"></span>Tickets Attending Report</a></li>
+							<!--EndTicketAttendingReportModule-->
+						</ul>
+					</li>
+					<!--EndITTicketingReportBlock-->
+					
+					<!--BeginReportsBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Reports</a>
+						<ul class="sub">
+							<!--BeginAttendanceReportModule-->
+							<li><a href="report_attendance.php"><span class="icon16 minia-icon-refresh"></span>Attendance</a></li>
+							<!--EndAttendanceReportModule-->
+							<!--BeginAllEmployeesAttendanceReportModule-->
+							<li><a href="employees_report_attendance.php"><span class="icon16 minia-icon-refresh"></span>Attendance</a></li>
+							<!--EndAllEmployeesAttendanceReportModule-->
+							<!--BeginLeaveReportModule-->
+							<li><a href="report_leave.php"><span class="icon16 minia-icon-refresh"></span>Leave</a></li>
+							<!--EndLeaveReportModule-->
+							<!--BeginBreakExceedReportModule-->
+							<li><a href="break_exceed_report.php"><span class="icon16 minia-icon-refresh"></span>Break Exceed</a></li>
+							<!--EndBreakExceedReportModule-->
+							<!--BeginLateComingReportModule-->
+							<li><a href="late_coming_report.php"><span class="icon16 minia-icon-refresh"></span>Late Coming</a></li>
+							<!--EndLateComingReportModule-->
+							<!--BeginMonthlyReportModule-->
+							<li><a href="monthly_report_view.php"><span class="icon16 minia-icon-refresh"></span>Monthly</a></li>
+							<!--EndMonthlyReportModule-->
+							<!--BeginShiftMovementReportModule-->
+							<li><a href="shift_movement_report.php"><span class="icon16 minia-icon-refresh"></span>Shift Movement</a></li>
+							<!--EndShiftMovementReportModule-->
+							<!--BeginIncentiveReportModule-->
+							<li><a href="report_incentive.php"><span class="icon16 minia-icon-refresh"></span>KRA / Incentive</a></li>
+							<!--EndIncentiveReportModule-->
+							<!--BeginBreakExceedApprovedReportModule-->
+							<li><a href="break_exceed_approved_report.php"><span class="icon16 minia-icon-refresh"></span>Break Exceed Approved</a></li>
+							<!--EndBreakExceedApprovedReportModule-->
+							<!--BeginAdminLeavesReportModule-->
+							<li><a href="admin_shift_movement_report.php"><span class="icon16 minia-icon-refresh"></span>Admin Leave Report</a></li>
+							<!--EndAdminLeavesReportModule-->
+							<!--BeginReportAttritionModule-->
+							<li><a href="report_attrition.php"><span class="icon16 minia-icon-refresh"></span>Attrition Rate</a></li>
+							<!--EndReportAttritionModule-->
+							<!--BeginHeadCountReportForReportingHeadsModule-->
+							<li><a href="headcount_report.php"><span class="icon16 minia-icon-refresh"></span>Daily Headcount Report</a></li>
+							<!--EndHeadCountReportForReportingHeadsModule-->
+						</ul>
+					</li>
+					<!--EndReportsBlock-->
+					<!--BeginAttritionModule-->
+					<li><a href="attrition_list.php"><span class="icon16 icomoon-icon-calendar"></span>Attrition Alert</a></li>
+					<!--EndAttritionModule-->
+					<!--BeginAttendanceViewModule-->
+					<!--BeginDisplayOneAttendanceView-->
+					<li><a href="attendance_view_all.php"><span class="icon16 icomoon-icon-calendar"></span>Daily Attendance Report</a></li>
+					<!--EndDisplayOneAttendanceView-->
+
+					<!--BeginDisplayAdminAttendanceView-->
+					<li><a href="attendance_view.php"><span class="icon16 icomoon-icon-calendar"></span>Daily Attendance Report</a></li>
+					<!--EndDisplayAdminAttendanceView-->
+					
+					<!--BeginDisplayTwoAttendanceView-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Daily Attendance </a>
+						<ul class="sub">
+							<li><a href="attendance_view_all.php"><span class="icon16 minia-icon-calendar"></span>Self Report</a></li>
+							<li><a href="attendance_view.php"><span class="icon16 minia-icon-calendar"></span>Team Report</a></li>
+						</ul>
+					</li>
+					<!--EndDisplayTwoAttendanceView-->
+					<!--EndAttendanceViewModule-->
+					
+					
+					<!--li><a href="file.html"><span class="icon16 icomoon-icon-upload-2"></span>File Manager</a></li>
+					<li> <a href="#"><span class="icon16 icomoon-icon-paper"></span>Error pages<span class="notification">6</span></a>
+						<ul class="sub">
+							<li><a href="403.html"><span class="icon16 icomoon-icon-paper"></span>Error 403</a></li>
+							<li><a href="404.html"><span class="icon16 icomoon-icon-paper"></span>Error 404</a></li>
+							<li><a href="405.html"><span class="icon16 icomoon-icon-paper"></span>Error 405</a></li>
+							<li><a href="500.html"><span class="icon16 icomoon-icon-paper"></span>Error 500</a></li>
+							<li><a href="503.html"><span class="icon16 icomoon-icon-paper"></span>Error 503</a></li>
+							<li><a href="offline.html"><span class="icon16 icomoon-icon-paper"></span>Offline page</a></li>
+						</ul>
+					</li>
+					<li> <a href="#"><span class="icon16 iconic-icon-box"></span>Other pages<span class="notification blue">2</span></a>
+						<ul class="sub">
+							<li><a href="invoice.html"><span class="icon16 icomoon-icon-paper"></span>Invoice page</a></li>
+							<li><a href="profile.html"><span class="icon16 icomoon-icon-paper"></span>User profile</a></li>
+						</ul>
+					</li-->
+					<!--BeginDisplayHRBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>HR Master</a>
+						<ul class="sub">
+							<!--BeginRctSourceModule-->
+							<li><a href="rct_source.php"><span class="icon16 minia-icon-refresh"></span>Source</a></li>
+							<!--EndRctSourceModule-->
+							<!--BeginRctDivisionModule-->
+							<li><a href="rct_division.php"><span class="icon16 minia-icon-refresh"></span>Division</a></li>
+							<!--EndRctDivisionModule-->
+							<!--BeginCurrentOpeningsModule-->
+							<li><a href="current_openings.php"><span class="icon16 minia-icon-refresh"></span>Current Openings</a></li>
+							<!--EndCurrentOpeningsModule-->
+							<!--BeginProofModule-->
+							<li><a href="proof_list.php"><span class="icon16 minia-icon-refresh"></span>Address/Id Proof</a></li>
+							<!--EndProofModule-->
+							<!--BeginGraduationModule-->
+							<li><a href="graduation_list.php"><span class="icon16 minia-icon-refresh"></span>Graduation Master</a></li>
+							<!--EndGraduationModule-->
+							<!--BeginPostGraduationModule-->
+							<li><a href="post_graduation_list.php"><span class="icon16 minia-icon-refresh"></span>Post Graduation Master</a></li>
+							<!--EndPostGraduationModule-->
+							<!--BeginEmployeeTestModule-->
+							<li><a href="emp_test.php"><span class="icon16 minia-icon-refresh"></span>Test Types Master</a></li>
+							<!--EndEmployeeTestModule-->
+							<!--BeginEmployeeTestMarksModule-->
+							<li><a href="emp_test_marks.php"><span class="icon16 minia-icon-refresh"></span>Test Marks Master</a></li>
+							<!--EndEmployeeTestMarksModule-->
+							<!--BeginSalaryOfferedModule-->
+							<li><a href="salary_offered.php"><span class="icon16 minia-icon-refresh"></span>Salary Offered</a></li>
+							<!--EndSalaryOfferedModule-->
+							
+							<!--BeginIncrementDetailsModule
+							<li><a href="increment.php"><span class="icon16 minia-icon-refresh"></span>Increment</a></li>
+							EndIncrementDetailsModule-->
+						</ul>
+					</li>
+					<!--EndDisplayHRBlock-->
+					
+					<!--BeginDisplayHRNewBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Interview Rounds</a>
+						<ul class="sub">
+							<!--BeginIQRoundModule-->
+							<li><a href="iq_round.php"><span class="icon16 minia-icon-refresh"></span>IQ Round</a></li>
+							<!--EndIQRoundModule-->
+							<!--BeginHrRoundModule-->
+							<li><a href="candidate_list.php"><span class="icon16 minia-icon-refresh"></span>HR Round</a></li>
+							<!--EndHrRoundModule-->
+							<!--BeginTestRoundModule-->
+							<li><a href="test_round.php"><span class="icon16 minia-icon-refresh"></span>Test Round</a></li>
+							<!--EndTestRoundModule-->
+							<!--BeginOmRoundViewModule-->
+							<li><a href="om_round_view.php"><span class="icon16 minia-icon-refresh"></span>OM Round</a></li>
+							<!--EndOmRoundViewModule-->
+							<!--BeginFinalHrModule-->
+							<li><a href="final_hr.php"><span class="icon16 minia-icon-refresh"></span>Final HR Evolution</a></li>
+							<!--EndFinalHrModule-->
+						</ul>
+					</li>
+					<!--EndDisplayHRNewBlock-->
+					
+					<!--BeginDisplayHRNewestBlock-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>Document & Status</a>
+						<ul class="sub">
+							<!--BeginCandidateDocumentDetailsModule-->
+							<li><a href="candidate_document_details.php"><span class="icon16 minia-icon-refresh"></span>Shortlisted Cand Docs</a></li>
+							<!--EndCandidateDocumentDetailsModule-->
+							<!--BeginJoineesModule-->
+							<li><a href="joinees_list.php"><span class="icon16 minia-icon-refresh"></span>Cand To Be Confirmed</a></li>
+							<!--EndJoineesModule-->
+							<!--BeginDocumentDetailsModule-->
+							<li><a href="document_details.php"><span class="icon16 minia-icon-refresh"></span>Emp Document Details</a></li>
+							<!--EndDocumentDetailsModule-->
+						</ul>
+					</li>
+					<!--EndDisplayHRNewestBlock-->
+					
+					<!--BeginOmRoundModule-->
+					<li>
+						<a href="om_round.php"><span class="icon16 minia-icon-refresh"></span>OM Round</a>
+					</li>
+					<!--EndOmRoundModule-->
+
+					<!--BeginDisplayHRReports-->
+					<li>
+						<a href="#"><span class="icon16 minia-icon-list-4"></span>HR Reports</a>
+						<ul class="sub">
+							<!--BeginRctSheetModule-->
+							<li><a href="rct_sheet.php"><span class="icon16 minia-icon-refresh"></span>RCT Sheet</a></li>
+							<!--EndRctSheetModule-->
+							<!--BeginMonthlyRctSheetModule-->
+							<li><a href="rct_sheet_monthly.php"><span class="icon16 minia-icon-refresh"></span>Monthly RCT Sheet</a></li>
+							<!--EndMonthlyRctSheetModule-->
+							<!--BeginDocumentReportModule-->
+							<li><a href="report_document.php"><span class="icon16 minia-icon-refresh"></span>All Documents</a></li>
+							<!--EndDocumentReportModule-->
+							<!--BeginPendingDocumentReportModule-->
+							<li><a href="report_pending_document.php"><span class="icon16 minia-icon-refresh"></span>Pending Documents</a></li>
+							<!--EndPendingDocumentReportModule-->
+							<!--BeginMasterReportModule-->
+							<li><a href="master_report.php"><span class="icon16 minia-icon-refresh"></span>Master Report</a></li>
+							<!--EndMasterReportModule-->
+							<!--BeginCurrentEmployeeModule-->
+							<li><a href="current_emp_report.php"><span class="icon16 minia-icon-refresh"></span>Current Employees</a></li>
+							<!--EndCurrentEmployeeModule-->
+							<!--BeginBirthdayCalendarModule-->
+							<li><a href="birthday_calendar.php"><span class="icon16 minia-icon-refresh"></span>Birthday Calendar</a></li>
+							<!--EndBirthdayCalendarModule-->
+							<!--BeginInductionReportModule-->
+							<li><a href="report_induction.php"><span class="icon16 minia-icon-refresh"></span>Induction</a></li>
+							<!--EndInductionReportModule-->
+							<!--BeginMonthlyEmployeeStatusReportModule-->
+							<li><a href="monthly_employee_report.php"><span class="icon16 minia-icon-refresh"></span>Employee Status Report</a></li>
+							<!--EndMonthlyEmployeeStatusReportModule-->
+							<!--BeginHrReportAttritionModule-->
+							<li><a href="rep_attrition.php"><span class="icon16 minia-icon-refresh"></span>Attrition Rate</a></li>
+							<!--EndHrReportAttritionModule-->
+							<!--BeginDesignationWiseEmployeeSummaryModule-->
+							<li><a href="designation_wise_employee_summary.php"><span class="icon16 minia-icon-refresh"></span>Designation wise Emp</a></li>
+							<!--EndDesignationWiseEmployeeSummaryModule-->
+							<!--BeginDailyHeadCountReportModule-->
+							<li><a href="daily_headcount_report.php"><span class="icon16 minia-icon-refresh"></span>Daily Headcount Report</a></li>
+							<!--EndDailyHeadCountReportModule-->
+							<!--BeginEmployeesNotIncludedInHeadCountListModule-->
+							<li><a href="employees_not_in_headcount.php"><span class="icon16 minia-icon-refresh"></span>Emp not in headcount</a></li>
+							<!--EndEmployeesNotIncludedInHeadCountListModule-->
+							<!--BeginDepartmentWiseHeadCountReportModule-->
+							<li><a href="department_wise_daily_headcount_report.php"><span class="icon16 minia-icon-refresh"></span>Dept wise headcount</a></li>
+							<!--EndDepartmentWiseHeadCountReportModule-->
+						</ul>
+					</li>
+					<!--EndDisplayHRReports-->
+					<!--BeginCandidatesModule-->
+						<li><a href="candidates.php"><span class="icon16 minia-icon-refresh"></span>Candidate Reg Form</a></li>
+					<!--EndCandidatesModule-->
+					<!--BeginInterviewSettingsModule-->
+					<li><a href="interview_settings.php"><span class="icon16 minia-icon-refresh"></span>Interview settings</a></li>
+					<!--EndInterviewSettingsModule-->
+					<!--BeginResignationModule-->
+					<!--li><a href="resignation.php"><span class="icon16 minia-icon-refresh"></span>Resignation Form</a></li-->
+					<!--EndResignationModule-->
+					<!--BeginResignationRequestModule-->
+					<!--li><a href="res_request.php"><span class="icon16 minia-icon-refresh"></span>Resignation Request</a></li-->
+					<!--EndResignationRequestModule-->
+					<!--BeginDolRequestModule-->
+					<!--li><a href="dol_request.php"><span class="icon16 minia-icon-refresh"></span>DOL</a></li-->
+					<!--EndDolRequestModule-->
+					<!--BeginEmployeeClearanceModule-->
+					<!--li><a href="clearance.php"><span class="icon16 minia-icon-refresh"></span>Clearance</a></li-->
+					<!--EndEmployeeClearanceModule-->
+					<!--BeginHrResignationRequestModule-->
+					<!--li><a href="hr_res_request.php"><span class="icon16 minia-icon-refresh"></span>Hr Resignation Request</a></li-->
+					<!--EndHrResignationRequestModule-->
+					
+					<!--BeginQualityLevelingFormModule-->
+					<li><a href="qaform.php"><span class="icon16 minia-icon-refresh"></span>Leveling Form</a></li>
+					<!--EndQualityLevelingFormModule-->
+					<!--BeginQualityFormTypeModule-->
+					<li><a href="quality_formtype_list.php"><span class="icon16 minia-icon-refresh"></span>Quality Form Type</a></li>
+					<!--EndQualityFormTypeModule-->
+					<!--BeginQualityParameterModule-->
+					<li><a href="quality_parameter_list.php"><span class="icon16 minia-icon-refresh"></span>Quality Parameter</a></li>
+					<!--EndQualityParameterModule-->
+					<!--BeginQualityAFDModule-->
+					<li><a href="quality_afd_list.php"><span class="icon16 minia-icon-refresh"></span>Quality AFD</a></li>
+					<!--EndQualityAFDModule-->
+					<!--BeginQualityLevelingReportModule-->
+					<li><a href="quality_report.php"><span class="icon16 minia-icon-refresh"></span>Leveling Report</a></li>
+					<!--EndQualityLevelingReportModule-->
+					<!--BeginLevelingDataEditModule-->
+					<li><a href="leveling_edit_list.php"><span class="icon16 minia-icon-refresh"></span>Leveling Data Edit</a></li>
+					<!--EndLevelingDataEditModule-->
+					<!--BeginQualitySettingsModule-->
+					<li><a href="quality_settings.php"><span class="icon16 minia-icon-refresh"></span>Quality Settings</a></li>
+					<!--EndQualitySettingsModule-->
+					<!--BeginReportingHeadHistoryModule-->
+					<li><a href="report_head_history.php"><span class="icon16 minia-icon-refresh"></span>Reporting Head History</a></li>
+					<!--EndReportingHeadHistoryModule-->	
+				</ul>
+			</div>
+		</div>
+		<!-- End sidenav -->
+		<!--<div class="sidebar-widget">
+                <h5 class="title">Monthly Bandwidth Transfer</h5>
+                <div class="content">
+                    <span class="icon16 iconic-icon-transfer left"></span>
+                    <div class="progress progress-mini progress-danger left tip" title="87%">
+                      <div class="bar" style="width: 87%;"></div>
+                    </div>
+                    <span class="percent">87%</span>
+                    <div class="stat">19419.94 / 12000 MB</div>
+                </div>
+
+            </div>
+
+            <div class="sidebar-widget">
+                <h5 class="title">Disk Space Usage</h5>
+                <div class="content">
+                    <span class="icon16 icomoon-icon-cloud left"></span>
+                    <div class="progress progress-mini progress-success left tip" title="16%">
+                      <div class="bar" style="width: 16%;"></div>
+                    </div>
+                    <span class="percent">16%</span>
+                    <div class="stat">304.44 / 8000 MB</div>
+                </div>
+
+            </div>
+
+            <div class="sidebar-widget">
+                <h5 class="title">Ad sense stats</h5>
+                <div class="content">
+
+                    <div class="stats">
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Advert View</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-eye left"></span>
+                            <div class="number">21,501</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-up green"></span>
+                                5%
+                            </div>
+                            <span id="stat1" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Clicks</div>
+                            </div>
+                            <span class="icon16 entypo-icon-thumbs-up left"></span>
+                            <div class="number">308</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-down red"></span>
+                                8%
+                            </div>
+                            <span id="stat2" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Page CTR</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-heart left"></span>
+                            <div class="number">4%</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-down red"></span>
+                                1%
+                            </div>
+                            <span id="stat3" class="spark"></span>
+                        </div>
+                        <div class="item">
+                            <div class="head clearfix">
+                                <div class="txt">Earn money</div>
+                            </div>
+                            <span class="icon16 icomoon-icon-calculate left"></span>
+                            <div class="number">$376</div>
+                            <div class="change">
+                                <span class="icon24 icomoon-icon-arrow-up green"></span>
+                                26%
+                            </div>
+                            <span id="stat4" class="spark"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="sidebar-widget">
+                <h5 class="title">Right now</h5>
+                <div class="content">
+                    <div class="rightnow">
+                        <ul class="unstyled">
+                            <li><span class="number">34</span><span class="icon16 icomoon-icon-new"></span>Posts</li>
+                            <li><span class="number">7</span><span class="icon16 icomoon-icon-paper"></span>Pages</li>
+                            <li><span class="number">14</span><span class="icon16 brocco-icon-list"></span>Categories</li>
+                            <li><span class="number">201</span><span class="icon16 icomoon-icon-tag"></span>Tags</li>
+                        </ul>
+                    </div>
+                </div>
+            </div?
+-->
+	</div>
+	<div id="content" class="clearfix">
+		<div class="contentwrapper">
+			<!--Content wrapper-->
+			<div class="heading">
+				<h3>{mainheading}</h3>
+				<!--div class="resBtnSearch"> <a href="#"><span class="icon16 brocco-icon-search"></span></a> </div>
+				<div class="search">
+					<form id="searchform" action="#" >
+					<input type="text" class="top-search" placeholder="Search here ..." />
+					<input type="submit" class="search-btn" value="" />
+					</form>
+				</div-->
+				<!-- End search -->
+				<ul class="breadcrumb">
+					<li>You are here:</li>
+					<li><a href="dashboard.php" class="tip" title="Back to dashboard"> <span class="icon16 icomoon-icon-screen"></span> </a> <span class="divider"> <span class="icon16 icomoon-icon-arrow-right"></span> </span> </li>
+					{mainbreadcrumb}
+
+				</ul>
+			</div>
+			<!-- End .heading-->
+			{main_container}
+		</div>
+		<!-- End contentwrapper -->
+	</div>
+</div>
+
+<!-- End #wrapper -->
+<!-- Le javascript
+    ================================================== -->
+<script type="text/javascript" src="js/bootstrap/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+<!-- Load plugins -->
+<script type="text/javascript" src="plugins/qtip/jquery.qtip.min.js"></script>
+<script type="text/javascript" src="plugins/flot/jquery.flot.js"></script>
+<script type="text/javascript" src="plugins/flot/jquery.flot.grow.js"></script>
+<script type="text/javascript" src="plugins/flot/jquery.flot.pie.js"></script>
+<script type="text/javascript" src="plugins/flot/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="plugins/flot/jquery.flot.tooltip_0.4.4.js"></script>
+<script type="text/javascript" src="plugins/flot/jquery.flot.orderBars.js"></script>
+<script type="text/javascript" src="plugins/sparkline/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="plugins/knob/jquery.knob.js"></script>
+
+<script type="text/javascript" src="plugins/prettify/prettify.js"></script>
+<script type="text/javascript" src="plugins/watermark/jquery.watermark.min.js"></script>
+<script type="text/javascript" src="plugins/elastic/jquery.elastic.js"></script>
+<script type="text/javascript" src="plugins/inputlimiter/jquery.inputlimiter.1.3.min.js"></script>
+<script type="text/javascript" src="plugins/maskedinput/jquery.maskedinput-1.3.min.js"></script>
+<script type="text/javascript" src="plugins/ibutton/jquery.ibutton.min.js"></script>
+<script type="text/javascript" src="plugins/uniform/jquery.uniform.min.js"></script>
+<!--script type="text/javascript" src="plugins/stepper/ui.stepper.js"></script-->
+<!--<script type="text/javascript" src="plugins/color-picker/colorpicker.js"></script>-->
+<script type="text/javascript" src="plugins/timeentry/jquery.timeentry.min.js"></script>
+<script type="text/javascript" src="plugins/select/select2.js"></script>
+<script type="text/javascript" src="plugins/dualselect/jquery.dualListBox-1.3.min.js"></script>
+<script type="text/javascript" src="plugins/tiny_mce/jquery.tinymce.js"></script>
+<script type="text/javascript" src="plugins/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="plugins/animated-progress-bar/jquery.progressbar.js"></script>
+<script type="text/javascript" src="plugins/pnotify/jquery.pnotify.min.js"></script>
+<script type="text/javascript" src="plugins/lazy-load/jquery.lazyload.min.js"></script>
+<script type="text/javascript" src="plugins/jpages/jPages.min.js"></script>
+<script type="text/javascript" src="plugins/pretty-photo/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="plugins/smartWizzard/jquery.smartWizard-2.0.min.js"></script>
+<script type="text/javascript" src="plugins/ios-fix/ios-orientationchange-fix.js"></script>
+<script type="text/javascript" src="plugins/elfinder/elfinder.min.js"></script>
+<script type="text/javascript" src="plugins/plupload/plupload.js"></script>
+<script type="text/javascript" src="plugins/plupload/plupload.html4.js"></script>
+<script type="text/javascript" src="plugins/plupload/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+
+<script type="text/javascript" src="js/colorpicker.js"></script>
+<script type="text/javascript" src="js/eye.js"></script>
+<script type="text/javascript" src="js/layout.js"></script>
+<script type="text/javascript" src="js/utils.js"></script>
+
+<!-- Init plugins -->
+<script type="text/javascript" src="js/statistic.js"></script>
+<!-- Control graphs ( chart, pies and etc) -->
+<!-- Important Place before main.js  -->
+<!--script type="text/javascript" src="plugins/touch-punch/jquery.ui.touch-punch.min.js"></script-->
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!-- Build page from here: -->
+
+<div class="row-fluid">
+	<div class="span8">
+		<h1>Welcome {displayname}</h1>
+	</div>
+</div>
+
+<!--BeginDisplayToDoListBlock-->
+<div class="row-fluid">
+	<div class="span6">
+		<div class="reminder">
+			<h4>Things you need to do</h4>
+			<ul>
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 icomoon-icon-new green"></span>
+					</div>
+					<span class="number" id="divPendingRequisitionCount">{pending_requisition_count}</span> 
+					<span class="txt">Pending Requisition</span>
+					<a href="it_requisition_list.php" class="btn btn-warning">go</a>
+				</li>
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 icomoon-icon-new green"></span>
+					</div>
+					<span class="number" id="divExpiredRequisitionCount">{expired_requisition_count}</span> 
+					<span class="txt">Expired Requisition</span>
+					<a href="it_expired_requisition_list.php" class="btn btn-warning">go</a>
+				</li>
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 minia-icon-list green"></span>
+					</div>
+					<span class="number" id="divOpenTicketsCount">{open_tickets_count}</span> 
+					<span class="txt">Open Tickets</span>
+					<a href="pending_ticket_list.php" class="btn btn-warning">go</a>
+				</li>
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 iconic-icon-list green"></span>
+					</div>
+					<span class="number" id="divPendingTicketsCount">{pending_tickets_count}</span> 
+					<span class="txt">Pending Tickets</span>
+					<a href="pending_ticket_list.php" class="btn btn-warning">go</a>
+				</li>
+			</ul>
+		</div><!-- End .reminder -->
+	</div><!-- End .span4 -->
+</div>
+<script type="text/javascript">
+	/* This function executes every 5 minutes (300000 ms) */
+	(function fnReloadDashboard(){
+		setTimeout(function(){
+			$.ajax({
+				url: './autoreload_id_dashboard.php',
+				dataType: 'json',
+				success: function(doc) {
+					if(parseInt($("#divPendingRequisitionCount").html(),10) != parseInt(doc.pending_requisition_count,10) || parseInt($("#divExpiredRequisitionCount").html(),10) != parseInt(doc.expired_requisition_count,10) || parseInt($("#divOpenTicketsCount").html(),10) != parseInt(doc.open_tickets_count,10) || parseInt($("#divPendingTicketsCount").html(),10) != parseInt(doc.pending_tickets_count,10))
+					{
+						alert("Information Your dashboard has been changed!");
+
+						$("#divPendingRequisitionCount").html(doc.pending_requisition_count);
+						$("#divExpiredRequisitionCount").html(doc.expired_requisition_count);
+						$("#divOpenTicketsCount").html(doc.open_tickets_count);
+						$("#divPendingTicketsCount").html(doc.pending_tickets_count);
+					}
+				}
+			});
+			
+			fnReloadDashboard();
+		}, 300000);
+	})();
+</script>
+<!--EndDisplayToDoListBlock-->
+<!--BeginDisplayPenaltyBlock-->
+<div class="row-fluid">
+	<div class="span6">
+		<div class="reminder">
+			<h4>Alert</h4>
+			<ul>
+				<!--BeginDisplayPenaltyBreakExceedBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 entypo-icon-time green"></span>
+					</div>
+					<span class="number">{penalty_break_exceed_count}</span> 
+					<span class="txt">Break Exceeds</span>
+					<a href="attendance_calendar.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPenaltyBreakExceedBlock-->
+
+				<!--BeginDisplayPenaltyLateComingBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 brocco-icon-clock green"></span>
+					</div>
+					<span class="number">{penalty_late_coming_count}</span> 
+					<span class="txt">Late comings</span>
+					<a href="attendance_calendar.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPenaltyLateComingBlock-->
+			</ul>
+		</div>
+	</div>
+</div>
+<!--EndDisplayPenaltyBlock-->
+
+<!--BeginDisplayPendingApprovalReminderBlock-->
+<div class="row-fluid">
+	<div class="span6">
+		<div class="reminder">
+			<h4>Things you need to do</h4>
+			<ul>
+				<!--BeginDisplayPendingLeaveRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 entypo-icon-suitcase-2 green"></span>
+					</div>
+					<span class="number">{pending_leave_request_count}</span> 
+					<span class="txt">Leave request</span>
+					<a href="leave_request.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingLeaveRequestBlock-->
+
+				<!--BeginDisplayPendingHalfdayLeaveRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 entypo-icon-suitcase green"></span>
+					</div>
+					<span class="number">{pending_halfday_leave_request_count}</span> 
+					<span class="txt">Halfday Leave request</span>
+					<a href="halfleave_request.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingHalfdayLeaveRequestBlock-->
+
+				<!--BeginDisplayPendingShiftMovementRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 brocco-icon-calendar green"></span>
+					</div>
+					<span class="number">{pending_shift_movement_request_count}</span> 
+					<span class="txt">Shift movement request</span>
+					<a href="shift_movement_request.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingShiftMovementRequestBlock-->
+				
+				<!--BeginDisplayPendingShiftMovementCompensationRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 entypo-icon-history green"></span>
+					</div>
+					<span class="number">{pending_shift_movement_compensation_request_count}</span> 
+					<span class="txt">Shift movement compensation request</span>
+					<a href="shift_movement_compensation_requests.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingShiftMovementCompensationRequestBlock-->
+
+				<!--BeginDisplayPendingLateComingCompensationRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 icomoon-icon-history green"></span>
+					</div>
+					<span class="number">{pending_late_coming_compensation_request_count}</span> 
+					<span class="txt">Late coming compensation request</span>
+					<a href="time_compensation_requests.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingLateComingCompensationRequestBlock-->
+
+				<!--BeginDisplayPendingRequisitionRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 silk-icon-desktop green"></span>
+					</div>
+					<span class="number">{pending_requisition_request_count}</span> 
+					<span class="txt">Requisition request</span>
+					<a href="requisition_request_list.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingRequisitionRequestBlock-->
+				
+				<!--BeginDisplayPendingInterviewRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 iconic-icon-chat-alt-stroke  green"></span>
+					</div>
+					<span class="number">{Pending_interview_request_count}</span> 
+					<span class="txt">Pending Interview request</span>
+					<a href="om_round.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingInterviewRequestBlock-->
+				
+				<!--BeginDisplayPendingAdminLeaveRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 minia-icon-suitcase green"></span>
+					</div>
+					<span class="number">{pending_admin_leave_count}</span> 
+					<span class="txt">Pending admin leave request</span>
+					<a href="admin_leave_requests.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingAdminLeaveRequestBlock-->
+				
+				<!--BeginDisplayPendingAdminHalfLeaveRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 silk-icon-notes green"></span>
+					</div>
+					<span class="number">{pending_admin_half_leave_count}</span> 
+					<span class="txt">Pending admin half leave request</span>
+					<a href="admin_half_leave_requests.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingAdminHalfLeaveRequestBlock-->
+
+				<!--BeginDisplayPendingAdminApprovedLwpRequestBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 silk-icon-notes-2 green"></span>
+					</div>
+					<span class="number">{pending_admin_approved_lwp_count}</span> 
+					<span class="txt">Pending admin approved lwp request</span>
+					<a href="admin_approved_lwp_requests.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayPendingAdminApprovedLwpRequestBlock-->
+			</ul>
+		</div>
+	</div>
+</div>
+<!--EndDisplayPendingApprovalReminderBlock-->
+
+<!--BeginDisplayLevelingDashboardBlock-->
+<div class="row-fluid">
+	<div class="span6">
+		<div class="reminder">
+			<h4>Leveling</h4>
+			<ul>
+				<!--BeginDisplayLevelingPerformedBlock-->
+				<li class="clearfix">
+					<div class="icon">
+						<span class="icon32 brocco-icon-stats green"></span>
+					</div>
+					<span class="number">&nbsp;</span> 
+					<span class="txt">Leveling Performed dated {leveling_date}</span>
+					<a href="quality_report.php" class="btn btn-warning">go</a>
+				</li>
+				<!--EndDisplayLevelingPerformedBlock-->
+			</ul>
+		</div>
+	</div>
+</div>
+<!--EndDisplayLevelingDashboardBlock-->

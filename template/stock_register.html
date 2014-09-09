@@ -1,0 +1,361 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<!--li>
+				<b>Item Name:</b><br>Enter the name for the stock item.
+			</li-->
+			<li>
+				<b>Unique Id:</b><br>Enter the unique no for the stock item.
+			</li>
+			<li>
+				<b>Serial No.:</b><br>Enter the serial no for the stock item.
+			</li>
+			<li>
+				<b>Inventory Type:</b><br>Enter the inventory type for the stock item.
+			</li>
+			<li>
+				<b>Inventory Location:</b><br>Enter the inventory location for the stock item.
+			</li>
+			<li>
+				<b>Status:</b><br>Select the status for the stock item.
+			</li>
+			<li>
+				<b>Remarks:</b><br>Enter the remarks for the stock item.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmstockregister" id="frmstockregister" class="form-horizontal seperator" method="post" action="stock_register.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<!--div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Item Name:</label>
+					<input class="span4" name="item_name" id="item_name" type="text" value="{item_name}" />
+				</div>
+			</div>
+		</div-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Inventory Type:</label>
+					<select name="inventory_type_id" id="inventory_type_id" onchange="javascript: fnChangeInventoryType();">
+						<option value="">Please select</option>
+						<!--BeginFillInventoryType-->
+						<option value="{type_id}">{type_name}</option>
+						<!--EndFillInventoryType-->
+					</select>
+					<script type="text/javascript">
+						if("{inventory_type_id}" != "")
+							$("#inventory_type_id").val("{inventory_type_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Inventory Make:</label>
+					<select name="inventory_make_id" id="inventory_make_id">
+						<option value="">Please select</option>
+						<!--BeginFillInventoryMake-->
+						<option value="{make_id}">{make_name}</option>
+						<!--EndFillInventoryMake-->
+					</select>
+					<script type="text/javascript">
+						if("{inventory_make_id}" != "")
+							$("#inventory_make_id").val("{inventory_make_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Serial No.:</label>
+					<input class="span4" name="serialno" id="serialno" type="text" value="{serialno}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Unique Id:</label>
+					<input class="span4" name="uniqueid" id="uniqueid" type="text" value="{uniqueid}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Inventory Location:</label>
+					<select name="location_id" id="location_id">
+						<option value="">Please select</option>
+						<!--BeginFillInventoryLocation-->
+						<option value="{inventory_location_id}">{inventory_location_name}</option>
+						<!--EndFillInventoryLocation-->
+					</select>
+					<script type="text/javascript">
+						if("{location_id}" != "")
+							$("#location_id").val("{location_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Inventory Vendor:</label>
+					<select name="vendor_id" id="vendor_id">
+						<option value="">Please select</option>
+						<!--BeginFillInventoryVendor-->
+						<option value="{inventory_vendor_id}">{inventory_vendor_name}</option>
+						<!--EndFillInventoryVendor-->
+					</select>
+					<script type="text/javascript">
+						if("{vendor_id}" != "")
+							$("#vendor_id").val("{vendor_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Inventory Attributes:</label>
+					<div class="form-label span4 clsleft" id="lblInventoryAttributes">
+						No attributes specified.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Purchase date:</label>
+					<input class="span4" name="purchasedate" id="purchasedate" type="text" value="{purchasedate}" readonly="readonly" style="cursor:pointer;" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Invoice No:</label>
+					<input class="span4" name="invoice_no" id="invoice_no" type="text" value="{invoice_no}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Warranty:</label>
+					Year: <select name="warranty_year" id="warranty_year">
+						<option value="">Please select</option>
+						<!--BeginFillWarrantyYear-->
+						<option value="{year}">{year}</option>
+						<!--EndFillWarrantyYear-->
+					</select>
+					<script type="text/javascript">
+						if("{warranty_year}" != "")
+							$("#warranty_year").val("{warranty_year}");
+					</script>
+					Month: <select name="warranty_month" id="warranty_month">
+						<option value="">Please select</option>
+						<!--BeginFillWarrantyMonth-->
+						<option value="{month}">{month}</option>
+						<!--EndFillWarrantyMonth-->
+					</select>
+					<script type="text/javascript">
+						if("{warranty_month}" != "")
+							$("#warranty_month").val("{warranty_month}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Status:</label>
+					<select name="status" id="status" onchange="javascript: fnChangeStatus();">
+						<option value="">Please select</option>
+						<option value="0">Stock</option>
+						<option value="1">In use</option>
+						<option value="2">Scrap</option>
+						<option value="3">Repair</option>
+					</select>
+					<script type="text/javascript">
+						if("{status}" != "")
+							$("#status").val("{status}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid clsRepair">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Sent to:</label>
+					<select name="sentto_vendor_id" id="sentto_vendor_id">
+						<option value="">Please select</option>
+						<option value="0">In-house</option>
+						<!--BeginFillSendToVendor-->
+						<option value="{inventory_vendor_id}">{inventory_vendor_name}</option>
+						<!--EndFillSendToVendor-->
+					</select>
+					<script type="text/javascript">
+						if("{sentto_vendor_id}" != "")
+							$("#sentto_vendor_id").val("{sentto_vendor_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid clsRepair">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Expected return date:</label>
+					<input class="span4" name="expected_return_date" id="expected_return_date" type="text" value="{expected_return_date}" readonly="readonly" style="cursor:pointer;" />
+				</div>
+			</div>
+		</div>
+		<!--div class="form-row row-fluid clsRepair">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Is Returnable:</label>
+					<input name="isreturnable" id="isreturnable" type="checkbox" value="1" {setchecked} />
+				</div>
+			</div>
+		</div-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" class = "required">
+					Remarks:
+					</label>
+					<textarea class="span4" name="remarks" id="remarks" type="text">{remarks}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="StockRegister" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<!--button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='stock_summary.php'">Cancel</button-->
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='stock_register_list.php?type={inventory_type_id}'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#purchasedate, #expected_return_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true,
+			changeYear: true,
+			changeMonth: true
+		});
+		
+		fnChangeStatus();
+		fnChangeInventoryType();
+	});
+
+	function fnChangeStatus()
+	{
+		if($("#status").val() == "3")
+			$(".clsRepair").show();
+		else
+		{
+			$(".clsRepair").hide();
+			$("#sentto_vendor_id").val('');
+			//$.uniform.update("#sentto_vendor_id");
+			$("#expected_return_date").val('');
+		}
+	}
+
+	function fnChangeInventoryType()
+	{
+		if($.trim($("#inventory_type_id").val()) != "")
+		{
+			$("#lblInventoryAttributes").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+			$("#lblInventoryAttributes").load("get_inventory_attributes_by_type.php?typeid="+escape($.trim($("#inventory_type_id").val()))+"&stock_id="+escape($.trim($("#id").val())),"",function(data){
+				$("select.clsInventoryAttributes").uniform();
+				/*$("select.clsInventoryAttributes").each(function(){
+					alert($(this).attr("id"));
+					//$("#"+$(this).attr("id")).uniform();
+				});*/
+			});
+		}
+		else
+		{
+			$("#lblInventoryAttributes").html("No attributes specified.");
+		}
+	}
+
+	function fnValidate()
+	{
+		/*if(!checkblank($("#item_name"),"Please enter the Item Name")) return false;*/
+		if(!checkblank($("#inventory_type_id"),"Please enter the Inventory Type")) return false;
+		if(!checkblank($("#serialno"),"Please enter the Serial No.")) return false;
+		if(!checkblank($("#uniqueid"),"Please enter the Unique Id.")) return false;
+		
+		if($(".clsInventoryAttributes").length > 0)
+		{
+			var errflag = false;
+			$(".clsInventoryAttributes").each(function(){
+				if($.trim($(this).val()) == "")
+				{
+					errflag = true;
+					return;
+				}
+			});
+			if(errflag)
+			{
+				alert("Please select value for the attribute.");
+				return false;
+			}
+		}
+		if(!checkblank($("#status"),"Please enter the Status")) return false;
+		
+		if($("#status").val() == "1")
+		{
+			/* In use */
+			if(!checkblank($("#location_id"),"Please enter the Inventory Location")) return false;
+		}
+		else if($("#status").val() == "2")
+		{
+			/* Scrap */
+			if($.trim($("#location_id").val()) != "")
+			{
+				if(confirm("Inventory status is Scrap, location will be removed. Are you sure you want to continue?"))
+				{
+					$("#location_id").val('');
+				}
+				else
+				{
+					return false;
+				}
+			}
+		}
+		else if($("#status").val() == "3")
+		{
+			/* In repair */
+			if(!checkblank($("#sentto_vendor_id"),"Please select Sent to repair")) return false;
+			if(!checkblank($("#expected_return_date"),"Please select Expected return date")) return false;
+		}
+	}
+	
+</script>

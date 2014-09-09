@@ -1,0 +1,148 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Search Scrap Disposal</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<form name="frmScrapDisposalReport" id="frmScrapDisposalReport" method="post" action="scrap_disposal_report.php">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Inventory Type:</label>
+								<select name="search_inventory_type_id" id="search_inventory_type_id">
+									<option value="">Please select</option>
+									<!--BeginFillInventoryType-->
+									<option value="{type_id}">{type_name}</option>
+									<!--EndFillInventoryType-->
+								</select>
+								<script type="text/javascript">
+									if("{search_inventory_type_id}" != "")
+										$("#search_inventory_type_id").val("{search_inventory_type_id}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Inventory Make:</label>
+								<select name="search_inventory_make_id" id="search_inventory_make_id">
+									<option value="">Please select</option>
+									<!--BeginFillInventoryMake-->
+									<option value="{make_id}">{make_name}</option>
+									<!--EndFillInventoryMake-->
+								</select>
+								<script type="text/javascript">
+									if("{search_inventory_make_id}" != "")
+										$("#search_inventory_make_id").val("{search_inventory_make_id}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Disposal date:</label>
+								<span style="float:left;padding:4px;">From : </span><input class="span4" name="search_scrap_disposal_date_from" id="search_scrap_disposal_date_from" type="text" value="{search_scrap_disposal_date_from}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+								<span style="float:left;padding:4px;">To : </span><input class="span4" name="search_scrap_disposal_date_to" id="search_scrap_disposal_date_to" type="text" value="{search_scrap_disposal_date_to}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Unique Id:</label>
+								<input class="span4" name="search_unique_id" id="search_unique_id" type="text" value="{search_unique_id}" />
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<input type="hidden" name="action" id="action" value="ScrapDisposalReport" />
+										<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Inventory in repair</span>
+							<a href="scrap_disposal_report.php?action=export" target="_blank">
+								<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+							</a>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblScrapDisposal">
+							<thead>
+								<tr>
+									<th>Inventory Type</th>
+									<th>Inventory Make</th>
+									<th>Serial No</th>
+									<th>Invoice No</th>
+									<th>Unique Id</th>
+									<th>Purchase date</th>
+									<th>Gatepass No.</th>
+									<th>Disposal Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillScrapDisposalList-->
+								<tr class="odd gradeX">
+									<td>{type}</td>
+									<td>{make}</td>
+									<td>{serialno}</td>
+									<td>{invoice_no}</td>
+									<td>{uniqueid}</td>
+									<td>{purchasedate}</td>
+									<td><a href="scrap_disposal_gatepass_print.php?id={disposal_gatepass_no}&action=noprint" target="_blank">{disposal_gatepass_no}</a></td>
+									<td>{disposeddate}</td>
+								</tr>
+								<!--EndFillScrapDisposalList-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		
+		$('#tblScrapDisposal').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 6, "desc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				{ "sType": "date-uk" }
+			]
+		});
+		
+		
+		$("#search_scrap_disposal_date_from, #search_scrap_disposal_date_to").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+</script>

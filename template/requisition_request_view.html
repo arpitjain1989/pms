@@ -1,0 +1,188 @@
+<form name="frmRequisitionRequest" id="frmRequisitionRequest" method="post" action="requisition_request_view.php">
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayRequisitionRequestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>User Name:</b></label>
+						<label class="form-label span3 clsleft">{name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Request For:</b></label>
+						<label class="form-label span3 clsleft">{requisition_for_title}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Project Name:</b></label>
+						<label class="form-label span3 clsleft">{project_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Remarks:</b></label>
+						<label class="form-label span3 clsleft">{remarks}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Requirement Type:</b></label>
+						<label class="form-label span3 clsleft">{request_type_text}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayTillDateBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Till Date:</b></label>
+						<label class="form-label span3 clsleft">{till_date}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayTillDateBlock-->
+			<!--BeginApprovalStatusDisplayBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Approval Status:</b></label>
+						<label class="form-label span3 clsleft">{approval_status_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting Head's Remarks:</b></label>
+						<label class="form-label span3 clsleft">{reporting_head_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Requisition Closed:</b></label>
+						<label class="form-label span3 clsleft">{isclosed_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>IT Support Remarks:</b></label>
+						<label class="form-label span3 clsleft">{it_support_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndApprovalStatusDisplayBlock-->
+			<!--BeginApprovalStatusEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Approval Status:</b></label>
+						<label class="form-label span3 clsleft">
+							<select class="span3" name="approval_status" id="approval_status">
+								<option value="0">Pending</option>
+								<option value="1">Approve</option>
+								<option value="2">Reject</option>
+							</select>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting Head's remark:</b></label>
+						<textarea class="span3" name="reporting_head_remarks" id="reporting_head_remarks"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndApprovalStatusEntryBlock-->
+			<!--BeginDelegateApprovalStatusDisplayBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate Approval Status:</b></label>
+						<label class="form-label span3 clsleft">{delegated_reporting_head_status_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate Reporting Head's Remarks:</b></label>
+						<label class="form-label span3 clsleft">{delegated_reporting_head_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegateApprovalStatusDisplayBlock-->
+			<!--BeginDelegateApprovalStatusEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate Approval Status:</b></label>
+						<label class="form-label span3 clsleft">
+							<select class="span3" name="delegated_reporting_head_status" id="delegated_reporting_head_status">
+								<option value="0">Pending</option>
+								<option value="1">Approve</option>
+								<option value="2">Reject</option>
+							</select>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate Reporting Head's remark:</b></label>
+						<textarea class="span3" name="delegated_reporting_head_remarks" id="delegated_reporting_head_remarks"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegateApprovalStatusEntryBlock-->
+			<!--EndDisplayRequisitionRequestInformationBlock-->
+			<!--BeginDisplayNoRequisitionRequestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>No requisition request information.</b></label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoRequisitionRequestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<!--BeginDisplayDelegatedTeamLeaderBlock-->
+								<input type="hidden" name="delegated_reporting_head_id" id="delegated_reporting_head_id" value="{curdelegated_reporting_head_id}" />
+								<!--EndDisplayDelegatedTeamLeaderBlock-->
+								
+								<!--BeginDisplaySubmitButtonBlock-->
+								<input type="hidden" name="id" id="id" value="{requisitionid}" />
+								<input type="hidden" name="action" id="action" value="RequisitionRequest" />
+								<button type="submit" class="btn btn-info marginR10" name="btnSubmit" id="btnSubmit">Save</button>
+								<!--EndDisplaySubmitButtonBlock-->
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='requisition_request_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

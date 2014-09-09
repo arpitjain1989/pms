@@ -1,0 +1,157 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Full name:</b><br>Enter your full name.
+			</li>
+			<li>
+				<b>Email:</b><br>Enter your E-Mail.
+			</li>
+			<li>
+				<b>Password:</b><br>Enter your password, if you want to update your password else leave it blank.
+			</li>
+			<li>
+				<b>Confirm Password:</b><br>Enter your password again.
+			</li>
+			<li>
+				<b>Phone Number:</b><br>Enter your phone number.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> 
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+		
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnuserid" id="hdnuserid" value="{user_id}" />
+		<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Username:
+					</label>
+					<input class="span4" name="username" id="username" type="text" value="{user_username}" disabled="disabled"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="name">Full name:</label>
+					<input class="span4" name="name" id="name" type="text" value="{user_name}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="email" class = "required">
+					Email:
+					</label>
+					<input class="span4" id="email" name="email" type="text" value="{user_email}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="normal">Password:</label>
+					<div class="span4 controls">
+						<input class="span12" id="password" name="password" type="password" placeholder="Enter password if you want to change" value="" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="normal">Confirm Password:</label>
+					<div class="span4 controls">
+						<input class="span12" id="passwordConfirm" name="confirm_password" type="password" placeholder="Enter your password again" value="" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="normal">Phone Number:</label>
+					<div class="span4 controls">
+						<input class="span12" type="text" id="phonenumber" name="phonenumber" plceholder="Enter your phone number" value="{user_phone}" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	if($("#name").val() == '')
+	{
+		alert('Please insert name.');
+		return false;
+	}
+	
+	if($("#password").val() != $("#passwordConfirm").val())
+	{
+		$("#passwordConfirm").focus();
+		alert('Password and password match not same.');
+		return false;
+	}
+	if($("#email").val() == '')
+	{
+		alert('Please insert email.');
+		return false;
+	}
+	else if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Email not valid.");
+			return false;
+		}
+	}
+	if($("#phonenumber").val() == '')
+	{
+		alert('Please insert phone number.');
+		return false;
+	}
+	
+});
+return true;
+});
+</script>

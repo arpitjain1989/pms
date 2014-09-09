@@ -1,0 +1,120 @@
+<div id="content" class="clearfix" style="margin-left: 0px;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box">
+					<div class="title">
+						<h4>
+							<span class="icon16 brocco-icon-grid"></span><span>Quality Report</span>
+						</h4>
+					</div>
+					<div class="content">
+						<input type="hidden" name="hdnaction" id="hdnaction" value="hdnsubmit" />
+
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="required">Date</label>
+									<select name="date" id="date">
+										<option value="">Please Select</option>
+										<!--BeginFillFormDate-->
+										<option value="{formdate}">{formdate}</option>
+										<!--EndFillFormDate-->
+									</select>
+								</div>
+							</div>
+						</div>
+							
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="required">Form Type</label>
+									<select name="formtype" id="formtype">
+										<option value="">Please Select</option>
+										<!--BeginFillFormType-->
+										<option value="{form_id}">{form_type}</option>
+										<!--EndFillFormType-->
+									</select>
+								</div>
+							</div>
+						</div> 
+						
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="required">Report Type</label>
+									<select name="reportype" id="reportype">
+										<option value="">Please Select</option>
+										<option value="1">Level</option>
+										<option value="2">Average Score</option>
+									</select>
+								</div>
+							</div>
+						</div> 
+
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<div class="form-actions">
+										<div class="span3"></div>
+										<div class="span9 controls">
+											<button type="button" id="getdata" class="btn marginR10">View Report</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row row-fluid" id="ajaxdatahere"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function validateform()
+	{
+		var valid = true
+		if($.trim($("#date").val()) == '')
+		{
+			alert('Please select Date');
+			$("#date").focus();
+			valid = false;
+			return false;
+		}
+		if($.trim($("#formtype").val()) == '')
+		{
+			alert('Please select form type');
+			$("#formtype").focus();
+			valid = false;
+			return false;
+		}
+		if($.trim($("#reportype").val()) == '')
+		{
+			alert('Please select Report type');
+			$("#reportype").focus();
+			valid = false;
+			return false;
+		}
+		return valid;
+	}
+
+	$(document).ready(function()
+	{	
+		$("#getdata").click(function() 
+		{
+			if(validateform())
+			{
+				if($('#reportype').val() == 1)
+				{
+					$('#ajaxdatahere').load('levelreport.php?date=' +$("#date").val() +'&ftype=' +$("#formtype").val());
+				}
+				else if($('#reportype').val() == 2)
+				{
+					$('#ajaxdatahere').load('averagescore.php?date=' +$("#date").val() +'&ftype=' +$("#formtype").val());
+				}
+			}
+		});
+	});
+</script>

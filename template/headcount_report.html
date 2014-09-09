@@ -1,0 +1,177 @@
+<script type="text/javascript" src="plugins/dataTables/FixedColumns.js"></script>
+<script type="text/javascript" src="plugins/dataTables/FixedHeader.js"></script>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="span12">
+			<form id="frmSearchDailyHeadCount" name="frmSearchDailyHeadCount" method="post" action="headcount_report.php">
+
+				<input type="hidden" name="action" id="action" value="DailyReportingHeadCountSearch" />
+				
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span4">
+							Month:
+							</label>
+							<select name='month' id='month'>
+								<option value="01">January</option>
+								<option value="02">Feburary</option>
+								<option value="03">March</option>
+								<option value="04">April</option>
+								<option value="05">May</option>
+								<option value="06">June</option>
+								<option value="07">July</option>
+								<option value="08">August</option>
+								<option value="09">September</option>
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+							</select>
+							<script type="text/javascript">
+								if("{month}" != "")
+								{
+									$("#month").val("{month}");
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span4">
+							Year:
+							</label>
+							<select name='year' id='year'>
+								<!--BeginDisplayYearBlock-->
+								<option value="{curyr}">{curyr}</option>
+								<!--EndDisplayYearBlock-->
+							</select>
+							<script type="text/javascript">
+								if("{year}" != "")
+								{
+									$("#year").val("{year}");
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn marginR10">Search</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="span8">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span6"><b style="float:left;">Average Head Count : {average_head_count}</b></label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Daily Head Count Report : {month_text}, {year}</span>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="demo">
+						<table cellpadding="5" cellspacing="0" border="0" class="responsive display table1 table-bordered" id="example">
+							<thead>
+								<tr>
+									<th>Reporting Head</th>
+									<th>Count</th>
+									<!--BeginDisplayDateHeaderBlock-->
+									<th>{display_date}</th>
+									<!--EndDisplayDateHeaderBlock-->
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginDisplayDailyHeadCountForUsersBlock-->
+								<tr>
+									<td>{reporting_head_name}</td>
+									<td>Opening</td>
+									<!--BeginDisplayDateHeadCountDetailsBlock1-->
+									<td><a href="#" onclick="javascript: fnViewDetails(1, '{reporting_head_id}', '{display_date}'); return false;">{opeaning_head_count}</a></td>
+									<!--EndDisplayDateHeadCountDetailsBlock1-->
+								</tr>
+								<tr>
+									<td>{reporting_head_name}</td>
+									<td>Joiners</td>
+									<!--BeginDisplayDateHeadCountDetailsBlock2-->
+									<td><a href="#" onclick="javascript: fnViewDetails(2, '{reporting_head_id}', '{display_date}'); return false;">{joiners_count}</a></td>
+									<!--EndDisplayDateHeadCountDetailsBlock2-->
+								</tr>
+								<tr>
+									<td>{reporting_head_name}</td>
+									<td>Leavers</td>
+									<!--BeginDisplayDateHeadCountDetailsBlock3-->
+									<td><a href="#" onclick="javascript: fnViewDetails(3, '{reporting_head_id}', '{display_date}'); return false;">{leavers_count}</a></td>
+									<!--EndDisplayDateHeadCountDetailsBlock3-->
+								</tr>
+								<tr>
+									<td>{reporting_head_name}</td>
+									<td>Closing</td>
+									<!--BeginDisplayDateHeadCountDetailsBlock4-->
+									<td><a href="#" onclick="javascript: fnViewDetails(4, '{reporting_head_id}', '{display_date}'); return false;">{closing_head_count}</a></td>
+									<!--EndDisplayDateHeadCountDetailsBlock4-->
+								</tr>
+								<!--EndDisplayDailyHeadCountForUsersBlock-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function () {
+		var oTable = $('#example').dataTable( {
+			"sScrollY": "400px",
+			"bPaginate": false,
+			"sScrollX": "100%",
+			"sScrollXInner": "150%",
+			"bScrollCollapse": true,
+			"bSort": false
+		});
+		new FixedColumns( oTable, {
+			"iLeftColumns": 2
+		});
+		
+		oTable.fnDraw();
+	});
+	
+	function fnViewDetails(detailsFor, headId, detailsForDate)
+	{
+		var page = "daily_headcount_details.php?a="+escape(detailsFor)+"&id="+escape(headId)+"&d="+escape(detailsForDate);
+		var $dialog = $('<div></div>')
+		.dialog({
+		   autoOpen: false,
+		   modal: true,
+		   height: 525,
+		   width: 500,
+		   title: "Daily Head Count Report Details"
+		}).html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>');
+		$dialog.dialog('open');
+	}
+</script>

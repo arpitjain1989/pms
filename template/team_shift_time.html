@@ -1,0 +1,68 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Reporting Head:</b><br>Select the reporting head for which the shift timings are to be allocated.
+			</li>
+			<li>                                                    
+				<b>Shifts:</b><br>Select the shifts to be allocated to the reporting head.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12">
+		
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+		
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Team shifts</span></h4>
+			</div>
+			<div class="content noPad clearfix">
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Reporting Head:</label>
+							<select name="headid" id="headid" onchange="javascript: fnDisplayTeamShifts($(this));">
+								<option value="">Please select</option>
+								<!--BeginFillTeams-->
+								<option value="{teamid}">{teamname}</option>
+								<!--EndFillTeams-->
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid" id="divTeamShiftDetail" style="text-align:center">
+					No team selected
+				</div>
+			</div>
+		</div>
+		<!-- End .box -->
+	</div>
+	<!-- End .span12 -->
+</div>
+<script type="text/javascript">
+	function fnDisplayTeamShifts($obj)
+	{
+		if($obj.val() == "")
+		{
+			$("#divTeamShiftDetail").html("No team selected");
+		}
+		else
+		{
+			$("#divTeamShiftDetail").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+			$("#divTeamShiftDetail").load("team_shift_time_detail.php?v="+escape($obj.val()),"",function(){
+				$("#divTeamShiftDetail").find("input[type='checkbox']").uniform();
+			});
+		}
+	}
+</script>

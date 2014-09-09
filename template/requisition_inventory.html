@@ -1,0 +1,122 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Title:</b><br>Enter the title for the requistion inventory.
+			</li>
+			<li>
+				<b>Description:</b><br>Enter the description for the requistion inventory.
+			</li>
+			<li>
+				<b>Allowed Designation:</b><br>Select the designations to which this requisition is allowed.
+			</li>
+			<!--li>
+				<b>Allow Team leaders:</b><br>Select if the requisition inventory is to be provided to team leader.
+			</li>
+			<li>
+				<b>Allow Managers:</b><br>Select if the requisition inventory is to be provided to managers.
+			</li-->
+			<li>
+				<b>Approval Required:</b><br>Select if the approval of the reporting head is required by the reporting head.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmrequisitioninventory" id="frmrequisitioninventory" class="form-horizontal seperator" method="post" action="requisition_inventory.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Title:</label>
+					<input class="span4" name="title" id="title" type="text" value="{title}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Description:
+					</label>
+					<textarea class="span4" name="description" id="description" type="text">{description}</textarea>
+				</div>
+			</div>
+		</div>
+		<!--div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Allow Team leaders:
+					</label>
+					<input type="checkbox" name="allow_teamleaders" id="allow_teamleaders" {set_allow_teamleaders} value="1" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Allow Managers:
+					</label>
+					<input type="checkbox" name="allow_managers" id="allow_managers" {set_allow_managers} value="1" />
+				</div>
+			</div>
+		</div-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Allowed Designation:
+					</label>
+					<label class="form-label span4" style="margin-left:0px;">
+						<select id="allowed_designation" name="allowed_designation[]" multiple="multiple" size='5'>
+							<!--BeginFillAllowedDesignation-->
+							<option value="{allowed_designation_id}" {set_Selected}>{allowed_designation_name}</option>
+							<!--EndFillAllowedDesignation-->
+						</select>
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Approval Required:
+					</label>
+					<input type="checkbox" name="is_approval_required" id="is_approval_required" {set_is_approval_required} value="1" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="RequisitionInventory" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='requisition_inventory_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	function fnValidate()
+	{
+		if(!checkblank($("#title"),"Please enter Requisition Inventory")) return false;
+	}
+	
+</script>

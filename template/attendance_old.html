@@ -1,0 +1,68 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+<form id="attendance" name="attendance" action="" method="post">
+	<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+	<span class="message">{message}</span> <span class="right"> <a href="attendance.add.php">
+	<h4> <span class="icon16 entypo-icon-add"></span> Add New Attendance </h4>
+	</a> </span>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box gradient">
+				<div class="title">
+					<h4> <span>Attendances table</span> </h4>
+				</div>
+				<div class="content noPad clearfix">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+						<thead>
+							<tr>
+								<th><input type='checkbox' name='chkall' id='chkall' /></th>
+								<th>Date</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillAttendanceValues-->
+							<tr class="odd gradeX">
+								<td><input type="checkbox" id="chk" name="chk[]" value="{id}" class="chkone"/></td>
+								<td>{date}</td>
+								<td><a href="attendance.add.php?date={date}&action=update" name="update" id="update" title="Edit Attendance" class="tip"><span class="icon12 icomoon-icon-pencil"></span></a></td>
+							</tr>
+							<!--EndFillAttendanceValues-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+<!-- End .row-fluid -->
+<!-- Page end here -->
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$("input[type='checkbox']").uniform();
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$("input[type='checkbox']").uniform();
+		});
+	});
+</script>

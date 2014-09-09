@@ -1,0 +1,142 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Salary after increment: </b><br>Enter the incremented salary.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="increment.add.php" enctype="multipart/form-data">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="add" />
+		<input type="hidden" name="userid" id="userid" value="{hdnid}" />
+		<input type="hidden" name="current_salary" id="current_salary" value="{e_cur_ctc}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Employee name:
+					</label>
+					{ename}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Employee code:
+					</label>
+					{e_code}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Date of Joining of Transform Solution P. Ltd.:
+					</label>
+					{e_dete_join}
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Start CTC:
+					</label>
+					{e_sta_ctc}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Current CTC:
+					</label>
+					{e_cur_ctc}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span7" for="username" class = "required">
+					<B>Last Increments History </B>
+					</label>
+				</div>
+				<!--BeginFillIncrementHistory-->
+				<div class="form-row row-fluid">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Salary before last increment :
+					</label>
+					{prev_salary}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Salary agter last increment :
+					</label>
+					{current_salary}
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">
+					Date :
+					</label>
+					{dt}
+				</div>
+				</div>
+				<!--EndFillIncrementHistory-->
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="newsalary">Salary after increment:</label>
+					<input type="text" id="newsalary" name="newsalary" class="span4 text" value="{final_hr_exp_date}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='increment.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	if($("#newsalary").val() == '')
+	{
+		alert('Insert incremented salary.');
+		$("#newsalary").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

@@ -1,0 +1,3956 @@
+<div id="content" class="clearfix" style="margin-left: 0px; padding-top:0px;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box">
+					<div class="title">
+						<h4>
+						<span class="icon16 brocco-icon-grid"></span>
+						<span>Attendance : {attendance_date}</span>
+						</h4>
+					</div>
+					<div class="content newdivforlevelreport" style="overflow:scroll;">
+					<form name="addattandance" name="addattandance" action="attendance.add.php" method="post" onsubmit="return fnValidate();">
+					<input type="hidden" name="hdnaction" id="hdnaction" value="add"  />
+					<input type="hidden" name="hdndate" id="hdndate" value="{attendance_date}"  />
+					
+						<table class="responsive table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Employee</th>
+									<th>Shift Time</th>
+									<th>In Time</th>
+									<th>Out Time</th>
+									<th>1st Break Start</th>
+									<th>1st Break Stop</th>
+									<th>2nd Break Start</th>
+									<th>2nd Break Stop</th>
+									<th>3rd Break Start</th>
+									<th>3rd Break Stop</th>
+									<th>4th Break Start</th>
+									<th>4th Break Stop</th>
+									<th>5th Break Start</th>
+									<th>5th Break Stop</th>
+									<th>Leave type</th>
+									<th>Notes</th>
+									<th>Remarks</th
+                                  </tr>
+                                </thead>
+                                <tbody>
+								<!--BeginEmployeeValues-->
+								<tr>
+								 	<td>
+										<span id="leavetype_tip_{employee_id}" title="">{employee_name}</span>
+										<input type="hidden" id="hdnemployeeid" name="hdnemployeeid[]" value="{employee_id}" />
+										<input type="hidden" id="hdnattendanceid" name="hdnattendanceid[{employee_id}]" value="{attendance_id}" />
+										<input type="hidden" name="designation_id_{employee_id}" id="designation_id_{employee_id}" value="{designation}" />
+										<input type="hidden" name="calculation_time[{employee_id}]" id="calculation_time_{employee_id}" value="{calculation_time}" />
+										<!--input type="hidden" id="shift_id" name="shift_id[{employee_id}]" value="{shift_id}" /-->
+									</td>
+									<td>
+										<input type="hidden" name="shift_start_time_{employee_id}" id="shift_start_time_{employee_id}" value="{shift_start_time}" />
+										<input type="hidden" name="shift_end_time_{employee_id}" id="shift_end_time_{employee_id}" value="{shift_end_time}" />
+
+										<select name="shift_id[{employee_id}]" id="shift_id_{employee_id}" style="width:110px;" onchange="javascript: fnChangeShift($(this));">
+											<option value="">Please select</option>
+											<!--BeginFillShiftInformation-->
+											<option value="{shiftid}">{shifttitle}</option>
+											<!--EndFillShiftInformation-->
+										</select>
+										<script type="text/javascript">
+											if("{shift_id}" != "")
+												$("#shift_id_{employee_id}").val("{shift_id}");
+										</script>
+									</td>
+									<td><input type="text" name="in_time[{employee_id}]" id="in_time_{employee_id}" value="{attendance1_in_time}" class="timepicker attendanceforminput clsInTime clsCheckTiming" maxlength="5" /></td>
+									<td><input type="text" name="out_time[{employee_id}]" id="out_time_{employee_id}" value="{attendance1_out_time}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5" /></td>
+									<td><input type="text" name="break1_in[{employee_id}]" id="break1_in_{employee_id}" value="{attendance1_break1_in}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break1_out[{employee_id}]" id="break1_out_{employee_id}" value="{attendance1_break1_out}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break2_in[{employee_id}]" id="break2_in_{employee_id}" value="{attendance1_break2_in}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break2_out[{employee_id}]" id="break2_out_{employee_id}" value="{attendance1_break2_out}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break3_in[{employee_id}]" id="break3_in_{employee_id}" value="{attendance1_break3_in}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break3_out[{employee_id}]" id="break3_out_{employee_id}" value="{attendance1_break3_out}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break4_in[{employee_id}]" id="break4_in_{employee_id}" value="{attendance1_break4_in}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break4_out[{employee_id}]" id="break4_out_{employee_id}" value="{attendance1_break4_out}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break5_in[{employee_id}]" id="break5_in_{employee_id}" value="{attendance1_break5_in}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td><input type="text" name="break5_out[{employee_id}]" id="break5_out_{employee_id}" value="{attendance1_break5_out}" class="timepicker attendanceforminput clsCheckTiming" maxlength="5"/></td>
+									<td>
+									<select id="leave_id_{employee_id}" name="leave_id[{employee_id}]" class="clsleave" style="width:110px;" onchange="javascript: fnChangeLeaveType($(this));">
+										<option value="">Please select</option>
+										<!--BeginLeaveValue-->
+										<option value="{leave_id}">{leave_title}</option>
+										<!--EndLeaveValue-->
+									</select>
+									<script type="text/javascript">
+										if($("{leave_id}") != "")
+										{
+											$("#leave_id_{employee_id}").val("{leave_id}");
+											if($("#leave_id_{employee_id}").val() != "")
+											{
+												$("#leavetype_tip_{employee_id}").attr("title",$("#leave_id_{employee_id} option:selected").text());
+												$("#leavetype_tip_{employee_id}").qtip({
+													content: false,
+													position: {
+														my: 'left center',
+														at: 'right center',
+														viewport: $(window)
+													},
+													style: {
+														classes: 'ui-tooltip-tipsy'
+													}
+												});
+											}
+										}
+									</script>
+									</td>
+									<td style="white-space:nowrap;">{notes}</td>
+									<td>
+										<textarea name="attendance_remarks[{employee_id}]" id="attendance_remarks_{employee_id}" style="width:100px">{attendance_remarks}</textarea>
+									</td>
+								</tr>
+								<!--EndEmployeeValues-->
+								<tr>
+									<td colspan="17">
+										<button id="submit" class="btn btn-info marginR10" name="submit" type="submit">Save</button>
+									</td>
+								</tr>	
+                                </tbody>
+                            </table>
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div id="myModal1" class="modal fade hide">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	/*var arrTest = ['1','2','3','6','7','9','10','15'];*/
+	var arrTest = ['1','2','6','7','9','10','15'];
+
+	$(document).ready(function()
+	{
+		$("input.timepicker").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d][:]?[^\d]/, ''));
+		});
+
+		//$('.timepicker').timepicker();	
+		
+		$("select.clsleave").each(function(){
+			if($.inArray($(this).val(), arrTest) > -1)
+				fnChangeLeaveType($(this))
+		});
+		
+		$("input.clsCheckTiming").blur(function(){
+			var arrids = $(this).attr("id").split("_");
+			var curid = arrids.pop();
+			//console.log(arrids);
+			//console.log(curid);
+			//console.log($(this).attr("id"));
+
+			var objCalculationTime = JSON.parse($("#calculation_time_"+curid).val());
+console.log(objCalculationTime);
+
+			if(objCalculationTime.fullday_minimum_working_hour != "")
+			{
+				var fulltime = h2m($.trim(objCalculationTime.fullday_minimum_working_hour));
+				var fulltime_text = objCalculationTime.fullday_minimum_working_hour;
+			}
+			else
+			{
+				var fulltime = 400;
+				var fulltime_text = "06:40";
+			}
+console.log(fulltime);
+
+			if(objCalculationTime.halfday_minimum_working_hour != "")
+			{
+				var halftime = h2m($.trim(objCalculationTime.halfday_minimum_working_hour));
+				var halftime_text = objCalculationTime.halfday_minimum_working_hour;
+			}
+			else
+			{
+				var halftime = 210;
+				var halftime_text = "03:30";
+			}
+console.log(halftime);
+
+			if(objCalculationTime.sm_minimum_working_hour != "")
+			{
+				var smtime = h2m($.trim(objCalculationTime.sm_minimum_working_hour));
+				var smtime_text = objCalculationTime.sm_minimum_working_hour;
+			}
+			else
+			{
+				var smtime = 300;
+				var smtime_text = "05:00";
+			}
+console.log("smtime " +smtime);
+
+			if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#in_time_"+curid).val()) != "00:00" && $(this).attr("id") == "in_time_"+curid)
+			{
+				//console.log("intime");
+				var inTime = h2m($.trim($("#in_time_"+curid).val()));
+				var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+				
+				console.log("inTime : "+inTime);
+				console.log("shiftStartTime : "+shiftStartTime);
+				/* Check if comming before shift, in that case provide a popup for confirmation */
+				if(inTime < shiftStartTime)
+				{
+					if(!confirm("In time is before shift start time.\nAre you sure you want to continue?"))
+					{
+						$("#in_time_"+curid).focus();
+						return false;
+					}
+				}
+			}
+
+			/* Check if the working hours are less and noting is selected */
+			//console.log("==="+$("#leave_id_"+curid).val());
+			//console.log("==="+$("#in_time_"+curid).val());
+			//console.log("==="+$("#out_time_"+curid).val());
+			if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#out_time_"+curid).val()) != "")
+			{
+				if($("#designation_id_"+curid).val() == 7 || $("#designation_id_"+curid).val() == 13)
+				{
+					var inTime = startmins = h2m($.trim($("#in_time_"+curid).val()));
+					var outTime = endmins = h2m($.trim($("#out_time_"+curid).val()));
+					
+					if(outTime < inTime)
+					{
+						timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+					}
+					else
+					{
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+					}
+					
+					console.log("TL timediff : "+timediff);
+					
+				}
+				else
+				{
+					var inTime = h2m($.trim($("#in_time_"+curid).val()));
+					var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+
+					var outTime = h2m($.trim($("#out_time_"+curid).val()));
+					var shiftEndTime = h2m($("#shift_end_time_"+curid).val());
+
+					if(shiftEndTime <= shiftStartTime)
+					{
+						var startmins = inTime;
+						if(inTime < shiftStartTime)
+							startmins = shiftStartTime;
+
+						var endmins = outTime;
+						if(outTime > shiftEndTime && outTime > startmins)
+						{
+							endmins = outTime;
+							timediff = parseInt(endmins,10) - parseInt(startmins,10);
+							
+							console.log("timediff 1 : "+timediff);
+							
+						}
+						else if(outTime > shiftEndTime)
+						{
+							endmins = shiftEndTime;
+							timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+							
+							console.log("timediff 2 : "+timediff);
+						}
+						else
+						{
+							timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+							
+							console.log("timediff 3 : "+timediff);
+						}
+					}
+					else
+					{
+						if(outTime < inTime)
+						{
+							var startmins = inTime;
+							if(inTime < shiftStartTime)
+								startmins = shiftStartTime;
+						
+							endmins = shiftEndTime;
+							
+							timediff = parseInt(endmins,10) - parseInt(startmins,10);
+						}
+						else
+						{
+							var startmins = inTime;
+							if(inTime < shiftStartTime)
+								startmins = shiftStartTime;
+
+							var endmins = outTime;
+							if(outTime > shiftEndTime)
+								endmins = shiftEndTime;
+							
+							timediff = parseInt(endmins,10) - parseInt(startmins,10);
+						
+							console.log("timediff 4 : "+timediff);
+						}
+					}
+				}
+				console.log("timediff : "+timediff);
+				console.log("leave_id : "+$.trim($("#leave_id_"+curid).val()));
+
+				var breakmins = 0;
+
+				/* Break exceed calculation */
+				if($.trim($("#break1_in_"+curid).val()) != "" && $.trim($("#break1_out_"+curid).val()) != "")
+				{
+					var break1in = h2m($.trim($("#break1_in_"+curid).val()));
+					var break1out = h2m($.trim($("#break1_out_"+curid).val()));
+					
+					if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+					{
+						if(shiftEndTime < shiftStartTime)
+						{
+							console.log("workin here 1");
+							/* Check if break is taken before shift */
+							if(break1in < shiftStartTime && break1in > shiftEndTime && (break1out > shiftStartTime || break1out <= shiftEndTime))
+							{
+								console.log("workin here");
+								break1in = shiftStartTime;
+							}
+							else if((break1in <= shiftEndTime || break1in >= shiftStartTime) && break1out > shiftEndTime && break1out < shiftStartTime)
+							{
+								console.log("workin here 2");
+								break1out = shiftEndTime;
+							}
+							else if(break1in < shiftStartTime && break1out < shiftStartTime && break1in > shiftEndTime && break1out > shiftEndTime)
+							{
+								console.log("workin here 3");
+								break1in = break1out = 0;
+							}
+						}
+						else
+						{
+							console.log("workin here 4");
+							/* Check if break is taken before shift */
+							if(break1in < shiftStartTime && break1out > shiftStartTime && break1out <= shiftEndTime)
+							{
+								break1in = shiftStartTime;
+							}
+							else if(break1in <= shiftEndTime && break1in >= shiftStartTime && break1out > shiftEndTime)
+							{
+								break1out = shiftEndTime;
+							}
+							else if((break1in < shiftStartTime && break1out < shiftStartTime) || (break1in > shiftEndTime && break1out > shiftEndTime))
+							{
+								break1in = break1out = 0;
+							}
+							
+						}
+					}
+					console.log("break1out : "+break1out);
+					console.log("break1in : "+break1in);
+					if(break1out < break1in)
+					{
+						var break1 = (parseInt(1440,10) - parseInt(break1in,10)) + parseInt(break1out,10)
+					}
+					else
+					{
+						var break1 = parseInt(break1out,10) - parseInt(break1in,10);
+					}
+					
+					console.log("break1 : "+break1);
+					breakmins = breakmins + break1;
+				}
+
+				if($.trim($("#break2_in_"+curid).val()) != "" && $.trim($("#break2_out_"+curid).val()) != "")
+				{
+					var break2in = h2m($.trim($("#break2_in_"+curid).val()));
+					var break2out = h2m($.trim($("#break2_out_"+curid).val()));
+					
+					if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+					{
+						if(shiftEndTime < shiftStartTime)
+						{
+							console.log("workin here 1");
+							/* Check if break is taken before shift */
+							if(break2in < shiftStartTime && break2in > shiftEndTime && (break2out > shiftStartTime || break2out <= shiftEndTime))
+							{
+								console.log("workin here");
+								break2in = shiftStartTime;
+							}
+							else if((break2in <= shiftEndTime || break2in >= shiftStartTime) && break2out > shiftEndTime && break2out < shiftStartTime)
+							{
+								console.log("workin here 2");
+								break2out = shiftEndTime;
+							}
+							else if(break2in < shiftStartTime && break2out < shiftStartTime && break2in > shiftEndTime && break2out > shiftEndTime)
+							{
+								console.log("workin here 3");
+								break2in = break2out = 0;
+							}
+						}
+						else
+						{
+							console.log("workin here 4");
+							/* Check if break is taken before shift */
+							if(break2in < shiftStartTime && break2out > shiftStartTime && break2out <= shiftEndTime)
+							{
+								break2in = shiftStartTime;
+							}
+							else if(break2in <= shiftEndTime && break2in >= shiftStartTime && break2out > shiftEndTime)
+							{
+								break2out = shiftEndTime;
+							}
+							else if((break2in < shiftStartTime && break2out < shiftStartTime) || (break2in > shiftEndTime && break2out > shiftEndTime))
+							{
+								break2in = break2out = 0;
+							}
+							
+						}
+					}
+					console.log("break2out : "+break2out);
+					console.log("break2in : "+break2in);
+					if(break2out < break2in)
+					{
+						var break2 = (parseInt(1440,10) - parseInt(break2in,10)) + parseInt(break2out,10)
+					}
+					else
+					{
+						var break2 = parseInt(break2out,10) - parseInt(break2in,10);
+					}
+				
+					console.log("break2 : "+break2);
+					breakmins = breakmins + break2;
+				}
+
+				if($.trim($("#break3_in_"+curid).val()) != "" && $.trim($("#break3_out_"+curid).val()) != "")
+				{
+					var break3in = h2m($.trim($("#break3_in_"+curid).val()));
+					var break3out = h2m($.trim($("#break3_out_"+curid).val()));
+					if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+					{
+						if(shiftEndTime < shiftStartTime)
+						{
+							console.log("workin here 1");
+							/* Check if break is taken before shift */
+							if(break3in < shiftStartTime && break3in > shiftEndTime && (break3out > shiftStartTime || break3out <= shiftEndTime))
+							{
+								console.log("workin here");
+								break3in = shiftStartTime;
+							}
+							else if((break3in <= shiftEndTime || break3in >= shiftStartTime) && break3out > shiftEndTime && break3out < shiftStartTime)
+							{
+								console.log("workin here 2");
+								break3out = shiftEndTime;
+							}
+							else if(break3in < shiftStartTime && break3out < shiftStartTime && break3in > shiftEndTime && break3out > shiftEndTime)
+							{
+								console.log("workin here 3");
+								break3in = break3out = 0;
+							}
+						}
+						else
+						{
+							console.log("workin here 4");
+							/* Check if break is taken before shift */
+							if(break3in < shiftStartTime && break3out > shiftStartTime && break3out <= shiftEndTime)
+							{
+								break3in = shiftStartTime;
+							}
+							else if(break3in <= shiftEndTime && break3in >= shiftStartTime && break3out > shiftEndTime)
+							{
+								break3out = shiftEndTime;
+							}
+							else if((break3in < shiftStartTime && break3out < shiftStartTime) || (break3in > shiftEndTime && break3out > shiftEndTime))
+							{
+								break3in = break3out = 0;
+							}
+							
+						}
+					}
+					console.log("break3out : "+break3out);
+					console.log("break3in : "+break3in);
+					if(break3out < break3in)
+					{
+						var break3 = (parseInt(1440,10) - parseInt(break3in,10)) + parseInt(break3out,10)
+					}
+					else
+					{
+						var break3 = parseInt(break3out,10) - parseInt(break3in,10);
+					}
+				
+					console.log("break3 : "+break3);
+					breakmins = breakmins + break3;
+				}
+
+				if($.trim($("#break4_in_"+curid).val()) != "" && $.trim($("#break4_out_"+curid).val()) != "")
+				{
+					var break4in = h2m($.trim($("#break4_in_"+curid).val()));
+					var break4out = h2m($.trim($("#break4_out_"+curid).val()));
+					
+					if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+					{
+						if(shiftEndTime < shiftStartTime)
+						{
+							console.log("workin here 1");
+							/* Check if break is taken before shift */
+							if(break4in < shiftStartTime && break4in > shiftEndTime && (break4out > shiftStartTime || break4out <= shiftEndTime))
+							{
+								console.log("workin here");
+								break4in = shiftStartTime;
+							}
+							else if((break4in <= shiftEndTime || break4in >= shiftStartTime) && break4out > shiftEndTime && break4out < shiftStartTime)
+							{
+								console.log("workin here 2");
+								break4out = shiftEndTime;
+							}
+							else if(break4in < shiftStartTime && break4out < shiftStartTime && break4in > shiftEndTime && break4out > shiftEndTime)
+							{
+								console.log("workin here 3");
+								break4in = break4out = 0;
+							}
+						}
+						else
+						{
+							console.log("workin here 4");
+							/* Check if break is taken before shift */
+							if(break4in < shiftStartTime && break4out > shiftStartTime && break4out <= shiftEndTime)
+							{
+								break4in = shiftStartTime;
+							}
+							else if(break4in <= shiftEndTime && break4in >= shiftStartTime && break4out > shiftEndTime)
+							{
+								break4out = shiftEndTime;
+							}
+							else if((break4in < shiftStartTime && break4out < shiftStartTime) || (break4in > shiftEndTime && break4out > shiftEndTime))
+							{
+								break4in = break4out = 0;
+							}
+							
+						}
+					}
+					console.log("break4out : "+break4out);
+					console.log("break4in : "+break4in);
+					if(break4out < break4in)
+					{
+						var break4 = (parseInt(1440,10) - parseInt(break4in,10)) + parseInt(break4out,10)
+					}
+					else
+					{
+						var break4 = parseInt(break4out,10) - parseInt(break4in,10);
+					}
+				
+					console.log("break4 : "+break4);
+					breakmins = breakmins + break4;
+				}
+
+				if($.trim($("#break5_in_"+curid).val()) != "" && $.trim($("#break5_out_"+curid).val()) != "")
+				{
+					var break5in = h2m($.trim($("#break5_in_"+curid).val()));
+					var break5out = h2m($.trim($("#break5_out_"+curid).val()));
+					
+					if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+					{
+						if(shiftEndTime < shiftStartTime)
+						{
+							console.log("workin here 1");
+							/* Check if break is taken before shift */
+							if(break5in < shiftStartTime && break5in > shiftEndTime && (break5out > shiftStartTime || break5out <= shiftEndTime))
+							{
+								console.log("workin here");
+								break5in = shiftStartTime;
+							}
+							else if((break5in <= shiftEndTime || break5in >= shiftStartTime) && break5out > shiftEndTime && break5out < shiftStartTime)
+							{
+								console.log("workin here 2");
+								break5out = shiftEndTime;
+							}
+							else if(break5in < shiftStartTime && break5out < shiftStartTime && break5in > shiftEndTime && break5out > shiftEndTime)
+							{
+								console.log("workin here 3");
+								break5in = break5out = 0;
+							}
+						}
+						else
+						{
+							console.log("workin here 4");
+							/* Check if break is taken before shift */
+							if(break5in < shiftStartTime && break5out > shiftStartTime && break5out <= shiftEndTime)
+							{
+								break5in = shiftStartTime;
+							}
+							else if(break5in <= shiftEndTime && break5in >= shiftStartTime && break5out > shiftEndTime)
+							{
+								break5out = shiftEndTime;
+							}
+							else if((break5in < shiftStartTime && break5out < shiftStartTime) || (break5in > shiftEndTime && break5out > shiftEndTime))
+							{
+								break5in = break5out = 0;
+							}
+							
+						}
+					}
+					console.log("break5out : "+break5out);
+					console.log("break5in : "+break5in);
+					if(break5out < break5in)
+					{
+						var break5 = (parseInt(1440,10) - parseInt(break5in,10)) + parseInt(break5out,10)
+					}
+					else
+					{
+						var break5 = parseInt(break5out,10) - parseInt(break5in,10);
+					}
+					
+					console.log("break5 : "+break5);
+					breakmins = breakmins + break5;
+				}
+
+				console.log("breakmins === : "+breakmins);
+
+				timediff = parseInt(timediff,10) - parseInt(breakmins,10);
+
+				/* check if shift movement exist */
+				var sm = 0;
+
+				$.ajax({
+					url: 'fetch_shiftmovement.php',
+					data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+					async: false,
+					success: function(data){
+						sm = $.trim(data);
+					}
+				});
+
+				console.log("sm : "+sm);
+
+				/* check if leave is added */
+
+				var halfleave = 0;
+
+				$.ajax({
+					url: 'fetch_halfleave.php',
+					data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+					async: false,
+					success: function(data){
+						halfleave = $.trim(data);
+					}
+				});
+				
+				console.log("halfleave : "+halfleave);
+				
+				if(sm == 1)
+				{
+					console.log("In sm");
+					/* If shift movement is marked */
+					var curleave = $("#leave_id_"+curid).val();
+					if(timediff < halftime)
+					{
+						/* Less then half day (3 Hours 30 Minutes) */
+						/* Mark as Absent */
+						if(curleave != 3)
+						{
+							$("#leave_id_"+curid).val(3);
+							$.uniform.update("#leave_id_"+curid);
+
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+
+							if(!confirm("Workhours less than "+halftime_text+"\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n \nABSENT \n \nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					else if(timediff < smtime)
+					{
+						/* Less then 5 Hours */
+						/* Mark as halfday absent */
+						if(curleave != 12)
+						{
+							$("#leave_id_"+curid).val(12);
+							$.uniform.update("#leave_id_"+curid);
+
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							if(!confirm("Workhours less than "+smtime_text+"\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n \nHALFDAY ABSENT \n \nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					else
+					{
+						/* Mark as SM */
+						if(curleave != 14)
+						{
+							$("#leave_id_"+curid).val(14);
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Shift movement taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+				}
+				else if(halfleave == "4" || halfleave == "5")
+				{
+					/* In halfday leave */
+					
+					var curleave = $("#leave_id_"+curid).val();
+					
+					if(timediff < halftime)
+					{
+						/* Less then half day (3 Hours 30 Minutes) */
+						/* Mark as Absent */
+						if(curleave != 3)
+						{
+							$("#leave_id_"+curid).val(3);
+							$.uniform.update("#leave_id_"+curid);
+
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+
+							if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n \nABSENT \n\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					else
+					{
+						/* Mark as Halfday (PHL / UHL) */
+						if(timediff > fulltime)
+						{
+							/* user is working for full day allow to mark as present */
+							$("#leave_id_"+curid).val('');
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title","");
+							$("#leavetype_tip_"+curid).qtip("destroy");
+							/*$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});*/
+						}
+						else if(curleave != halfleave && curleave != "12" && curleave != "4" && curleave != "5")
+						{
+							$("#leave_id_"+curid).val(halfleave);
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Half day taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+				}
+				else
+				{
+					if($.trim($("#leave_id_"+curid).val()) == "" || $.trim($("#leave_id_"+curid).val()) == "11")
+					{
+						if(timediff < halftime)
+						{
+							/* Less then half day (3 Hours 30 Minutes) */
+							/* Mark as Absent */
+							$("#leave_id_"+curid).val(3);
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT \n\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+						else if(timediff < fulltime)
+						{
+							/* Less then 6:40 Hours */
+							/* Mark as halfday absent */
+							
+							var curleave = $("#leave_id_"+curid).val();
+							if(curleave != "12" && curleave != "4" && curleave != "5")
+							{
+								/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+								$("#leave_id_"+curid).val(12);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+fulltime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									return false;
+								}
+							}
+						}
+						else
+						{
+							//console.log("startmins: "+startmins);
+							//console.log("shiftStartTime: "+shiftStartTime);
+							var lesstime = parseInt(startmins,10) - parseInt(shiftStartTime,10)
+							//console.log("lesstime: "+lesstime);
+							if(lesstime > 15 && smtime > 0)
+							{
+								var curleave = $("#leave_id_"+curid).val();
+								//console.log("curleave ==== : "+curleave);
+								if(curleave != 11)
+								{
+									/* Mark as sm+plt */
+									$("#leave_id_"+curid).val(11);
+									$.uniform.update("#leave_id_"+curid);
+									
+									$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+									$("#leavetype_tip_"+curid).qtip({
+										content: false,
+										position: {
+											my: 'left center',
+											at: 'right center',
+											viewport: $(window)
+										},
+										style: {
+											classes: 'ui-tooltip-tipsy'
+										}
+									});
+									
+									if(!confirm("Late for more than 15 minutes, user "+$("#leavetype_tip_"+curid).html()+" marked as \n\nSM + PLT\n\nAre you sure you want to continue?"))
+									{
+										$("#out_time_"+curid).focus();
+										return false;
+									}
+								}
+							}
+							else
+							{
+								$("#leave_id_"+curid).val('');
+								$.uniform.update("#leave_id_"+curid);
+							
+								$("#leavetype_tip_"+curid).attr("title","");
+								$("#leavetype_tip_"+curid).qtip("destroy");
+								/*$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});*/
+							}
+						}
+					}
+					else if($.trim($("#leave_id_"+curid).val()) == "3")
+					{
+						console.log("=--=inhere"+$("#leave_id_"+curid).val());
+						console.log(timediff);
+						if(timediff >= fulltime)
+						{
+							console.log("in absent");
+							/* If workhours more then 6 hours and 40 mins mark as  */
+							$("#leave_id_"+curid).val('');
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title","");
+							$("#leavetype_tip_"+curid).qtip("destroy");
+							/*$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});*/
+						}
+						else if(timediff >= halftime)
+						{
+							/* Less then 6:40 and greater then 3 Hours 30 Minutes */
+							/* Mark as halfday absent */
+							
+							var curleave = $("#leave_id_"+curid).val();
+							if(curleave != "12" && curleave != "4" && curleave != "5")
+							{
+								/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+								
+								$("#leave_id_"+curid).val(12);
+								console.log("working here");
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+fulltime_text+" and greater than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT \n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									return false;
+								}
+							}
+						}
+						console.log("no where");
+					}
+					else if($.trim($("#leave_id_"+curid).val()) == "12")
+					{
+						console.log("==inhere"+$("#leave_id_"+curid).val());
+						console.log(timediff);
+						if(timediff >= fulltime)
+						{
+							/* If workhours more then 6 hours and 40 mins mark as  */
+							$("#leave_id_"+curid).val('');
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title","");
+							$("#leavetype_tip_"+curid).qtip("destroy");
+							/*$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});*/
+						}
+						else if(timediff < halftime)
+						{
+							/* Less then half day (3 Hours 30 Minutes) */
+							/* Mark as Absent */
+							$("#leave_id_"+curid).val(3);
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT \n\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+				}
+			}
+		});
+	});
+	
+	function fnChangeShift(curObj)
+	{
+		var strId = curObj.attr("id");
+		var arrId = strId.split("_");
+
+		$.ajax({
+			url: 'fetch_shifttime.php',
+			data: 'id='+curObj.val(),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				$("#shift_start_time_"+arrId[2]).val(data.start);
+				$("#shift_end_time_"+arrId[2]).val(data.end);
+			}
+		});
+		
+		/* Calculation for validation */
+		
+		curid = arrId[2];
+		console.log("curid : "+curid);
+		
+		var objCalculationTime = JSON.parse($("#calculation_time_"+curid).val());
+console.log(objCalculationTime);
+
+		if(objCalculationTime.fullday_minimum_working_hour != "")
+		{
+			var fulltime = h2m($.trim(objCalculationTime.fullday_minimum_working_hour));
+			var fulltime_text = objCalculationTime.fullday_minimum_working_hour;
+		}
+		else
+		{
+			var fulltime = 400;
+			var fulltime_text = "06:40";
+		}
+console.log(fulltime);
+
+		if(objCalculationTime.halfday_minimum_working_hour != "")
+		{
+			var halftime = h2m($.trim(objCalculationTime.halfday_minimum_working_hour));
+			var halftime_text = objCalculationTime.halfday_minimum_working_hour;
+		}
+		else
+		{
+			var halftime = 210;
+			var halftime_text = "03:30";
+		}
+console.log(halftime);
+
+		if(objCalculationTime.sm_minimum_working_hour != "")
+		{
+			var smtime = h2m($.trim(objCalculationTime.sm_minimum_working_hour));
+			var smtime_text = objCalculationTime.sm_minimum_working_hour;
+		}
+		else
+		{
+			var smtime = 300;
+			var smtime_text = "05:00";
+		}
+console.log("smtime "+smtime);		
+		
+		if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#in_time_"+curid).val()) != "00:00")
+		{
+			//console.log("intime");
+			
+			var inTime = h2m($.trim($("#in_time_"+curid).val()));
+			var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+			
+			console.log("inTime : "+inTime);
+			console.log("shiftStartTime : "+shiftStartTime);
+			/* Check if comming before shift, in that case provide a popup for confirmation */
+			if(inTime < shiftStartTime)
+			{
+				if(!confirm("In time is before shift start time.\nAre you sure you want to continue?"))
+				{
+					$("#in_time_"+curid).focus();
+					return false;
+				}
+			}
+		}
+
+		/* Check if the working hours are less and noting is selected */
+		//console.log("==="+$("#leave_id_"+curid).val());
+		//console.log("==="+$("#in_time_"+curid).val());
+		//console.log("==="+$("#out_time_"+curid).val());
+		if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#out_time_"+curid).val()) != "")
+		{
+			if($("#designation_id_"+curid).val() == 7 || $("#designation_id_"+curid).val() == 13)
+			{
+				var inTime = startmins = h2m($.trim($("#in_time_"+curid).val()));
+				var outTime = endmins = h2m($.trim($("#out_time_"+curid).val()));
+				
+				if(outTime < inTime)
+				{
+					timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+				}
+				else
+				{
+					timediff = parseInt(endmins,10) - parseInt(startmins,10);
+				}
+				
+				console.log("TL timediff : "+timediff);
+				
+			}
+			else
+			{
+				var inTime = h2m($.trim($("#in_time_"+curid).val()));
+				var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+
+				var outTime = h2m($.trim($("#out_time_"+curid).val()));
+				var shiftEndTime = h2m($("#shift_end_time_"+curid).val());
+
+				if(shiftEndTime <= shiftStartTime)
+				{
+					var startmins = inTime;
+					if(inTime < shiftStartTime)
+						startmins = shiftStartTime;
+
+					var endmins = outTime;
+					if(outTime > shiftEndTime && outTime > startmins)
+					{
+						endmins = outTime;
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+						
+						console.log("timediff 1 : "+timediff);
+						
+					}
+					else if(outTime > shiftEndTime)
+					{
+						endmins = shiftEndTime;
+						timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+						
+						console.log("timediff 2 : "+timediff);
+					}
+					else
+					{
+						timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+						
+						console.log("timediff 3 : "+timediff);
+					}
+					
+				}
+				else
+				{
+					if(outTime < inTime)
+					{
+						var startmins = inTime;
+						if(inTime < shiftStartTime)
+							startmins = shiftStartTime;
+					
+						endmins = shiftEndTime;
+						
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+					}
+					else
+					{
+						var startmins = inTime;
+						if(inTime < shiftStartTime)
+							startmins = shiftStartTime;
+
+						var endmins = outTime;
+						if(outTime > shiftEndTime)
+							endmins = shiftEndTime;
+						
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+					
+						console.log("timediff 4 : "+timediff);
+					}
+				}
+			}
+			console.log("timediff : "+timediff);
+			console.log("leave_id : "+$.trim($("#leave_id_"+curid).val()));
+
+			var breakmins = 0;
+
+			/* Break exceed calculation */
+			if($.trim($("#break1_in_"+curid).val()) != "" && $.trim($("#break1_out_"+curid).val()) != "")
+			{
+				var break1in = h2m($.trim($("#break1_in_"+curid).val()));
+				var break1out = h2m($.trim($("#break1_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break1in < shiftStartTime && break1in > shiftEndTime && (break1out > shiftStartTime || break1out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break1in = shiftStartTime;
+						}
+						else if((break1in <= shiftEndTime || break1in >= shiftStartTime) && break1out > shiftEndTime && break1out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break1out = shiftEndTime;
+						}
+						else if(break1in < shiftStartTime && break1out < shiftStartTime && break1in > shiftEndTime && break1out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break1in = break1out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break1in < shiftStartTime && break1out > shiftStartTime && break1out <= shiftEndTime)
+						{
+							break1in = shiftStartTime;
+						}
+						else if(break1in <= shiftEndTime && break1in >= shiftStartTime && break1out > shiftEndTime)
+						{
+							break1out = shiftEndTime;
+						}
+						else if((break1in < shiftStartTime && break1out < shiftStartTime) || (break1in > shiftEndTime && break1out > shiftEndTime))
+						{
+							break1in = break1out = 0;
+						}
+						
+					}
+				}
+				console.log("break1out : "+break1out);
+				console.log("break1in : "+break1in);
+				if(break1out < break1in)
+				{
+					var break1 = (parseInt(1440,10) - parseInt(break1in,10)) + parseInt(break1out,10)
+				}
+				else
+				{
+					var break1 = parseInt(break1out,10) - parseInt(break1in,10);
+				}
+								
+				console.log("break1 : "+break1);
+				breakmins = breakmins + break1;
+			}
+			
+			if($.trim($("#break2_in_"+curid).val()) != "" && $.trim($("#break2_out_"+curid).val()) != "")
+			{
+				var break2in = h2m($.trim($("#break2_in_"+curid).val()));
+				var break2out = h2m($.trim($("#break2_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break2in < shiftStartTime && break2in > shiftEndTime && (break2out > shiftStartTime || break2out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break2in = shiftStartTime;
+						}
+						else if((break2in <= shiftEndTime || break2in >= shiftStartTime) && break2out > shiftEndTime && break2out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break2out = shiftEndTime;
+						}
+						else if(break2in < shiftStartTime && break2out < shiftStartTime && break2in > shiftEndTime && break2out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break2in = break2out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break2in < shiftStartTime && break2out > shiftStartTime && break2out <= shiftEndTime)
+						{
+							break2in = shiftStartTime;
+						}
+						else if(break2in <= shiftEndTime && break2in >= shiftStartTime && break2out > shiftEndTime)
+						{
+							break2out = shiftEndTime;
+						}
+						else if((break2in < shiftStartTime && break2out < shiftStartTime) || (break2in > shiftEndTime && break2out > shiftEndTime))
+						{
+							break2in = break2out = 0;
+						}
+						
+					}
+				}
+				console.log("break2out : "+break2out);
+				console.log("break2in : "+break2in);
+				if(break2out < break2in)
+				{
+					var break2 = (parseInt(1440,10) - parseInt(break2in,10)) + parseInt(break2out,10)
+				}
+				else
+				{
+					var break2 = parseInt(break2out,10) - parseInt(break2in,10);
+				}
+				
+				console.log("break2 : "+break2);
+				breakmins = breakmins + break2;
+			}
+
+			if($.trim($("#break3_in_"+curid).val()) != "" && $.trim($("#break3_out_"+curid).val()) != "")
+			{
+				var break3in = h2m($.trim($("#break3_in_"+curid).val()));
+				var break3out = h2m($.trim($("#break3_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break3in < shiftStartTime && break3in > shiftEndTime && (break3out > shiftStartTime || break3out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break3in = shiftStartTime;
+						}
+						else if((break3in <= shiftEndTime || break3in >= shiftStartTime) && break3out > shiftEndTime && break3out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break3out = shiftEndTime;
+						}
+						else if(break3in < shiftStartTime && break3out < shiftStartTime && break3in > shiftEndTime && break3out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break3in = break3out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break3in < shiftStartTime && break3out > shiftStartTime && break3out <= shiftEndTime)
+						{
+							break3in = shiftStartTime;
+						}
+						else if(break3in <= shiftEndTime && break3in >= shiftStartTime && break3out > shiftEndTime)
+						{
+							break3out = shiftEndTime;
+						}
+						else if((break3in < shiftStartTime && break3out < shiftStartTime) || (break3in > shiftEndTime && break3out > shiftEndTime))
+						{
+							break3in = break3out = 0;
+						}
+						
+					}
+				}
+				console.log("break3out : "+break3out);
+				console.log("break3in : "+break3in);
+				if(break3out < break3in)
+				{
+					var break3 = (parseInt(1440,10) - parseInt(break3in,10)) + parseInt(break3out,10)
+				}
+				else
+				{
+					var break3 = parseInt(break3out,10) - parseInt(break3in,10);
+				}
+				
+				console.log("break3 : "+break3);
+				breakmins = breakmins + break3;
+			}
+
+			if($.trim($("#break4_in_"+curid).val()) != "" && $.trim($("#break4_out_"+curid).val()) != "")
+			{
+				var break4in = h2m($.trim($("#break4_in_"+curid).val()));
+				var break4out = h2m($.trim($("#break4_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break4in < shiftStartTime && break4in > shiftEndTime && (break4out > shiftStartTime || break4out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break4in = shiftStartTime;
+						}
+						else if((break4in <= shiftEndTime || break4in >= shiftStartTime) && break4out > shiftEndTime && break4out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break4out = shiftEndTime;
+						}
+						else if(break4in < shiftStartTime && break4out < shiftStartTime && break4in > shiftEndTime && break4out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break4in = break4out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break4in < shiftStartTime && break4out > shiftStartTime && break4out <= shiftEndTime)
+						{
+							break4in = shiftStartTime;
+						}
+						else if(break4in <= shiftEndTime && break4in >= shiftStartTime && break4out > shiftEndTime)
+						{
+							break4out = shiftEndTime;
+						}
+						else if((break4in < shiftStartTime && break4out < shiftStartTime) || (break4in > shiftEndTime && break4out > shiftEndTime))
+						{
+							break4in = break4out = 0;
+						}
+						
+					}
+				}
+				console.log("break4out : "+break4out);
+				console.log("break4in : "+break4in);
+				if(break4out < break4in)
+				{
+					var break4 = (parseInt(1440,10) - parseInt(break4in,10)) + parseInt(break4out,10)
+				}
+				else
+				{
+					var break4 = parseInt(break4out,10) - parseInt(break4in,10);
+				}
+				
+				console.log("break4 : "+break4);
+				breakmins = breakmins + break4;
+			}
+
+			if($.trim($("#break5_in_"+curid).val()) != "" && $.trim($("#break5_out_"+curid).val()) != "")
+			{
+				var break5in = h2m($.trim($("#break5_in_"+curid).val()));
+				var break5out = h2m($.trim($("#break5_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break5in < shiftStartTime && break5in > shiftEndTime && (break5out > shiftStartTime || break5out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break5in = shiftStartTime;
+						}
+						else if((break5in <= shiftEndTime || break5in >= shiftStartTime) && break5out > shiftEndTime && break5out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break5out = shiftEndTime;
+						}
+						else if(break5in < shiftStartTime && break5out < shiftStartTime && break5in > shiftEndTime && break5out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break5in = break5out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break5in < shiftStartTime && break5out > shiftStartTime && break5out <= shiftEndTime)
+						{
+							break5in = shiftStartTime;
+						}
+						else if(break5in <= shiftEndTime && break5in >= shiftStartTime && break5out > shiftEndTime)
+						{
+							break5out = shiftEndTime;
+						}
+						else if((break5in < shiftStartTime && break5out < shiftStartTime) || (break5in > shiftEndTime && break5out > shiftEndTime))
+						{
+							break5in = break5out = 0;
+						}
+						
+					}
+				}
+				console.log("break5out : "+break5out);
+				console.log("break5in : "+break5in);
+				if(break5out < break5in)
+				{
+					var break5 = (parseInt(1440,10) - parseInt(break5in,10)) + parseInt(break5out,10)
+				}
+				else
+				{
+					var break5 = parseInt(break5out,10) - parseInt(break5in,10);
+				}
+				
+				console.log("break5 : "+break5);
+				breakmins = breakmins + break5;
+			}
+
+			timediff = parseInt(timediff,10) - parseInt(breakmins,10);
+
+			/* check if shift movement exist */
+			var sm = 0;
+
+			$.ajax({
+				url: 'fetch_shiftmovement.php',
+				data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+				async: false,
+				success: function(data){
+					sm = $.trim(data);
+				}
+			});
+
+			console.log("sm : "+sm);
+			
+		
+			/* check if leave is added */
+			
+			var halfleave = 0;
+			
+			$.ajax({
+				url: 'fetch_halfleave.php',
+				data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+				async: false,
+				success: function(data){
+					halfleave = $.trim(data);
+				}
+			});
+			
+			console.log("halfleave : "+halfleave);
+			
+			if(sm == 1)
+			{
+				console.log("In sm");
+				/* If shift movement is marked */
+				var curleave = $("#leave_id_"+curid).val();
+				if(timediff < halftime)
+				{
+					/* Less then half day (3 Hours 30 Minutes) */
+					/* Mark as Absent */
+					if(curleave != 3)
+					{
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT \n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+				else if(timediff < smtime)
+				{
+					/* Less then 5 Hours */
+					/* Mark as halfday absent */
+					if(curleave != 12)
+					{
+						$("#leave_id_"+curid).val(12);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+smtime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT \n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+				else
+				{
+					/* Mark as SM */
+					if(curleave != 14)
+					{
+						$("#leave_id_"+curid).val(14);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Shift movement taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+			}
+			else if(halfleave == "4" || halfleave == "5")
+			{
+				/* In halfday leave */
+				
+				var curleave = $("#leave_id_"+curid).val();
+				
+				if(timediff < halftime)
+				{
+					/* Less then half day (3 Hours 30 Minutes) */
+					/* Mark as Absent */
+					if(curleave != 3)
+					{
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT \n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+				else
+				{
+					/* Mark as Halfday (PHL / UHL) */
+					if(timediff > fulltime)
+					{
+						/* user is working for full day allow to mark as present */
+						$("#leave_id_"+curid).val('');
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title","");
+						$("#leavetype_tip_"+curid).qtip("destroy");
+						/*$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});*/
+					}
+					else if(curleave != halfleave && curleave != "12" && curleave != "4" && curleave != "5")
+					{
+						$("#leave_id_"+curid).val(halfleave);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Half day taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+			}
+			else
+			{
+				if($.trim($("#leave_id_"+curid).val()) == "" || $.trim($("#leave_id_"+curid).val()) == "11")
+				{
+					if(timediff < halftime)
+					{
+						/* Less then half day (3 Hours 30 Minutes) */
+						/* Mark as Absent */
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT \n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+					else if(timediff < fulltime)
+					{
+						/* Less then 6:40 Hours */
+						/* Mark as halfday absent */
+						
+						var curleave = $("#leave_id_"+curid).val();
+						if(curleave != "12" && curleave != "4" && curleave != "5")
+						{
+							/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+						
+							$("#leave_id_"+curid).val(12);
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Workhours less than "+fulltime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\n Are you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					else
+					{
+						//console.log("startmins: "+startmins);
+						//console.log("shiftStartTime: "+shiftStartTime);
+						var lesstime = parseInt(startmins,10) - parseInt(shiftStartTime,10)
+						//console.log("lesstime: "+lesstime);
+						if(lesstime > 15 && smtime > 0)
+						{
+							var curleave = $("#leave_id_"+curid).val();
+							//console.log("curleave ==== : "+curleave);
+							if(curleave != 11)
+							{
+								/* Mark as sm+plt */
+								$("#leave_id_"+curid).val(11);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Late for more than 15 minutes, \nuser "+$("#leavetype_tip_"+curid).html()+" marked as \n\nSM + PLT\n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									return false;
+								}
+							}
+						}
+						else
+						{
+							$("#leave_id_"+curid).val('');
+							$.uniform.update("#leave_id_"+curid);
+						
+							$("#leavetype_tip_"+curid).attr("title","");
+							$("#leavetype_tip_"+curid).qtip("destroy");
+							/*$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});*/
+						}
+					}
+				}
+				else if($.trim($("#leave_id_"+curid).val()) == "3")
+				{
+					console.log("=--=inhere"+$("#leave_id_"+curid).val());
+					console.log(timediff);
+					if(timediff >= fulltime)
+					{
+						console.log("in absent");
+						/* If workhours more then 6 hours and 40 mins mark as  */
+						$("#leave_id_"+curid).val('');
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title","");
+						$("#leavetype_tip_"+curid).qtip("destroy");
+						/*$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});*/
+					}
+					else if(timediff >= halftime)
+					{
+						/* Less then 6:40 and greater then 3 Hours 30 Minutes */
+						/* Mark as halfday absent */
+						
+						var curleave = $("#leave_id_"+curid).val();
+						if(curleave != "12" && curleave != "4" && curleave != "5")
+						{
+							/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+							$("#leave_id_"+curid).val(12);
+							console.log("working here");
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Workhours less than "+fulltime_text+" and greater than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					console.log("no where");
+				}
+				else if($.trim($("#leave_id_"+curid).val()) == "12")
+				{
+					console.log("==inhere"+$("#leave_id_"+curid).val());
+					console.log(timediff);
+					if(timediff >= fulltime)
+					{
+						/* If workhours more then 6 hours and 40 mins mark as  */
+						$("#leave_id_"+curid).val('');
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title","");
+						$("#leavetype_tip_"+curid).qtip("destroy");
+						/*$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});*/
+					}
+					else if(timediff < halftime)
+					{
+						/* Less then half day (3 Hours 30 Minutes) */
+						/* Mark as Absent */
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	function fnValidate()
+	{
+		var res = true;
+		$("input.clsInTime").each(function(){
+			
+			var strId = $(this).attr("id");
+			var arrId = strId.split("_");
+			
+			var curid = arrId[2];
+			
+			var objCalculationTime = JSON.parse($("#calculation_time_"+curid).val());
+console.log(objCalculationTime);
+
+			if(objCalculationTime.fullday_minimum_working_hour != "")
+			{
+				var fulltime = h2m($.trim(objCalculationTime.fullday_minimum_working_hour));
+				var fulltime_text = objCalculationTime.fullday_minimum_working_hour;
+			}
+			else
+			{
+				var fulltime = 400;
+				var fulltime_text = "06:40";
+			}
+console.log(fulltime);
+
+			if(objCalculationTime.halfday_minimum_working_hour != "")
+			{
+				var halftime = h2m($.trim(objCalculationTime.halfday_minimum_working_hour));
+				var halftime_text = objCalculationTime.halfday_minimum_working_hour;
+			}
+			else
+			{
+				var halftime = 210;
+				var halftime_text = "03:30";
+			}
+console.log(halftime);
+
+			if(objCalculationTime.sm_minimum_working_hour != "")
+			{
+				var smtime = h2m($.trim(objCalculationTime.sm_minimum_working_hour));
+				var smtime_text = objCalculationTime.sm_minimum_working_hour;
+			}
+			else
+			{
+				var smtime = 300;
+				var smtime_text = "05:00";
+			}
+console.log(smtime);
+			
+			if($(this).val() != "" && $(this).val() != "00:00")
+			{
+				if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#out_time_"+curid).val()) != "")
+				{
+					if($("#designation_id_"+curid).val() == 7 || $("#designation_id_"+curid).val() == 13)
+					{
+						var inTime = startmins = h2m($.trim($("#in_time_"+curid).val()));
+						var outTime = endmins = h2m($.trim($("#out_time_"+curid).val()));
+						
+						if(outTime < inTime)
+						{
+							timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+						}
+						else
+						{
+							timediff = parseInt(endmins,10) - parseInt(startmins,10);
+						}
+						
+						console.log("TL timediff : "+timediff);
+						
+					}
+					else
+					{
+						var inTime = h2m($.trim($("#in_time_"+curid).val()));
+						var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+
+						var outTime = h2m($.trim($("#out_time_"+curid).val()));
+						var shiftEndTime = h2m($("#shift_end_time_"+curid).val());
+
+						if(shiftEndTime <= shiftStartTime)
+						{
+							var startmins = inTime;
+							if(inTime < shiftStartTime)
+								startmins = shiftStartTime;
+
+							var endmins = outTime;
+							if(outTime > shiftEndTime && outTime > startmins)
+							{
+								endmins = outTime;
+								timediff = parseInt(endmins,10) - parseInt(startmins,10);
+								
+								console.log("timediff 1 : "+timediff);
+								
+							}
+							else if(outTime > shiftEndTime)
+							{
+								endmins = shiftEndTime;
+								timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+								
+								console.log("timediff 2 : "+timediff);
+							}
+							else
+							{
+								timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+								
+								console.log("timediff 3 : "+timediff);
+							}
+							
+						}
+						else
+						{
+							if(outTime < inTime)
+							{
+								var startmins = inTime;
+								if(inTime < shiftStartTime)
+									startmins = shiftStartTime;
+							
+								endmins = shiftEndTime;
+								
+								timediff = parseInt(endmins,10) - parseInt(startmins,10);
+							}
+							else
+							{
+								var startmins = inTime;
+								if(inTime < shiftStartTime)
+									startmins = shiftStartTime;
+
+								var endmins = outTime;
+								if(outTime > shiftEndTime)
+									endmins = shiftEndTime;
+								
+								timediff = parseInt(endmins,10) - parseInt(startmins,10);
+							
+								console.log("timediff 4 : "+timediff);
+							}
+						}
+					}
+					console.log("timediff : "+timediff);
+					console.log("leave_id : "+$.trim($("#leave_id_"+curid).val()));
+
+					var breakmins = 0;
+
+					/* Break exceed calculation */
+					if($.trim($("#break1_in_"+curid).val()) != "" && $.trim($("#break1_out_"+curid).val()) != "")
+					{
+						var break1in = h2m($.trim($("#break1_in_"+curid).val()));
+						var break1out = h2m($.trim($("#break1_out_"+curid).val()));
+						
+						if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+						{
+							if(shiftEndTime < shiftStartTime)
+							{
+								console.log("workin here 1");
+								/* Check if break is taken before shift */
+								if(break1in < shiftStartTime && break1in > shiftEndTime && (break1out > shiftStartTime || break1out <= shiftEndTime))
+								{
+									console.log("workin here");
+									break1in = shiftStartTime;
+								}
+								else if((break1in <= shiftEndTime || break1in >= shiftStartTime) && break1out > shiftEndTime && break1out < shiftStartTime)
+								{
+									console.log("workin here 2");
+									break1out = shiftEndTime;
+								}
+								else if(break1in < shiftStartTime && break1out < shiftStartTime && break1in > shiftEndTime && break1out > shiftEndTime)
+								{
+									console.log("workin here 3");
+									break1in = break1out = 0;
+								}
+							}
+							else
+							{
+								console.log("workin here 4");
+								/* Check if break is taken before shift */
+								if(break1in < shiftStartTime && break1out > shiftStartTime && break1out <= shiftEndTime)
+								{
+									break1in = shiftStartTime;
+								}
+								else if(break1in <= shiftEndTime && break1in >= shiftStartTime && break1out > shiftEndTime)
+								{
+									break1out = shiftEndTime;
+								}
+								else if((break1in < shiftStartTime && break1out < shiftStartTime) || (break1in > shiftEndTime && break1out > shiftEndTime))
+								{
+									break1in = break1out = 0;
+								}
+								
+							}
+						}
+						console.log("break1out : "+break1out);
+						console.log("break1in : "+break1in);
+						if(break1out < break1in)
+						{
+							var break1 = (parseInt(1440,10) - parseInt(break1in,10)) + parseInt(break1out,10)
+						}
+						else
+						{
+							var break1 = parseInt(break1out,10) - parseInt(break1in,10);
+						}
+												
+						console.log("break1 : "+break1);
+						breakmins = breakmins + break1;
+					}
+					else if($.trim($("#break1_in_"+curid).val()) != "" && $.trim($("#break1_out_"+curid).val()) == "")
+					{
+						alert("Please enter break 1 stop time");
+						$("#break1_out_"+curid).focus();
+						res = false;
+						return false;
+					}
+					else if($.trim($("#break1_in_"+curid).val()) == "" && $.trim($("#break1_out_"+curid).val()) != "")
+					{
+						alert("Please enter break 1 start time");
+						$("#break1_in_"+curid).focus();
+						res = false;
+						return false;
+					}
+					
+					if($.trim($("#break2_in_"+curid).val()) != "" && $.trim($("#break2_out_"+curid).val()) != "")
+					{
+						var break2in = h2m($.trim($("#break2_in_"+curid).val()));
+						var break2out = h2m($.trim($("#break2_out_"+curid).val()));
+						
+						if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+						{
+							if(shiftEndTime < shiftStartTime)
+							{
+								console.log("workin here 1");
+								/* Check if break is taken before shift */
+								if(break2in < shiftStartTime && break2in > shiftEndTime && (break2out > shiftStartTime || break2out <= shiftEndTime))
+								{
+									console.log("workin here");
+									break2in = shiftStartTime;
+								}
+								else if((break2in <= shiftEndTime || break2in >= shiftStartTime) && break2out > shiftEndTime && break2out < shiftStartTime)
+								{
+									console.log("workin here 2");
+									break2out = shiftEndTime;
+								}
+								else if(break2in < shiftStartTime && break2out < shiftStartTime && break2in > shiftEndTime && break2out > shiftEndTime)
+								{
+									console.log("workin here 3");
+									break2in = break2out = 0;
+								}
+							}
+							else
+							{
+								console.log("workin here 4");
+								/* Check if break is taken before shift */
+								if(break2in < shiftStartTime && break2out > shiftStartTime && break2out <= shiftEndTime)
+								{
+									break2in = shiftStartTime;
+								}
+								else if(break2in <= shiftEndTime && break2in >= shiftStartTime && break2out > shiftEndTime)
+								{
+									break2out = shiftEndTime;
+								}
+								else if((break2in < shiftStartTime && break2out < shiftStartTime) || (break2in > shiftEndTime && break2out > shiftEndTime))
+								{
+									break2in = break2out = 0;
+								}
+								
+							}
+						}
+						console.log("break2out : "+break2out);
+						console.log("break2in : "+break2in);
+						if(break2out < break2in)
+						{
+							var break2 = (parseInt(1440,10) - parseInt(break2in,10)) + parseInt(break2out,10)
+						}
+						else
+						{
+							var break2 = parseInt(break2out,10) - parseInt(break2in,10);
+						}
+				
+						console.log("break2 : "+break2);
+						breakmins = breakmins + break2;
+					}
+					else if($.trim($("#break2_in_"+curid).val()) != "" && $.trim($("#break2_out_"+curid).val()) == "")
+					{
+						alert("Please enter break 2 stop time");
+						$("#break2_out_"+curid).focus();
+						res = false;
+						return false;
+					}
+					else if($.trim($("#break2_in_"+curid).val()) == "" && $.trim($("#break2_out_"+curid).val()) != "")
+					{
+						alert("Please enter break 2 start time");
+						$("#break2_in_"+curid).focus();
+						res = false;
+						return false;
+					}
+
+					if($.trim($("#break3_in_"+curid).val()) != "" && $.trim($("#break3_out_"+curid).val()) != "")
+					{
+						var break3in = h2m($.trim($("#break3_in_"+curid).val()));
+						var break3out = h2m($.trim($("#break3_out_"+curid).val()));
+						
+						if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+						{
+							if(shiftEndTime < shiftStartTime)
+							{
+								console.log("workin here 1");
+								/* Check if break is taken before shift */
+								if(break3in < shiftStartTime && break3in > shiftEndTime && (break3out > shiftStartTime || break3out <= shiftEndTime))
+								{
+									console.log("workin here");
+									break3in = shiftStartTime;
+								}
+								else if((break3in <= shiftEndTime || break3in >= shiftStartTime) && break3out > shiftEndTime && break3out < shiftStartTime)
+								{
+									console.log("workin here 2");
+									break3out = shiftEndTime;
+								}
+								else if(break3in < shiftStartTime && break3out < shiftStartTime && break3in > shiftEndTime && break3out > shiftEndTime)
+								{
+									console.log("workin here 3");
+									break3in = break3out = 0;
+								}
+							}
+							else
+							{
+								console.log("workin here 4");
+								/* Check if break is taken before shift */
+								if(break3in < shiftStartTime && break3out > shiftStartTime && break3out <= shiftEndTime)
+								{
+									break3in = shiftStartTime;
+								}
+								else if(break3in <= shiftEndTime && break3in >= shiftStartTime && break3out > shiftEndTime)
+								{
+									break3out = shiftEndTime;
+								}
+								else if((break3in < shiftStartTime && break3out < shiftStartTime) || (break3in > shiftEndTime && break3out > shiftEndTime))
+								{
+									break3in = break3out = 0;
+								}
+								
+							}
+						}
+						console.log("break3out : "+break3out);
+						console.log("break3in : "+break3in);
+						if(break3out < break3in)
+						{
+							var break3 = (parseInt(1440,10) - parseInt(break3in,10)) + parseInt(break3out,10)
+						}
+						else
+						{
+							var break3 = parseInt(break3out,10) - parseInt(break3in,10);
+						}
+						
+						console.log("break3 : "+break3);
+						breakmins = breakmins + break3;
+					}
+					else if($.trim($("#break3_in_"+curid).val()) != "" && $.trim($("#break3_out_"+curid).val()) == "")
+					{
+						alert("Please enter break 3 stop time");
+						$("#break3_out_"+curid).focus();
+						res = false;
+						return false;
+					}
+					else if($.trim($("#break3_in_"+curid).val()) == "" && $.trim($("#break3_out_"+curid).val()) != "")
+					{
+						alert("Please enter break 3 start time");
+						$("#break3_in_"+curid).focus();
+						res = false;
+						return false;
+					}
+
+					if($.trim($("#break4_in_"+curid).val()) != "" && $.trim($("#break4_out_"+curid).val()) != "")
+					{
+						var break4in = h2m($.trim($("#break4_in_"+curid).val()));
+						var break4out = h2m($.trim($("#break4_out_"+curid).val()));
+						
+						if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+						{
+							if(shiftEndTime < shiftStartTime)
+							{
+								console.log("workin here 1");
+								/* Check if break is taken before shift */
+								if(break4in < shiftStartTime && break4in > shiftEndTime && (break4out > shiftStartTime || break4out <= shiftEndTime))
+								{
+									console.log("workin here");
+									break4in = shiftStartTime;
+								}
+								else if((break4in <= shiftEndTime || break4in >= shiftStartTime) && break4out > shiftEndTime && break4out < shiftStartTime)
+								{
+									console.log("workin here 2");
+									break4out = shiftEndTime;
+								}
+								else if(break4in < shiftStartTime && break4out < shiftStartTime && break4in > shiftEndTime && break4out > shiftEndTime)
+								{
+									console.log("workin here 3");
+									break4in = break4out = 0;
+								}
+							}
+							else
+							{
+								console.log("workin here 4");
+								/* Check if break is taken before shift */
+								if(break4in < shiftStartTime && break4out > shiftStartTime && break4out <= shiftEndTime)
+								{
+									break4in = shiftStartTime;
+								}
+								else if(break4in <= shiftEndTime && break4in >= shiftStartTime && break4out > shiftEndTime)
+								{
+									break4out = shiftEndTime;
+								}
+								else if((break4in < shiftStartTime && break4out < shiftStartTime) || (break4in > shiftEndTime && break4out > shiftEndTime))
+								{
+									break4in = break4out = 0;
+								}
+								
+							}
+						}
+						console.log("break4out : "+break4out);
+						console.log("break4in : "+break4in);
+						if(break4out < break4in)
+						{
+							var break4 = (parseInt(1440,10) - parseInt(break4in,10)) + parseInt(break4out,10)
+						}
+						else
+						{
+							var break4 = parseInt(break4out,10) - parseInt(break4in,10);
+						}
+						
+						console.log("break4 : "+break4);
+						breakmins = breakmins + break4;
+					}
+					else if($.trim($("#break4_in_"+curid).val()) != "" && $.trim($("#break3_out_"+curid).val()) == "")
+					{
+						alert("Please enter break 4 stop time");
+						$("#break4_out_"+curid).focus();
+						res = false;
+						return false;
+					}
+					else if($.trim($("#break4_in_"+curid).val()) == "" && $.trim($("#break4_out_"+curid).val()) != "")
+					{
+						alert("Please enter break 4 start time");
+						$("#break4_in_"+curid).focus();
+						res = false;
+						return false;
+					}
+
+					if($.trim($("#break5_in_"+curid).val()) != "" && $.trim($("#break5_out_"+curid).val()) != "")
+					{
+						var break5in = h2m($.trim($("#break5_in_"+curid).val()));
+						var break5out = h2m($.trim($("#break5_out_"+curid).val()));
+						
+						if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+						{
+							if(shiftEndTime < shiftStartTime)
+							{
+								console.log("workin here 1");
+								/* Check if break is taken before shift */
+								if(break5in < shiftStartTime && break5in > shiftEndTime && (break5out > shiftStartTime || break5out <= shiftEndTime))
+								{
+									console.log("workin here");
+									break5in = shiftStartTime;
+								}
+								else if((break5in <= shiftEndTime || break5in >= shiftStartTime) && break5out > shiftEndTime && break5out < shiftStartTime)
+								{
+									console.log("workin here 2");
+									break5out = shiftEndTime;
+								}
+								else if(break5in < shiftStartTime && break5out < shiftStartTime && break5in > shiftEndTime && break5out > shiftEndTime)
+								{
+									console.log("workin here 3");
+									break5in = break5out = 0;
+								}
+							}
+							else
+							{
+								console.log("workin here 4");
+								/* Check if break is taken before shift */
+								if(break5in < shiftStartTime && break5out > shiftStartTime && break5out <= shiftEndTime)
+								{
+									break5in = shiftStartTime;
+								}
+								else if(break5in <= shiftEndTime && break5in >= shiftStartTime && break5out > shiftEndTime)
+								{
+									break5out = shiftEndTime;
+								}
+								else if((break5in < shiftStartTime && break5out < shiftStartTime) || (break5in > shiftEndTime && break5out > shiftEndTime))
+								{
+									break5in = break5out = 0;
+								}
+								
+							}
+						}
+						console.log("break5out : "+break5out);
+						console.log("break5in : "+break5in);
+						if(break5out < break5in)
+						{
+							var break5 = (parseInt(1440,10) - parseInt(break5in,10)) + parseInt(break5out,10)
+						}
+						else
+						{
+							var break5 = parseInt(break5out,10) - parseInt(break5in,10);
+						}
+				
+						console.log("break5 : "+break5);
+						breakmins = breakmins + break5;
+					}
+					else if($.trim($("#break5_in_"+curid).val()) != "" && $.trim($("#break5_out_"+curid).val()) == "")
+					{
+						alert("Please enter break 5 stop time");
+						$("#break5_out_"+curid).focus();
+						res = false;
+						return false;
+					}
+					else if($.trim($("#break5_in_"+curid).val()) == "" && $.trim($("#break5_out_"+curid).val()) != "")
+					{
+						alert("Please enter break 5 start time");
+						$("#break5_in_"+curid).focus();
+						res = false;
+						return false;
+					}
+
+					/* fetch if shift movement is marked */
+
+					timediff = parseInt(timediff,10) - parseInt(breakmins,10);
+		console.log("timediff after break : "+timediff);
+		
+					/* check if shift movement exist */
+					var sm = 0;
+
+					$.ajax({
+						url: 'fetch_shiftmovement.php',
+						data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+						async: false,
+						success: function(data){
+							sm = $.trim(data);
+						}
+					});
+
+					console.log("sm : "+sm);
+						
+					/* check if leave is added */
+					
+					var halfleave = 0;
+					
+					$.ajax({
+						url: 'fetch_halfleave.php',
+						data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+						async: false,
+						success: function(data){
+							halfleave = $.trim(data);
+						}
+					});
+					
+					console.log("halfleave : "+halfleave);
+					
+					if(sm == 1)
+					{
+						console.log("In sm");
+						/* If shift movement is marked */
+						var curleave = $("#leave_id_"+curid).val();
+						if(timediff < halftime)
+						{
+							/* Less then half day (3 Hours 30 Minutes) */
+							/* Mark as Absent */
+							if(curleave != 3)
+							{
+								$("#leave_id_"+curid).val(3);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT \n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+						}
+						else if(timediff < smtime)
+						{
+							/* Less then 5 Hours */
+							/* Mark as halfday absent */
+							if(curleave != 12)
+							{
+								$("#leave_id_"+curid).val(12);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+smtime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+						}
+						else
+						{
+							/* Mark as SM */
+							if(curleave != 14)
+							{
+								$("#leave_id_"+curid).val(14);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Shift movement taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+						}
+					}
+					else if(halfleave == "4" || halfleave == "5")
+					{
+						/* In halfday leave */
+						
+						var curleave = $("#leave_id_"+curid).val();
+						
+						if(timediff < halftime)
+						{
+							/* Less then half day (3 Hours 30 Minutes) */
+							/* Mark as Absent */
+							if(curleave != 3)
+							{
+								$("#leave_id_"+curid).val(3);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+						}
+						else
+						{
+							/* Mark as Halfday (PHL / UHL) */
+							if(timediff > fulltime)
+							{
+								/* user is working for full day allow to mark as present */
+								$("#leave_id_"+curid).val('');
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title","");
+								$("#leavetype_tip_"+curid).qtip("destroy");
+								/*$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});*/
+							}
+							else if(curleave != halfleave && curleave != "12" && curleave != "4" && curleave != "5")
+							{
+								$("#leave_id_"+curid).val(halfleave);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Half day taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+						}
+					}
+					else
+					{
+						if($.trim($("#leave_id_"+curid).val()) == "" || $.trim($("#leave_id_"+curid).val()) == "11")
+						{
+							if(timediff < halftime)
+							{
+								/* Less then half day (3 Hours 30 Minutes) */
+								/* Mark as Absent */
+								$("#leave_id_"+curid).val(3);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+							else if(timediff < fulltime)
+							{
+								/* Less then 6:40 Hours */
+								/* Mark as halfday absent */
+								
+								var curleave = $("#leave_id_"+curid).val();
+								if(curleave != "12" && curleave != "4" && curleave != "5")
+								{
+									/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+								
+									$("#leave_id_"+curid).val(12);
+									$.uniform.update("#leave_id_"+curid);
+									
+									$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+									$("#leavetype_tip_"+curid).qtip({
+										content: false,
+										position: {
+											my: 'left center',
+											at: 'right center',
+											viewport: $(window)
+										},
+										style: {
+											classes: 'ui-tooltip-tipsy'
+										}
+									});
+									
+									if(!confirm("Workhours less than "+fulltime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+									{
+										$("#out_time_"+curid).focus();
+										res = false;
+										return false;
+									}
+								}
+							}
+							else
+							{
+								//console.log("startmins: "+startmins);
+								//console.log("shiftStartTime: "+shiftStartTime);
+								var lesstime = parseInt(startmins,10) - parseInt(shiftStartTime,10)
+								//console.log("lesstime: "+lesstime);
+								if(lesstime > 15 && smtime > 0)
+								{
+									var curleave = $("#leave_id_"+curid).val();
+									//console.log("curleave ==== : "+curleave);
+									if(curleave != 11)
+									{
+										/* Mark as sm+plt */
+										$("#leave_id_"+curid).val(11);
+										$.uniform.update("#leave_id_"+curid);
+										
+										$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+										$("#leavetype_tip_"+curid).qtip({
+											content: false,
+											position: {
+												my: 'left center',
+												at: 'right center',
+												viewport: $(window)
+											},
+											style: {
+												classes: 'ui-tooltip-tipsy'
+											}
+										});
+										
+										if(!confirm("Late for more than 15 minutes, \nuser "+$("#leavetype_tip_"+curid).html()+" marked as \n\nSM + PLT\n\nAre you sure you want to continue?"))
+										{
+											$("#out_time_"+curid).focus();
+											res = false;
+											return false;
+										}
+									}
+								}
+								else
+								{
+									$("#leave_id_"+curid).val('');
+									$.uniform.update("#leave_id_"+curid);
+								
+									$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+									$("#leavetype_tip_"+curid).qtip({
+										content: false,
+										position: {
+											my: 'left center',
+											at: 'right center',
+											viewport: $(window)
+										},
+										style: {
+											classes: 'ui-tooltip-tipsy'
+										}
+									});
+								}
+							}
+						}
+						else if($.trim($("#leave_id_"+curid).val()) == "3")
+						{
+							console.log("=--=inhere"+$("#leave_id_"+curid).val());
+							console.log(timediff);
+							if(timediff >= fulltime)
+							{
+								console.log("in absent");
+								/* If workhours more then 6 hours and 40 mins mark as  */
+								$("#leave_id_"+curid).val('');
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+							}
+							else if(timediff >= halftime)
+							{
+								/* Less then 6:40 and greater then 3 Hours 30 Minutes */
+								/* Mark as halfday absent */
+								
+								var curleave = $("#leave_id_"+curid).val();
+								if(curleave != "12" && curleave != "4" && curleave != "5")
+								{
+									/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+									$("#leave_id_"+curid).val(12);
+									console.log("working here");
+									$.uniform.update("#leave_id_"+curid);
+									
+									$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+									$("#leavetype_tip_"+curid).qtip({
+										content: false,
+										position: {
+											my: 'left center',
+											at: 'right center',
+											viewport: $(window)
+										},
+										style: {
+											classes: 'ui-tooltip-tipsy'
+										}
+									});
+									
+									if(!confirm("Workhours less than "+fulltime_text+" and greater than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+									{
+										$("#out_time_"+curid).focus();
+										res = false;
+										return false;
+									}
+								}
+							}
+							console.log("no where");
+						}
+						else if($.trim($("#leave_id_"+curid).val()) == "12")
+						{
+							console.log("==inhere"+$("#leave_id_"+curid).val());
+							console.log(timediff);
+							if(timediff >= fulltime)
+							{
+								/* If workhours more then 6 hours and 40 mins mark as  */
+								$("#leave_id_"+curid).val('');
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+							}
+							else if(timediff < halftime)
+							{
+								/* Less then half day (3 Hours 30 Minutes) */
+								/* Mark as Absent */
+								$("#leave_id_"+curid).val(3);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									res = false;
+									return false;
+								}
+							}
+						}
+					}
+				}
+				
+				
+				/* ============================================================================================= */
+				
+				var inTime = h2m($(this).val());
+				var ShiftInTime = h2m($("#shift_start_time_"+arrId[2]).val());
+
+				if($("#leave_id_"+arrId[2]).val() == 4 || $("#leave_id_"+arrId[2]).val() == 5 || $("#leave_id_"+arrId[2]).val() == 8 || $("#leave_id_"+arrId[2]).val() == 12)
+				{
+					if((inTime > (parseInt(ShiftInTime,10) + 245)) || (inTime < (parseInt(ShiftInTime,10) - 240)))
+					{
+						alert("Please enter correct in time");
+						res = false;
+						$(this).focus();
+						return false;
+					}
+				}
+				else
+				{
+					if((inTime > (parseInt(ShiftInTime,10) + 240)) || (inTime < (parseInt(ShiftInTime,10) - 240)))
+					{
+						alert("Please enter correct in time");
+						res = false;
+						$(this).focus();
+						return false;
+					}
+				}
+			}
+			else if($.trim($("#in_time_"+curid).val()) == "" && $.trim($("#out_time_"+curid).val()) == "" && $("#leave_id_"+curid).val() == "")
+			{
+				$("#leave_id_"+curid).val(3);
+				$.uniform.update("#leave_id_"+curid);
+				
+				$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+				$("#leavetype_tip_"+curid).qtip({
+					content: false,
+					position: {
+						my: 'left center',
+						at: 'right center',
+						viewport: $(window)
+					},
+					style: {
+						classes: 'ui-tooltip-tipsy'
+					}
+				});
+				
+				if(!confirm("In time and out time not marked. user "+$("#leavetype_tip_"+curid).html()+" marked as absent.\nAre you sure you want to continue?"))
+				{
+					res = false;
+					return false;
+				}
+			}
+		});
+		
+		return res;
+	}
+	
+	function fnChangeLeaveType(curObj)
+	{
+		var strId = curObj.attr("id");
+		var arrId = strId.split("_");
+		
+		if($("#leave_id_"+arrId[2]).val() != "")
+		{
+			$("#leavetype_tip_"+arrId[2]).attr("title",$("#leave_id_"+arrId[2]+" option:selected").text());
+			$("#leavetype_tip_"+arrId[2]).qtip({
+				content: false,
+				position: {
+					my: 'left center',
+					at: 'right center',
+					viewport: $(window)
+				},
+				style: {
+					classes: 'ui-tooltip-tipsy'
+				}
+			});
+		}
+		
+		var curid = arrId[2];
+		
+		var objCalculationTime = JSON.parse($("#calculation_time_"+curid).val());
+console.log(objCalculationTime);
+
+		if(objCalculationTime.fullday_minimum_working_hour != "")
+		{
+			var fulltime = h2m($.trim(objCalculationTime.fullday_minimum_working_hour));
+			var fulltime_text = objCalculationTime.fullday_minimum_working_hour;
+		}
+		else
+		{
+			var fulltime = 400;
+			var fulltime_text = "06:40";
+		}
+console.log(fulltime);
+
+		if(objCalculationTime.halfday_minimum_working_hour != "")
+		{
+			var halftime = h2m($.trim(objCalculationTime.halfday_minimum_working_hour));
+			var halftime_text = objCalculationTime.halfday_minimum_working_hour;
+		}
+		else
+		{
+			var halftime = 210;
+			var halftime_text = "03:30";
+		}
+console.log(halftime);
+
+		if(objCalculationTime.sm_minimum_working_hour != "")
+		{
+			var smtime = h2m($.trim(objCalculationTime.sm_minimum_working_hour));
+			var smtime_text = objCalculationTime.sm_minimum_working_hour;
+		}
+		else
+		{
+			var smtime = 300;
+			var smtime_text = "05:00";
+		}
+console.log(smtime);
+		
+		if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#in_time_"+curid).val()) != "00:00" && $(this).attr("id") == "in_time_"+curid)
+		{
+			//console.log("intime");
+			
+			var inTime = h2m($.trim($("#in_time_"+curid).val()));
+			var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+			
+			console.log("inTime : "+inTime);
+			console.log("shiftStartTime : "+shiftStartTime);
+			/* Check if comming before shift, in that case provide a popup for confirmation */
+			if(inTime < shiftStartTime)
+			{
+				if(!confirm("In time is before shift start time.\nAre you sure you want to continue?"))
+				{
+					$("#in_time_"+curid).focus();
+					return false;
+				}
+			}
+		}
+
+		/* Check if the working hours are less and noting is selected */
+		//console.log("==="+$("#leave_id_"+curid).val());
+		//console.log("==="+$("#in_time_"+curid).val());
+		//console.log("==="+$("#out_time_"+curid).val());
+		if($.trim($("#in_time_"+curid).val()) != "" && $.trim($("#out_time_"+curid).val()) != "")
+		{
+			if($("#designation_id_"+curid).val() == 7 || $("#designation_id_"+curid).val() == 13)
+			{
+				var inTime = startmins = h2m($.trim($("#in_time_"+curid).val()));
+				var outTime = endmins = h2m($.trim($("#out_time_"+curid).val()));
+				
+				if(outTime < inTime)
+				{
+					timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+				}
+				else
+				{
+					timediff = parseInt(endmins,10) - parseInt(startmins,10);
+				}
+				
+				console.log("TL timediff : "+timediff);
+				
+			}
+			else
+			{
+				var inTime = h2m($.trim($("#in_time_"+curid).val()));
+				var shiftStartTime = h2m($("#shift_start_time_"+curid).val());
+
+				var outTime = h2m($.trim($("#out_time_"+curid).val()));
+				var shiftEndTime = h2m($("#shift_end_time_"+curid).val());
+
+				if(shiftEndTime <= shiftStartTime)
+				{
+					var startmins = inTime;
+					if(inTime < shiftStartTime)
+						startmins = shiftStartTime;
+
+					var endmins = outTime;
+					if(outTime > shiftEndTime && outTime > startmins)
+					{
+						endmins = outTime;
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+						
+						console.log("timediff 1 : "+timediff);
+						
+					}
+					else if(outTime > shiftEndTime)
+					{
+						endmins = shiftEndTime;
+						timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+						
+						console.log("timediff 2 : "+timediff);
+					}
+					else
+					{
+						timediff = (parseInt(1440,10) - parseInt(startmins,10)) + parseInt(endmins,10);
+						
+						console.log("timediff 3 : "+timediff);
+					}
+					
+				}
+				else
+				{
+					if(outTime < inTime)
+					{
+						var startmins = inTime;
+						if(inTime < shiftStartTime)
+							startmins = shiftStartTime;
+					
+						endmins = shiftEndTime;
+						
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+					}
+					else
+					{
+						var startmins = inTime;
+						if(inTime < shiftStartTime)
+							startmins = shiftStartTime;
+
+						var endmins = outTime;
+						if(outTime > shiftEndTime)
+							endmins = shiftEndTime;
+						
+						timediff = parseInt(endmins,10) - parseInt(startmins,10);
+					
+						console.log("timediff 4 : "+timediff);
+					}
+				}
+			}
+			console.log("timediff : "+timediff);
+			console.log("leave_id : "+$.trim($("#leave_id_"+curid).val()));
+
+			var breakmins = 0;
+
+			/* Break exceed calculation */
+			if($.trim($("#break1_in_"+curid).val()) != "" && $.trim($("#break1_out_"+curid).val()) != "")
+			{
+				var break1in = h2m($.trim($("#break1_in_"+curid).val()));
+				var break1out = h2m($.trim($("#break1_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break1in < shiftStartTime && break1in > shiftEndTime && (break1out > shiftStartTime || break1out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break1in = shiftStartTime;
+						}
+						else if((break1in <= shiftEndTime || break1in >= shiftStartTime) && break1out > shiftEndTime && break1out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break1out = shiftEndTime;
+						}
+						else if(break1in < shiftStartTime && break1out < shiftStartTime && break1in > shiftEndTime && break1out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break1in = break1out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break1in < shiftStartTime && break1out > shiftStartTime && break1out <= shiftEndTime)
+						{
+							break1in = shiftStartTime;
+						}
+						else if(break1in <= shiftEndTime && break1in >= shiftStartTime && break1out > shiftEndTime)
+						{
+							break1out = shiftEndTime;
+						}
+						else if((break1in < shiftStartTime && break1out < shiftStartTime) || (break1in > shiftEndTime && break1out > shiftEndTime))
+						{
+							break1in = break1out = 0;
+						}
+						
+					}
+				}
+				console.log("break1out : "+break1out);
+				console.log("break1in : "+break1in);
+				if(break1out < break1in)
+				{
+					var break1 = (parseInt(1440,10) - parseInt(break1in,10)) + parseInt(break1out,10)
+				}
+				else
+				{
+					var break1 = parseInt(break1out,10) - parseInt(break1in,10);
+				}
+								
+				console.log("break1 : "+break1);
+				breakmins = breakmins + break1;
+			}
+			
+			if($.trim($("#break2_in_"+curid).val()) != "" && $.trim($("#break2_out_"+curid).val()) != "")
+			{
+				var break2in = h2m($.trim($("#break2_in_"+curid).val()));
+				var break2out = h2m($.trim($("#break2_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break2in < shiftStartTime && break2in > shiftEndTime && (break2out > shiftStartTime || break2out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break2in = shiftStartTime;
+						}
+						else if((break2in <= shiftEndTime || break2in >= shiftStartTime) && break2out > shiftEndTime && break2out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break2out = shiftEndTime;
+						}
+						else if(break2in < shiftStartTime && break2out < shiftStartTime && break2in > shiftEndTime && break2out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break2in = break2out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break2in < shiftStartTime && break2out > shiftStartTime && break2out <= shiftEndTime)
+						{
+							break2in = shiftStartTime;
+						}
+						else if(break2in <= shiftEndTime && break2in >= shiftStartTime && break2out > shiftEndTime)
+						{
+							break2out = shiftEndTime;
+						}
+						else if((break2in < shiftStartTime && break2out < shiftStartTime) || (break2in > shiftEndTime && break2out > shiftEndTime))
+						{
+							break2in = break2out = 0;
+						}
+						
+					}
+				}
+				console.log("break2out : "+break2out);
+				console.log("break2in : "+break2in);
+				if(break2out < break2in)
+				{
+					var break2 = (parseInt(1440,10) - parseInt(break2in,10)) + parseInt(break2out,10)
+				}
+				else
+				{
+					var break2 = parseInt(break2out,10) - parseInt(break2in,10);
+				}
+				
+				console.log("break2 : "+break2);
+				breakmins = breakmins + break2;
+			}
+
+			if($.trim($("#break3_in_"+curid).val()) != "" && $.trim($("#break3_out_"+curid).val()) != "")
+			{
+				var break3in = h2m($.trim($("#break3_in_"+curid).val()));
+				var break3out = h2m($.trim($("#break3_out_"+curid).val()));
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break3in < shiftStartTime && break3in > shiftEndTime && (break3out > shiftStartTime || break3out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break3in = shiftStartTime;
+						}
+						else if((break3in <= shiftEndTime || break3in >= shiftStartTime) && break3out > shiftEndTime && break3out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break3out = shiftEndTime;
+						}
+						else if(break3in < shiftStartTime && break3out < shiftStartTime && break3in > shiftEndTime && break3out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break3in = break3out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break3in < shiftStartTime && break3out > shiftStartTime && break3out <= shiftEndTime)
+						{
+							break3in = shiftStartTime;
+						}
+						else if(break3in <= shiftEndTime && break3in >= shiftStartTime && break3out > shiftEndTime)
+						{
+							break3out = shiftEndTime;
+						}
+						else if((break3in < shiftStartTime && break3out < shiftStartTime) || (break3in > shiftEndTime && break3out > shiftEndTime))
+						{
+							break3in = break3out = 0;
+						}
+						
+					}
+				}
+				console.log("break3out : "+break3out);
+				console.log("break3in : "+break3in);
+				if(break3out < break3in)
+				{
+					var break3 = (parseInt(1440,10) - parseInt(break3in,10)) + parseInt(break3out,10)
+				}
+				else
+				{
+					var break3 = parseInt(break3out,10) - parseInt(break3in,10);
+				}
+				
+				console.log("break3 : "+break3);
+				breakmins = breakmins + break3;
+			}
+
+			if($.trim($("#break4_in_"+curid).val()) != "" && $.trim($("#break4_out_"+curid).val()) != "")
+			{
+				var break4in = h2m($.trim($("#break4_in_"+curid).val()));
+				var break4out = h2m($.trim($("#break4_out_"+curid).val()));
+				
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break4in < shiftStartTime && break4in > shiftEndTime && (break4out > shiftStartTime || break4out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break4in = shiftStartTime;
+						}
+						else if((break4in <= shiftEndTime || break4in >= shiftStartTime) && break4out > shiftEndTime && break4out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break4out = shiftEndTime;
+						}
+						else if(break4in < shiftStartTime && break4out < shiftStartTime && break4in > shiftEndTime && break4out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break4in = break4out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break4in < shiftStartTime && break4out > shiftStartTime && break4out <= shiftEndTime)
+						{
+							break4in = shiftStartTime;
+						}
+						else if(break4in <= shiftEndTime && break4in >= shiftStartTime && break4out > shiftEndTime)
+						{
+							break4out = shiftEndTime;
+						}
+						else if((break4in < shiftStartTime && break4out < shiftStartTime) || (break4in > shiftEndTime && break4out > shiftEndTime))
+						{
+							break4in = break4out = 0;
+						}
+						
+					}
+				}
+				console.log("break4out : "+break4out);
+				console.log("break4in : "+break4in);
+				if(break4out < break4in)
+				{
+					var break4 = (parseInt(1440,10) - parseInt(break4in,10)) + parseInt(break4out,10)
+				}
+				else
+				{
+					var break4 = parseInt(break4out,10) - parseInt(break4in,10);
+				}
+				
+				console.log("break4 : "+break4);
+				breakmins = breakmins + break4;
+			}
+
+			if($.trim($("#break5_in_"+curid).val()) != "" && $.trim($("#break5_out_"+curid).val()) != "")
+			{
+				var break5in = h2m($.trim($("#break5_in_"+curid).val()));
+				var break5out = h2m($.trim($("#break5_out_"+curid).val()));
+				if($("#designation_id_"+curid).val() != 7 && $("#designation_id_"+curid).val() != 13)
+				{
+					if(shiftEndTime < shiftStartTime)
+					{
+						console.log("workin here 1");
+						/* Check if break is taken before shift */
+						if(break5in < shiftStartTime && break5in > shiftEndTime && (break5out > shiftStartTime || break5out <= shiftEndTime))
+						{
+							console.log("workin here");
+							break5in = shiftStartTime;
+						}
+						else if((break5in <= shiftEndTime || break5in >= shiftStartTime) && break5out > shiftEndTime && break5out < shiftStartTime)
+						{
+							console.log("workin here 2");
+							break5out = shiftEndTime;
+						}
+						else if(break5in < shiftStartTime && break5out < shiftStartTime && break5in > shiftEndTime && break5out > shiftEndTime)
+						{
+							console.log("workin here 3");
+							break5in = break5out = 0;
+						}
+					}
+					else
+					{
+						console.log("workin here 4");
+						/* Check if break is taken before shift */
+						if(break5in < shiftStartTime && break5out > shiftStartTime && break5out <= shiftEndTime)
+						{
+							break5in = shiftStartTime;
+						}
+						else if(break5in <= shiftEndTime && break5in >= shiftStartTime && break5out > shiftEndTime)
+						{
+							break5out = shiftEndTime;
+						}
+						else if((break5in < shiftStartTime && break5out < shiftStartTime) || (break5in > shiftEndTime && break5out > shiftEndTime))
+						{
+							break5in = break5out = 0;
+						}
+						
+					}
+				}
+				console.log("break5out : "+break5out);
+				console.log("break5in : "+break5in);
+				if(break5out < break5in)
+				{
+					var break5 = (parseInt(1440,10) - parseInt(break5in,10)) + parseInt(break5out,10)
+				}
+				else
+				{
+					var break5 = parseInt(break5out,10) - parseInt(break5in,10);
+				}
+				
+				console.log("break5 : "+break5);
+				breakmins = breakmins + break5;
+			}
+
+			timediff = parseInt(timediff,10) - parseInt(breakmins,10);
+console.log("timediff after break : "+timediff);
+
+			/* check if shift movement exist */
+			var sm = 0;
+
+			$.ajax({
+				url: 'fetch_shiftmovement.php',
+				data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+				async: false,
+				success: function(data){
+					sm = $.trim(data);
+				}
+			});
+
+			console.log("sm : "+sm);			
+			
+			/* check if leave is added */
+			
+			var halfleave = 0;
+			
+			$.ajax({
+				url: 'fetch_halfleave.php',
+				data: 'id='+escape(curid)+"&dt="+escape($("#hdndate").val()),
+				async: false,
+				success: function(data){
+					halfleave = $.trim(data);
+				}
+			});
+			
+			console.log("halfleave : "+halfleave);
+			
+			if(sm == 1)
+			{
+				console.log("In sm");
+				/* If shift movement is marked */
+				var curleave = $("#leave_id_"+curid).val();
+				if(timediff < halftime)
+				{
+					/* Less then half day (3 Hours 30 Minutes) */
+					/* Mark as Absent */
+					if(curleave != 3)
+					{
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+				else if(timediff < smtime)
+				{
+					/* Less then 5 Hours */
+					/* Mark as halfday absent */
+					if(curleave != 12)
+					{
+						$("#leave_id_"+curid).val(12);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+smtime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+				else
+				{
+					/* Mark as SM */
+					if(curleave != 14)
+					{
+						$("#leave_id_"+curid).val(14);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Shift movement taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+			}
+			else if(halfleave == "4" || halfleave == "5")
+			{
+				/* In halfday leave */
+				
+				var curleave = $("#leave_id_"+curid).val();
+				
+				if(timediff < halftime)
+				{
+					/* Less then half day (3 Hours 30 Minutes) */
+					/* Mark as Absent */
+					if(curleave != 3)
+					{
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+				else
+				{
+					/* Mark as Halfday (PHL / UHL) */
+					if(timediff > fulltime)
+					{
+						/* user is working for full day allow to mark as present */
+						$("#leave_id_"+curid).val('');
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title","");
+						$("#leavetype_tip_"+curid).qtip("destroy");
+						/*$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});*/
+					}
+					else if(curleave != halfleave && curleave != "12" && curleave != "4" && curleave != "5")
+					{
+						$("#leave_id_"+curid).val(halfleave);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Half day taken by the user "+$("#leavetype_tip_"+curid).html()+".\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+			}
+			else
+			{
+
+				if($.trim($("#leave_id_"+curid).val()) == "" || $.trim($("#leave_id_"+curid).val()) == "11")
+				{
+					if(timediff < halftime)
+					{
+						/* Less then half day (3 Hours 30 Minutes) */
+						/* Mark as Absent */
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+					else if(timediff < fulltime)
+					{
+						/* Less then 6:40 Hours */
+						/* Mark as halfday absent */
+						
+						var curleave = $("#leave_id_"+curid).val();
+						if(curleave != "12" && curleave != "4" && curleave != "5")
+						{
+							/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+							$("#leave_id_"+curid).val(12);
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Workhours less than "+fulltime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					else
+					{
+						//console.log("startmins: "+startmins);
+						//console.log("shiftStartTime: "+shiftStartTime);
+						var lesstime = parseInt(startmins,10) - parseInt(shiftStartTime,10)
+						//console.log("lesstime: "+lesstime);
+						if(lesstime > 15 && smtime > 0)
+						{
+							var curleave = $("#leave_id_"+curid).val();
+							//console.log("curleave ==== : "+curleave);
+							if(curleave != 11)
+							{
+								/* Mark as sm+plt */
+								$("#leave_id_"+curid).val(11);
+								$.uniform.update("#leave_id_"+curid);
+								
+								$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+								$("#leavetype_tip_"+curid).qtip({
+									content: false,
+									position: {
+										my: 'left center',
+										at: 'right center',
+										viewport: $(window)
+									},
+									style: {
+										classes: 'ui-tooltip-tipsy'
+									}
+								});
+								
+								if(!confirm("Late for more than 15 minutes, \nuser "+$("#leavetype_tip_"+curid).html()+" marked as \n\nSM + PLT\nAre you sure you want to continue?"))
+								{
+									$("#out_time_"+curid).focus();
+									return false;
+								}
+							}
+						}
+						else
+						{
+							$("#leave_id_"+curid).val('');
+							$.uniform.update("#leave_id_"+curid);
+						
+							$("#leavetype_tip_"+curid).attr("title","");
+							$("#leavetype_tip_"+curid).qtip("destroy");
+							/*$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});*/
+						}
+					}
+				}
+				else if($.trim($("#leave_id_"+curid).val()) == "3")
+				{
+					console.log("=--=inhere"+$("#leave_id_"+curid).val());
+					console.log(timediff);
+					if(timediff >= fulltime)
+					{
+						console.log("in absent");
+						/* If workhours more then 6 hours and 40 mins mark as  */
+						$("#leave_id_"+curid).val('');
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title","");
+						$("#leavetype_tip_"+curid).qtip("destroy");
+						/*$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});*/
+					}
+					else if(timediff >= halftime)
+					{
+						/* Less then 6:40 and greater then 3 Hours 30 Minutes */
+						/* Mark as halfday absent */
+						
+						var curleave = $("#leave_id_"+curid).val();
+						if(curleave != "12" && curleave != "4" && curleave != "5")
+						{
+							/* Check if half day leave (planned or unplanned) not marked manually, if marked then do not mark halfday */
+							$("#leave_id_"+curid).val(12);
+							console.log("working here");
+							$.uniform.update("#leave_id_"+curid);
+							
+							$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+							$("#leavetype_tip_"+curid).qtip({
+								content: false,
+								position: {
+									my: 'left center',
+									at: 'right center',
+									viewport: $(window)
+								},
+								style: {
+									classes: 'ui-tooltip-tipsy'
+								}
+							});
+							
+							if(!confirm("Workhours less than "+fulltime_text+" and greater than "+halftime_text+",\nuser  "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nHALFDAY ABSENT\n\nAre you sure you want to continue?"))
+							{
+								$("#out_time_"+curid).focus();
+								return false;
+							}
+						}
+					}
+					console.log("no where");
+				}
+				else if($.trim($("#leave_id_"+curid).val()) == "12")
+				{
+					console.log("==inhere"+$("#leave_id_"+curid).val());
+					console.log(timediff);
+					if(timediff >= fulltime)
+					{
+						/* If workhours more then 6 hours and 40 mins mark as  */
+						$("#leave_id_"+curid).val('');
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title","");
+						$("#leavetype_tip_"+curid).qtip("destroy");
+						/*$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});*/
+					}
+					else if(timediff < halftime)
+					{
+						/* Less then half day (3 Hours 30 Minutes) */
+						/* Mark as Absent */
+						$("#leave_id_"+curid).val(3);
+						$.uniform.update("#leave_id_"+curid);
+						
+						$("#leavetype_tip_"+curid).attr("title",$("#leave_id_"+curid+" option:selected").text());
+						$("#leavetype_tip_"+curid).qtip({
+							content: false,
+							position: {
+								my: 'left center',
+								at: 'right center',
+								viewport: $(window)
+							},
+							style: {
+								classes: 'ui-tooltip-tipsy'
+							}
+						});
+						
+						if(!confirm("Workhours less than "+halftime_text+",\nuser "+$("#leavetype_tip_"+curid).html()+" will be marked as \n\nABSENT\n\nAre you sure you want to continue?"))
+						{
+							$("#out_time_"+curid).focus();
+							return false;
+						}
+					}
+				}
+			}
+		}
+
+		if($.inArray(curObj.val(), arrTest) > -1)
+		{
+			$("#in_time_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#out_time_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break1_in_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break1_out_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break2_in_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break2_out_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break3_in_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break3_out_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break4_in_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break4_out_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break5_in_"+arrId[2]).attr('readonly', 'readonly').val('');
+			$("#break5_out_"+arrId[2]).attr('readonly', 'readonly').val('');
+		}
+		else
+		{
+			$("#in_time_"+arrId[2]).removeAttr('readonly');
+			$("#out_time_"+arrId[2]).removeAttr('readonly');
+			$("#break1_in_"+arrId[2]).removeAttr('readonly');
+			$("#break1_out_"+arrId[2]).removeAttr('readonly');
+			$("#break2_in_"+arrId[2]).removeAttr('readonly');
+			$("#break2_out_"+arrId[2]).removeAttr('readonly');
+			$("#break3_in_"+arrId[2]).removeAttr('readonly');
+			$("#break3_out_"+arrId[2]).removeAttr('readonly');
+			$("#break4_in_"+arrId[2]).removeAttr('readonly');
+			$("#break4_out_"+arrId[2]).removeAttr('readonly');
+			$("#break5_in_"+arrId[2]).removeAttr('readonly');
+			$("#break5_out_"+arrId[2]).removeAttr('readonly');
+		}
+	}
+	
+</script>

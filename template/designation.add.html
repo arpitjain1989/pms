@@ -1,0 +1,346 @@
+		<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Title: </b><br>Enter the title for the designation.
+			</li>
+			<li>
+				<b>Parent Designation: </b><br>Select the parent designation for the current designation.
+			</li>
+			<li>
+				<b>Description: </b><br>Enter the description for the designation.
+			</li>
+			<li>
+				<b>1<sup>st</sup> Reporting Head Designation: </b><br>Select the designation for the first reporting head.
+			</li>
+			<li>
+				<b>2<sup>nd</sup> Reporting Head Designation: </b><br>Select the designation for the second reporting head.
+			</li>
+			<li>
+				<b>Allow Delegation: </b><br>Check if the delegation for the employee is to be done.
+			</li>
+			<li>
+				<b>Delegation Designation: </b><br>If delegation is allowed, select the designations who can be delegated.
+			</li>
+			<li>
+				<b>Minimum working hours for fullday: </b><br>Select the minimum working hours for the user to be marked as present for fullday.
+			</li>
+			<li>
+				<b>Break for fullday: </b><br>Select the break hours for the user, if the user is present for fullday.
+			</li>
+			<li>
+				<b>Minimum working hours for halfday: </b><br>Select the minimum working hours for the user to be marked as present for halfday.
+			</li>
+			<li>
+				<b>Break for halfday: </b><br>Select the break hours for the user, if the user is present for halfday.
+			</li>
+			<li>
+				<b>Minimum working hours for shift movement: </b><br>Select the minimum working hours for the user, when the user is on shift movement.
+			</li>
+			<li>
+				<b>Break for shift movement: </b><br>Select the break hours for the user, if the user is on shift movement.
+			</li>
+			<li>
+				<b>Do not consider break exceed: </b><br>Select if the penalty for break exceed are not to be considered in paydays calculation.
+			</li>
+			<li>
+				<b>Do not consider late commings: </b><br>Select if the penalty for late commings are not to be considered in paydays calculation.
+			</li>
+			<li>
+				<b>Consider In-Out Time for calculation: </b><br>Select if in time and out time is to be considered to calculate working hours instead of the working hours between the shift timings.
+			</li>
+			<li>
+				<b>Allow roster generation: </b><br>Select if roster for the user is to be generated (Not including IT Support).
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<div class="row-fluid">
+	<div class="span12">
+	<span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="" onsubmit="javascript: return fnValidate();">
+			<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+			<input type="hidden" name="id" id="id" value="{designationid}" />
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" for="username" class = "required">Title:</label>
+						<input class="span4" name="title" id="title" type="text" value="{title}"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Parent Designation:</label>
+						<select name="parent_designation_id" id="parent_designation_id" onchange="javascript: fnChangeParentDesignation();">
+							<option value="">Please Select</option>
+							<!--BeginFillParentDesignationBlock-->
+							<option value="{designation_id}">{designation_title}</option>
+							<!--EndFillParentDesignationBlock-->
+						</select>
+						<script type="text/javascript">
+							$("#parent_designation_id").val("{parent_designation_id}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" for="name">Description:</label>
+						<textarea class="span4" name="description" id="description">{description}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">1<sup>st</sup> Reporting Head Designation:</label>
+						<input type="hidden" name="hfirst_reporting_head" id="hfirst_reporting_head" value="{first_reporting_head}" />
+						<div id="divFirstReportingHead">
+							<select name="first_reporting_head" id="first_reporting_head" onchange="javascript: fnChangeFirstReportingHead();">
+								<option value="">Please Select</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">2<sup>nd</sup> Reporting Head Designation:</label>
+						<input type="hidden" name="hsecond_reporting_head" id="hsecond_reporting_head" value="{second_reporting_head}" />
+						<div id="divSecondReportingHead">
+							<select name="second_reporting_head" id="second_reporting_head">
+								<option value="">Please Select</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Allow Delegation:</label>
+						<input type="checkbox" name="allow_delegation" id="allow_delegation" value="1" onclick="javascript: fnChangeAllowDeligate();" />
+						<script type="text/javascript">
+							if("{allow_delegation}" == 1)
+								$("#allow_delegation").attr("checked","checked");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid" id="divDelegationDesignation">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Delegation Designation:</label>
+						<label class="form-label span4" style="margin-left: 0px;">
+						<select name="delegation_designation_id[]" id="delegation_designation_id" multiple="multiple" size="5">
+							<!--BeginFillDelegationDesignationBlock-->
+							<option {set_selected} value="{designation_id}">{designation_title}</option>
+							<!--EndFillDelegationDesignationBlock-->
+						</select>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Minimum working hours for fullday:</label>
+						<input type="text" name="fullday_minimum_working_hour" id="fullday_minimum_working_hour" value="{fullday_minimum_working_hour}" readonly="readonly" class="span4 timepicker" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Break for fullday:</label>
+						<input type="text" name="fullday_break_minutes" id="fullday_break_minutes" value="{fullday_break_minutes}"  class="span4 timepicker" readonly="readonly" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Minimum working hours for halfday:</label>
+						<input type="text" name="halfday_minimum_working_hour" id="halfday_minimum_working_hour" value="{halfday_minimum_working_hour}" class="span4 timepicker" readonly="readonly" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Break for halfday:</label>
+						<input type="text" name="halfday_break_minutes" id="halfday_break_minutes" value="{halfday_break_minutes}" class="span4 timepicker" readonly="readonly" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Minimum working hours for shift movement:</label>
+						<input type="text" name="sm_minimum_working_hour" id="sm_minimum_working_hour" value="{sm_minimum_working_hour}" class="span4 timepicker" readonly="readonly" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Break for shift movement:</label>
+						<input type="text" name="sm_break_minutes" id="sm_break_minutes"  class="span4 timepicker" value="{sm_break_minutes}" readonly="readonly" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Do not consider break exceed:</label>
+						<input type="checkbox" name="consider_break_exceed" id="consider_break_exceed" value="1" />
+						<script type="text/javascript">
+							if("{consider_break_exceed}" == 1)
+								$("#consider_break_exceed").attr("checked","checked");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Do not consider late commings:</label>
+						<input type="checkbox" name="consider_late_commings" id="consider_late_commings" value="1" />
+						<script type="text/javascript">
+							if("{consider_late_commings}" == 1)
+								$("#consider_late_commings").attr("checked","checked");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Consider In-Out Time for calculation:</label>
+						<input type="checkbox" name="consider_inout_time" id="consider_inout_time" value="1" />
+						<script type="text/javascript">
+							if("{consider_inout_time}" == 1)
+								$("#consider_inout_time").attr("checked","checked");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Allow roster generation:</label>
+						<input type="checkbox" name="allow_roster_generation" id="allow_roster_generation" value="1" />
+						<script type="text/javascript">
+							if("{allow_roster_generation}" == 1)
+								$("#allow_roster_generation").attr("checked","checked");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='designation.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+
+	function fnValidate()
+	{
+		if(!checkblank($("#title"),"Please enter the title")) return false;
+			
+		if($("#allow_delegation:checked").length == 1)
+		{
+			if($("#divDelegationDesignation").find('option:selected').length == 0)
+			{
+				alert("Please select atlease 1 Delegation Designation");
+				return false;
+			}
+		}
+
+		if(!checkblank($("#fullday_minimum_working_hour"),"Please select the Minimum working hours for fullday")) return false;
+		if(!checkblank($("#fullday_break_minutes"),"Please select the Break for fullday")) return false;
+
+		if(!checkblank($("#halfday_minimum_working_hour"),"Please select the Minimum working hours for halfday")) return false;
+		if(!checkblank($("#halfday_break_minutes"),"Please select the Break for halfday")) return false;
+
+		if(!checkblank($("#sm_minimum_working_hour"),"Please select the Minimum working hours for shift movement")) return false;
+		if(!checkblank($("#sm_break_minutes"),"Please select the Break for shift movement")) return false;
+	}
+
+	function fnChangeParentDesignation()
+	{
+		console.log('fill_reporting_head_designation.php?id='+escape($("#parent_designation_id").val())+"&action=first_head");
+		$.ajax({
+			url: 'fill_reporting_head_designation.php?id='+escape($("#parent_designation_id").val())+"&action=first_head",
+			success: function(data){
+				$("#divFirstReportingHead").html(data);
+				$("#first_reporting_head").val($("#hfirst_reporting_head").val());
+				
+				$("#first_reporting_head").uniform();
+				
+				fnChangeFirstReportingHead();
+			}
+		});
+	}
+	
+	function fnChangeFirstReportingHead()
+	{
+		console.log('fill_reporting_head_designation.php?id='+escape($("#first_reporting_head").val())+"&action=second_head");
+		$.ajax({
+			url: 'fill_reporting_head_designation.php?id='+escape($("#first_reporting_head").val())+"&action=second_head",
+			success: function(data){
+				$("#divSecondReportingHead").html(data);
+				$("#second_reporting_head").val($("#hsecond_reporting_head").val());
+				
+				$("#second_reporting_head").uniform();
+			}
+		});
+	}
+	
+	function fnChangeAllowDeligate()
+	{
+		console.log("working here");
+		console.log($("#allow_delegation:checked").length);
+		if($("#allow_delegation:checked").length == 1)
+		{
+			$("#divDelegationDesignation").show();
+		}
+		else
+		{
+			$("#divDelegationDesignation").find('option').removeAttr("selected");
+			$("#divDelegationDesignation").hide();
+		}
+	}
+
+	$(document).ready(function(){
+
+		$('.timepicker').timepicker();	
+
+		fnChangeParentDesignation();
+
+		fnChangeAllowDeligate();
+	});
+</script>

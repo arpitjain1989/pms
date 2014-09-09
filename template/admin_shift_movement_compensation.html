@@ -1,0 +1,461 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Team Member:</b><br>Please select the team member for whom you are adding an shift movement.
+			</li>
+			<li>                                                    
+				<b>Movement date:</b><br>Select the date when your team member has taken shift movement.<br/><br/>
+			</li>
+			<li>
+				<b>Compensation date:</b><br>Select the date when the team member has compensating for the shift movement.
+			</li>
+			<li>
+				<b>Compensation from time:</b><br>Enter the time from when the team member has compensated for the shift movement.
+			</li>
+			<li>
+				<b>Compensation to time:</b><br>Enter the time till when the team member has compensated for the shift movement.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form name="frmadminsmcompensation" id="frmadminsmcompensation" class="form-horizontal seperator" method="post" action="admin_shift_movement_compensation.php" onsubmit="return fnValidate();" />
+
+			<input type="hidden" name="shift_start" id="shift_start" value="" />
+			<input type="hidden" name="shift_end" id="shift_end" value="" />
+
+			<input type="hidden" name="curdt" id="curdt" value="{movement_date}" />
+			<input type="hidden" name="prevdt" id="prevdt" value="{previous_date}" />
+
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Employee Name:</label>
+						<select name="userid" id="userid" class="nostyle" style="width:300px;" onchange="javascript: fnChangeEmployee();">
+							<option value="">Please select</option>
+							<!--BeginFillEmployeesBlock-->
+							<option value="{employeeid}">{employeename}</option>
+							<!--EndFillEmployeesBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" class = "required">
+						Movement date:
+						</label>
+						<div id="divMovementDate">
+							<select name="shift_movement_id" id="shift_movement_id">
+								<option value=''>Please select</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Movement date:
+						</label>
+						<label class="form-label span6 clsleft" id="lblMovementDate" name="lblMovementDate">-</label>
+						<input type="hidden" name="movement_date" id="movement_date" value='-' />
+						
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Movement from time:</label>
+						<label class="form-label span6 clsleft" id="lblMovementFromTime" name="lblMovementFromTime">-</label>
+						<input type="hidden" name="hMovementFrom" id="hMovementFrom" value='-' />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Movement to time:</label>
+						<label class="form-label span6 clsleft" id="lblMovementToTime" name="lblMovementToTime">-</label>
+						<input type="hidden" name="hMovementTo" id="hMovementTo" value='-' />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" class = "required">
+						Compensation date:
+						</label>
+						<input class="span4" name="compensation_date" id="compensation_date" type="text" value="{compensation_date}" readonly="readonly" style="cursor:pointer;"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Compensation from time:</label>
+						
+						<select name="compensation_fromtime_hour" id="compensation_fromtime_hour" class="small">
+							<!--BeginFillHoursBlock-->
+							<option value="{hours}">{hours}</option>
+							<!--EndFillHoursBlock-->
+						</select>
+						
+						<select name="compensation_fromtime_minutes" id="compensation_fromtime_minutes" class="small">
+							<!--BeginFillMinutesBlock-->
+							<option value="{minutes}">{minutes}</option>
+							<!--EndFillMinutesBlock-->
+						</select>
+						
+						<select name="compensation_fromtime_ampm" id="compensation_fromtime_ampm" class="small">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Compensation to time:</label>
+
+						<select name="compensation_totime_hour" id="compensation_totime_hour" class="small">
+							<!--BeginFillHoursBlock-->
+							<option value="{hours}">{hours}</option>
+							<!--EndFillHoursBlock-->
+						</select>
+
+						<select name="compensation_totime_minutes" id="compensation_totime_minutes" class="small">
+							<!--BeginFillMinutesBlock-->
+							<option value="{minutes}">{minutes}</option>
+							<!--EndFillMinutesBlock-->
+						</select>
+
+						<select name="compensation_totime_ampm" id="compensation_totime_ampm" class="small">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<input type="hidden" name="action" id="action" value="adminShiftMovementCompensation" />
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='admin_shift_movement_list.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#compensation_date, #movement_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+		
+		$("#userid").select2({
+			placeholder: "Select Please",
+			placeholderOption : 'first'
+		});
+	});
+	
+	$(window).load(function() {
+		$("select.small").each(function(){
+			$("#uniform-"+$(this).attr("id")).addClass("smallsel");
+		});
+	});
+
+	function fnChangeEmployee()
+	{
+		console.log('get_pending_shift_movement_compensation.php?id='+escape($("#userid").val()));
+
+		$("#divMovementDate").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded' style='margin-left:40%;'>");
+		$("#divMovementDate").load("get_pending_shift_movement_compensation.php?id="+escape($("#userid").val()),"",function(data){
+			$("#shift_movement_id").uniform();
+		});
+	}
+
+	function fnMovementChange($obj)
+	{
+		//alert($obj.val()); return false;
+		$("#lblMovementDate").html("-");
+		$("#movement_date").val("");
+		$("#lblMovementFromTime").html("-");
+		$("#lblMovementToTime").html("-");			
+		$("#hMovementFrom").val("-");			
+		$("#hMovementTo").val("-");
+		
+		$("#compensation_fromtime_hour").val("");			
+		$("#compensation_fromtime_minutes").val("");			
+		$("#compensation_fromtime_ampm").val("");
+					
+		$("#compensation_totime_hour").val("");			
+		$("#compensation_totime_minutes").val("");			
+		$("#compensation_totime_ampm").val("");
+		
+		if($obj.val() != "")
+		{
+			$.ajax({
+				url: 'fetch_shiftdata.php',
+				data: 'id='+$obj.val(),
+				dataType: 'json',
+				async: false,
+				success: function(data){
+
+					$("#lblMovementDate").html(data.movement_date);
+					$("#movement_date").val(data.movement_date);
+					$("#lblMovementFromTime").html(data.movement_starttime);
+					$("#hMovementFrom").val(data.movement_starttime);
+					$("#lblMovementToTime").html(data.movement_endtime);
+					$("#hMovementTo").val(data.movement_endtime);
+					
+					$("#compensation_fromtime_hour").val(data.fromH);
+					$("#compensation_fromtime_minutes").val(data.fromM);
+					$("#compensation_fromtime_ampm").val(data.fromAMPM);
+								
+					$("#compensation_totime_hour").val(data.toH);
+					$("#compensation_totime_minutes").val(data.toM);
+					$("#compensation_totime_ampm").val(data.toAMPM);
+					
+					$.uniform.update($("select.small"));
+				}
+			});
+		}
+	}
+
+	function fnCheckShift()
+	{
+		var ret = 0;
+		//alert($("#userid").val());
+		$.ajax({
+			url: 'get_employee_official_shift.php',
+			data: 'id='+escape($("#userid").val()),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				$("#shift_start").val(data.start);
+				$("#shift_end").val(data.end);
+				
+				var shift_start_minutes = hour2min(data.start);
+				var shift_end_minutes = hour2min(data.end);
+
+				if(shift_end_minutes < shift_start_minutes)
+				{
+					ret = '1';
+				}
+				else
+				{
+					ret = '2';
+				}
+			}
+		});
+		return ret;
+	}
+
+	function DateFromString(str){ 
+        str = str.split(/\D+/);
+        str = new Date(str[2],str[0]-1,(parseInt(str[1])+7));
+        return MMDDYYYY(str);
+    }
+    function MMDDYYYY(str) {
+        var ndateArr = str.toString().split(' ');
+        var Months = 'Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec';
+        return (parseInt(Months.indexOf(ndateArr[1])/4)+1)+'/'+ndateArr[2]+'/'+ndateArr[3];
+    }
+
+    function Add7Days() {
+        var date = $('#start_date').val();
+        var ndate = DateFromString(date);
+        return ndate;
+    }
+
+
+	function fnValidate()
+	{
+		var checkshift = fnCheckShift();
+
+		if(!checkblank($("#userid"),"Please select the employee")) return false;
+		if(!checkblank($("#movement_date"),"Please select Movement date")) return false;
+		
+		if($.trim($("#hMovementFrom").val()) == "" || $.trim($("#hMovementFrom").val()) == "-" || $.trim($("#hMovementTo").val()) == "" || $.trim($("#hMovementTo").val()) == "-")
+		{
+			alert("Problem loading the shift movement. Please try again or contact the admin");
+			return false;
+		}
+		
+		var movementTime = hour2min($.trim($("#hMovementTo").val())) - hour2min($.trim($("#hMovementFrom").val()));
+		
+		if(!checkblank($("#compensation_date"),"Please select Compensation date")) return false;
+	
+	
+		
+		var d = new Date($("#movement_date").val());
+		/*alert($("#compensation_date").val());
+		//alert($("#movement_date").val());
+		var d = new Date($("#movement_date").val());
+		//alert(d);
+		var curr_date = d.getDate();
+		var tomo_date = d.getDate()+1;
+		var seven_date = d.getDate()+7;
+		var curr_month = d.getMonth();
+		curr_month++;
+		var curr_year = d.getFullYear();
+		var tomorrowsDate =(tomo_date + "-" + curr_month + "-" + curr_year);
+		var weekDate =(curr_year + "-" + curr_month + "-" + seven_date);
+		//alert(tomorrowsDate);
+		alert(weekDate);
+		if($("#compensation_date").val() > weekDate)
+		{
+			alert('hell');
+		}
+		return false;*/
+		var d1 = new Date();
+		var formattedDate = new Date(d1);
+		var d2 = formattedDate.getDate();
+		var m =  formattedDate.getMonth();
+		m += 1;  // JavaScript months are 0-11
+		var y = formattedDate.getFullYear();
+
+		var newd = y + "-" + m + "-" + d2;
+		
+		if($("#compensation_date").val() < $("#movement_date").val())
+		{
+			alert("Compensation date should be greater than or equal to the movement date.");
+			$("#compensation_date").focus();
+			return false;
+		}
+		if($("#compensation_date").val() > newd)
+		{
+			alert("Compensation date should be greater than or equal to current date.");
+			$("#compensation_date").focus();
+			return false;
+		}
+		
+		var max_comdt = new Date($("#movement_date").val());
+		max_comdt.setDate(max_comdt.getDate() + 7);
+
+		if($("#compensation_date").val() > max_comdt.getFullYear()+"-"+zerofill((parseInt(max_comdt.getMonth(),10)+1),2)+"-"+zerofill(max_comdt.getDate(),2))
+		{
+			alert("Compensation should be done within 7 days from shift movement date");
+			$("#compensation_date").focus();
+			return false;
+		}
+		
+		if($("#compensation_fromtime_ampm").val() == "am" && $("#compensation_fromtime_hour").val()==12)
+		{
+			/*var compensation_fromtime = (parseInt($("#compensation_fromtime_hour").val(),10) + 12) +":"+$("#compensation_fromtime_minutes").val();*/
+			var compensation_fromtime = "00:"+$("#compensation_fromtime_minutes").val();
+		}
+		else if($("#compensation_fromtime_ampm").val() == "pm" && $("#compensation_fromtime_hour").val() != 12)
+		{
+			var compensation_fromtime = (parseInt($("#compensation_fromtime_hour").val(),10) + 12) +":"+$("#compensation_fromtime_minutes").val();
+		}
+		else
+		{
+			var compensation_fromtime = $("#compensation_fromtime_hour").val() +":"+$("#compensation_fromtime_minutes").val();
+		}
+		
+		if($("#compensation_totime_ampm").val() == "am" && $("#compensation_totime_hour").val() == 12)
+		{
+			/*var compensation_totime = (parseInt($("#compensation_totime_hour").val(),10) + 12) +":"+$("#compensation_totime_minutes").val();*/
+			var compensation_totime = "00:"+$("#compensation_totime_minutes").val();
+		}
+		else if($("#compensation_totime_ampm").val() == "pm" && $("#compensation_totime_hour").val() != 12)
+		{
+			var compensation_totime = (parseInt($("#compensation_totime_hour").val(),10) + 12) +":"+$("#compensation_totime_minutes").val();
+		}
+		else
+		{
+			var compensation_totime = $("#compensation_totime_hour").val() +":"+$("#compensation_totime_minutes").val();
+		}
+
+		var curdt = new Date();
+		var curtime = zerofill(curdt.getHours(),2) + ":" + zerofill(curdt.getMinutes(),2);
+
+		if($("#compensation_fromtime_ampm").val() == "pm" && $("#compensation_totime_ampm").val() == "am")
+		{
+			/* For night shift */
+			
+			if(compensation_fromtime > '24:00' || compensation_totime > curtime)
+			{
+				alert("Incorrect compensation time.");
+				$("#compensation_totime_hour").focus();
+			}
+			
+			var compensationTime = (hour2min('24:00') - hour2min(compensation_fromtime)) + hour2min(compensation_totime);
+		}
+		else
+		{
+			/*if(compensation_fromtime > curtime || compensation_totime > curtime)
+			{
+				alert("Cannot add compensation before the current time");
+				return false;
+			}*/
+
+			if(compensation_fromtime >= compensation_totime)
+			{
+				alert("Compensation to time should be greater than the Compensation from time.");
+				$("#compensation_totime").focus();
+				return false;
+			}
+			
+			var compensationTime = hour2min(compensation_totime) - hour2min(compensation_fromtime);
+		}
+		
+		if(movementTime <= 30)
+		{
+			if(compensationTime < 30)
+			{
+				alert("Compensation time should be 30 Mins.");
+				return false;
+			}
+		}
+		else if(movementTime <= 60)
+		{
+			if(compensationTime < 60)
+			{
+				alert("Compensation time should be 1 Hour.");
+				return false;
+			}
+		}
+		else if(movementTime <= 90)
+		{
+			if(compensationTime < 90)
+			{
+				alert("Compensation time should be 1:30 Hours.");
+				return false;
+			}
+		}
+		else if(movementTime <= 120)
+		{
+			if(compensationTime < 120)
+			{
+				alert("Compensation time should be 2 Hours.");
+				return false;
+			}
+		}
+	}
+	
+</script>

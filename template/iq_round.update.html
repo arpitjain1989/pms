@@ -1,0 +1,274 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="iq_round.update.php">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+				<input type="hidden" name="id" id="id" value="{cand_id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name" class = "required">Candidate Name:</label>
+							{cand_name}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="mobile" class = "required">Mobile:</label>
+							{mobile}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="applied_for" class = "required">Position applied for:</label>
+							{des_title}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="reference">Reference:</label>
+							{refer}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="job_experience">Job Experience (in year):</label>
+							{total_experience}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="rel_job_experience">Related Job Experience:</label>
+							{rel_job_exp}
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="recommend_test">IQ Score(%):</label>
+							<div class="span5 controls">   
+								<input class="span4" name="iq_score" id="iq_score" type="text" value="{IQScore}" style="float:left;"/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="recommend_test">Recommend for HR Round:</label>
+							<div class="span8 controls">   
+								<select name="recommend_hr_round" id="recommend_hr_round">
+									<option value='' selected="selected" />Please select
+									<option value='1' />Yes
+									<option value='2'/>No
+								</select>
+								<script type="text/javascript">
+									if("{recommend_hr_round}" != "")
+										$("#recommend_hr_round").val("{recommend_hr_round}");
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-row row-fluid" id="showHide" style="display:none;">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="recommend_test">Level according to score:</label>
+							<div class="span8 controls">   
+								<span id="scrLevel"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--BeginFillSubmitButton-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='iq_round.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--EndFillSubmitButton-->
+				<!--BeginFillCancelButton-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='iq_round.php'">Back</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--EndFillCancelButton-->
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	/*if($("#initiative").val() == '')
+	{
+		alert('Please insert initiative.');
+		$("#initiative").focus();
+		return false;
+	}
+	if($("#communication_listening").val() == '')
+	{
+		alert('Please insert communication/listening skills.');
+		$("#communication_listening").focus();
+		return false;
+	}
+	if($("#attitute").val() == '')
+	{
+		alert('Please insert attitute.');
+		$("#attitute").focus();
+		return false;
+	}*/
+	if($("#recommend_hr_round").val() == '')
+	{
+		alert('Please chose recommend hr round.');
+		$("#recommend_hr_round").focus();
+		return false;
+	}
+	if($("#iq_score").val() == '')
+	{
+		alert('Please Enter IQ Score.');
+		$("#recommend_test").focus();
+		return false;
+	}
+	else if($("#iq_score").val() > 100)
+	{
+		$("#showHide").css("display", "none");
+		alert('Please insert value between 0 to 100 for IQ Score.');
+		return false;
+	}
+	else if($("#iq_score").val() < 0)
+	{
+		$("#showHide").css("display", "none");
+		alert('Please insert value between 0 to 100 for IQ Score.');
+		return false;
+	}
+	
+});
+return true;
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	if($("#iq_score").val() == '')
+		{
+			$("#showHide").css("display", "none");
+		}
+		else
+		{
+			$("#showHide").css("display", "block");
+		}
+
+		if(($("#iq_score").val() >= 0) && ($("#iq_score").val() < 40))
+		{
+			//alert('hello');
+			$("#scrLevel").text('Poor');
+		}
+		else if(($("#iq_score").val() >= 40) && ($("#iq_score").val() <= 55))
+		{
+			//alert('hello1');
+			$("#scrLevel").text('Fair');
+		}
+		else if(($("#iq_score").val() > 55) && ($("#iq_score").val() <= 70))
+		{
+			//alert('hello2');
+			$("#scrLevel").text('Satisfactory');
+		}
+		
+		else if(($("#iq_score").val() > 70) && ($("#iq_score").val() <= 100))
+		{
+			//alert('hello3');
+			$("#scrLevel").text('Good');
+		}
+
+		
+	$("#iq_score").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+	//alert('hello');
+	 $('#iq_score').keyup(function() {
+		//alert($('#iq_score').val());
+		//alert($('#scrLevel').val());
+		if($("#iq_score").val() == '')
+		{
+			$("#showHide").css("display", "none");
+		}
+		else
+		{
+			$("#showHide").css("display", "block");
+		}
+
+		if($("#iq_score").val() < 0)
+		{
+			$("#showHide").css("display", "none");
+			alert('Please insert value between 0 to 100 for IQ Score.');
+			return false;
+		}
+		if(($("#iq_score").val() >= 0) && ($("#iq_score").val() < 40))
+		{
+			//alert('hello');
+			$("#scrLevel").text('Poor');
+		}
+		else if(($("#iq_score").val() >= 40) && ($("#iq_score").val() <= 55))
+		{
+			//alert('hello1');
+			$("#scrLevel").text('Fair');
+		}
+		else if(($("#iq_score").val() > 55) && ($("#iq_score").val() <= 70))
+		{
+			//alert('hello2');
+			$("#scrLevel").text('Satisfactory');
+		}
+		
+		else if(($("#iq_score").val() > 70) && ($("#iq_score").val() <= 100))
+		{
+			//alert('hello3');
+			$("#scrLevel").text('Good');
+		}
+		else if($("#iq_score").val() > 100)
+		{
+			$("#showHide").css("display", "none");
+			alert('Please insert value between 0 to 100 for IQ Score.');
+			return false;
+		}
+		//$.uniform.update("#scrLevel");
+        //if ($('#iq_score').val() != '') {
+          //  content = $('#myContent').val();
+            //alert('Content has been changed');
+          
+        })
+    });
+</script>

@@ -1,0 +1,97 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Title:</b><br>Enter the title for the shift.
+			</li>
+			<li>                                                    
+				<b>Description:</b><br>Enter the description for the shift.
+			</li>
+			<li>
+				<b>Start Time:</b><br>Select the time from when the shift will start.
+			</li>
+			<li>                                                    
+				<b>End Time:</b><br>Select the time when the shift will end.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+		<input type="hidden" name="id" id="id" value="{shiftid}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4" for="username" class = "required">
+					Title:
+					</label>
+					<input class="span4" name="title" id="title" type="text" value="{title}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4" for="name">Description:</label>
+					<textarea class="span4" name="description" id="description">{description}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4" for="name">Start Time:</label>
+					 <input id="starttime" type="text" name="starttime"  autocomplete="off" class="span4 text timepicker" value="{starttime}" readonly="readonly" style="cursor:pointer;" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4" for="name">End Time:</label>
+					<input id="endtime" type="text" name="endtime" autocomplete="off" class="span4 text timepicker" value="{endtime}" readonly="readonly" style="cursor:pointer;" />
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='shifts.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#submit").click(function() 
+	{
+		if($("#title").val() == '')
+		{
+			alert('Please insert Title.');
+			return false;
+		}
+		return true;
+	});
+
+	$('.timepicker').timepicker();	
+});
+</script>

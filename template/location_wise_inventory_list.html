@@ -1,0 +1,80 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Stock Register Report Detail</span>
+					<span style="float: right;margin-right: 10px;"><a href="location_wise_inventory_report.php" style="color:black; font-size:16px;">Back</a></span>
+					<a href="location_wise_inventory_list.php?id={locid}&action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export&nbsp;|&nbsp;</span>
+					</a>
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblLocationWiseInventory">
+					<thead>
+						<tr>
+							<th>Inventory Type</th>
+							<th>Inventory Make</th>
+							<th>Serial No</th>
+							<th>Unique Id</th>
+							<th>Location</th>
+							<th>Purchase date</th>
+							<th>Warranty</th>
+							<th>Warranty expiry</th>
+							<th>In Warranty</th>
+							<th>Status</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillStockRegisterList-->
+						<tr class="odd gradeX">
+							<td>{type}</td>
+							<td>{make}</td>
+							<td>{serialno}</td>
+							<td>{uniqueid}</td>
+							<td>{location_name}</td>
+							<td>{purchasedate}</td>
+							<td>{warranty_text}</td>
+							<td>{warrenty_expiry}</td>
+							<td>{warranty_status_text}</td>
+							<td>{status_text}</td>
+							<td>
+								<a href="location_wise_inventory_view.php?id={srid}&loc={locid}" name="view" id="view" title="View Issue" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillStockRegisterList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready( function() {
+		$('#tblLocationWiseInventory').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 4, "desc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				null
+			]
+		});
+	});
+	
+</script>

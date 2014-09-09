@@ -1,0 +1,85 @@
+		<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+		<form id="project" name="project" action="" method="post">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+		<span class="message">{message}</span>
+		<span class="right">
+			<a href="project.add.php">
+				<h4>
+					<span class="icon16 entypo-icon-add"></span>
+					Add New Project
+				</h4>
+			</a>
+		</span>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4> <span>Project table</span> </h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th><input type='checkbox' name='chkall' id='chkall' /></th>
+									<th>Project</th>
+									<th>Owner</th>
+									<th>client</th>
+									<th>Options</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillProjectValues-->
+								<tr class="odd gradeX {active}">
+									<td><input type="checkbox" id="chk" name="chk[]" value="{project_id}" class="chkone"/></td>
+									<td>{title}</td>
+									<td>{owner}</td>
+									<td>{display_name}</td>
+									<td><a href="project.view.php?id={project_id}" name="view" id="view" title="View Project" class="tip"><span class="icon12 brocco-icon-search"></span></a><a href="project.add.php?id={project_id}&action=update" name="update" id="update" title="Update Project" class="tip"><span class="icon12 icomoon-icon-pencil-2"></span></a><a href="form.php?id={project_id}&action=form" name="form" id="form" title="Add Form" class="tip"><span class="icon12 icomoon-icon-pencil-2"></span></a></td>
+								</tr>
+								<!--EndFillProjectValues-->
+							</tbody>
+						</table>
+					</div>
+					
+						<span class="btn btn-danger">
+							<span class="icon16 icomoon-icon-cancel-2 white"></span>
+							<input type="submit" name="delete" id="delete" value="Delete" />
+						</span>
+				</div>
+				<!-- End .box -->
+			</div>
+			<!-- End .span12 -->
+		</div>
+		</form>
+		<!-- End .row-fluid -->
+		<!-- Page end here -->
+		
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$("input[type='checkbox']").uniform();
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$("input[type='checkbox']").uniform();
+		});
+	});
+</script>

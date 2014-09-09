@@ -1,0 +1,108 @@
+<!--BeginScrapDisposalPrintScriptBlock-->
+<script type="text/javascript">
+	if("{server_url}" != "" && "{gatepass_for_scrap_disposal_id}" != "")
+	{
+		printWin = window.open('{server_url}scrap_disposal_gatepass_print.php?id={gatepass_for_scrap_disposal_id}',"Print Gatepass","width=200,height=100");
+	}
+</script>
+<!--EndScrapDisposalPrintScriptBlock-->
+
+<div class="row-fluid">
+	<div class="span12">
+		
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+		
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Scrap Disposal</span>
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<form name="frmScrapDisposal" id="frmScrapDisposal" action="scrap_disposal.php" method="post" onsubmit="javascript: return fnValidate();">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+						<thead>
+							<tr>
+								<th><input type="checkbox" name="chkall" id="chkall" /></th>
+								<th>Inventory Type</th>
+								<th>Inventory Make</th>
+								<th>Serial No</th>
+								<th>Unique Id</th>
+								<th>Vendor Name</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginSaveBlock-->
+							<!--BeginFillScrapInventoryBlock-->
+							<tr class="odd gradeX">
+								<td><input type="checkbox" name="stock_register_id[]" id="chkone_{srid}" value="{srid}" class="chkone" /></td>
+								<td>{type}</td>
+								<td>{make}</td>
+								<td>{serialno}</td>
+								<td>{uniqueid}</td>
+								<td>{vendor_name}</td>
+							</tr>
+							<!--EndFillScrapInventoryBlock-->
+							<tr>
+								<td colspan="6">
+									<input type="hidden" name="action" id="action" value="ScrapDisposal" />
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='stock_summary.php'">Cancel</button>
+								</td>
+							</tr>
+							<!--EndSaveBlock-->
+							<!--BeginNoRecordsBlock-->
+							<tr class="odd gradeX">
+								<th colspan="6">No records</th>
+							</tr>
+							<!--EndNoRecordsBlock-->
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$.uniform.update("input[type='checkbox']");
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$.uniform.update("input[type='checkbox']");
+		});
+	});
+	
+	function fnValidate()
+	{
+		if($(".chkone:checked").length == 0)
+		{
+			alert("Please select atleast one inventory to dispose");
+			return false;
+		}
+		return true;
+	}
+</script>

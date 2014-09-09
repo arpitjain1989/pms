@@ -1,0 +1,162 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Search Inventory in repair</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<form name="frmInventoryRepairReport" id="frmInventoryRepairReport" method="post" action="inventory_repair_report.php">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Inventory Type:</label>
+								<select name="search_inventory_type_id" id="search_inventory_type_id">
+									<option value="">Please select</option>
+									<!--BeginFillInventoryType-->
+									<option value="{type_id}">{type_name}</option>
+									<!--EndFillInventoryType-->
+								</select>
+								<script type="text/javascript">
+									if("{search_inventory_type_id}" != "")
+										$("#search_inventory_type_id").val("{search_inventory_type_id}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Inventory Make:</label>
+								<select name="search_inventory_make_id" id="search_inventory_make_id">
+									<option value="">Please select</option>
+									<!--BeginFillInventoryMake-->
+									<option value="{make_id}">{make_name}</option>
+									<!--EndFillInventoryMake-->
+								</select>
+								<script type="text/javascript">
+									if("{search_inventory_make_id}" != "")
+										$("#search_inventory_make_id").val("{search_inventory_make_id}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Sent to Vendor:</label>
+								<select name="search_inventory_sentto_vendor_id" id="search_inventory_sentto_vendor_id">
+									<option value="">Please select</option>
+									<option value="0">Inhouse</option>
+									<!--BeginFillInventoryVendor-->
+									<option value="{vendor_id}">{vendor_name}</option>
+									<!--EndFillInventoryVendor-->
+								</select>
+								<script type="text/javascript">
+									if("{search_inventory_sentto_vendor_id}" != "")
+										$("#search_inventory_sentto_vendor_id").val("{search_inventory_sentto_vendor_id}");
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Expected return date:</label>
+								<span style="float:left;padding:4px;">From : </span><input class="span4" name="search_expected_return_date_from" id="search_expected_return_date_from" type="text" value="{search_expected_return_date_from}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+								<span style="float:left;padding:4px;">To : </span><input class="span4" name="search_expected_return_date_to" id="search_expected_return_date_to" type="text" value="{search_expected_return_date_to}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<input type="hidden" name="action" id="action" value="InventoryRepairReport" />
+										<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Inventory in repair</span>
+							<a href="inventory_repair_report.php?action=export" target="_blank">
+								<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+							</a>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblInventoryRepairReport">
+							<thead>
+								<tr>
+									<th>Inventory Type</th>
+									<th>Inventory Make</th>
+									<th>Serial No</th>
+									<th>Unique Id</th>
+									<th>Location</th>
+									<th>Purchase date</th>
+									<th>Vendor Name</th>
+									<th>Warranty expiry</th>
+									<th>Sent To Vendor</th>
+									<th>Expected Return Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillInventoryRepairList-->
+								<tr class="odd gradeX">
+									<td>{type}</td>
+									<td>{make}</td>
+									<td>{serialno}</td>
+									<td>{uniqueid}</td>
+									<td>{location_name}</td>
+									<td>{purchasedate}</td>
+									<td>{vendor_name}</td>
+									<td>{warrenty_expiry}</td>
+									<td>{senttovendor}</td>
+									<td>{expected_return_date}</td>
+								</tr>
+								<!--EndFillInventoryRepairList-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		$('#tblInventoryRepairReport').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 4, "asc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				{ "sType": "date-uk" }
+			]
+		});
+		
+		$("#search_expected_return_date_from, #search_expected_return_date_to").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+</script>

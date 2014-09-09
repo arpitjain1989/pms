@@ -1,0 +1,720 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right" style='margin-bottom:10px;'><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Post Applied For:</b><br>Chose the post for you applyied.
+			</li>
+			<li>
+				<b>Advertisement Reference For:</b><br>Select the reference from you came.
+			</li>
+			<li>
+				<b>Full Name:</b><br>Enter your full name.
+			</li>
+			<li>
+				<b>Address:</b><br>Enter your permanent address.
+			</li>
+			
+			<li>
+				<b>Area & City:</b><br>Enter area and city where you live.
+			</li>
+			<li>
+				<b>Date of Birth:</b><br>Enter your birth date.
+			</li>
+			
+			<li>
+				<b>Email:</b><br>Enter your email.
+			</li>
+			<li>
+				<b>Mobile:</b><br>Enter your mobile number.
+			</li>
+			<li>
+				<b>Phone Number:</b><br>Enter your phone number.
+			</li>
+			<!--<li>
+				<b>Nationality:</b><br>Enter your Nationality.
+			</li>
+			<li>
+				<b>Native Place:</b><br>Enter your native place.
+			</li>
+			<li>
+				<b>Vehicle Number:</b><br>Enter your vehicle number.
+			</li>
+			<li>
+				<b>Emergency contact details : Details for emergency purpose</b>
+			</li>
+			<li>
+				<b>1. Name of the person :</b> Emergency contact person name
+			</li>
+			<li>
+				<b>2. Contact number :</b> Emergency contact person number
+			</li>
+			<li>
+				<b>3. Relationship status :</b> What relation you have with the emergency contact person 
+			</li>-->
+			<li>
+				<b>Qalification:</b><br>Enter ther qualification.
+			</li>
+			<li>
+				<b>Name of the Institute:</b><br>Name of institure where you complete your graduat or undergraduate in previous selection.
+			</li>
+			<li>
+				<b>Total Experience:</b><br>Enter total experience in digits or numbers only.
+			</li>
+			<li>
+				<b>Relevant Experience:</b><br>Enter Relevant Experience if any.
+			</li>
+			<li>
+				<b>Current Employer:</b><br>Enter Current Employer if any.
+			</li>
+			<li>
+				<b>Reporting to (Designation):</b><br>Enter your Reporting head name and his Designation of your current emloyer.
+			</li>
+			<li>
+				<b>Current Salary (Per Month):</b><br>Enter Current Salary Per Month.
+			</li>
+			<li>
+				<b>Expected Salary (Per Month):</b><br>Enter Expected Salary Per Month.
+			</li>
+			<!--<li>
+				<b>Expected Date of Joining:</b><br>Enter Expected Date of Joining in yyyy-mm-dd format like 2011-11-11.
+			</li>
+			<li>
+				<b>Father / Husband Occupation:</b><br>Enter your Father / Husband Occupation.
+			</li>-->
+			<li>
+				<b>Marital Status:</b><br>Select Marital Status.
+			</li>
+			<!--<li>
+				<b>Passport:</b><br>Chose you have password or not.
+			</li>
+			<li>
+				<b>Passport detials with expiry date:</b><br>Enter passport details with expiry date if you have a passport
+			</li>
+			<li>
+				<b>International Visa:</b><br>Enter International Visa if any.
+			</li>
+			<li>
+				<b>Pen card details:</b><br>Enter pen card details.
+			</li>
+			<li>
+				<b>Location:</b><br>Enter location.
+			</li>-->
+			<li>
+				<b>Any Reference in TransForm:</b><br>Enter name of any transform employee whom you know.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+ <div class="row-fluid">
+
+                        <div class="span12">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 brocco-icon-grid"></span>
+                                        <span><b>Application Date:</b> {date}</span>
+                                    </h4>
+                                    
+                                </div>
+                                <div class="content">
+                                   
+                                    <form class="user_registration" id="user_registration" action="user_registration.php" method='post' enctype="multipart/form-data"/>
+                                    <input type='hidden' name='hdnaction' id='hdnaction' value='add' />
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="division">Division <span style="color:red;">*</span></label>
+                                                    
+                                                    <select id="dev_id" name="dev_id">
+														<option value="">Please select</option>
+														<!--BeginFillAllDivision-->
+														<option value="{dev_id}">{dev_title}</option>
+														<!--EndFillAllDivision-->
+													</select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="postApplied">Post Applied For <span style="color:red;">*</span></label>
+                                                    
+                                                    <select id="des_id" name="des_id">
+														<option value="">Please select</option>
+														<!--BeginFillAllDesignation-->
+														<option value="{des_id}">{des_title}</option>
+														<!--EndFillAllDesignation-->
+													</select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="required">Advertisement Reference <span style="color:red;">*</span></label>
+                                                    <select id="rctsource" name="rctsource">
+														<option value="">Please select</option>
+														<option value="0">Employee Reference</option>
+														<!--BeginFillRCTSourceValues-->
+														<option value="{rct_id}">{rct_title}</option>
+														<!--EndFillRCTSourceValues-->
+													</select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="name">Full Name <span style="color:red;">*</span></label> 
+                                                    <input class="span9" id="name" name="name" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="address">Address <span style="color:red;">*</span></label>
+                                                    <textarea id="address" name="address" class="span9 elastic uniform" rows="3" style="overflow: hidden; height: 71px;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="location">Area <span style="color:red;">*</span></label>
+                                                    <input class="span9" id="area" name="area" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="city">City <span style="color:red;">*</span></label>
+                                                    <input class="span9" id="city" name="city" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="zip">Zip <span style="color:red;">*</span></label>
+                                                    <input class="span9" id="zip" name="zip" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="dob">Date of Birth (yyyy-mm-dd) <span style="color:red;">*</span></label>
+													<input type="text" id="dob" name="dob" class="span9 text" value="" readonly="readonly" style="cursor:pointer;"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="dob">Blood group</label>
+													<input type="text" id="blood_group" name="blood_group" class="span9 text" value=""/>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="email">Email</label>
+                                                    <input class="span9" id="email" name="email" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phnumber">Mobile <span style="color:red;">*</span></label>
+                                                    <input class="span9" id="mobile" name="mobile" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phnumber">Phone Number</label>
+                                                    <input class="span9" id="phnumber" name="phnumber" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <!--<div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phnumber">Nationality</label>
+                                                    <input class="span9" id="nationality" name="nationality" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phnumber">Native place</label>
+                                                    <input class="span9" id="native_place" name="native_place" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phnumber">Vehicle Number</label>
+                                                    <input class="span9" id="vehicle_number" name="vehicle_number" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <div class="form-row row-fluid">
+                                            <div class="span10">
+                                                <div class="row-fluid" style="padding-left: 90px;">
+                                                    <b>Emergency contact details.</b>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="emergency_contact_person">1. Name of the person</label>
+                                                    <input class="span9" id="emergency_contact_person" name="emergency_contact_person" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="emergency_contact_number">2. Contact number</label>
+                                                    <input class="span9" id="emergency_contact_number" name="emergency_contact_number" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="emergency_contact_status">3. Relationship status</label>
+                                                    <input class="span9" id="emergency_contact_status" name="emergency_contact_status" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        -->
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="graduation_degree">Qualification:</label>
+                                                    <input class="span9" id="graduation_degree" name="graduation_degree" type="text" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="graduation_institute">Name of the Institute</label>
+                                                    <input class="span9" id="graduation_institute" name="graduation_institute" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="totExperience">Total Experience (No of Yrs)</label>
+                                                    <input class="span9" id="totExperience" name="totExperience" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="relExperience">Relevant Experience</label>
+                                                    <input class="span9" id="relExperience" name="relExperience" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="currEmployer">Current Employer</label>
+                                                    <input class="span9" id="currEmployer" name="currEmployer" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="currDesignation">Current Designation</label>
+                                                    <input class="span9" id="currDesignation" name="currDesignation" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="repoting_head">Reporting to (Designation)</label>
+                                                    <input class="span9" id="repoting_head" name="repoting_head" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="reason_leave">Reason for Leaving</label>
+                                                    <input class="span9" id="reason_leave" name="reason_leave" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="current_salary">Current Salary (Per Month)</label>
+                                                    <input class="span9" id="current_salary" name="current_salary" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="expected_salary">Expected Salary (Per Month) </label>
+                                                    <input class="span9" id="expected_salary" name="expected_salary" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                     <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="expected_joining_date">Expected Date of Joining (yyyy-mm-dd)</label>
+                                                    <input type="text" id="expected_joining_date" name="expected_joining_date" class="span9 text" value=""/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <!-- <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="occupation_FH">Father / Husband Occupation</label>
+                                                    <input class="span9" id="occupation_FH" name="occupation_FH" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="marital_status">Marital Status <span style="color:red;">*</span></label>
+                                                    <div class="span8 controls">   
+                                                        <select name="marital_status" id="marital_status">
+                                                            <option value='' selected="selected" />Please select
+                                                            <option value='0' />Single
+                                                            <option value='1'/>Married
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <!-- <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="passport">Passport</label>
+                                                    <div class="span8 controls">   
+                                                        <select name="passport" id="passport">
+                                                            <option value='' selected="selected" />Please select
+                                                            <option value='0' />Yes
+                                                            <option value='1'/>No
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="passport_details_with_exp">Passport details with expiry date</label>
+                                                    <input class="span9" id="passport_details_with_exp" name="passport_details_with_exp" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="internation_visa">International Visa (if any)</label>
+                                                    <input class="span9" id="internation_visa" name="internation_visa" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="pan_card_details">Pen card details</label>
+                                                    <input class="span9" id="pan_card_details" name="pan_card_details" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="location">Location</label>
+                                                    <input class="span9" id="location" name="location" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="reference_trans">Any Reference in Trans Form</label>
+                                                    <input class="span9" id="reference_trans" name="reference_trans" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="checkboxes">Any Reference in Trans Form :</label>
+                                                    <div class="span9 controls">
+														<select id="e1" name="reference_trans" class="span4 nostyle">
+															 <option value="" selected="selected" />Please select</option>
+															<!--BeginFillEmployeeReference-->
+															<option value="{emp_id}">{emp_name}</option><!--EndFillEmployeeReference-->
+														</select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+											<div class="span12">
+												<div class="row-fluid">
+												   <label class="form-label span3" for="resume">Resume</label>
+													<input type="file" name="file" size="50" value=''/><span style='padding-left:5px;'></span>
+												</div>
+											</div>
+										</div>
+
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <input class="styled" type="checkbox" value="all" name="checkbox" id="checkbox" style="opacity: 0;">
+                                                    I hereby confirm that above mentioned details are true.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-row row-fluid">
+											<div class="span12">
+												<div class="row-fluid">
+													<div class="form-actions">
+													<div class="span3"></div>
+													<div class="span9 controls">
+														<button type="submit" class="btn marginR10" id='submit'>Save changes</button>
+													</div>
+													</div>
+												</div>
+											</div>
+                                        </div>
+                                    </form>
+                                 
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span12 -->
+
+                    </div><!-- End .row-fluid -->  
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	var email = $("#email").val();
+
+	if($("#dev_id").val() == '')
+	{
+		alert('Please chose division name you want to apply.');
+		$("#dev_id").focus();
+		return false;
+	}
+	if($("#des_id").val() == '')
+	{
+		alert('Please chose post name you applied for.');
+		$("#des_id").focus();
+		return false;
+	}
+	
+	if($("#rctsource").val() == '')
+	{
+		alert('Please insert your rctsource.');
+		$("#rctsource").focus();
+		return false;
+	}
+	else if($("#rctsource").val() == '0')
+	{
+		if($("#e1").val() == '')
+		{
+			alert('Please Enter employee name for the reference.');
+			$("#e1").focus();
+			return false;
+		}
+	}
+	if($("#name").val() == '')
+	{
+		alert('Please insert your name.');
+		$("#name").focus();
+		return false;
+	}
+	if($("#address").val() == '')
+	{
+		alert('Please insert your address.');
+		$("#address").focus();
+		return false;
+	}
+	/*if($("#comm_address").val() == '')
+	{
+		alert('Please insert your communication address.');
+		$("#comm_address").focus();
+		return false;
+	}*/
+	if($("#area").val() == '')
+	{
+		alert('Please insert your area.');
+		$("#area").focus();
+		return false;
+	}
+	if($("#dob").val() == '')
+	{
+		alert('Please insert your date of birth.');
+		$("#dob").focus();
+		return false;
+	}
+	/*if($("#email").val() == '')
+	{
+		alert('Please insert your email.');
+		$("#email").focus();
+		return false;
+	}*/
+	if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Please enter valid email.");
+			return false;
+		}
+	}
+	if($("#mobile").val() == '')
+	{
+		alert('Please insert your mobile number.');
+		$("#mobile").focus();
+		return false;
+	}
+	/*if($("#expected_salary").val() == '')
+	{
+		alert('Please insert your expected salary.');
+		$("#expected_salary").focus();
+		return false;
+	}*/
+	if($("#marital_status").val() == '')
+	{
+		alert('Please insert your marital status.');
+		$("#marital_status").focus();
+		return false;
+		
+	}
+	/*if($("#passport").val() == '')
+	{
+		alert('Please chose passport.');
+		$("#passport").focus();
+		return false;
+		
+	}
+	if($("#expected_joining_date").val() == '')
+	{
+		alert('Please insert your expected date of joining.');
+		$("#expected_joining_date").focus();
+		return false;
+		
+	}*/
+	if(! $('#checkbox').is(':checked')){
+               
+			alert("Please confirm the mention details!");
+			$("#checkbox").focus();
+			return false;
+
+		}
+	
+		
+});
+return true;
+});
+
+$(document).ready(function()
+	{
+	
+			$("#phnumber").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#mobile").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#totExperience").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#current_salary").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#expected_salary").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#dob").datepicker({
+				dateFormat: 'yy-mm-dd',
+				showOtherMonths:true,
+				changeYear:true,
+				changeMonth:true
+			});
+			$("#expected_joining_date").datepicker({
+				dateFormat: 'yy-mm-dd',
+				showOtherMonths:true
+			});
+			/*if($("#passport").val() == '' || $("#passport").val() == '1')
+			{
+				$("#passport_details_with_exp").attr("disabled", "disabled"); 
+				$("#internation_visa").attr("disabled", "disabled");
+			}
+			else if($("#passport").val() == '0')
+			{
+				$("#passport_details_with_exp").removeAttr("disabled"); 
+				$("#internation_visa").removeAttr("disabled"); 
+			}*/
+	});
+	
+$(document).ready(function(){
+		$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+ 		/* $('#passport').change(function() {
+			if($("#passport").val() == '' || $("#passport").val() == '1')
+			{
+				$("#passport_details_with_exp").attr("disabled", "disabled"); 
+				$("#internation_visa").attr("disabled", "disabled");
+			}
+			else if($("#passport").val() == '0')
+			{
+				$("#passport_details_with_exp").removeAttr("disabled"); 
+				$("#internation_visa").removeAttr("disabled"); 
+			}
+		});*/
+		
+	});
+ $(document).ready(function() { $("#e1").select2({
+	 placeholder: "Select Please",
+	 placeholderOption : 'first',
+	  minimumInputLength: 2	 }); });
+</script>

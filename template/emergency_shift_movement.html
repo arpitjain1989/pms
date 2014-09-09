@@ -1,0 +1,509 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Team Member:</b><br>Please select the team member for whom you are adding an emergency shift movement.
+			</li>
+			<li>                                                    
+				<b>Movement date:</b><br>Enter the date when your team member will be taking an emergency shift movement.<br><br>
+				<b>* Note: </b>Night Shift Employees/ Shift falling in two dates will select the WORK DATE (payday).
+			</li>
+			<li>
+				<b>Movement from time:</b><br>Enter the time from when your team member will be on shift movement.
+			</li>
+			<li>
+				<b>Movement to time:</b><br>Enter the time till when your team member will be on shift movement.
+			</li>
+			<li>
+				<b>Reason for Shift Movement:</b><br>Let us know the reason why your team member want to take the shift movement.
+			</li>
+			<li>
+				<b>Compensation date:</b><br>Enter the date when your team member will be compensating for the shift movement.
+			</li>
+			<li>
+				<b>Compensation from time:</b><br>Enter the time from when your team member will be compensating for the shift movement.
+			</li>
+			<li>
+				<b>Compensation to time:</b><br>Enter the time till when your team member will be compensating for the shift movement.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form name="frmemergencyshiftmovement" id="frmemergencyshiftmovement" class="form-horizontal seperator" method="post" action="emergency_shift_movement.php" onsubmit="return fnValidate();" />
+
+			<input type="hidden" name="shift_start" id="shift_start" value="" />
+			<input type="hidden" name="shift_end" id="shift_end" value="" />
+		
+			<input type="hidden" name="curdt" id="curdt" value="{movement_date}" />
+			<input type="hidden" name="prevdt" id="prevdt" value="{previous_date}" />
+			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Reporting Head:</label>
+						<label class="form-label span3 clsleft">{reportinghead}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Employee Name:</label>
+						<select name="userid" id="userid" onchange="javascript: fnChangeEmployee();">
+							<option value="">Please select</option>
+							<!--BeginFillEmployeesBlock-->
+							<option value="{employeeid}">{employeename}</option>
+							<!--EndFillEmployeesBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" class = "required">
+						Movement date:
+						</label>
+						<div id="divMovementDate">
+							<input class="span4" name="movement_date" id="movement_date" type="text" value="{movement_date}" readonly="readonly" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Movement from time:</label>
+						<select name="movement_fromtime_hour" id="movement_fromtime_hour" class="small">
+							<!--BeginFillHoursBlock-->
+							<option value="{hours}">{hours}</option>
+							<!--EndFillHoursBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{currenthour}" != "")
+							{
+								$("#movement_fromtime_hour").val("{currenthour}");
+							}
+						</script>
+						<select name="movement_fromtime_minutes" id="movement_fromtime_minutes" class="small">
+							<!--BeginFillMinutesBlock-->
+							<option value="{minutes}">{minutes}</option>
+							<!--EndFillMinutesBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{currentminute}" != "")
+							{
+								$("#movement_fromtime_minutes").val("{currentminute}");
+							}
+						</script>
+						<select name="movement_fromtime_ampm" id="movement_fromtime_ampm" class="small">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+						<script type="text/javascript">
+							if("{currentampm}" != "")
+							{
+								$("#movement_fromtime_ampm").val("{currentampm}");
+							}
+						</script>
+						<!--input type="text" id="movement_fromtime" name="movement_fromtime" class="span4 text timepicker" value="{movement_fromtime}" readonly="readonly" style="cursor:pointer;"/-->
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Movement to time:</label>
+						
+						<select name="movement_totime_hour" id="movement_totime_hour" class="small">
+							<!--BeginFillHoursBlock-->
+							<option value="{hours}">{hours}</option>
+							<!--EndFillHoursBlock-->
+						</select>
+						
+						<select name="movement_totime_minutes" id="movement_totime_minutes" class="small">
+							<!--BeginFillMinutesBlock-->
+							<option value="{minutes}">{minutes}</option>
+							<!--EndFillMinutesBlock-->
+						</select>
+						
+						<select name="movement_totime_ampm" id="movement_totime_ampm" class="small">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+						
+						<!--input type="text" id="movement_totime" class="span4 text timepicker" value="{movement_totime}" name="movement_totime" readonly="readonly" style="cursor:pointer;" /-->
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" class = "required">
+						Reason for Shift Movement:
+						</label>
+						<textarea id="reason" name="reason" class="span4 uniform">{reason}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" class = "required">
+						Compensation date:
+						</label>
+						<input class="span4" name="compensation_date" id="compensation_date" type="text" value="{compensation_date}" readonly="readonly" style="cursor:pointer;"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Compensation from time:</label>
+						
+						<select name="compensation_fromtime_hour" id="compensation_fromtime_hour" class="small">
+							<!--BeginFillHoursBlock-->
+							<option value="{hours}">{hours}</option>
+							<!--EndFillHoursBlock-->
+						</select>
+						
+						<select name="compensation_fromtime_minutes" id="compensation_fromtime_minutes" class="small">
+							<!--BeginFillMinutesBlock-->
+							<option value="{minutes}">{minutes}</option>
+							<!--EndFillMinutesBlock-->
+						</select>
+						
+						<select name="compensation_fromtime_ampm" id="compensation_fromtime_ampm" class="small">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+						
+						<!--input type="text" id="compensation_fromtime" name="compensation_fromtime" class="span4 text timepicker" value="{compensation_fromtime}" readonly="readonly" style="cursor:pointer;"/-->
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">Compensation to time:</label>
+						
+						<select name="compensation_totime_hour" id="compensation_totime_hour" class="small">
+							<!--BeginFillHoursBlock-->
+							<option value="{hours}">{hours}</option>
+							<!--EndFillHoursBlock-->
+						</select>
+						
+						<select name="compensation_totime_minutes" id="compensation_totime_minutes" class="small">
+							<!--BeginFillMinutesBlock-->
+							<option value="{minutes}">{minutes}</option>
+							<!--EndFillMinutesBlock-->
+						</select>
+						
+						<select name="compensation_totime_ampm" id="compensation_totime_ampm" class="small">
+							<option value="am">AM</option>
+							<option value="pm">PM</option>
+						</select>
+						
+						<!--input type="text" id="compensation_totime" class="span4 text timepicker" value="{compensation_tuseridotime}" name="compensation_totime" readonly="readonly" style="cursor:pointer;" /-->
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<input type="hidden" name="action" id="action" value="ShiftMovement" />
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='emergency_shift_movement_list.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#compensation_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+		
+		/*
+		$('.timepicker').timepicker();
+		*/
+	});
+	
+	$(window).load(function() {
+		$("select.small").each(function(){
+			$("#uniform-"+$(this).attr("id")).addClass("smallsel");
+		});
+	});
+
+	function fnChangeEmployee()
+	{
+		$.ajax({
+			url: 'get_employee_official_shift.php',
+			data: 'id='+escape($("#userid").val()),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				$("#shift_start").val(data.start);
+				$("#shift_end").val(data.end);
+				
+				var shift_start_minutes = hour2min(data.start);
+				var shift_end_minutes = hour2min(data.end);
+				
+				if(shift_end_minutes < shift_start_minutes)
+				{
+					/* If shift end time is less than start time, display dropdown for 2 days current and previous */
+					var curdt = $("#curdt").val()
+					var prevdt = $("#prevdt").val()
+					
+					var $objSelect = $("<select>").attr("name","movement_date").attr("id","movement_date").addClass("span4").html("<option value='"+curdt+"'>"+curdt+"</option><option value='"+prevdt+"'>"+prevdt+"</option>");
+					$("#divMovementDate").html($objSelect);
+					$("#movement_date").uniform();
+				}
+				else
+				{
+					/* If shift start time is less than end time, display textbox for the current date */
+					var $objInput = $("<input type='text'>").attr("name","movement_date").attr("id","movement_date").attr("readonly","readonly").addClass("span4").val($("#curdt").val());
+					$("#divMovementDate").html($objInput);
+					$("#movement_date").uniform();
+				}
+			}
+		});
+	}
+
+	function fnCheckShift()
+	{
+		var ret = 0;
+		//alert($("#userid").val());
+		$.ajax({
+			url: 'get_employee_official_shift.php',
+			data: 'id='+escape($("#userid").val()),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				$("#shift_start").val(data.start);
+				$("#shift_end").val(data.end);
+				
+				var shift_start_minutes = hour2min(data.start);
+				var shift_end_minutes = hour2min(data.end);
+
+				if(shift_end_minutes < shift_start_minutes)
+				{
+					ret = '1';
+				}
+				else
+				{
+					ret = '2';
+				}
+			}
+		});
+		return ret;
+	}
+
+	function fnValidate()
+	{
+		var checkshift = fnCheckShift();
+		//alert(checkshift);
+		if(!checkblank($("#userid"),"Please select the employee")) return false;
+		if(!checkblank($("#movement_date"),"Please select Movement date")) return false;
+		
+		var dt = new Date();
+		
+		/*if($("#movement_date").val() < dt.getFullYear()+"-"+zerofill((parseInt(dt.getMonth(),10)+1),2)+"-"+zerofill(dt.getDate(),2))
+		{
+			alert("Movement date should be greater then or equal to current date");
+			return false;
+		}*/
+		
+		if($("#movement_fromtime_ampm").val() == "am" && $("#movement_fromtime_hour").val() == 12)
+		{
+			var movement_fromtime = (parseInt($("#movement_fromtime_hour").val(),10) + 12) +":"+$("#movement_fromtime_minutes").val();
+		}
+		else if($("#movement_fromtime_ampm").val() == "pm" && $("#movement_fromtime_hour").val() != 12)
+		{
+			var movement_fromtime = (parseInt($("#movement_fromtime_hour").val(),10) + 12) +":"+$("#movement_fromtime_minutes").val();
+		}
+		else
+		{
+			var movement_fromtime = $("#movement_fromtime_hour").val() +":"+$("#movement_fromtime_minutes").val();
+		}
+		
+		if($("#movement_totime_ampm").val() == "am" && $("#movement_totime_hour").val() == 12)
+		{
+			var movement_totime = (parseInt($("#movement_totime_hour").val(),10) + 12) +":"+$("#movement_totime_minutes").val();
+		}
+		else if($("#movement_totime_ampm").val() == "pm" && $("#movement_totime_hour").val() != 12)
+		{
+			var movement_totime = (parseInt($("#movement_totime_hour").val(),10) + 12) +":"+$("#movement_totime_minutes").val();
+		}
+		else
+		{
+			var movement_totime = $("#movement_totime_hour").val() +":"+$("#movement_totime_minutes").val();
+		}
+
+
+		if(checkshift == 1)
+		{
+			//alert('movement_fromtime' + movement_fromtime); 
+			//alert('movement_totime' + movement_totime);
+			if(movement_fromtime >= movement_totime)
+			{
+				var mov_fromtime1 = '1440'- hour2min(movement_fromtime);
+				var mov_fromtime2 = hour2min(movement_totime);
+				var total  = mov_fromtime1 + mov_fromtime2;
+
+				//alert('mov_fromtime1' + mov_fromtime1)
+				//alert('mov_fromtime2' + mov_fromtime2)
+				//alert('total' + total)
+
+				if(total > 120)
+				{
+					alert("Shift movement can be of maximum 2 hours");
+					return false;
+				}
+			}
+		}
+		else
+		{
+			if(movement_fromtime >= movement_totime)
+			{
+				alert("Movement to time should be greater than the movement from time.");
+				$("#movement_totime").focus();
+				return false;
+			}
+		}
+
+		
+		
+
+		var movementTime = hour2min(movement_totime) - hour2min(movement_fromtime);
+
+		if(parseInt(movementTime,10) > 120)
+		{
+			alert("Shift movement can be of maximum 2 hours");
+			return false;
+		}
+		
+		/*if($("#movement_date").val() == $("#curdate").val())
+		{
+			var currentTime = new Date();
+		
+			if(hour2min(zerofill(currentTime.getHours(),2)+":"+zerofill(currentTime.getMinutes(),2)) > hour2min($("#shiftTime").val()))
+			{
+				alert("Shift movement not allowed for short notice. \nPlease apply well in advance.");
+				return false;
+			}
+			return false;
+			if(hour2min(movement_fromtime) < (hour2min($("#curtime").val()) + 5))
+			{
+				alert("Shift movement not allowed for short notice. \nPlease apply well in advance.");
+				return false;
+			}
+		}*/
+		
+		if(!checkblank($("#reason"),"Please enter the Reason for Shift Movement")) return false;
+		if(!checkblank($("#compensation_date"),"Please select Compensation date")) return false;
+		
+		var max_comdt = new Date($("#movement_date").val());
+		max_comdt.setDate(max_comdt.getDate() + 7);
+
+		if($("#compensation_date").val() > max_comdt.getFullYear()+"-"+zerofill((parseInt(max_comdt.getMonth(),10)+1),2)+"-"+zerofill(max_comdt.getDate(),2))
+		{
+			alert("Compensation should be done within 7 days from shift movement date");
+			$("#compensation_date").focus();
+			return false;
+		}
+		
+		if($("#compensation_date").val() < $("#movement_date").val())
+		{
+			alert("Compensation date should be greater than or equal to the movement date.");
+			$("#compensation_date").focus();
+			return false;
+		}
+		
+		if($("#compensation_fromtime_ampm").val() == "am" && $("#compensation_fromtime_hour").val()==12)
+		{
+			var compensation_fromtime = (parseInt($("#compensation_fromtime_hour").val(),10) + 12) +":"+$("#compensation_fromtime_minutes").val();
+		}
+		else if($("#compensation_fromtime_ampm").val() == "pm" && $("#compensation_fromtime_hour").val() != 12)
+		{
+			var compensation_fromtime = (parseInt($("#compensation_fromtime_hour").val(),10) + 12) +":"+$("#compensation_fromtime_minutes").val();
+		}
+		else
+		{
+			var compensation_fromtime = $("#compensation_fromtime_hour").val() +":"+$("#compensation_fromtime_minutes").val();
+		}
+		
+		if($("#compensation_totime_ampm").val() == "am" && $("#compensation_totime_hour").val() == 12)
+		{
+			var compensation_totime = (parseInt($("#compensation_totime_hour").val(),10) + 12) +":"+$("#compensation_totime_minutes").val();
+		}
+		else if($("#compensation_totime_ampm").val() == "pm" && $("#compensation_totime_hour").val() != 12)
+		{
+			var compensation_totime = (parseInt($("#compensation_totime_hour").val(),10) + 12) +":"+$("#compensation_totime_minutes").val();
+		}
+		else
+		{
+			var compensation_totime = $("#compensation_totime_hour").val() +":"+$("#compensation_totime_minutes").val();
+		}
+
+		if(compensation_fromtime >= compensation_totime)
+		{
+			alert("Compensation to time should be greater than the Compensation from time.");
+			$("#compensation_totime").focus();
+			return false;
+		}
+		
+		var compensationTime = hour2min(compensation_totime) - hour2min(compensation_fromtime);
+		
+		if(movementTime <= 30)
+		{
+			if(compensationTime < 30)
+			{
+				alert("Compensation time should be 30 Mins.");
+				return false;
+			}
+		}
+		else if(movementTime <= 60)
+		{
+			if(compensationTime < 60)
+			{
+				alert("Compensation time should be 1 Hour.");
+				return false;
+			}
+		}
+		else if(movementTime <= 90)
+		{
+			if(compensationTime < 90)
+			{
+				alert("Compensation time should be 1:30 Hours.");
+				return false;
+			}
+		}
+		else if(movementTime <= 120)
+		{
+			if(compensationTime < 120)
+			{
+				alert("Compensation time should be 2 Hours.");
+				return false;
+			}
+		}
+	}
+	
+</script>

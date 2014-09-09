@@ -1,0 +1,62 @@
+<span class="right">
+	<a href="holiday.php">
+		<h4><span class="icon16 entypo-icon-add"></span>Add Holiday</h4>
+	</a>
+</span>
+	
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Holidays</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblHoliday">
+					<thead>
+						<tr>
+							<th>Holiday title</th>
+							<th>Holiday date</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillHolidayList-->
+						<tr class="odd gradeX">
+							<td>{title}</td>
+							<td>{holidaydate}</td>
+							<td>
+								<a href="holiday_view.php?id={id}" name="view" id="view" title="View Holiday" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+								<a href="holiday.php?id={id}&action=update" name="update" id="update" title="Update Holiday" class="tip">
+									<span class="icon12 icomoon-icon-pencil-2"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillHolidayList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblHoliday').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 1, "desc" ]]
+		});
+	});
+</script>

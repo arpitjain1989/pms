@@ -1,0 +1,176 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Leave For:</b><br>Select the employee for whom the leave form is added.
+			</li>
+			<li>
+				<b>Date:</b><br>Select the date for which the leave is to be added.
+			</li>
+			<li>                                                    
+				<b>Leave Type:</b><br>Select the leave type to be marked for the leave.
+			</li>
+			<li>                                                    
+				<b>Reason for Leave:</b><br>Let us know the reason you want to add the leave.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> 
+		<span style="color:#ED7A53;">{message}</span>
+
+		<form class="form-horizontal seperator" method="post" action="" onsubmit="return fnValidate();" >
+
+			<input type="hidden" name="hdnaction" id="hdnaction" value="AdminApprovedLWPAdd" />
+
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Leave For:</label>
+						<label class="form-label span3 clsleft">
+							<select name="user_id" id="user_id" class="nostyle" style="width:300px;" onchange="javascript: fnGetDetails($(this));">
+								<option value="">Please select</option>
+								<!--BeginFillLeaveForBlock-->
+								<option value="{leave_form_id}">{leave_form_name}</option>
+								<!--EndFillLeaveForBlock-->
+							</select>
+						</label>
+					</div>
+				</div>
+			</div>			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Start Date:</label>
+						<input type="text" id="lwp_date" name="lwp_date" class="span4 text" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">End Date:</label>
+						<input type="text" id="lwp_date_to" name="lwp_date_to" class="span4 text" disabled="disabled"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">Leave Type: </label>
+						<select name="leave_id" id="leave_id">
+							<option value="">Please select</option>
+							<!--BeginFillLWPTYPESBlock-->
+							<option value="{lwp_type_id}">{lwp_type_title}</option>
+							<!--EndFillLWPTYPESBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">Reason for Leave:</label>
+						<textarea id="reason" name="reason" class="span4 uniform"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='admin_approved_lwp_form.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#lwp_date").datepicker({
+		onSelect: function() {
+		 $('#lwp_date_to').prop("disabled", false);
+		start = $("#lwp_date").val();
+		end = start.split("-");
+		endDate = end[0]+"-"+end[1]+"-"+Math.round(((new Date(end[0], end[1]))-(new Date(end[0], end[1]-1)))/86400000);
+				//alert(endDate);
+    $("#lwp_date_to").datepicker({
+			dateFormat: 'yy-mm-dd',
+			 minDate: new Date(start), 
+			 maxDate: new Date(endDate),
+			showOtherMonths:true
+		});
+  },
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+		
+		
+		$("#user_id").select2({
+			placeholder: "Select Please",
+			placeholderOption : 'first'
+		});
+	});
+
+	function fnValidate()
+	{
+		if(!checkblank($("#user_id"),"Please select Leave For")) return false;
+		if(!checkblank($("#lwp_date"),"Please select Date for leave")) return false;
+
+		var date = new Date();
+
+		var firstDay = new Date(date.getFullYear(), date.getMonth() + 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		var eighthDay = new Date(date.getFullYear(), date.getMonth(), 8);
+
+		var oneDay = 24*60*60*1000;
+
+		var start = $.trim($("#lwp_date").val()).split('-');
+		var year = start[0];
+		var month = parseInt(start[1],10) - 1;
+		var day = start[2];
+
+		var startdate = $("#lwp_date").val();
+		var start_date_formated = new Date(startdate);
+
+		var Date1 = new Date (year,month,day);
+
+		var attendanceMonthYr = year+'-'+parseInt(start[1],10);
+		var curMonthYr = date.getFullYear()+'-'+(parseInt(date.getMonth(),10) + 1)
+
+		if(attendanceMonthYr < curMonthYr && date >= eighthDay)
+		{
+			alert("Cannot add leave for the previous month");
+			$("#lwp_date").focus();
+			return false; 
+		}
+
+		/* Start date of leave cannot be greater than 100 days from current date */
+		var CurDate = new Date (date.getFullYear(),date.getMonth(),date.getDate());
+		var CheckDays = Math.floor((Date1.getTime() - CurDate.getTime())/(1000*60*60*24));
+
+		if(CheckDays > 100)
+		{
+			alert("Cannot apply leave so much in advance");
+			return false;
+		}
+
+		if(!checkblank($("#leave_id"),"Please select Leave type")) return false;
+		if(!checkblank($("#reason"),"Please enter Reason for Leave")) return false;
+	}
+
+</script>

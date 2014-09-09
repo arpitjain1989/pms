@@ -1,0 +1,63 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Weekly roster from {startdate} to {enddate}</span></h4>
+			</div>
+			<div class="content noPad clearfix">
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="username" class = "required">Generate Roster for:</label>
+							
+							<input type="hidden" name="startdate" id="startdate" value="{startdate}" />
+							<input type="hidden" name="enddate" id="enddate" value="{enddate}" />
+							<input type="hidden" name="action" id="action" value="{action}" />
+							
+							<select name="rosterfor" id="rosterfor" onchange="javascript: fnDisplayRosterDetails($(this));">
+								<option value="">Please select</option>
+								<!--option value="0">Team Leaders</option-->
+								<!--BeginFillTeams-->
+								<option value="{teamsid}">{teamsname}</option>
+								<!--EndFillTeams-->
+							</select>
+							<script type="text/javascript">
+								if("{selectemployee}" != "")
+								{
+									$("#rosterfor").val("{selectemployee}");
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid" id="divRosterDetail" style="text-align:center">
+					No team selected
+				</div>
+			</div>
+		</div>
+		<!-- End .box -->
+	</div>
+	<!-- End .span12 -->
+</div>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		fnDisplayRosterDetails($("#rosterfor"));
+	});
+	
+	function fnDisplayRosterDetails($obj)
+	{
+		if($obj.val() == "")
+		{
+			$("#divRosterDetail").html("No team selected");
+		}
+		else
+		{
+			$("#divRosterDetail").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+			$("#divRosterDetail").load("manager_roster_detail.php?v="+escape($obj.val())+"&start="+escape($("#startdate").val())+"&end="+escape($("#enddate").val())+"&action="+escape($("#action").val()),"",function(){
+				$("#divRosterDetail").find("select").uniform();
+			});
+		}
+	}
+</script>

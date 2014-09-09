@@ -1,0 +1,80 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Tickets - User wise</span>
+					<a href="user_issue_tracking_report.php"><span style="float:right;margin-right:10px;width:auto;color: #353535; font-size: 14px; line-height: 19px;">Back</span></a>
+					<a href="user_issue_tracking_report_view.php?id=89&start_date={date_from}&end_date={date_to}&action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export | </span>
+					</a>
+				</h4>
+			</div>
+			<!--BeginDisplayInformationBlock-->
+			<div class="content noPad clearfix flexiblewidth">
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Name : </label>{username}
+						</div>
+						<div class="row-fluid">
+							<label class="form-label span3">Date : </label>{date_from} &mdash; {date_to}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayInformationBlock-->
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblUserWiseIssueTracking">
+					<thead>
+						<tr>
+							<th>Ticket Id</th>
+							<th>Issue Category</th>
+							<th>Issue</th>
+							<th>Location</th>
+							<th>Priority</th>
+							<th>Estimated resolution time</th>
+							<th>Ticket raised date</th>
+							<th>Resolution Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillUserWiseIssueInformation-->
+						<tr class="odd gradeX">
+							<td>{ticket_id}</td>
+							<td>{issue_category}</td>
+							<td>{issue}</td>
+							<td>{location_name}</td>
+							<td>{priority}</td>
+							<td>{resolution_time}</td>
+							<td>{ticket_date}</td>
+							<td>{resolution_status_text}</td>
+						</tr>
+						<!--EndFillUserWiseIssueInformation-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblUserWiseIssueTracking').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 6, "desc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				null
+			]
+		});
+	});
+</script>

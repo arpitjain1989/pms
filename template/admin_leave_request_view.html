@@ -1,0 +1,116 @@
+<form name="frmLeaveRequestView" id="frmLeaveRequestView" action="" method="post" onsubmit="return fnValidate();" >
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Employee Name:</b></label>
+						<label class="form-label span3 clsleft">{employee_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting Head:</b></label>
+						<label class="form-label span3 clsleft">{reporting_head_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>No of days:</b></label>
+						<label class="form-label span3 clsleft">{nodays}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Start date:</b></label>
+						<label class="form-label span3 clsleft">{startdate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>End date:</b></label>
+						<label class="form-label span3 clsleft">{enddate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reason:</b></label>
+						<label class="form-label span3 clsleft">{reason}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Address:</b></label>
+						<label class="form-label span3 clsleft">{address}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Contact:</b></label>
+						<label class="form-label span3 clsleft">{contact}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status:</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="status_manager" id="status_manager">
+								<option value="">Please select</option>
+								<option value="1">Approved</option>
+								<option value="2">Reject</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment:</b></label>
+						<textarea id="comment_manager" class="span4 uniform" name="comment_manager"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<input type="hidden" name="id" id="id" value="{id}" />
+								<input type="hidden" name="action" id="action" value="AdminLeaveRequest" />
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='admin_leave_requests.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+
+	function fnValidate()
+	{
+		if(!checkblank($("#status_manager"),"Please select Status")) return false;
+		if(!checkblank($("#comment_manager"),"Please select Comment")) return false;
+	}
+
+</script>

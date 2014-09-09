@@ -1,0 +1,105 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="id" id="id" value="{id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name" class = "required">Name:</label>
+							<input class="span4" name="title" id="title" type="text" value="{title}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="type" class = "required">Type:</label>
+							<select name="type" id="type" >
+								<option value="">Please Select</option>	
+								<option value="1">TextBox</option>
+								<option value="2">TextArea</option>
+								<option value="3">DatePicker</option>
+							</select>
+							<script type="text/javascript">
+							if("{type}" != "")
+							{
+								$("#type").val("{type}"); 
+							}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="iscompulsory">Is Compulsory:</label>
+							<input class="span4" name="iscompulsory" id="iscompulsory" type="checkbox" value="1" {check}/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="contact">Validation Rule:</label>
+							<select name="validation_rule" id="validation_rule" >
+								<option value="">Please Select</option>	
+								<option value="1">Email</option>
+								<option value="2">Number</option>
+							</select>
+							<script type="text/javascript">
+							if("{validation_rule}" != "")
+							{
+								$("#validation_rule").val("{validation_rule}");
+							}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='form_field.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		<!-- End .row-fluid -->
+		
+
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+ $("#contact").keyup(function() {
+    $(this).val($(this).val().replace(/[^\d]+/, ''));
+  });
+	$("#submit").click(function() 
+	{
+		if($("#title").val() == '')
+		{
+			alert('Please insert name.');
+			$("#title").focus();
+			return false;
+		}
+		if($("#type").val() == '')
+		{
+			alert('Please insert type.');
+			$("#type").focus();
+			return false;
+		}
+	});
+	return true;
+});
+</script>

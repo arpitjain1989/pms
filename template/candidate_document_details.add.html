@@ -1,0 +1,521 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Photos: </b><br>Chose photo submitted or not.
+			</li>
+			<li>
+				<b>SSC: </b><br>Chose ssc submitted or not.
+			</li>
+			<li>
+				<b>HSC: </b><br>Chose hsc submitted or not.
+			</li>
+			<li>
+				<b>LC: </b><br>Chose lc submitted or not.
+			</li>
+			<li>
+				<b>Graduation: </b><br>Chose degree submitted or not.
+			</li>
+			<li>
+				<b>Graduation (Degree / Diploma): </b><br>Chose degree or diploma that submitted .
+			</li>
+			<li>
+				<b>PG: </b><br>Chose pg submitted or not.
+			</li>
+			<li>
+				<b>PG Name: </b><br>Chose pg submitted document.
+			</li>
+			<li>
+				<b>Additional Cert.: </b><br>Chose additional cert. submitted or not.
+			</li>
+			<li>
+				<b>ID Proof: </b><br>Chose ID proof submitted or not.
+			</li>
+			<li>
+				<b>Given ID Proof: </b><br>Chose ID proof submitted or not.
+			</li>
+			<li>
+				<b>Address Proof: </b><br>Chose address proof submitted or not.
+			</li>
+			<li>
+				<b>Given Address Proof: </b><br>Chose Given address proof submitted.
+			</li>
+			<li>
+				<b>BGR: </b><br>Chose BGR submitted or not.
+			</li>
+			<li>
+				<b>Previous Co. Docs: </b><br>Chose Previous Co. Docs submitted or not.
+			</li>
+			
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="candidate_document_details.add.php" enctype="multipart/form-data">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+		<input type="hidden" name="userid" id="userid" value="{hdnid}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Employee name:
+					</label>
+					{emp_name}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="photos">Photos:</label>
+					<div class="span8 controls">   
+						<select name="photos" id="photos">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{photos}" != "")
+								$("#photos").val("{photos}");
+						</script>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="ssc">SSC:</label>
+					<div class="span8 controls">   
+						<select name="ssc" id="ssc">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{ssc}" != "")
+								$("#ssc").val("{ssc}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="hsc">HSC:</label>
+					<div class="span8 controls">   
+						<select name="hsc" id="hsc">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{hsc}" != "")
+								$("#hsc").val("{hsc}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="lc">LC:</label>
+					<div class="span8 controls">   
+						<select name="lc" id="lc">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{lc}" != "")
+								$("#lc").val("{lc}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="degree">Graduation:</label>
+					<div class="span8 controls">   
+						<select name="degree" id="degree">
+							<option value='0' />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+							<option value='4'/>Pursuing Degree College
+						</select>
+						<script type="text/javascript">
+							if("{degree}" != "")
+								$("#degree").val("{degree}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="degree_name">Graduation (Degree / Diploma):</label>
+					<div class="span8 controls">   
+						<select name="degree" id="degree">
+							<option value='' selected="selected" />Please select
+							<!--BeginFillGraduaction-->
+							<option value='{grad_id}' />{grad_name}
+							<!--EndFillGraduaction-->
+						</select>
+						<script type="text/javascript">
+							if("{degree}" != "")
+								$("#degree").val("{degree}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="pg">PG:</label>
+					<div class="span8 controls">   
+						<select name="pg" id="pg">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+							<option value='4'/>Pursuing Degree College
+						</select>
+						<script type="text/javascript">
+							if("{pg}" != "")
+								$("#pg").val("{pg}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="pg_name">PG Name:</label>
+					<div class="span8 controls">   
+						<select name="pg" id="pg">
+							<option value='' selected="selected" />Please select
+							<!--BeginFillPostGraduaction-->
+							<option value='{post_grad_id}' />{post_grad_name}
+							<!--EndFillPostGraduaction-->
+						</select>
+						<script type="text/javascript">
+							if("{pg}" != "")
+								$("#pg").val("{pg}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="additional_cert">Additional Cert.:</label>
+					<div class="span8 controls">   
+						<select name="additional_cert" id="additional_cert">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{additional_cert}" != "")
+								$("#additional_cert").val("{additional_cert}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="id_proof">ID Proof:</label>
+					<div class="span8 controls">   
+						<select name="id_proof" id="id_proof">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{id_proof}" != "")
+								$("#id_proof").val("{id_proof}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="id_proof">ID Proof:</label>
+					<div class="span8 controls">   
+						<select name="id_proof" id="id_proof">
+							<option value='' selected="selected" />Please select
+							<!--BeginFillIdProof-->
+							<option value='{idProof_id}' selected="selected" />{idProof_name}
+							<!--EndFillIdProof-->
+						</select>
+						<script type="text/javascript">
+							if("{id_proof}" != "")
+								$("#id_proof").val("{id_proof}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="extra_id_proof">Extra ID Proof:</label>
+					<div class="span8 controls">   
+						<select name="extra_id_proof" id="extra_id_proof">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{extra_id_proof}" != "")
+								$("#extra_id_proof").val("{extra_id_proof}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="given_extra_id_proof">Extra ID Proof:</label>
+					<div class="span8 controls">   
+						<select name="extra_id_proof" id="extra_id_proof">
+							<option value='' selected="selected" />Please select
+							<!--BeginFillIdProof-->
+							<option value='{idProof_id}' selected="selected" />{idProof_name}
+							<!--EndFillIdProof-->
+						</select>
+						<script type="text/javascript">
+							if("{extra_id_proof}" != "")
+								$("#extra_id_proof").val("{extra_id_proof}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="address_proof">Address Proof:</label>
+					<div class="span8 controls">   
+						<select name="address_proof" id="address_proof">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{address_proof}" != "")
+								$("#address_proof").val("{address_proof}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="address_proof">Address Proof:</label>
+					<div class="span8 controls">   
+						<select name="address_proof" id="address_proof">
+							<option value='' selected="selected" />Please select
+							<!--BeginFillAddressProof-->
+							<option value='{address_id}' selected="selected" />{address_name}
+							<!--EndFillAddressProof-->
+						</select>
+						<script type="text/javascript">
+							if("{address_proof}" != "")
+								$("#address_proof").val("{address_proof}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="bgr">BGR:</label>
+					<div class="span8 controls">
+						<input class="span5" type="text" id="bgr" name="bgr" value="{bgr}"/>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="prv_comp_doc">Previous Co. Docs:</label>
+					<div class="span8 controls">   
+						<select name="prv_comp_doc" id="prv_comp_doc">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Received
+							<option value='2'/>Not Received
+							<option value='3'/>N/A
+						</select>
+						<script type="text/javascript">
+							if("{prv_comp_doc}" != "")
+								$("#prv_comp_doc").val("{prv_comp_doc}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='candidate_document_details.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	/*if($("#photos").val() == '')
+	{
+		alert('Please select photos.');
+		$("#photos").focus();
+		return false;
+	}
+	if($("#ssc").val() == '')
+	{
+		alert('Please select ssc.');
+		$("#photos").focus();
+		return false;
+	}
+	if($("#hsc").val() == '')
+	{
+		alert('Please select hsc.');
+		$("#hsc").focus();
+		return false;
+	}
+	if($("#lc").val() == '')
+	{
+		alert('Please select lc.');
+		$("#lc").focus();
+		return false;
+	}
+	if($("#degree").val() == '1' && $("#degree_name").val() == '')
+	{
+		alert('Please select Graduation (Degree / Diploma).');
+		$("#degree_name").focus();
+		return false;
+	}
+	else if(($("#degree").val() != '1' && $("#degree").val() != '4') && $("#degree_name").val() != '')
+	{
+		alert('Please select graduation.');
+		$("#degree").focus();
+		return false;
+	}
+	
+	if($("#pg").val() == '1' && $("#pg_name").val() == '')
+	{
+		alert('Please select PG Name.');
+		$("#pg_name").focus();
+		return false;
+	}
+	else if(($("#pg").val() != '1' && $("#pg").val() != '4') && $("#pg_name").val() != '')
+	{
+		alert('Please select PG.');
+		$("#pg").focus();
+		return false;
+	}
+	if($("#additional_cert").val() == '')
+	{
+		alert('Please select additional_cert.');
+		$("#additional_cert").focus();
+		return false;
+	}
+	if($("#id_proof").val() == '1' && $("#given_id_proof").val() == '')
+	{
+		alert('Please select Given ID Proof.');
+		$("#given_id_proof").focus();
+		return false;
+	}
+	else if($("#id_proof").val() != '1' && $("#given_id_proof").val() != '')
+	{
+		alert('Please select ID Proof.');
+		$("#id_proof").focus();
+		return false;
+	}
+	
+	if($("#extra_id_proof").val() == '1' && $("#given_extra_id_proof").val() == '')
+	{
+		alert('Please select Given Extra ID Proof.');
+		$("#given_extra_id_proof").focus();
+		return false;
+	}
+	else if($("#extra_id_proof").val() != '1' && $("#given_extra_id_proof").val() != '')
+	{
+		alert('Please select Extra ID Proof.');
+		$("#extra_id_proof").focus();
+		return false;
+	}
+	
+	if($("#address_proof").val() == '1' && $("#given_address_proof").val() == '')
+	{
+		alert('Please select Given Address Proof.');
+		$("#given_address_proof").focus();
+		return false;
+	}
+	else if($("#address_proof").val() != '1' && $("#given_address_proof").val() != '')
+	{
+		alert('Please select Address Proof.');
+		$("#address_proof").focus();
+		return false;
+	}
+	if($("#bgr").val() == '')
+	{
+		alert('Please select bgr.');
+		$("#bgr").focus();
+		return false;
+	}
+	if($("#prv_comp_doc").val() == '')
+	{
+		alert('Please select prv_comp_doc.');
+		$("#prv_comp_doc").focus();
+		return false;
+	}*/
+});
+return true;
+});
+</script>

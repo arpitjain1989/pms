@@ -1,0 +1,65 @@
+<div class="row-fluid seperator">
+	<div class="span12">
+		<!--BeginDisplayInventoryVendorInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Vendor Name:</b></label>
+					<label class="form-label span3 clsleft">{vendor_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblContactDetails">
+						<thead>
+							<tr>
+								<th>Contact Person</th>
+								<th>Contact No</th>
+								<th>Address</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillContactInformation-->
+							<tr>
+								<td>{contact_person}</td>
+								<td>{contact_no}</td>
+								<td>{address}</td>
+							</tr>
+							<!--EndFillContactInformation-->
+							<!--BeginFillNoContactInformation-->
+							<tr>
+								<td colspan="3">No contact information found.</td>
+							</tr>
+							<!--EndFillNoContactInformation-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayInventoryVendorInformationBlock-->
+		<!--BeginDisplayNoInventoryVendorInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>No inventory vendor information.</b></label>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayNoInventoryVendorInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='inventory_vendor_list.php'">Back</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

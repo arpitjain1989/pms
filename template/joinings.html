@@ -1,0 +1,66 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Joinees</span></h4>
+			</div>
+			<!--BeginFillJoinings-->
+			<form name="frmjoinings" id="frmjoinings" method="post" action="joinings.php" onsubmit="javascript: return fnValidate();">
+				<input type="hidden" name="headid" id="headid" value="{headid}" />
+				<input type="hidden" name="hdnaction" id="hdnaction" value="addOpenings" />
+				
+				<div class="content noPad clearfix">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Employees:</label>
+								<label class="form-label span7 clsleft">
+									<!--BeginFillDisplayJoinings-->
+									<input type="checkbox" name="chkempId[]" id="chkempId_{empid}" value="{empid}" {strChecked} /> {emptitle} <br/>
+									<b>Exp. Date Of Joining :</b> {exp_joining_date} <br/>
+									<b>TeamLeader Name :</b> {teamLeaderName} <br/>
+									<b>Recommended Shift :</b> {recommendedShift} <br /><br />
+									<!--EndFillDisplayJoinings-->
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<input type="hidden" name="action" id="action" value="AllowedShiftTime" />
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--EndFillJoinings-->
+			<script type="text/javascript">
+				function fnValidate()
+				{
+					if($("input[type='checkbox']:checked").length == 0)
+					{
+						alert("Please select at least 1 time.");
+						return false
+					}
+				}
+			</script>
+			<!--BeginDisplayNoJoinings-->
+			<div class="content noPad clearfix">
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid" style="padding-left:15px;">No Joinees Found.</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoJoinings-->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+<span class="right">
+	<a href="graduation.php">
+		<h4><span class="icon16 entypo-icon-add"></span>Add Graduation</h4>
+	</a>
+</span>
+	
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Graduation</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Graduation</th>
+							<th>Description</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillGraduationList-->
+						<tr class="odd gradeX">
+							<td>{title}</td>
+							<td>{description}</td>
+							<td>
+								<a href="graduation_view.php?id={id}" name="view" id="view" title="View Graduation" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+								<a href="graduation.php?id={id}&action=update" name="update" id="update" title="Update Graduation" class="tip">
+									<span class="icon12 icomoon-icon-pencil-2"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillGraduationList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

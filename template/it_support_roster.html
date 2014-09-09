@@ -1,0 +1,151 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Roster Start Date:</b><br>Select start date for the roster.
+			</li>
+			<li>
+				<b>Shift Time:</b><br>Select shift time.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmSupportRoster" id="frmSupportRoster" class="form-horizontal seperator" method="post" action="it_support_roster.php">
+
+	<!--BeginDisplayMessageBlock-->
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="alert {message_class}">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{message}</strong>
+			</div>
+		</div>
+	</div>
+	<!--EndDisplayMessageBlock-->
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Roster Start Date:</label>
+					<div class="span4 controls">   
+						<input type="text" name="roster_start_date" id="roster_start_date" value="{roster_start_date}" class="span4" readonly="readonly" style="cursor:pointer;" />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SearchSupportRoster" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Search</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<!--BeginDisplaySupportRoster-->
+<form name="frmSupportRoster" id="frmSupportRoster" action="it_support_roster.php" method="post" onsubmit='javascript: return fnValidate();'>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box gradient">
+				<div class="title">
+					<h4>
+						<span>Roster</span>
+					</h4>
+				</div>
+				<div class="content noPad clearfix flexiblewidth">
+					<table class="responsive table table-bordered">
+						<thead>
+							<tr>
+								<th>Employee</th>
+								<!--BeginFillDateHeadings-->
+								<th>
+									{date_headings}
+									<!--input type="hidden" name="date[]" id="date_{date_value}" value="{date_value}" /-->
+								</th>
+								<!--EndFillDateHeadings-->
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillEmployeeInformation-->
+							<tr>
+								<td>{employee_name}</td>
+								<!--BeginFillDateDetails-->
+								<td>
+									{DisplayString}<br/>
+									<select name="shift_id[{employee_id}][{cur_date}]" id="shift_id_{employee_id}_{cur_date}">
+										<option value="">Please select</option>
+										<!--BeginFillShiftInformation-->
+										<option value="{shift_id}">{shift_title}</option>
+										<!--EndFillShiftInformation-->
+									</select>
+									<script type="text/javascript">
+										if("{support_shift_id}" != "")
+											$("#shift_id_{employee_id}_{cur_date}").val("{support_shift_id}");
+									</script>
+								</td>
+								<!--EndFillDateDetails-->
+							</tr>
+							<!--EndFillEmployeeInformation-->
+						</tbody>
+					</table>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<input type="hidden" name="current_date" id="current_date" value="{current_date}" />
+									<input type="hidden" name="action" id="action" value="SaveSupportRoster" />
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	$(window).load(function() {
+		$("select").each(function(){
+			$("#uniform-"+$(this).attr("id")).addClass("smallsel");
+		});
+	});
+
+	$(document).ready(function(){
+		$("#roster_start_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+
+	function fnValidate()
+	{
+		if($("#roster_start_date").val() <= $("#current_date").val())
+		{
+			alert("Roster dates should be greater than current date");
+			return false;
+		}
+		return true;
+	}
+
+</script>
+<!--EndDisplaySupportRoster-->

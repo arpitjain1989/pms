@@ -1,0 +1,175 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="id" id="id" value="{task_id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="emp_code" class = "required">Title:</label>
+							<input class="span4" name="title" id="title" type="text" value="{task_title}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="username" class = "required">Description:</label>
+							<textarea id="description" name="description" class="span4 uniform">{task_desc}</textarea>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Project:</label>
+							<select name="project" id="project" >
+							<!--BeginFillProjectValues-->
+							<option value="{project_id}">{project_title}</option>
+							<!--EndFillProjectValues-->
+							</select>
+							<script type="text/javascript">
+							if($("{project}") != "")
+								$("#project").val("{project}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Job Type:</label>
+							<select name="job_type" id="job_type">
+							<!--BeginFillJobTypeValues-->
+							<option value="{job_id}">{job_title}</option>
+							<!--EndFillJobTypeValues-->
+							</select>
+							<script type="text/javascript">
+							if($("{job_type}") != "")
+								$("#job_type").val("{job_type}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Team Leader:</label>
+							<input class="span4" name="team_leader" id="team_leader" type="text" value="{team_leader}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Start Date:</label>
+                                 <input type="text" id="datepicker" name="startdatepicker" class="span4 text" value="{starting_date}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Start Time:</label>
+                               <input id="timepicker" type="text" name="starttime" autocomplete="off" class="span4 text" value="{starting_time}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">End Date:</label>
+							<input type="text" id="datepicker1" class="span4 text" value="{ending_date}" name="enddatepicker"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">End Time:</label>
+							<input id="timepicker1" type="text" name="endtime" autocomplete="off" class="span4 text" value="{ending_time}"/>
+						</div>
+					</div>
+				</div>
+				<!--div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Overtime:</label>
+							<select name="overtime" id="overtime">
+							<option value="0">Yes</option>
+							<option value="1">No</option>
+							</select>
+							<script type="text/javascript">
+							/*if($('{overtime}') != '' )
+								$("#overtime").val("{overtime}");*/
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Rework:</label>
+							<select name="rework" id="rework">
+							<option value="0">Yes</option>
+							<option value="1">No</option>
+							</select>
+							<script type="text/javascript">
+							/*if($("{rework}") != '' )
+								$("#rework").val("{rework}");*/
+							</script>
+						</div>
+					</div>
+				</div-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='task.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+$(document).ready(function(){
+$('#timepicker').timeEntry('setTime', $("#timepicker").val());
+$('#timepicker1').timeEntry('setTime', $("#timepicker1").val())
+
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$("#submit").click(function() 
+{
+	if($("#title").val() == '')
+	{
+		alert('Please insert title.');
+		$("#title").focus();
+		return false;
+	}
+	if($("#description").val() == '')
+	{
+		alert('Please insert description.');
+		$("#description").focus();
+		return false;
+	}
+	if($("#project").val() == '')
+	{
+		alert('Please insert project.');
+		$("#project").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

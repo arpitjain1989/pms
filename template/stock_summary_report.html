@@ -1,0 +1,40 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Stock Summary Report</span>
+					<a href="stock_summary_report.php?action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+					</a>
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Inventory Type</th>
+							<th>Stock</th>
+							<th>In Use</th>
+							<th>Repair</th>
+							<th>Scrap</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillStockRegisterSummaryList-->
+						<tr class="odd gradeX">
+							<td><a href="stock_register_report.php?type={type_id}" target="_blank">{type}</a></td>
+							<td><a href="stock_register_report.php?type={type_id}&status=0" target="_blank">{stock_count}</a></td>
+							<td><a href="stock_register_report.php?type={type_id}&status=1" target="_blank">{inuse_count}</a></td>
+							<td><a href="stock_register_report.php?type={type_id}&status=3" target="_blank">{repair_count}</a></td>
+							<td><a href="stock_register_report.php?type={type_id}&status=2" target="_blank">{scrap_count}</a></td>
+							<td><a href="stock_register_report.php?type={type_id}" target="_blank">{total_count}</a></td>
+						</tr>
+						<!--EndFillStockRegisterSummaryList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

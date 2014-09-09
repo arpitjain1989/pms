@@ -1,0 +1,141 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Team:</b><br>Select the team for which you are adding the attendance.
+			</li>
+			<li>
+				<b>Date:</b><br>Select the date for which you are adding the attendance.
+			</li>
+			<li>
+				<b>In Time:</b><br>Enter the In time for the employee.
+			</li>
+			<li>
+				<b>Out Time:</b><br>Enter the Out time for the employee.
+			</li>
+			<li>
+				<b>Break start:</b><br>Enter the time from when the employee.
+			</li>
+			<li>
+				<b>Leave type:</b><br>Select the leave type for the employee, if the employee is present for full day leave it blank.
+			</li>
+			<li>
+				<b>Shift Time:</b><br>Select the shift of the employee, at which the employee will be comming.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{add}" />
+		<input type="hidden" name="id" id="id" value="{attendanceid}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Team:
+					</label>
+					<select id="designation" name="designation">
+						<option value="">Please select</option>
+						<!--option value="0">Manager</option>
+						<option value="-1">HR</option>
+						<option value="-2">Admin</option>
+						<option value="-3">IT</option-->
+						<!--BeginEmployeeValues-->
+						<option value="{employee_id}">{employee_name}</option>
+						<!--EndEmployeeValues-->
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Date:
+					</label>
+					 <input type="text" id="datepicker" name="startdatepicker" class="span4 text" value="{currentdate}" onchange="javascript: fnChangeDate();"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" id="getdata" class="btn marginR10">View</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='attendance.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+		<div class="form-row row-fluid" id="ajaxdatahere"></div>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+function validateform()
+{
+	var valid = true
+	/*if($.trim($("#designation").val()) == '')
+	{
+		alert('Please select Designation.');
+		$("#designation").focus();
+		valid = false;
+		return false;
+	}*/
+	if($.trim($("#datepicker").val()) == '')
+	{
+		alert('Please select date.');
+		$("#datepicker").focus();
+		valid = false;
+		return false;
+	}
+	return valid;
+}
+
+function fnChangeDate()
+{
+	document.location.href='attendance.add.php?date='+$("#datepicker").val()+'&action=update';
+}
+
+$(document).ready(function()
+{	
+	$("#getdata").click(function() 
+	{
+		if($("#designation").val() != "")
+		{
+			if($("#designation").val() == "0" || $("#designation").val() == "-1" || $("#designation").val() == "-2" || $("#designation").val() == "-3")
+			{
+				/* THIS IS CURRENTLY NOT USED */
+				$("#ajaxdatahere").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded' style='margin-left:40%;'>");
+				$('#ajaxdatahere').load('attendance_form_managers.php?desid='+ $("#designation").val() +'&date=' +$("#datepicker").val());
+			}
+			else
+			{
+				if(validateform())
+				{
+					$("#ajaxdatahere").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded' style='margin-left:40%;'>");
+					$('#ajaxdatahere').load('attendance_form.php?date=' +$("#datepicker").val() +'&designation=' +$("#designation").val());
+				}
+			}
+		}
+		else
+		{
+			alert("Please select the team");
+		}
+	});
+	//$("#getdata").trigger("click");
+});
+
+</script>

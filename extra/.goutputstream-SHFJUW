@@ -1,0 +1,230 @@
+ALTER TABLE  `pms_employee` CHANGE  `teamleader`  `teamleader` INT( 11 ) NOT NULL
+
+alter table pms_employee add column `username` varchar(255);
+
+alter table pms_employee add column `shiftid` int(11);
+
+INSERT INTO pms_module (title) values ('Site Settings');
+INSERT INTO pms_module (title) values ('Leave Type');
+INSERT INTO pms_module (title) values ('Leave Form');
+INSERT INTO pms_module (title) values ('Shift');
+INSERT INTO pms_module (title) values ('Attendance');
+INSERT INTO pms_module (title) values ('Leave Request');
+INSERT INTO pms_module (title) values ('Attendance Calendar');
+
+alter table pms_attendance add column `is_late` tinyint(1);
+
+alter table pms_attendance add column `total_break_time` date;
+
+alter table pms_attendance add column `isExceededBreak` tinyint(1);
+
+CREATE TABLE pms_shift_movement(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	userid int(11) NULL,
+	movement_date datetime NULL,
+	movement_fromtime time NULL,
+	movement_totime time NULL,
+	compensation_date datetime NULL,
+	compensation_fromtime time NULL,
+	compensation_totime time NULL,
+	reason text NULL,
+	addedon datetime NULL,
+	approvedby_tl tinyint(1) NULL,
+	lt_comments text NULL,
+	approvedby_manager tinyint(1) NULL,
+	manager_comments text NULL,
+	PRIMARY KEY(id)
+)
+
+alter table pms_shift_movement add column `lt_approval_date` datetime;
+alter table pms_shift_movement add column `manager_approval_date` datetime;
+
+INSERT INTO pms_module (title) values ('Shift Movement');
+INSERT INTO pms_module (title) values ('Shift Movement Request');
+
+CREATE TABLE pms_roaster(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	userid int(11) NULL,
+	start_date datetime NULL,
+	end_date datetime NULL,
+	weekoffdate datetime NULL,
+	weekoffday varchar(255) NULL,
+	addedon datetime NULL,
+	PRIMARY KEY(id)
+)
+
+alter table pms_roaster add column `addedby` int(11);
+alter table pms_roaster add column `autoadded` tinyint(1);
+
+INSERT INTO pms_module (title) values ('Roaster');
+
+INSERT INTO `pms`.`pms_module` (`id` ,`title` ,`description`)VALUES (NULL , 'Movement Cancel', '');
+
+CREATE TABLE pms_roaster_detail(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	roasterid int(11) NULL,
+	roastereddate datetime NULL,
+	attendance varchar(10) NULL,
+	shiftid int(11) NULL,
+	PRIMARY KEY(id)
+)
+
+INSERT INTO pms_leave_type (title, description) values ('SC','Shift Change');
+INSERT INTO pms_leave_type (title, description) values ('SM','Shift Movement');
+
+alter table pms_roaster add column `reportinghead` int(11);
+
+alter table pms_shift_movement add column `reportinghead1` int(11);
+alter table pms_shift_movement add column `reportinghead2` int(11);
+
+alter table pms_shift_movement add column `isemergency` tinyint(1);
+
+INSERT INTO pms_module (title) values ('Emergency Shift Movement');
+
+alter table pms_roaster add column `secondreportinghead` int(11);
+
+CREATE TABLE pms_shift_movement_compensation(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	userid int(11) NULL,
+	shift_movement_id int(11) NULL,
+	compensation_date datetime NULL,
+	compensation_fromtime time NULL,
+	compensation_totime time NULL,
+	firstreportingheadid int(11) NULL,
+	secondreportingheadid int(11) NULL,
+	approvedby_tl tinyint(1) NULL,
+	tl_approveddate datetime NULL,
+	tl_comment text NULL,
+	addedon datetime NULL,
+	PRIMARY KEY(id)
+)
+
+INSERT INTO pms_module (title) values ('Shift Movement Compensation');
+INSERT INTO pms_module (title) values ('Shift Movement Compensation Request');
+
+
+CREATE TABLE pms_holidays(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	title varchar(255) NULL,
+	holidaydate datetime NULL,
+	PRIMARY KEY(id)
+)
+
+INSERT INTO pms_module (title) values ('Holidays');
+
+
+ALTER TABLE `pms_leave_form` ADD `ph` TINYINT( 1 ) NOT NULL 
+
+ALTER TABLE `pms_leave_form` ADD `delegate` INT( 11 ) NOT NULL 
+
+ALTER TABLE `pms_leave_form` ADD `delegate_date` DATETIME NOT NULL ,
+ADD `delegate_comment` TEXT NOT NULL ,
+ADD `delegate_status` TINYINT( 1 ) NOT NULL
+
+ALTER TABLE `pms_attendance` ADD `break4_in` TIME NOT NULL AFTER `break3_out` ,
+ADD `break4_out` TIME NOT NULL AFTER `break4_in` ,
+ADD `break5_in` TIME NOT NULL AFTER `break4_out` ,
+ADD `break5_out` TIME NOT NULL AFTER `break5_in` 
+
+ALTER TABLE `pms_attendance` ADD `late_time` TIME NOT NULL ,
+ADD `shift_id` INT( 11 ) NOT NULL ,
+ADD `isLateAllowed` TINYINT NOT NULL ,
+ADD `allowed_time` TIME NOT NULL ,
+ADD `break_exceed_time` INT NOT NULL 
+
+CREATE TABLE pms_allowed_shift_time(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	headid int(11) NULL,
+	addeddate datetime NULL,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE pms_allowedshifts_detail(
+	id int(11) NOT NULL AUTO_INCREMENT,
+	allowedshifttimeid int(11) NULL,
+	shiftid int(11) NULL,
+	PRIMARY KEY(id)
+);
+
+INSERT INTO pms_module (title) values ('Team Shifts');
+
+
+ALTER TABLE `pms_attendance` ADD `total_working_hours` TIME NOT NULL
+
+ALTER TABLE `pms_attendance` ADD `official_total_working_hours` TIME NOT NULL 
+
+ALTER TABLE `pms_attendance` ADD `ishoursapproved` tinyint(1) NOT NULL
+ALTER TABLE `pms_attendance` ADD `additionaltime` time NOT NULL
+
+INSERT INTO pms_module (title) values ('Attendance Report');
+INSERT INTO pms_module (title) values ('Leave Report');
+
+
+ALTER TABLE  `pms_attendance` CHANGE  `break_exceed_time`  `break_exceed_time` TIME NOT NULL
+
+
+ALTER TABLE `pms_leave_form` ADD `isactive` TINYINT( 1 ) NOT NULL 
+
+ALTER TABLE `pms_shift_movement` ADD `isactive` TINYINT( 1 ) NOT NULL 
+
+ALTER TABLE `pms_leave_form` ADD `isemergency` TINYINT( 1 ) NOT NULL
+ALTER TABLE `pms_leave_form` ADD `emergencyaddedby` int(11) NOT NULL
+
+
+INSERT INTO `pms_test`.`pms_module` (
+`id` ,
+`title` ,
+`description`
+)
+VALUES (
+NULL , 'Leave History', ''
+);
+
+INSERT INTO pms_module (title) values ('Emergency Leave Form');
+
+CREATE TABLE IF NOT EXISTS `pms_half_leave_form` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nodays` float(10,2) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `reason` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `contact` varchar(15) NOT NULL,
+  `date` datetime NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `status` tinyint(2) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `status_manager` tinyint(2) NOT NULL,
+  `approved_date` datetime NOT NULL,
+  `comment_manager` varchar(255) NOT NULL,
+  `approved_date_manager` datetime NOT NULL,
+  `teamleader_id` int(11) NOT NULL,
+  `manager_id` int(11) NOT NULL,
+  `ph` tinyint(2) NOT NULL,
+  `delegate` int(11) NOT NULL,
+  `delegate_date` datetime NOT NULL,
+  `delegate_comment` text NOT NULL,
+  `delegate_status` tinyint(1) NOT NULL,
+  `isactive` tinyint(1) NOT NULL,
+  `halfdayfor` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1;
+
+ALTER TABLE `pms_half_leave_form` ADD `halfdayfor` TINYINT( 1 ) NOT NULL 
+
+INSERT INTO `pms_test`.`pms_module` (`id`, `title`, `description`) VALUES (NULL, 'Half Leave Request', '');
+
+CREATE TABLE IF NOT EXISTS `pms_exceed_compensation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) DEFAULT NULL,
+  `attendance_id` int(11) DEFAULT NULL,
+  `compensation_date` datetime DEFAULT NULL,
+  `compensation_fromtime` time DEFAULT NULL,
+  `compensation_totime` time DEFAULT NULL,
+  `firstreportingheadid` int(11) DEFAULT NULL,
+  `secondreportingheadid` int(11) DEFAULT NULL,
+  `approvedby_tl` tinyint(1) DEFAULT NULL,
+  `tl_approveddate` datetime DEFAULT NULL,
+  `tl_comment` text,
+  `addedon` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)

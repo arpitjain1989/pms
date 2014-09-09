@@ -1,0 +1,331 @@
+<!-- Build page from here: -->
+
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Start date:</b><br>Enter the date from when you will be on leave.
+			</li>
+			<li>                                                    
+				<b>End date:</b><br>Enter the date till when you will be on leave.
+			</li>
+			<li>                                                    
+				<b>No of days:</b><br>The number of days you will be on leave.
+			</li>
+			<li>                                                    
+				<b>Reason for Leave:</b><br>Let us know the reason you want to take the leave.
+			</li>
+			<li>                                                    
+				<b>Address while on leave:</b><br>Enter your address while you will be on leave, so that we can communicate.
+			</li>
+			<li>                                                    
+				<b>Contact number while on Leave:</b><br>Enter your contact number while you will be on leave, so that we can communicate.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> 
+		<span style="color:#ED7A53;">{message}</span>
+		
+		<form class="form-horizontal seperator" method="post" action="" onsubmit="return fnValidate();" >
+			
+			<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+			<input type="hidden" name="id" id="id" value="{leaveformid}" />
+			<input type="hidden" name="phcounts" name="phcounts" id="phcounts" class="phcounts" value="{phcounts}">
+			
+			<!--BeginDisplayDecemberMessageBlock-->
+			<div class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>Maximim 12 leaves carry forward for next year.</strong>
+			</div>
+			<!--EndDisplayDecemberMessageBlock-->
+			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Leave balance:</label>
+						<label class="form-label span3 clsleft">{pending_leave_balance}</label>
+					</div>
+				</div>
+			</div>
+			<!--<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Maximim leaves you can apply for:</label>
+						<label class="form-label span3 clsleft">{eligible_bal}</label>
+					</div>
+				</div>
+			</div>-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Reporting Head:</label>
+						<label class="form-label span3 clsleft">{reportinghead}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginPhCheckBox-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Use public holiday:<br>Available PH : {phcounts}</label>
+						<input type="checkbox" name="ph" id="ph" value="1"/><span></span>
+					</div>
+				</div>
+			</div>
+			<!--EndPhCheckBox-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Start Date:</label>
+						<input type="text" id="start_date" name="start_date" class="span4 text" value="{startdate}" onchange="javascript: fnChangeDate();"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">End Date:</label>
+						<input type="text" id="end_date" class="span4 text" value="{enddate}" name="end_date"  onchange="javascript: fnChangeDate();"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						No of days:
+						</label>
+						<input class="span4" name="nodays" id="nodays" type="text" value="{nodays}" readonly="readonly" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Reason for Leave:
+						</label>
+						<textarea id="reason" name="reason" class="span4 uniform"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Address while on leave:
+						</label>
+						<textarea id="address" name="address" class="span4 uniform">{cont}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Contact number while on Leave:
+						</label>
+						<input class="span4" name="contact" id="contact" type="text" value="{addr}"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='leave_form.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+		$("#start_date,#end_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+
+	function fnChangeDate()
+	{
+		if($.trim($("#start_date").val()) != ""  && $.trim($("#end_date").val()) != "")
+		{
+			if($.trim($("#start_date").val()) > $.trim($("#end_date").val()))
+			{
+				alert("End date should be greater or equal to start date");
+				$("#nodays").val('');
+				return false;
+			}
+			
+			var start = $.trim($("#start_date").val()).split('-');
+			var year = start[0];
+			var month = parseInt(start[1],10) - 1;
+			var day = start[2];
+			
+			var end = $.trim($("#end_date").val()).split('-');
+			var year1 = end[0];
+			var month1 = parseInt(end[1],10) - 1;
+			var day1 = end[2];
+			
+			var Date1 = new Date (year,month,day);
+			
+			var Date2 = new Date (year1,month1,day1);
+			
+			var Days = Math.floor((Date2.getTime() - Date1.getTime())/(1000*60*60*24));
+			
+			$("#nodays").val((Days+1));
+		}
+		else
+		{
+			$("#nodays").val('');
+		}
+	}
+
+	function fnValidate()
+	{
+		//var today = new Date();
+		var date = new Date();
+		//var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		var firstDay = new Date(date.getFullYear(), date.getMonth() + 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		//alert(firstDay);
+		//alert(lastDay);
+		var oneDay = 24*60*60*1000;
+		var eligible_bal = "{eligible_bal}";
+		var phDays = $('#phcounts').val();
+		var start = $.trim($("#start_date").val()).split('-');
+		var year = start[0];
+		var month = parseInt(start[1],10) - 1;
+		var day = start[2];
+		
+		var startdate = $("#start_date").val();
+		var start_date_formated = new Date(startdate);
+		
+		var enddate = $("#end_date").val();
+		var end_date_formated = new Date(enddate);
+		
+		//alert('lastdate---' + lastDay);
+		//alert('start_date_formated---' + start_date_formated);
+		//alert('end_date_formated---' + end_date_formated);
+		
+		var end = $.trim($("#end_date").val()).split('-');
+		var year1 = end[0];
+		var month1 = parseInt(end[1],10) - 1;
+		var day1 = end[2];
+		
+		var Date1 = new Date (year,month,day);
+		var Date2 = new Date (year1,month1,day1);
+		
+		if(!checkblank($("#start_date"),"Please enter Start Date")) return false;
+		if(!checkblank($("#end_date"),"Please enter End Date")) return false;
+		
+		var Days = Math.floor((Date2.getTime() - Date1.getTime())/(1000*60*60*24));
+
+//alert(start_date_formated);
+//alert(date); 
+		if(start_date_formated < date)
+		{
+			alert('Start date must be greater than current date.');
+			$("#start_date").focus(); return false; 
+		}
+		
+		/* Start date of leave cannot be greater than 100 days from current date */
+		var CurDate = new Date (date.getFullYear(),date.getMonth(),date.getDate());
+		var CheckDays = Math.floor((Date1.getTime() - CurDate.getTime())/(1000*60*60*24));
+		
+		if(CheckDays > 100)
+		{
+			alert("Cannot apply leave so much in advance");
+			return false;
+		}
+		
+		if($.trim($("#start_date").val()) > $.trim($("#end_date").val()))
+		{
+			alert("End date should be greater or equal to start date");
+			$("#end_date").focus();
+			return false;
+		}
+		
+		$("#nodays").val((Days+1));
+		
+		if(!checkblank($("#nodays"),"Please enter No. Of days")) return false;
+		if(!checkfloat($("#nodays"),"Invalid No. Of days")) return false;
+		
+		//return false;
+		if ($("#nodays").val() != '') 
+	   {
+			if($('#ph').is(':checked'))
+			{
+				//alert('hello');
+				//alert($("#nodays").val());
+				//alert(phDays);
+				if($("#nodays").val() > (phDays))
+				{
+					 alert("You do not have enough Ph leaves."); $("#nodays").focus(); return false; 
+				}
+
+				if (start_date_formated < date ) 
+				{
+					alert("Start date must be greater then current date."); $("#start_date").focus(); return false; 
+				}
+				else if(start_date_formated >= firstDay || end_date_formated >= firstDay )
+				{
+					alert('Ph leave only available for same month'); $("#start_date").focus(); return false; 
+				}
+			}
+			else 
+			{
+				if(parseFloat($("#nodays").val()) > parseFloat(eligible_bal))
+				{
+				//alert('hello3');
+					 alert("You do not have enough leaves."); $("#nodays").focus(); return false; 
+				} 
+			}
+		}
+		else 
+		{
+			alert("Invalid no of days."); $("#nodays").focus(); return false; 
+		}
+		
+		if(!checkblank($("#reason"),"Please enter Reason for Leave")) return false;
+		if(!checkblank($("#address"),"Please enter Address while on leave")) return false;
+		if(!checkblank($("#contact"),"Please enter Contact number while on Leave")) return false;
+		
+		if($("#nodays").val() != (Days+1))
+			{
+				alert('Number of days and dates do not match.');
+				$("#end_date").focus();
+				return false;
+			}
+		if($('#ph').is(':checked'))
+		{
+			if($("#nodays").val() > (phDays))
+			{
+				alert('You dont have enough Ph.');
+				$("#nodays").focus();
+				return false;
+			}
+		}		
+	}
+	
+
+</script>

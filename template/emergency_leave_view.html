@@ -1,0 +1,294 @@
+<!-- Build page from here: -->
+<form name="frmemergencyleave" id="frmemergencyleave" method="post" action="emergency_leave_view.php">
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Employee Name:</b></label>
+						<label class="form-label span3 clsleft">{emplo_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>No of days:</b></label>
+						<label class="form-label span3 clsleft">{nodays}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Start date:</b></label>
+						<label class="form-label span3 clsleft">{startdate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>End date:</b></label>
+						<label class="form-label span3 clsleft">{enddate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reason:</b></label>
+						<label class="form-label span3 clsleft">{reason}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Address:</b></label>
+						<label class="form-label span3 clsleft">{leave_address}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Contact:</b></label>
+						<label class="form-label span3 clsleft">{leave_contact}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayTLBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by TL:</b></label>
+						<label class="form-label span3 clsleft">{status1}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by TL:</b></label>
+						<label class="form-label span3 clsleft">{comment1}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayTLBlock-->
+			<!--BeginDisplayDelegateTLBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by Deligated TL:</b></label>
+						<label class="form-label span3 clsleft">{status2}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by Delegated TL:</b></label>
+						<label class="form-label span3 clsleft">{comment2}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegateTLBlock-->
+			<!--BeginDisplayTLEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by teamleader:</b></label>
+						<select name="status" id="status">
+							<option value="0">Please select</option>
+							<option value="1">Approve</option>
+							<option value="2">Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{leave_status}" != "")
+							{
+								$("#status").val("{leave_status}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by teamleader:</b></label>
+						<textarea name="comment" id="comment" class="span4">{comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayTLEntryBlock-->
+			<!--BeginDisplayDelegateTLEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by delegated teamleader:</b></label>
+						<select name="delegate_status" id="delegate_status">
+							<option value="0">Please select</option>
+							<option value="1">Approve</option>
+							<option value="2">Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{delegate_status}" != "")
+							{
+								$("#delegate_status").val("{delegate_status}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by delegated teamleader:</b></label>
+						<textarea name="delegate_comment" id="delegate_comment" class="span4">{delegate_comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegateTLEntryBlock-->
+			<!--BeginDisplayManagerEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by manager:</b></label>
+						<select name="status_manager" id="status_manager">
+							<option value="0">Please select</option>
+							<option value="1">Approve</option>
+							<option value="2">Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{status_manager}" != "")
+							{
+								$("#status_manager").val("{status_manager}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by manager:</b></label>
+						<textarea name="comment_manager" id="comment_manager" class="span4">{comment_manager}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayManagerEntryBlock-->
+			<!--BeginDisplayDelegatedManagerEntryBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by Delegated manager:</b></label>
+						<select name="status_manager_delegate" id="status_manager_delegate">
+							<option value="0">Please select</option>
+							<option value="1">Approve</option>
+							<option value="2">Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{status_manager_delegate}" != "")
+							{
+								$("#status_manager_delegate").val("{status_manager_delegate}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by Delegated manager:</b></label>
+						<textarea name="manager_delegate_comment" id="manager_delegate_comment" class="span4">{comment_manager_delegate}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegatedManagerEntryBlock-->
+			<!--BeginDisplayManagerBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by manager:</b></label>
+						<label class="form-label span3 clsleft">{status_manager1}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by manager:</b></label>
+						<label class="form-label span3 clsleft">{comment_manager1}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayManagerBlock-->
+			<!--BeginDisplayDelegateManagerBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Status by delegated manager:</b></label>
+						<label class="form-label span3 clsleft">{status_manager_delegate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Comment by delegated manager:</b></label>
+						<label class="form-label span3 clsleft">{comment_manager_delegate}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegateManagerBlock-->
+
+			<!--BeginFillDeligation-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate to:</b></label>
+						<div style="float: left;width: 210px;">
+						{delegated_tl}
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndFillDeligation-->
+
+			<!--BeginFillManagerDeligation-->
+			<!--div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate to:</b></label>
+						<div style="float: left;width: 210px;">
+							{delegated_manager}
+						</div>
+					</div>
+				</div>
+			</div-->
+			<!--EndFillManagerDeligation-->
+			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<!--BeginDisplaySaveButton-->
+								<button type="submit" class="btn btn-info marginR10" name="btnsave" id="btnsave">Save</button>
+								<input type="hidden" name="action" id="action" value="EmergencyLeaveSave" />
+								<input type="hidden" name="id" id="id" value="{leaveid}" />
+								<input type="hidden" name="eid" id="eid" value="{eid}" />
+								<input type="hidden" name="tid" id="tid" value="{tid}" />
+								<input type="hidden" name="mid" id="mid" value="{mid}" />
+								<!--EndDisplaySaveButton-->
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='emergency_leave_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

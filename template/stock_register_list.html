@@ -1,0 +1,102 @@
+<!--BeginGatePassPrintScriptBlock-->
+<script type="text/javascript">
+	if("{server_url}" != "" && "{gatepass_for_stock_id}" != "")
+	{
+		printWin = window.open('{server_url}gatepass_print.php?id={gatepass_for_stock_id}',"Print Gatepass","width=200,height=100");
+	}
+</script>
+<!--EndGatePassPrintScriptBlock-->
+
+<span class="right">
+	<a href="stock_register.php">
+		<h4><span class="icon16 entypo-icon-add"></span>Add Stock</h4>
+	</a>
+</span>
+	
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Stock Register</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblStockRegisterList">
+					<thead>
+						<tr>
+							<!--th>Item Name</th-->
+							<th>Inventory Type</th>
+							<th>Inventory Make</th>
+							<th>Serial No</th>
+							<th>Unique Id</th>
+							<th>Location</th>
+							<th>Purchase date</th>
+							<th>Warranty</th>
+							<th>Warranty expiry</th>
+							<th>In Warranty</th>
+							<th>Status</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillStockRegisterList-->
+						<tr class="odd gradeX">
+							<!--td>{item_name}</td-->
+							<td>{type}</td>
+							<td>{make}</td>
+							<td>{serialno}</td>
+							<td>{uniqueid}</td>
+							<td>{location_name}</td>
+							<td>{purchasedate}</td>
+							<td>{warranty_text}</td>
+							<td>{warrenty_expiry}</td>
+							<td>{warranty_status_text}</td>
+							<td>{status_text}</td>
+							<td>
+								<a href="stock_register_view.php?id={id}" name="view" id="view" title="View Stock Register" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+								<a href="stock_register.php?id={id}&action=update" name="update" id="update" title="Update Stock Register" class="tip">
+									<span class="icon12 icomoon-icon-pencil-2"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillStockRegisterList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblStockRegisterList').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"iDisplayLength": 20,
+			"bLengthChange": false,
+			"aaSorting": [[ 4, "asc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" },
+				null,
+				{ "sType": "date-uk" },
+				null,
+				null,
+				null
+			]
+		});
+	});
+</script>

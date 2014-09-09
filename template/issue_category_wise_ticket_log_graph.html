@@ -1,0 +1,169 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Search : Tickets - Issue Category wise</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<form name="frmIssueCategoryWiseTicketGraph" id="frmIssueCategoryWiseTicketGraph" method="post" action="issue_category_wise_ticket_log_graph.php">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Date:</label>
+								<span style="float:left;padding:4px;">From : </span><input class="span4" name="search_ticket_date_from" id="search_ticket_date_from" type="text" value="{search_ticket_date_from}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+								<span style="float:left;padding:4px;">To : </span><input class="span4" name="search_ticket_date_to" id="search_ticket_date_to" type="text" value="{search_ticket_date_to}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<input type="hidden" name="action" id="action" value="IssueCategoryWiseTicket" />
+										<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Tickets - Issue Category wise</span>
+					<!--a href="inventory_purchase_report.php?action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+					</a-->
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<!--BeginDisplayGraphContainer-->
+				<input type="hidden" name="graph_labels" id="graph_labels" value="{graph_labels}"/>
+				<input type="hidden" name="total_values" id="total_values" value="{total_values}"/>
+				<input type="hidden" name="pending_values" id="pending_values" value="{pending_values}"/>
+				<input type="hidden" name="resolved_intime_values" id="resolved_intime_values" value="{resolved_intime_values}"/>
+								
+				<div id="container" style="width: 95%; height: 400px; margin: 0 auto"></div>
+				<div id="container_pie" style="width: 95%; height: 400px; margin: 0 auto"></div>
+				<!--EndDisplayGraphContainer-->
+				<!--BeginDisplayNoGraphContainer-->
+				<label class="form-label span3">No graph data found!</label>
+				<!--EndDisplayNoGraphContainer-->
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="plugins/highcharts/highcharts.js"></script>
+<script src="plugins/highcharts/exporting.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search_ticket_date_from, #search_ticket_date_to").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+</script>
+<!--BeginDisplayGraphScript-->
+<script type="text/javascript">	
+	$(function () {
+	
+		var graph_labels = $("#graph_labels").val().split(",");
+		var total_values = $("#total_values").val().split(",").map(function(x){return parseInt(x)});
+		var pending_values = $("#pending_values").val().split(",").map(function(x){return parseInt(x)});
+		var resolved_intime_values = $("#resolved_intime_values").val().split(",").map(function(x){return parseInt(x)});
+			
+		var pieObj = [];
+		
+		graph_labels.forEach(function(v, index, arr) {
+			var tmpObj = [v , parseInt(total_values[index])]
+			
+			pieObj.push(tmpObj);
+		});
+
+		var pieData = JSON.stringify(pieObj);
+
+        $('#container').highcharts({
+            chart: {
+            },
+            title: {
+                text: 'Ticket - Category wise'
+            },
+			xAxis: {
+                categories: graph_labels,
+                labels: {
+                    rotation: -45,
+                    align: 'right',
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+			yAxis: {
+                allowDecimals: false
+            },
+            series: [{name:'Total', type:'column', data:total_values},
+					 {name:'Resolved Intime', type:'column', data:resolved_intime_values},
+					 {name:'Pending', type:'column', data:pending_values},
+					 {name:'No of tickets', data:total_values}] 
+        });
+
+		Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+		    return {
+		        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+		        stops: [
+		            [0, color],
+		            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+		        ]
+		    };
+		});
+
+		$('#container_pie').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Ticket - Category wise'
+            },
+            tooltip: {
+				formatter: function() {
+					return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+				}
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage.toFixed(2) +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                data: JSON.parse(pieData)
+            }]
+        });
+
+    });
+	
+</script>
+<!--EndDisplayGraphScript-->

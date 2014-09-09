@@ -1,0 +1,130 @@
+<div class="row-fluid">
+	
+	<form id="frmLateComing" name="frmLateComing" method="post" action="admin_shift_movement_report.php">
+
+		<input type="hidden" name="action" id="action" value="shiftMovementSearch" />
+
+		<!--div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Month:
+					</label>
+					<select name='month' id='month'>
+						<option value="01">January</option>
+						<option value="02">Feburary</option>
+						<option value="03">March</option>
+						<option value="04">April</option>
+						<option value="05">May</option>
+						<option value="06">June</option>
+						<option value="07">July</option>
+						<option value="08">August</option>
+						<option value="09">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+					</select>
+					<script type="text/javascript">
+						if("{month}" != "")
+						{
+							$("#month").val("{month}");
+							$.uniform.update("#month");
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Year:
+					</label>
+					<select name='year' id='year'-->
+						<!--BeginDisplayYearBlock-->
+						<!--option value="{curyr}">{curyr}</option-->
+						<!--EndDisplayYearBlock-->
+					<!--/select>
+					<script type="text/javascript">
+						if("{year}" != "")
+						{
+							$("#year").val("{year}");
+							$.uniform.update("#year");
+						}
+					</script>
+				</div>
+			</div>
+		</div-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Date:</label>
+					<span style="float:left;padding:4px;">From : </span><input class="span4" name="search_from_date" id="search_from_date" type="text" value="{search_from_date}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+					<span style="float:left;padding:4px;">To : </span><input class="span4" name="search_to_date" id="search_to_date" type="text" value="{search_to_date}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Report for:
+					</label>
+					<select name='movement_compensation' id='movement_compensation'>
+						<option value="0">Please select</option>
+						<option value="1">Shift Movements</option>
+						<option value="2">Shift Movements Compensation</option>
+						<option value="3">Admin Leave</option>
+						<option value="4">Admin Halfday Leave</option>
+						<option value="5">Admin LWP / Special Leave</option>
+					</select>
+					<script type="text/javascript">
+						if("{movement_compensation}" != "")
+						{
+							$("#movement_compensation").val("{movement_compensation}");
+							$.uniform.update("#movement_compensation");
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" id="getdata" class="btn marginR10" onclick="javascript: fnFillDivision();">Search</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	<div id="fillAjaxPage"></div>
+	
+</div>
+<script type="text/javascript">
+	function fnFillDivision()
+	{
+		$("#fillAjaxPage").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded' style='margin-left:40%;'>");
+		$("#fillAjaxPage").load("get_shift_movement_report.php?search_from_date="+escape($("#search_from_date").val())+"&search_to_date="+escape($("#search_to_date").val())+"&id="+escape($("#movement_compensation").val()),"",function(data){
+			$("#shift_movement_id").uniform();
+		});
+	}
+	
+	$("#search_from_date, #search_to_date").datepicker({
+		dateFormat: 'yy-mm-dd',
+		showOtherMonths:true
+	});
+	
+	$(function(){
+		if($.trim($("#movement_compensation").val()) > 0)
+		{
+			fnFillDivision();
+		}
+	});
+		
+</script>

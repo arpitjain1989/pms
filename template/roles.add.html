@@ -1,0 +1,88 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Title:</b><br>Enter the title for the role.
+			</li>
+			<li>
+				<b>Description:</b><br>Enter a short description for the role.
+			</li>
+			<li>
+				<b>Modules:</b><br>Please select the modules for which rights are to given for the role.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<!-- Build page from here: -->
+<div class="row-fluid">
+	<div class="span12">
+	<span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+			<input type="hidden" name="id" id="id" value="{role_id}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="title" class = "required">Title:</label>
+					<input class="span4" name="title" id="title" type="text" value="{rols_title}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="description">Description:</label>
+					<textarea class="span4 uniform" name="description" id="description" rows="3">{rols_description}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="description" style="height: 150px;">Modules:</label>
+					<div style="float:left;">
+						<!--BeginFillModules-->
+						<input type="checkbox" name="modules[]" value="{id}" {check}>{title}<br />	
+						<!--EndFillModules-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='roles.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$("#submit").click(function() 
+	{
+		if($("#title").val() == '')
+		{
+			alert('Please insert Role title.');
+			$("#title").focus();
+			return false;
+		}
+	});
+return true;
+});
+</script>

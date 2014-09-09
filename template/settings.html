@@ -1,0 +1,110 @@
+<!-- Build page from here: -->
+
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">
+		<!--BeginMessageSuccess-->
+		<div class="alert {messageclass}">
+			<button data-dismiss="alert" class="close" type="button">x</button>
+			<strong>{message}</strong> </div>
+		<!--EndMessageSuccess-->
+		</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="id" id="id" value="{id}" />
+		<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="phone" class = "required">
+					Phone:
+					</label>
+					<input class="span4" name="phone" id="phone" type="text" value="{phone}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="email">Email:</label>
+					<input class="span4" name="email" id="email" type="text" value="{email}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="website_title" class = "required">
+					Website Title:
+					</label>
+					<input class="span4" id="website_title" name="website_title" type="text" value="{website_title}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="website_description" class = "required">
+					Website Description:
+					</label>
+					<input class="span4" id="website_description" name="website_description" type="text" value="{website_description}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="website_description" class = "required">
+					Website Keywords:
+					</label>
+					<input class="span4" id="website_keywords" name="website_keywords" type="text" value="{website_keywords}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	if($("#phone").val() == '')
+	{
+		alert('Please insert phone.');
+		return false;
+	}
+	if($("#email").val() == '')
+	{
+		alert('Please insert email.');
+		return false;
+	}
+	else if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Email not valid.");
+			return false;
+		}
+	}
+	
+});
+return true;
+});
+</script>

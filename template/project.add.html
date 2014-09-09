@@ -1,0 +1,123 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="id" id="id" value="{project_id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="username" class = "required">Name:</label>
+							<input class="span4" name="title" id="title" type="text" value="{title}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="owner">Owner:</label>
+							<input class="span4" name="owner" id="owner" type="text" value="{owner}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Description:</label>
+							<input class="span4" name="description" id="description" type="text" value="{description}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Client:</label>
+							<select name="client" id="client" >
+							<!--BeginFillClientValues-->
+							<option value="{client_id}">{display_name}</option>
+							<!--EndFillClientValues-->
+							</select>
+							<script type="text/javascript">
+							if($("{client_uid}") != "")
+								$("#client").val("{client_uid}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Form:</label>
+							<input class="span4" name="form" id="form" type="text" value="{form}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Status:</label>
+							<Select name="status" id="status">
+							<option value="0">Active</option>
+							<option value="1">Deactive</option>
+							</Select>
+							<script type="text/javascript">
+							if($({status}).val !="")
+								$("#status").val("{status}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='project.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$("#submit").click(function() 
+{
+	if($("#title").val() == '')
+	{
+		alert('Please insert name.');
+		$("#title").focus();
+		return false;
+	}
+	if($("#owner").val() == '')
+	{
+		alert('Please insert owner.');
+		$("#owner").focus();
+		return false;
+	}
+	if($("#client").val() == '')
+	{
+		alert('Please insert client.');
+		$("#contact").focus();
+		return false;
+	}
+	if($("#form").val() == '')
+	{
+		alert('Please insert Form.');
+		$("#form").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

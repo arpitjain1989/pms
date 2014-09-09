@@ -1,0 +1,134 @@
+<span class="dropdown pull-right">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+		<span class="icon16 entypo-icon-help"></span>Help
+	</a>
+	<ul class="dropdown-menu" style="top:35px;">
+		<li class="menu">
+			<ul>
+				<li>
+					<b>Issue Category:</b><br>Select Issue Category for the ticket being raised.
+				</li>
+				<li>
+					<b>Issue:</b><br>Select Issue for the ticket being raised.
+				</li>
+				<li>
+					<b>Location:</b><br>Select Location for the ticket being raised.
+				</li>
+				<li>
+					<b>Description:</b><br>Enter the description for the ticket.
+				</li>
+				<li>
+					<b>Reference file:</b><br>Select the reference file for the ticket.<br/>(If required)
+				</li>
+			</ul>
+		</li>
+	</ul>
+</span>
+
+<form name="frmticket" id="frmticket" class="form-horizontal seperator" method="post" action="ticket.php" onsubmit="return fnValidate();" enctype="multipart/form-data" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Issue Category:</label>
+					<select name="issue_category_id" id="issue_category_id" onchange="javascript: fnChangeIssueCategory();">
+						<option value="">Please select</option>
+						<!--BeginFillIssueCategoryBlock-->
+						<option value="{issue_category_id}">{issue_category_name}</option>
+						<!--EndFillIssueCategoryBlock-->
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Issue:</label>
+					<div id="divIssue">
+						<select name="issue_id" id="issue_id">
+							<option value="">Please select</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Location:</label>
+					<div id="divIssue">
+						<select name="location_id" id="location_id" class="span4 nostyle">
+							<option value="">Please select</option>
+							<!--BeginFillLocationBlock-->
+							<option value="{location_id}">{location_name}</option>
+							<!--EndFillLocationBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" class = "required">
+					Description:
+					</label>
+					<textarea class="span4" name="description" id="description" type="text">{description}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" class = "required">
+					Reference file:<br/>(If required)
+					</label>
+					<input type="file" name="ticket_reference_image" id="ticket_reference_image" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SaveTicket" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Send Request</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='ticket_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#location_id").select2({
+			placeholder: "Select Please",
+			placeholderOption : 'first',
+		});
+	});
+
+	function fnChangeIssueCategory()
+	{
+		$("#divIssue").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+		$("#divIssue").load("fill_data.php?action=fillissues&categoryid="+$("#issue_category_id").val(),"",function(){
+			$("#issue_id").uniform();
+		});
+	}
+
+	function fnValidate()
+	{
+		if(!checkblank($("#issue_category_id"),"Please select the Issue Category")) return false;
+		if(!checkblank($("#issue_id"),"Please select the Issue")) return false;
+		if(!checkblank($("#location_id"),"Please select the Location")) return false;
+	}
+	
+</script>

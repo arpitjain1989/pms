@@ -1,0 +1,124 @@
+<form name="frmExpiredRequisition" id="frmExpiredRequisition" method="post" action="it_expired_requisition_view.php">
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayExpiredRequisitionInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>User Name:</b></label>
+						<label class="form-label span3 clsleft">{name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Request For:</b></label>
+						<label class="form-label span3 clsleft">{requisition_for_title}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Project Name:</b></label>
+						<label class="form-label span3 clsleft">{project_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Remarks:</b></label>
+						<label class="form-label span3 clsleft">{remarks}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Requirement Type:</b></label>
+						<label class="form-label span3 clsleft">{request_type_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Till Date:</b></label>
+						<label class="form-label span3 clsleft">{till_date}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Approval Status:</b></label>
+						<label class="form-label span3 clsleft">{approval_status_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting Head's Remarks:</b></label>
+						<label class="form-label span3 clsleft">{reporting_head_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Requisition Closed:</b></label>
+						<label class="form-label span3 clsleft">{isclosed_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>IT Support Remarks:</b></label>
+						<label class="form-label span3 clsleft">{it_support_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<input type="hidden" name="id" id="id" value="{requisitionid}" />
+								<input type="hidden" name="action" id="action" value="CloseExpiredRequisition" />
+								<button type="submit" class="btn btn-info marginR10" name="btnSubmit" id="btnSubmit">Close Requisition</button>
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='it_expired_requisition_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayExpiredRequisitionInformationBlock-->
+			<!--BeginDisplayNoExpiredRequisitionInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>No expired requisition information.</b></label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='it_expired_requisition_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoExpiredRequisitionInformationBlock-->
+		</div>
+	</div>
+</form>

@@ -1,0 +1,110 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Test Type: </b><br>Select the type in which you want to insert marks criteria.
+			</li>
+			<li>
+				<b>Level: </b><br>Enter name of level for the test criteria.
+			</li>
+			<li>
+				<b>Level Criteria: </b><br>Enter description for the test criteria.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+		<input type="hidden" name="id" id="id" value="{tm_id}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Test Type:
+					</label>
+					<div class="span8 controls">   
+						<select name="test_id" id="test_id">
+							<option value='0' selected="selected" />Please select
+							<!--BeginFillEmpRootTestValues-->
+							<option value='{test_id}'/>{test_title}
+							<!--EndFillEmpRootTestValues-->
+						</select>
+						<script type="text/javascript">
+							if("{tm_test_id}" != "")
+								$("#test_id").val("{tm_test_id}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Level:
+					</label>
+					<input class="span4" name="title" id="title" type="text" value="{tm_title}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Level Criteria:
+					</label>
+					<input class="span4" name="title_criteria" id="title_criteria" type="text" value="{tm_criteria}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='emp_test_marks.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	if($("#test_id").val() == '0' || $("#test_id").val() == '')
+	{
+		alert('Please select Test Type.');
+		$('#test_id').focus();
+		return false;
+	}
+	if($("#title").val() == '')
+	{
+		alert('Please insert title.');
+		$('#title').focus();
+		return false;
+	}
+	if($("#title_criteria").val() == '')
+	{
+		alert('Please insert title criteria.');
+		$('#title_criteria').focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

@@ -1,0 +1,80 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Search : Tickets - Location wise</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<form name="frmLocationWiseIssueTrackingReport" id="frmLocationWiseIssueTrackingReport" method="post" action="location_issue_tracking_report.php">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Date:</label>
+								<span style="float:left;padding:4px;">From : </span><input class="span4" name="search_ticket_date_from" id="search_ticket_date_from" type="text" value="{search_ticket_date_from}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+								<span style="float:left;padding:4px;">To : </span><input class="span4" name="search_ticket_date_to" id="search_ticket_date_to" type="text" value="{search_ticket_date_to}" readonly="readonly" style="cursor:pointer;width:100px;float:left;" />
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<input type="hidden" name="action" id="action" value="LocationWiseIssueTracking" />
+										<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Report : Tickets - Location wise</span>
+					<!--a href="inventory_purchase_report.php?action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+					</a-->
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Location</th>
+							<th>Count</th>
+							<th>Option</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillLocationWiseIssueInformation-->
+						<tr class="odd gradeX">
+							<td>{location_name}</td>
+							<td>{cnt_location}</td>
+							<td>
+								<a href="location_issue_tracking_report_view.php?id={location_id}&start_date={search_ticket_date_from}&end_date={search_ticket_date_to}" name="view" id="view" title="View Location wise issue tracking" class="tip"><span class="icon12 brocco-icon-search"></span></a>
+							</td>
+						</tr>
+						<!--EndFillLocationWiseIssueInformation-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#search_ticket_date_from, #search_ticket_date_to").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+</script>

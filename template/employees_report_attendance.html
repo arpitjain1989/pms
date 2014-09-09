@@ -1,0 +1,199 @@
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form id="frmSearchAttendance" name="frmSearchAttendance" method="post" action="employees_report_attendance.php">
+
+			<input type="hidden" name="action" id="action" value="AttendanceSearch" />
+			<input type="hidden" name="team_member_id" id="team_member_id" value="{team_member}" />
+	
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Month:
+						</label>
+						<select name='month' id='month'>
+							<option value="01">January</option>
+							<option value="02">Feburary</option>
+							<option value="03">March</option>
+							<option value="04">April</option>
+							<option value="05">May</option>
+							<option value="06">June</option>
+							<option value="07">July</option>
+							<option value="08">August</option>
+							<option value="09">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<script type="text/javascript">
+							if("{month}" != "")
+							{
+								$("#month").val("{month}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Year:
+						</label>
+						<select name='year' id='year'>
+							<!--BeginDisplayYearBlock-->
+							<option value="{curyr}">{curyr}</option>
+							<!--EndDisplayYearBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{year}" != "")
+							{
+								$("#year").val("{year}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayReportingHeadBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Reporting Heads:
+						</label>
+						<select name='reporting_head' id='reporting_head' onchange="javascript: fnChanageReportingHead();">
+							<option value=''>Please select</option>
+							 <!--BeginFillReportingHeads-->
+							 <option value="{reporting_head_id}">{reporting_head_name}</option>
+							 <!--EndFillReportingHeads-->
+						 </select>
+						 <script type="text/javascript">
+							if("{reporting_head}" != "")
+							{
+								$("#reporting_head").val("{reporting_head}");
+							}
+						 </script>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayReportingHeadBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Team Members:
+						</label>
+						<div id="divTeamMembers">
+							<select name='team_member' id='team_member'  class="nostyle" style="width:300px;">
+								<option value=''>Please select</option>
+							 </select>
+						 </div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Shifts:
+						</label>
+						<select name='shiftid' id='shiftid' onchange="javascript: fnChanageReportingHead();">
+							<option value=''>Please select</option>
+							 <!--BeginFillShiftInformation-->
+							 <option value="{shift_id}">{shift_name}</option>
+							 <!--EndFillShiftInformation-->
+						 </select>
+						 <script type="text/javascript">
+							if("{shiftid}" != "")
+								$("#shiftid").val("{shiftid}");
+						 </script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" id="getdata" class="btn marginR10">Search</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Attendance Information {headingdate}</span>
+							<a href="print_attendance_report.php" target="_blank">
+								<span style="float:right;width:auto;font-size:12px;" class="icon16 cut-icon-printer-2" title="Print attendance">&nbsp;Print attendance</span>
+							</a>
+							<a href="print_attendance_report_summary.php" target="_blank">
+								<span style="float:right;width:auto;font-size:12px;" class="icon16 cut-icon-printer-2" title="Print attendance summary">&nbsp;Print attendance summary</span>
+							</a>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th style="white-space:nowrap;font-size: 17px;">Employee Name</th>
+									<!--BeginFillSearchDateBlock-->
+									<th style="white-space:nowrap;font-size: 17px;">{DisplayDate}&nbsp;&nbsp;</th>
+									<!--EndFillSearchDateBlock-->
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillAttendanceInformation-->
+								<tr class="odd gradeX">
+									<td>{employeename}</td>
+									<!--BeginFillEmployeeAttendanceBlock-->
+									<td bgcolor="{strColor}"><span class="tip" title="{tip_info}" style="{fontcolor}">{attendance_displaystr}</span></td>
+									<!--EndFillEmployeeAttendanceBlock-->
+								</tr>
+								<!--EndFillAttendanceInformation-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End .span12 -->
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$('#attendanceTbl').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"iDisplayLength": 200
+		});
+		
+		fnChanageReportingHead();
+		
+	});
+
+	function fnChanageReportingHead()
+	{
+		$("#divTeamMembers").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+
+		$("#divTeamMembers").load("fill_data.php?action=fillteamleaders&reporting_headid="+escape($("#reporting_head").val())+"&year="+$("#year").val()+"&month="+$("#month").val(),"",function(data){
+			$("#team_member").val($("#team_member_id").val());
+			$("#team_member").select2({
+				placeholder: "Select Please",
+				placeholderOption : 'first'
+			});
+
+		});
+	}
+	
+</script>

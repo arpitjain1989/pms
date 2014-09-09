@@ -1,0 +1,1120 @@
+<?php
+
+	include_once('db_mysql.php');
+
+	class shift_movement extends DB_Sql
+	{
+		function __construct()
+		{
+		}
+
+		function fnSaveShiftMovement($arrMovementInfo)
+		{
+			$totalCount = $this->fnValidateShiftMovement($_SESSION["id"], $arrMovementInfo["movement_date"]);
+
+			if(!$this->fnCheckShiftMovementEligable($_SESSION["id"], $arrMovementInfo["movement_date"]))
+			{
+				/* indicates that shift movement / leave is already taken for this date */
+				return -1;
+			}
+
+			if($totalCount < 2)
+			{
+				if($arrMovementInfo["movement_fromtime_ampm"] == "am" && $arrMovementInfo["movement_fromtime_hour"] == 12)
+				{
+					$arrMovementInfo["movement_fromtime"] = ($arrMovementInfo["movement_fromtime_hour"] + 12) . ":".$arrMovementInfo["movement_fromtime_minutes"];
+				}
+				else if($arrMovementInfo["movement_fromtime_ampm"] == "pm" && $arrMovementInfo["movement_fromtime_hour"] != 12)
+				{
+					$arrMovementInfo["movement_fromtime"] = ($arrMovementInfo["movement_fromtime_hour"] + 12) . ":".$arrMovementInfo["movement_fromtime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["movement_fromtime"] = $arrMovementInfo["movement_fromtime_hour"] . ":" . $arrMovementInfo["movement_fromtime_minutes"];
+				}
+
+				if($arrMovementInfo["movement_totime_ampm"] == "am" && $arrMovementInfo["movement_totime_hour"] == 12)
+				{
+					$arrMovementInfo["movement_totime"] = ($arrMovementInfo["movement_totime_hour"] + 12) . ":".$arrMovementInfo["movement_totime_minutes"];
+				}
+				else if($arrMovementInfo["movement_totime_ampm"] == "pm" && $arrMovementInfo["movement_totime_hour"] != 12)
+				{
+					$arrMovementInfo["movement_totime"] = ($arrMovementInfo["movement_totime_hour"] + 12) . ":".$arrMovementInfo["movement_totime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["movement_totime"] = $arrMovementInfo["movement_totime_hour"] . ":" . $arrMovementInfo["movement_totime_minutes"];
+				}
+
+				if($arrMovementInfo["compensation_fromtime_ampm"] == "am" && $arrMovementInfo["compensation_fromtime_hour"] == 12)
+				{
+					$arrMovementInfo["compensation_fromtime"] = ($arrMovementInfo["compensation_fromtime_hour"] + 12) . ":".$arrMovementInfo["compensation_fromtime_minutes"];
+				}
+				else if($arrMovementInfo["compensation_fromtime_ampm"] == "pm" && $arrMovementInfo["compensation_fromtime_hour"] != 12)
+				{
+					$arrMovementInfo["compensation_fromtime"] = ($arrMovementInfo["compensation_fromtime_hour"] + 12) . ":".$arrMovementInfo["compensation_fromtime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["compensation_fromtime"] = $arrMovementInfo["compensation_fromtime_hour"] . ":" . $arrMovementInfo["compensation_fromtime_minutes"];
+				}
+
+				if($arrMovementInfo["compensation_totime_ampm"] == "am" && $arrMovementInfo["compensation_totime_hour"] == 12)
+				{
+					$arrMovementInfo["compensation_totime"] = ($arrMovementInfo["compensation_totime_hour"] + 12) . ":".$arrMovementInfo["compensation_totime_minutes"];
+				}
+				else if($arrMovementInfo["compensation_totime_ampm"] == "pm" && $arrMovementInfo["compensation_totime_hour"] != 12)
+				{
+					$arrMovementInfo["compensation_totime"] = ($arrMovementInfo["compensation_totime_hour"] + 12) . ":".$arrMovementInfo["compensation_totime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["compensation_totime"] = $arrMovementInfo["compensation_totime_hour"] . ":" . $arrMovementInfo["compensation_totime_minutes"];
+				}
+
+				//print_r($arrMovementInfo);die;
+
+				$arrMovementInfo["userid"] = $_SESSION["id"];
+				$arrMovementInfo["addedon"] = date('Y-m-d H:i:s');
+				$arrMovementInfo["approvedby_tl"] = 0;
+				$arrMovementInfo["approvedby_manager"] = 0;
+				$arrMovementInfo["isemergency"] = 1;
+
+				include_once('class.employee.php');
+
+				$objEmployee = new employee();
+
+				$reportingHead = $objEmployee->fnGetReportingHeadId($_SESSION["id"]);
+
+				$arrMovementInfo["reportinghead1"] = $reportingHead;
+
+				$reportinghead2 = $objEmployee->fnGetReportingHeadId($reportingHead);
+
+				$arrMovementInfo["reportinghead2"] = $reportinghead2;
+
+				$id = $this->insertArray('pms_shift_movement',$arrMovementInfo);
+
+				$employeeInfo = $objEmployee->fnGetEmployeeDetailById($_SESSION["id"]);
+
+				$arrHeads = $objEmployee->fnGetReportingHeads($_SESSION["id"]);
+
+				/* Mail */
+				if(count($arrHeads) > 0)
+				{
+					foreach($arrHeads as $curHead)
+					{
+						$MailTo = $curHead["email"];
+						$Subject = "Shift Movement Request";
+						$content = "Dear ".$curHead["name"].",<br><br>";
+						$content .= "A new shift movement request is added. The details for the leave are as follows:<br/><br/>";
+						$content .= "<table cellspacing='2' cellpadding='2' bgcolor='#E6E6E6'>
+							<tr bgcolor='#FFFFFF'>
+								<td><b>Employee Name: </b></td>
+								<td>".$employeeInfo["name"]."</td>
+							</tr>
+							<tr bgcolor='#FFFFFF'>
+								<td><b>Reporting Head: </b></td>
+								<td>".$reportingHead."</td>
+							</tr>
+							<tr bgcolor='#FFFFFF'>
+								<td><b>Movement On: </b></td>
+								<td>".$arrMovementInfo["movement_date"].", ".$arrMovementInfo["movement_fromtime"]." - ".$arrMovementInfo["movement_totime"]."</td>
+							</tr>
+							<tr bgcolor='#FFFFFF'>
+								<td><b>Compensation On: </b></td>
+								<td>".$arrMovementInfo["compensation_date"].", ".$arrMovementInfo["compensation_fromtime"]." - ".$arrMovementInfo["compensation_totime"]."</td>
+							</tr>
+							<tr bgcolor='#FFFFFF'>
+								<td><b>Reason: </b></td>
+								<td>".$arrMovementInfo["reason"]."</td>
+							</tr>
+							<tr bgcolor='#FFFFFF'>
+								<td colspan='2'>To approve / unapprove the shift movement please click <a href='".SERVERURL."shift_movement_request_view.php?id=".$id."'>here</a></td>
+							</tr>
+						</table>";
+						$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+						sendmail($MailTo, $Subject, $content);
+					}
+				}
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+
+		function fnSaveEmergencyShiftMovement($arrMovementInfo)
+		{
+			$totalCount = $this->fnValidateShiftMovement($arrMovementInfo["userid"], $arrMovementInfo["movement_date"]);
+
+			if(!$this->fnCheckShiftMovementEligable($arrMovementInfo["userid"], $arrMovementInfo["movement_date"]))
+			{
+				/* indicates that shift movement / leave is already taken for this date */
+				return -1;
+			}
+
+			if($totalCount < 2)
+			{
+				if($arrMovementInfo["movement_fromtime_ampm"] == "am" && $arrMovementInfo["movement_fromtime_hour"] == 12)
+				{
+					$arrMovementInfo["movement_fromtime"] = ($arrMovementInfo["movement_fromtime_hour"] + 12) . ":".$arrMovementInfo["movement_fromtime_minutes"];
+				}
+				else if($arrMovementInfo["movement_fromtime_ampm"] == "pm" && $arrMovementInfo["movement_fromtime_hour"] != 12)
+				{
+					$arrMovementInfo["movement_fromtime"] = ($arrMovementInfo["movement_fromtime_hour"] + 12) . ":".$arrMovementInfo["movement_fromtime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["movement_fromtime"] = $arrMovementInfo["movement_fromtime_hour"] . ":" . $arrMovementInfo["movement_fromtime_minutes"];
+				}
+
+				if($arrMovementInfo["movement_totime_ampm"] == "am" && $arrMovementInfo["movement_totime_hour"] == 12)
+				{
+					$arrMovementInfo["movement_totime"] = ($arrMovementInfo["movement_totime_hour"] + 12) . ":".$arrMovementInfo["movement_totime_minutes"];
+				}
+				else if($arrMovementInfo["movement_totime_ampm"] == "pm" && $arrMovementInfo["movement_totime_hour"] != 12)
+				{
+					$arrMovementInfo["movement_totime"] = ($arrMovementInfo["movement_totime_hour"] + 12) . ":".$arrMovementInfo["movement_totime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["movement_totime"] = $arrMovementInfo["movement_totime_hour"] . ":" . $arrMovementInfo["movement_totime_minutes"];
+				}
+
+				if($arrMovementInfo["compensation_fromtime_ampm"] == "am" && $arrMovementInfo["compensation_fromtime_hour"] == 12)
+				{
+					$arrMovementInfo["compensation_fromtime"] = ($arrMovementInfo["compensation_fromtime_hour"] + 12) . ":".$arrMovementInfo["compensation_fromtime_minutes"];
+				}
+				else if($arrMovementInfo["compensation_fromtime_ampm"] == "pm" && $arrMovementInfo["compensation_fromtime_hour"] != 12)
+				{
+					$arrMovementInfo["compensation_fromtime"] = ($arrMovementInfo["compensation_fromtime_hour"] + 12) . ":".$arrMovementInfo["compensation_fromtime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["compensation_fromtime"] = $arrMovementInfo["compensation_fromtime_hour"] . ":" . $arrMovementInfo["compensation_fromtime_minutes"];
+				}
+
+				if($arrMovementInfo["compensation_totime_ampm"] == "am" && $arrMovementInfo["compensation_totime_hour"] == 12)
+				{
+					$arrMovementInfo["compensation_totime"] = ($arrMovementInfo["compensation_totime_hour"] + 12) . ":".$arrMovementInfo["compensation_totime_minutes"];
+				}
+				else if($arrMovementInfo["compensation_totime_ampm"] == "pm" && $arrMovementInfo["compensation_totime_hour"] != 12)
+				{
+					$arrMovementInfo["compensation_totime"] = ($arrMovementInfo["compensation_totime_hour"] + 12) . ":".$arrMovementInfo["compensation_totime_minutes"];
+				}
+				else
+				{
+					$arrMovementInfo["compensation_totime"] = $arrMovementInfo["compensation_totime_hour"] . ":" . $arrMovementInfo["compensation_totime_minutes"];
+				}
+
+				//print_r($arrMovementInfo);die;
+
+				$arrMovementInfo["addedon"] = date('Y-m-d H:i:s');
+				$arrMovementInfo["approvedby_tl"] = 1;
+				$arrMovementInfo["approvedby_manager"] = 0;
+				$arrMovementInfo["isemergency"] = 1;
+				$arrMovementInfo["lt_approval_date"] = Date('Y-m-d H:i:s');
+
+				include_once('class.employee.php');
+
+				$objEmployee = new employee();
+
+				$reportingHead = $objEmployee->fnGetReportingHeadId($arrMovementInfo["userid"]);
+
+				$arrMovementInfo["reportinghead1"] = $reportingHead;
+
+				$reportinghead2 = $objEmployee->fnGetReportingHeadId($reportingHead);
+
+				$arrMovementInfo["reportinghead2"] = $reportinghead2;
+
+				//print_r($arrMovementInfo);
+				//die;
+
+				$id = $this->insertArray('pms_shift_movement',$arrMovementInfo);
+
+				$employeeInfo = $objEmployee->fnGetEmployeeDetailById($arrMovementInfo["userid"]);
+
+				//$arrHeads = $objEmployee->fnGetReportingHeads($arrMovementInfo["userid"]);
+
+				/* Mail */
+				if($reportinghead2 != "")
+				{
+
+					$HeadInfo = $objEmployee->fnGetEmployeeDetailById($reportinghead2);
+
+
+					$MailTo = $HeadInfo["email"];
+					$Subject = "Emergency Shift Movement Request";
+					$content = "Dear ".$HeadInfo["name"].",<br><br>";
+					$content .= "A new shift movement request is added. The details for the leave are as follows:<br/><br/>";
+					$content .= "<table cellspacing='2' cellpadding='2' bgcolor='#E6E6E6'>
+						<tr bgcolor='#FFFFFF'>
+							<td><b>Employee Name: </b></td>
+							<td>".$employeeInfo["name"]."</td>
+						</tr>
+						<tr bgcolor='#FFFFFF'>
+							<td><b>Reporting Head: </b></td>
+							<td>".$reportingHead."</td>
+						</tr>
+						<tr bgcolor='#FFFFFF'>
+							<td><b>Movement On: </b></td>
+							<td>".$arrMovementInfo["movement_date"].", ".$arrMovementInfo["movement_fromtime"]." - ".$arrMovementInfo["movement_totime"]."</td>
+						</tr>
+						<tr bgcolor='#FFFFFF'>
+							<td><b>Compensation On: </b></td>
+							<td>".$arrMovementInfo["compensation_date"].", ".$arrMovementInfo["compensation_fromtime"]." - ".$arrMovementInfo["compensation_totime"]."</td>
+						</tr>
+						<tr bgcolor='#FFFFFF'>
+							<td><b>Reason: </b></td>
+							<td>".$arrMovementInfo["reason"]."</td>
+						</tr>
+						<tr bgcolor='#FFFFFF'>
+							<td colspan='2'>To approve / unapprove the shift movement please click <a href='".SERVERURL."shift_movement_request_view.php?id=".$id."'>here</a></td>
+						</tr>
+					</table>";
+					$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+					sendmail($MailTo, $Subject, $content);
+				}
+				return 1;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+
+		function fnSaveShiftMovementCompensation($arrMovementInfo)
+		{
+			if($arrMovementInfo["compensation_fromtime_ampm"] == "am" && $arrMovementInfo["compensation_fromtime_hour"] == 12)
+			{
+				$arrMovementInfo["compensation_fromtime"] = ($arrMovementInfo["compensation_fromtime_hour"] + 12) . ":".$arrMovementInfo["compensation_fromtime_minutes"];
+			}
+			else if($arrMovementInfo["compensation_fromtime_ampm"] == "pm" && $arrMovementInfo["compensation_fromtime_hour"] != 12)
+			{
+				$arrMovementInfo["compensation_fromtime"] = ($arrMovementInfo["compensation_fromtime_hour"] + 12) . ":".$arrMovementInfo["compensation_fromtime_minutes"];
+			}
+			else
+			{
+				$arrMovementInfo["compensation_fromtime"] = $arrMovementInfo["compensation_fromtime_hour"] . ":" . $arrMovementInfo["compensation_fromtime_minutes"];
+			}
+
+			if($arrMovementInfo["compensation_totime_ampm"] == "am" && $arrMovementInfo["compensation_totime_hour"] == 12)
+			{
+				$arrMovementInfo["compensation_totime"] = ($arrMovementInfo["compensation_totime_hour"] + 12) . ":".$arrMovementInfo["compensation_totime_minutes"];
+			}
+			else if($arrMovementInfo["compensation_totime_ampm"] == "pm" && $arrMovementInfo["compensation_totime_hour"] != 12)
+			{
+				$arrMovementInfo["compensation_totime"] = ($arrMovementInfo["compensation_totime_hour"] + 12) . ":".$arrMovementInfo["compensation_totime_minutes"];
+			}
+			else
+			{
+				$arrMovementInfo["compensation_totime"] = $arrMovementInfo["compensation_totime_hour"] . ":" . $arrMovementInfo["compensation_totime_minutes"];
+			}
+
+			$arrMovementInfo["userid"] = $_SESSION["id"];
+			$arrMovementInfo["addedon"] = date('Y-m-d H:i:s');
+			$arrMovementInfo["approvedby_tl"] = 0;
+
+			include_once('class.employee.php');
+
+			$objEmployee = new employee();
+
+			$reportingHead = $objEmployee->fnGetReportingHeadId($_SESSION["id"]);
+
+			$arrMovementInfo["firstreportingheadid"] = $reportingHead;
+
+			$reportinghead2 = $objEmployee->fnGetReportingHeadId($reportingHead);
+
+			$arrMovementInfo["secondreportingheadid"] = $reportinghead2;
+
+			$movementDetails = $this->fnShiftMovementById($arrMovementInfo["shift_movement_id"]);
+
+			$id = $this->insertArray('pms_shift_movement_compensation',$arrMovementInfo);
+
+			$employeeInfo = $objEmployee->fnGetEmployeeDetailById($_SESSION["id"]);
+			$tlInfo = $objEmployee->fnGetEmployeeDetailById($reportingHead);
+
+			/* Mail */
+			if(count($tlInfo) > 0)
+			{
+				$MailTo = $tlInfo["email"];
+				$Subject = "Shift Movement Request";
+				$content = "Dear ".$tlInfo["name"].",<br><br>";
+				$content .= $employeeInfo["name"]." has added a shift movement compensation. The details for the shift movement compensation are as follows:<br/><br/>";
+				$content .= "<table cellspacing='2' cellpadding='2' bgcolor='#E6E6E6'>
+					<tr bgcolor='#FFFFFF'>
+						<td><b>Employee Name: </b></td>
+						<td>".$employeeInfo["name"]."</td>
+					</tr>
+					<tr bgcolor='#FFFFFF'>
+						<td><b>Reporting Head: </b></td>
+						<td>".$tlInfo["name"]."</td>
+					</tr>
+					<tr bgcolor='#FFFFFF'>
+						<td><b>Movement On: </b></td>
+						<td>".$movementDetails["movementdate"].", ".$movementDetails["movementfrom"]." - ".$movementDetails["movementto"]."</td>
+					</tr>
+					<tr bgcolor='#FFFFFF'>
+						<td><b>Compensation On: </b></td>
+						<td>".$arrMovementInfo["compensation_date"].", ".$arrMovementInfo["compensation_fromtime"]." - ".$arrMovementInfo["compensation_totime"]."</td>
+					</tr>
+					<!--tr bgcolor='#FFFFFF'>
+						<td colspan='2'>To approve / unapprove the shift movement please click <a href='".SERVERURL."shift_movement_request_view.php?id=".$id."'>here</a></td>
+					</tr-->
+				</table>";
+				$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+				sendmail($MailTo, $Subject, $content);
+			}
+
+			return true;
+		}
+
+		function fnCheckShiftMovementEligable($EmployeeId, $MovementDate)
+		{
+			//$sSQL = "select * from pms_leave_form where '$MovementDate' BETWEEN date_format(start_date,'%Y-%m-%d') AND date_format(end_date,'%Y-%m-%d') and employee_id='$EmployeeId' and ((status='1' and status_manager='0') or status_manager='1' or (status='0' and status_manager='0'))";
+			$sSQL = "select * from pms_leave_form where '$MovementDate' BETWEEN date_format(start_date,'%Y-%m-%d') AND date_format(end_date,'%Y-%m-%d') and employee_id='$EmployeeId' and status_manager IN(0,1)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+				return false;
+			else
+			{
+				$sSQL = "select * from pms_shift_movement where date_format(movement_date,'%Y-%m-%d') = '$MovementDate' and userid='$EmployeeId' and ((approvedby_tl='1' and approvedby_manager='0') or approvedby_manager='1' or (approvedby_tl='0' and approvedby_manager='0')) and isCancel='0'";
+				$this->query($sSQL);
+				if($this->num_rows() > 0)
+					return false;
+				else
+					return true;
+			}
+		}
+
+		function fnValidateShiftMovement($EmployeeId, $MovementDate)
+		{
+			$arrDt = explode("-",$MovementDate);
+
+			$CheckingDt = $arrDt[0]."-".$arrDt[1];
+
+			$movements = 0;
+			$movementsPlt = 0;
+			$totalShiftMovement = 0;
+
+			$sSQL = "select * from pms_shift_movement where userid='$EmployeeId' and date_format(movement_date,'%Y-%m') = '$CheckingDt' and (approvedby_manager = '1' or (approvedby_manager='0' && approvedby_tl='1'))";
+			$this->query($sSQL);
+			$movements = $this->num_rows();
+
+			$sSQL = "select * from pms_attendance where user_id='$EmployeeId' and date_format(date,'%Y-%m') = '$CheckingDt' and leave_id='11'";
+			$this->query($sSQL);
+			$movementsPlt = $this->num_rows();
+
+			$totalShiftMovement = $movements + $movementsPlt;
+
+			return $totalShiftMovement;
+		}
+
+		function fnUserShiftMovement($UserId)
+		{
+			$arrMovements = array();
+
+			$sSQL = "select id, date_format(movement_date,'%Y-%m-%d') as movementdate, date_format(compensation_date,'%Y-%m-%d') as compensationdate, date_format(movement_fromtime,'%H:%i') as movementfrom, date_format(movement_totime,'%H:%i') as movementto, date_format(compensation_fromtime,'%H:%i') as compensationfrom, date_format(compensation_totime,'%H:%i') as compensationto, approvedby_tl, approvedby_manager,isCancel, isemergency, if(isemergency=1,'Yes','No') as emergencytext from pms_shift_movement where userid='$UserId'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					switch($this->f("approvedby_manager"))
+					{
+						case '0':
+							$row["managerapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["managerapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["managerapproval"] = 'Unapproved';
+							break;
+					}
+
+					$arrMovements[] = $row;
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnUserEmergencyShiftMovement($HeadId)
+		{
+			$arrMovements = array();
+
+			$sSQL = "select e.name as employeename, sm.id, date_format(sm.movement_date,'%Y-%m-%d') as movementdate, date_format(sm.compensation_date,'%Y-%m-%d') as compensationdate, date_format(sm.movement_fromtime,'%H:%i') as movementfrom, date_format(sm.movement_totime,'%H:%i') as movementto, date_format(sm.compensation_fromtime,'%H:%i') as compensationfrom, date_format(sm.compensation_totime,'%H:%i') as compensationto, sm.approvedby_tl, sm.approvedby_manager, sm.isCancel, sm.isemergency from pms_shift_movement sm INNER JOIN pms_employee e ON e.id = sm.userid where e.teamleader='$HeadId'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					switch($this->f("approvedby_manager"))
+					{
+						case '0':
+							$row["managerapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["managerapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["managerapproval"] = 'Unapproved';
+							break;
+					}
+
+					$arrMovements[] = $row;
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnUserShiftMovementCompensation()
+		{
+			$arrMovements = array();
+
+			$sSQL = "select smc.id as compensationid, date_format(sm.movement_date,'%Y-%m-%d') as movementdate, date_format(sm.movement_fromtime,'%H:%i') as movementfrom, date_format(sm.movement_totime,'%H:%i') as movementto, date_format(smc.compensation_date,'%Y-%m-%d') as compensationdate, date_format(smc.compensation_fromtime,'%H:%i') as compensationfrom, date_format(smc.compensation_totime,'%H:%i') as compensationto, smc.approvedby_tl from pms_shift_movement sm INNER JOIN pms_shift_movement_compensation smc ON sm.id = smc.shift_movement_id where smc.userid='".mysql_real_escape_string($_SESSION["id"])."'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					$arrMovements[] = $row;
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnUserShiftMovementCompensationById($CompensationId)
+		{
+			$arrMovements = array();
+
+			$sSQL = "select smc.id as compensationid, date_format(sm.movement_date,'%Y-%m-%d') as movementdate, date_format(sm.movement_fromtime,'%H:%i') as movementfrom, date_format(sm.movement_totime,'%H:%i') as movementto, date_format(smc.compensation_date,'%Y-%m-%d') as compensationdate, date_format(smc.compensation_fromtime,'%H:%i') as compensationfrom, date_format(smc.compensation_totime,'%H:%i') as compensationto, smc.approvedby_tl, sm.reason, smc.tl_comment from pms_shift_movement sm INNER JOIN pms_shift_movement_compensation smc ON sm.id = smc.shift_movement_id where smc.userid='".mysql_real_escape_string($_SESSION["id"])."' and smc.id='$CompensationId'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					$arrMovements = $row;
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnShiftMovementCompensationById($CompensationId)
+		{
+			$arrMovements = array();
+
+			$sSQL = "select smc.id as compensationid, date_format(sm.movement_date,'%Y-%m-%d') as movementdate, date_format(sm.movement_fromtime,'%H:%i') as movementfrom, date_format(sm.movement_totime,'%H:%i') as movementto, date_format(smc.compensation_date,'%Y-%m-%d') as compensationdate, date_format(smc.compensation_fromtime,'%H:%i') as compensationfrom, date_format(smc.compensation_totime,'%H:%i') as compensationto, smc.approvedby_tl, sm.reason, e.name as employeename,e.id as employeeid, smc.tl_comment from pms_shift_movement sm INNER JOIN pms_shift_movement_compensation smc ON sm.id = smc.shift_movement_id INNER JOIN pms_employee e ON e.id = smc.userid where e.teamleader='".mysql_real_escape_string($_SESSION["id"])."' and smc.id='$CompensationId'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					$arrMovements = $row;
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnUserShiftMovementById($ShiftMovementId)
+		{
+			$MovementInfo = false;
+
+			$sSQL = "select date_format(m.movement_date,'%Y-%m-%d') as movementdate, date_format(m.compensation_date,'%Y-%m-%d') as compensationdate, date_format(m.movement_fromtime,'%H:%i') as movementfrom, date_format(m.movement_totime,'%H:%i') as movementto, date_format(m.compensation_fromtime,'%H:%i') as compensationfrom, date_format(m.compensation_totime,'%H:%i') as compensationto, m.approvedby_tl, m.approvedby_manager, e.name as employeename, m.reason, m.lt_comments, m.manager_comments from pms_shift_movement m INNER JOIN pms_employee e ON e.id = m.userid where m.id='".mysql_real_escape_string($ShiftMovementId)."' and m.userid='".mysql_real_escape_string($_SESSION["id"])."'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					switch($this->f("approvedby_manager"))
+					{
+						case '0':
+							$row["managerapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["managerapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["managerapproval"] = 'Unapproved';
+							break;
+					}
+
+					$MovementInfo = $row;
+				}
+			}
+
+			return $MovementInfo;
+		}
+
+		function fnUpdateShiftMovementCompensation($ApprovalInfo)
+		{
+			include_once('class.employee.php');
+			$objEmployee = new employee();
+
+			$status = array("0"=>"Pending", "1"=>"Approved", "2"=>"Unapproved");
+
+			$compensationInfo = $this->fnShiftMovementCompensationById($ApprovalInfo["id"]);
+
+			$EmployeeInfo = $objEmployee->fnGetEmployeeById($compensationInfo["employeeid"]);
+
+			if($EmployeeInfo["teamleader"] != "" && $EmployeeInfo["teamleader"] != "0")
+			{
+				$TlInfo = $objEmployee->fnGetEmployeeById($EmployeeInfo["teamleader"]);
+
+				$ApprovalInfo["tl_approveddate"] = Date("Y-m-d H:i:s");
+
+				$this->updateArray('pms_shift_movement_compensation',$ApprovalInfo);
+
+				$MailTo = $EmployeeInfo["email"];
+				$Subject = "Shift Movement Compensation ".$status[$ApprovalInfo["approvedby_tl"]];
+
+				$content = "Dear ".$EmployeeInfo["name"].",<br><br>";
+				$content .= $TlInfo["name"]." has ".$status[$ApprovalInfo["tl_approveddate"]]." your shift movement compensation request for shift movement on ".$compensationInfo["movementdate"]." from ".$compensationInfo["movementfrom"]." to ".$compensationInfo["movementto"]." compensated on ".$compensationInfo["compensationdate"]." from ".$compensationInfo["compensationfrom"]." to ".$compensationInfo["compensationto"]."<br/><br/>";
+				$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+				sendmail($MailTo, $Subject, $content);
+				return $ApprovalInfo["approvedby_tl"];
+			}
+			else
+				return -1;
+		}
+
+		function fnUserEmergencyShiftMovementById($ShiftMovementId)
+		{
+			$MovementInfo = false;
+
+			$sSQL = "select e.name as employeename, date_format(m.movement_date,'%Y-%m-%d') as movementdate, date_format(m.compensation_date,'%Y-%m-%d') as compensationdate, date_format(m.movement_fromtime,'%H:%i') as movementfrom, date_format(m.movement_totime,'%H:%i') as movementto, date_format(m.compensation_fromtime,'%H:%i') as compensationfrom, date_format(m.compensation_totime,'%H:%i') as compensationto, m.approvedby_tl, m.approvedby_manager, e.name as employeename, m.reason, m.lt_comments, m.manager_comments from pms_shift_movement m INNER JOIN pms_employee e ON e.id = m.userid where m.id='".mysql_real_escape_string($ShiftMovementId)."' and e.teamleader='".mysql_real_escape_string($_SESSION["id"])."' and isemergency='1'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					switch($this->f("approvedby_manager"))
+					{
+						case '0':
+							$row["managerapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["managerapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["managerapproval"] = 'Unapproved';
+							break;
+					}
+
+					$MovementInfo = $row;
+				}
+			}
+
+			return $MovementInfo;
+		}
+
+		function fnShiftMovementById($ShiftMovementId, $ids = "")
+		{
+			$MovementInfo = false;
+
+			$cond = "";
+			if(trim($ids) != "")
+			{
+				$cond = " and m.userid in ($ids)";
+			}
+
+			$sSQL = "select e.name as employeename, m.id,m.userid,date_format(m.movement_date,'%Y-%m-%d') as movementdate, date_format(m.compensation_date,'%Y-%m-%d') as compensationdate, date_format(m.movement_fromtime,'%H:%i') as movementfrom, date_format(m.movement_totime,'%H:%i') as movementto, date_format(m.compensation_fromtime,'%H:%i') as compensationfrom, date_format(m.compensation_totime,'%H:%i') as compensationto, m.approvedby_tl, m.approvedby_manager, e.name as employeename, m.reason, m.approvedby_tl, m.lt_comments, m.approvedby_manager, m.manager_comments, concat(date_format(m.movement_date,'%Y-%m-%d'),' ',m.movement_fromtime) as movementdt,m.isCancel from pms_shift_movement m INNER JOIN pms_employee e ON e.id = m.userid where m.id='".mysql_real_escape_string($ShiftMovementId)."' $cond";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					switch($this->f("approvedby_manager"))
+					{
+						case '0':
+							$row["managerapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["managerapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["managerapproval"] = 'Unapproved';
+							break;
+					}
+
+					$MovementInfo = $row;
+				}
+			}
+
+			return $MovementInfo;
+		}
+
+		function fnGetAllShiftMovementRequest($EmployeeIds)
+		{
+			$arrMovements = array();
+
+			$sSQL = "select m.id, date_format(m.movement_date,'%Y-%m-%d') as movementdate, date_format(m.compensation_date,'%Y-%m-%d') as compensationdate, date_format(m.movement_fromtime,'%H:%i') as movementfrom, date_format(m.movement_totime,'%H:%i') as movementto, date_format(m.compensation_fromtime,'%H:%i') as compensationfrom, date_format(m.compensation_totime,'%H:%i') as compensationto, m.approvedby_tl, m.approvedby_manager, e.name as employeename, m.reason, e1.name as teamleadername, m.lt_comments, m.manager_comments,m.isCancel from pms_shift_movement m INNER JOIN pms_employee e ON e.id = m.userid INNER JOIN pms_employee e1 ON e.teamleader = e1.id where m.userid in ($EmployeeIds)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrMovements[] = $this->fetchrow();
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnGetAllShiftMovementCompensationRequest()
+		{
+			$arrMovements = array();
+
+			$sSQL = "select smc.id as compensationid, e.name as employeename, date_format(sm.movement_date,'%Y-%m-%d') as movementdate, date_format(sm.movement_fromtime,'%H:%i') as movementfrom, date_format(sm.movement_totime,'%H:%i') as movementto, date_format(smc.compensation_date,'%Y-%m-%d') as compensationdate, date_format(smc.compensation_fromtime,'%H:%i') as compensationfrom, date_format(smc.compensation_totime,'%H:%i') as compensationto, smc.approvedby_tl from pms_shift_movement sm INNER JOIN pms_shift_movement_compensation smc ON sm.id = smc.shift_movement_id INNER JOIN pms_employee e ON e.id = smc.userid where e.teamleader='".mysql_real_escape_string($_SESSION["id"])."'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$row = $this->fetchrow();
+
+					switch($this->f("approvedby_tl"))
+					{
+						case '0':
+							$row["tlapproval"] = 'Pending';
+							break;
+						case '1':
+							$row["tlapproval"] = 'Approved';
+							break;
+						case '2':
+							$row["tlapproval"] = 'Unapproved';
+							break;
+					}
+
+					$arrMovements[] = $row;
+				}
+			}
+
+			return $arrMovements;
+		}
+
+		function fnUpdateShiftMovement($ApprovalInfo)
+		{
+			if($_SESSION["usertype"] == "employee")
+			{
+				include_once('class.employee.php');
+				$objEmployee = new employee();
+
+				$status = array("0"=>"Pending", "1"=>"Approved", "2"=>"Unapproved");
+
+				$MovementInfo = $this->fnShiftMovementById($ApprovalInfo["id"]);
+
+				if($_SESSION["designation"] == 6)
+				{
+					/* Manager Login */
+					$ApprovalInfo["manager_approval_date"] = Date("Y-m-d H:i:s");
+					$this->updateArray('pms_shift_movement',$ApprovalInfo);
+
+					$EmployeeInfo = $objEmployee->fnGetEmployeeById($MovementInfo["userid"]);
+
+					$ManagerInfo = $objEmployee->fnGetEmployeeById($_SESSION["id"]);
+
+					$MailTo = $EmployeeInfo["email"];
+					$Subject = "Shift Movement ".$status[$ApprovalInfo["approvedby_manager"]];
+					$content = "Dear ".$EmployeeInfo["name"].",<br><br>";
+					$content .= $ManagerInfo["name"]." has ".$status[$ApprovalInfo["approvedby_manager"]]." your shift movement request on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]."<br/><br/>";
+					$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+					sendmail($MailTo, $Subject, $content);
+
+					if($EmployeeInfo["teamleader"] != 0)
+					{
+						$TeamleaderInfo = $objEmployee->fnGetEmployeeById($EmployeeInfo["teamleader"]);
+
+						$MailTo = $TeamleaderInfo["email"];
+
+						$content = "Dear ".$TeamleaderInfo["name"].",<br><br>";
+						$content .= $ManagerInfo["name"]." has ".$status[$ApprovalInfo["approvedby_manager"]]." shift movement request of ".$EmployeeInfo["name"]." on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]."<br/><br/>";
+						$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+						sendmail($MailTo, $Subject, $content);
+					}
+
+					return $ApprovalInfo["approvedby_manager"];
+				}
+				else if($_SESSION["designation"] == 7 || $_SESSION["designation"] == 13)
+				{
+					/* TL Login */
+
+					$ShiftInfo = $this->fnShiftMovementById($ApprovalInfo["id"]);
+
+					$curdt = Date("Y-m-d H:i:s");
+
+					if($ShiftInfo["movementdt"] < $curdt)
+						return -1;
+
+					$ApprovalInfo["lt_approval_date"] = $curdt;
+					$this->updateArray('pms_shift_movement',$ApprovalInfo);
+
+					$EmployeeInfo = $objEmployee->fnGetEmployeeById($MovementInfo["userid"]);
+
+					$TeamleaderInfo = $objEmployee->fnGetEmployeeById($_SESSION["id"]);
+
+					$MailTo = $EmployeeInfo["email"];
+					$Subject = "Shift Movement ".$status[$ApprovalInfo["approvedby_tl"]];
+
+					$content = "Dear ".$EmployeeInfo["name"].",<br><br>";
+					$content .= $TeamleaderInfo["name"]." has ".$status[$ApprovalInfo["approvedby_tl"]]." your shift movement request on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]."<br/><br/>";
+					$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+					sendmail($MailTo, $Subject, $content);
+
+					if($TeamleaderInfo["teamleader"] != 0)
+					{
+						$ManagerInfo = $objEmployee->fnGetEmployeeById($TeamleaderInfo["teamleader"]);
+
+						$MailTo = $ManagerInfo["email"];
+
+						$content = "Dear ".$ManagerInfo["name"].",<br><br>";
+						$content .= $TeamleaderInfo["name"]." has ".$status[$ApprovalInfo["approvedby_tl"]]." shift movement request of ".$EmployeeInfo["name"]." on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]."<br/><br/>";
+						$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+
+						sendmail($MailTo, $Subject, $content);
+					}
+
+					return $ApprovalInfo["approvedby_tl"];
+				}
+				else
+				{
+					return 0;
+				}
+			}
+			else
+			{
+				return 0;
+			}
+		}
+
+		function getEmployeeShiftMovementByDate($EmployeeId, $Date)
+		{
+			$arrShiftMovement = array();
+			$sSQL = "select *, time_format(movement_fromtime,'%H:%i') as movement_fromtime, time_format(movement_totime,'%H:%i') as movement_totime, time_format(compensation_fromtime,'%H:%i') as compensation_fromtime, time_format(compensation_totime,'%H:%i') as compensation_totime, date_format(compensation_date, '%Y-%m-%d') as compensation_date from pms_shift_movement where userid='$EmployeeId' and date_format(movement_date, '%Y-%m-%d') = '".mysql_real_escape_string($Date)."' and (approvedby_manager='1' or (approvedby_tl='1' && approvedby_manager='0')) and isCancel='0'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$arrShiftMovement = $this->fetchrow();
+				}
+			}
+
+			return $arrShiftMovement;
+		}
+
+		function fnChangeStatus($id)
+		{
+			include_once('class.employee.php');
+			$objEmployee = new employee();
+
+
+			$MovementInfo = $this->fnShiftMovementById($id);
+
+			$EmployeeInfo = $objEmployee->fnGetEmployeeById($MovementInfo["userid"]);
+
+			$loginInfo = $objEmployee->fnGetEmployeeById($_SESSION['id']);
+
+			$TeamleaderInfo = $objEmployee->fnGetEmployeeById($EmployeeInfo["teamleader"]);
+
+			$ManagerInfo = $objEmployee->fnGetEmployeeById($TeamleaderInfo["teamleader"]);
+
+			if($EmployeeInfo["email"] != '')
+			{
+				$MailTo = $EmployeeInfo["email"];
+
+				$Subject = "Shift Movement Cancel";
+
+
+				$content = "Dear ".$EmployeeInfo["name"].",<br><br>";
+
+				if($_SESSION['id'] == 1 && $_SESSION['usertype'] == 'admin')
+				{
+					$content .=  "Admin  has cancel your shift movement on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"].".<br/><br/>";
+				}
+				else
+				{
+					$content .= $loginInfo["name"]." has cancel your shift movement on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]." cancel successfully.<br/><br/>";
+				}
+
+				$content .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+				sendmail($MailTo, $Subject, $content);
+			}
+			if($TeamleaderInfo["email"] != '')
+			{
+				$MailTo1 = $TeamleaderInfo["email"];
+
+				$Subject1 = "Shift Movement Cancel";
+
+
+				$content1 = "Dear ".$TeamleaderInfo["name"].",<br><br>";
+
+				if($_SESSION['id'] == 1 && $_SESSION['usertype'] == 'admin')
+				{
+					$content1 .=  "Admin  has cancel shift movement of ".$EmployeeInfo["name"]." on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"].".<br/><br/>";
+				}
+				else
+				{
+					$content1 .= $loginInfo["name"]." shift movement  of ".$EmployeeInfo["name"]." on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]." cancel successfully.<br/><br/>";
+				}
+
+				$content1 .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+				sendmail($MailTo1, $Subject1, $content1);
+			}
+
+			if($ManagerInfo["email"] != '')
+			{
+				$MailTo2 = $ManagerInfo["email"];
+
+				$Subject2 = "Shift Movement Cancel";
+
+
+				$content2 = "Dear ".$ManagerInfo["name"].",<br><br>";
+
+				if($_SESSION['id'] == 1 && $_SESSION['usertype'] == 'admin')
+				{
+					$content2 .=  "Admin  has cancel shift movement  of ".$EmployeeInfo["name"]." on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"].".<br/><br/>";
+				}
+				else
+				{
+					$content2 .= $loginInfo["name"]." shift movement of ".$EmployeeInfo["name"]." on ".$MovementInfo["movementdate"]." from ".$MovementInfo["movementfrom"]." to ".$MovementInfo["movementto"]." cancel successfully.<br/><br/>";
+				}
+
+				$content2 .= "<br><br>Regards,<br>".SITEADMINISTRATOR;
+				sendmail($MailTo2, $Subject2, $content2);
+			}
+
+			$status = array("id"=>$id, "isCancel"=>"1");
+			$this->updateArray('pms_shift_movement',$status);
+			return true;
+		}
+
+		function fnGetApprovedShiftMovementCompensationIdByUser($userId)
+		{
+			$arrApprovedCompensation = array();
+
+			$sSQL = "select distinct shift_movement_id as shift_movement_id from pms_shift_movement_compensation where userid='$userId' and approvedby_tl='1'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrApprovedCompensation[] = $this->f("shift_movement_id");
+				}
+			}
+
+			return $arrApprovedCompensation;
+		}
+
+		function fnGetApprovedAndPendinShiftMovementCompensationIdByUser($userId)
+		{
+			$arrApprovedCompensation = array();
+
+			$sSQL = "select distinct shift_movement_id as shift_movement_id from pms_shift_movement_compensation where userid='$userId' and (approvedby_tl='1' or approvedby_tl='0')";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrApprovedCompensation[] = $this->f("shift_movement_id");
+				}
+			}
+
+			return $arrApprovedCompensation;
+		}
+
+
+		function fnGetPendingCompensationMovementByUser($userId)
+		{
+			$arrPendingShifts = array();
+
+			$arrApprovedCompensation = $this->fnGetApprovedAndPendinShiftMovementCompensationIdByUser($userId);
+
+			if(count($arrApprovedCompensation) > 0)
+			{
+				$arrApprovedCompensation = array_filter($arrApprovedCompensation,'strlen');
+			}
+
+			$ids = 0;
+			if(count($arrApprovedCompensation) > 0)
+			{
+				$ids = implode(",",$arrApprovedCompensation);
+			}
+
+			$sSQL = "select id, date_format(movement_date,'%Y-%m-%d') as movement_date from pms_shift_movement where userid='$userId' and isCancel='0' and (approvedby_manager='1' or (approvedby_tl='1' and approvedby_manager='0')) and id not in ($ids)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrPendingShifts[] = $this->fetchrow();
+				}
+			}
+
+			return $arrPendingShifts;
+		}
+
+		function fnGetUncompensatedShiftMovementsByUser($UserId)
+		{
+			$arrUncompensatedShiftMovement = array();
+
+			/* Fetch all shift movement compensations that are approved */
+			$arrApprovedCompensation = $this->fnGetApprovedAndPendinShiftMovementCompensationIdByUser($userId);
+
+			if(count($arrApprovedCompensation) > 0)
+			{
+				$arrApprovedCompensation = array_filter($arrApprovedCompensation,'strlen');
+			}
+
+			$ids = 0;
+			if(count($arrApprovedCompensation) > 0)
+			{
+				$ids = implode(",",$arrApprovedCompensation);
+			}
+
+			$sSQL = "select id, date_format(movement_date,'%Y-%m-%d') as movement_date from pms_shift_movement where userid='$UserId' and isCancel='0' and (approvedby_manager='1' or (approvedby_tl='1' and approvedby_manager='0')) and id not in ($ids)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrUncompensatedShiftMovement[] = $this->fetchrow();
+				}
+			}
+
+			return $arrUncompensatedShiftMovement;
+		}
+	}
+?>

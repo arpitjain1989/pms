@@ -1,0 +1,103 @@
+		<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+		<form id="leave_request" name="leave_request" action="" method="post">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+		<div class="row-fluid">
+			<div class="span12">
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+				<div class="box gradient">
+					<div class="title">
+						<h4> <span>Leave Request table</span> </h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="example">
+							<thead>
+								<tr>
+									<!--th><input type='checkbox' name='chkall' id='chkall' /></th-->
+									<th>Name</th>
+									<!--BeginFillTeamLeaderName-->
+									<th>Team Leader</th>
+									<!--EndFillTeamLeaderName-->
+									<th>No Of Days</th>
+									<th>Start Date</th>
+									<th>End Date</th>
+									<th>Is Emergency</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillLeaveRequestValues-->
+								<tr class="odd gradeX {active}">
+									<!--td><input type="checkbox" id="chk" name="chk[]" value="{leaves_id}" class="chkone"/></td-->
+									<td><a href='leave_history.php?id={employee_id}'>{name}</a></td>
+									<td>{headname}</td>	
+									<td>{nodays}</td>
+									<td>{start_date}</td>
+									<td>{end_date}</td>
+									<td>{isemergency}</td>
+									<td>
+										<a href="leave_request.view.php?id={leaves_id}" name="view" id="view" title="View Leave Request" class="tip">{final_status}</a>
+										<!--a href="leave_request.view.php?id={leaves_id}" name="view" id="view" title="View Leave Request" class="tip"><span class="icon12 brocco-icon-search"></span></a-->
+									</td>
+								</tr>
+								<!--EndFillLeaveRequestValues-->
+							</tbody>
+							<!--BeginFillNoRecords-->
+							
+							<!--EndFillNoRecords-->
+						</table>
+					</div>
+				</div>
+				<!-- End .box -->
+			</div>
+			<!-- End .span12 -->
+		</div>
+		</form>
+		<!-- End .row-fluid -->
+		<!-- Page end here -->
+				
+<script type='text/javascript'>
+$(document).ready(function() {
+	if($('#example').find("th").length == 7)
+	{
+		$('#example').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 3, "asc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				{ "sType": "date-uk" }, 
+				null,
+				null
+			]
+		});
+	}
+	else
+	{
+		$('#example').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 2, "asc" ]],
+			"aoColumns": [
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				{ "sType": "date-uk" }, 
+				null,
+				null
+			]
+		});
+	}
+});
+</script>

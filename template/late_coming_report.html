@@ -1,0 +1,145 @@
+<div class="row-fluid">
+	
+	<form id="frmLateComing" name="frmLateComing" method="post" action="late_coming_report.php">
+
+		<input type="hidden" name="action" id="action" value="LateComingSearch" />
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Month:
+					</label>
+					<select name='month' id='month'>
+						<option value="01">January</option>
+						<option value="02">Feburary</option>
+						<option value="03">March</option>
+						<option value="04">April</option>
+						<option value="05">May</option>
+						<option value="06">June</option>
+						<option value="07">July</option>
+						<option value="08">August</option>
+						<option value="09">September</option>
+						<option value="10">October</option>
+						<option value="11">November</option>
+						<option value="12">December</option>
+					</select>
+					<script type="text/javascript">
+						if("{month}" != "")
+						{
+							$("#month").val("{month}");
+							$.uniform.update("#month");
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					Year:
+					</label>
+					<select name='year' id='year'>
+						<!--BeginDisplayYearBlock-->
+						<option value="{curyr}">{curyr}</option>
+						<!--EndDisplayYearBlock-->
+					</select>
+					<script type="text/javascript">
+						if("{year}" != "")
+						{
+							$("#year").val("{year}");
+							$.uniform.update("#year");
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">
+					View all late commings:
+					</label>
+					<input type="checkbox" name="viewall" id="viewall" value="1" />
+					<script type="text/javascript">
+						if("{viewall}" == "1")
+						{
+							$("#viewall").attr("checked","checked");
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" id="getdata" class="btn marginR10">Search</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box gradient">
+				<div class="title">
+					<h4>
+						<span>Late Coming Report for Year: {year}, Month: {month}</span>
+						<a href="late_coming_report.php?action=export" target="_blank">
+							<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+						</a>
+					</h4>
+				</div>
+				<div class="content noPad clearfix flexiblewidth" id="search_result">
+					<!--BeginDisplayLateComing-->
+					<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive  dynamicTable display table table-bordered" width="100%">
+						<thead>
+							<tr>
+								<th style="white-space:nowrap;font-size: 17px;">Employee Name</th>
+								<th style="white-space:nowrap;font-size: 17px;">Team Leader</th>
+								<th style="white-space:nowrap;font-size: 17px;">Deduction</th>
+								<th style="white-space:nowrap;font-size: 17px;">Details</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillLateComingInformation-->
+							<tr class="odd gradeX">
+								<td>{employeename}</td>
+								<td>{teamleader}</td>
+								<td>{deduction}</td>
+								<td>
+									<table class="responsive table table-bordered" width="100%" style="border: 1px solid #ddd;">
+										<tr>
+											<th>Sr No.</th>
+											<th>Late Coming Date</th>
+											<th>Late Coming Time</th>
+										</tr>
+										<!--BeginFillLateComingDetailsInformation-->
+										<tr>
+											<td>{srno}</td>
+											<td>{latecomingdate}</td>
+											<td>{totallatetime}</td>
+										</tr>
+										<!--EndFillLateComingDetailsInformation-->
+									</table>
+								</td>
+							</tr>
+							<!--EndFillLateComingInformation-->
+						</tbody>
+					</table>
+					<!--EndDisplayLateComing-->
+					<!--BeginNoDisplayLateComing-->
+					No late coming data found.
+					<!--EndNoDisplayLateComing-->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

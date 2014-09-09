@@ -1,0 +1,70 @@
+<div id="content" class="clearfix" style="margin-left: 0px;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box">
+					<div class="title">
+						<h4>
+						<span class="icon16 brocco-icon-grid"></span>
+						<span>Attendance : {attendance_date}</span>
+						</h4>
+					</div>
+					<div class="content newdivforlevelreport">
+					<form name="addattandance" name="addattandance" action="attendance.add.php" method="post">
+					<input type="hidden" name="hdnaction" id="hdnaction" value="add"  />
+					<input type="hidden" name="hdndate" id="hdndate" value="{attendance_date}"  />
+					
+						<table class="responsive table table-bordered">
+                                <thead>
+                                  <tr>
+                                    <th>Employee</th>
+									<th>In Time</th>
+									<th>Out Time</th>
+									<th>1st Break In Time</th>
+									<th>1st Break Out Time</th>
+									<th>2nd Break In Time</th>
+									<th>2nd Break Out Time</th>
+									<th>3rd Break In Time</th>
+									<th>3rd Break Out Time</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+								<!--BeginEmployeeValues-->
+								<tr>
+								 	<td>{employee_name}</td>
+										<input type="hidden" id="hdnemployeeid" name="hdnemployeeid[]" value="{employee_id}" />
+										<input type="hidden" id="hdnattendanceid" name="hdnattendanceid[{employee_id}]" value="{attendance_id}" />
+									<td><input type="text" name="in_time[{employee_id}]" id="in_time_{employee_id}" value="{attendance_in_time}" class="timepicker"/></td>
+									<td><input type="text" name="out_time[{employee_id}]" id="out_time_{employee_id}" value="{attendance_out_time}" class="timepicker"/></td>
+									<td><input type="text" name="break1_in[{employee_id}]" id="break1_in_{employee_id}" value="{attendance_break1_in}" class="timepicker"/></td>
+									<td><input type="text" name="break1_out[{employee_id}]" id="break1_out_{employee_id}" value="{attendance_break1_out}" class="timepicker"/></td>
+									<td><input type="text" name="break2_in[{employee_id}]" id="break2_in_{employee_id}" value="{attendance_break2_in}" class="timepicker"/></td>
+									<td><input type="text" name="break2_out[{employee_id}]" id="break2_out_{employee_id}" value="{attendance_break2_out}" class="timepicker"/></td>
+									<td><input type="text" name="break3_in[{employee_id}]" id="break3_in_{employee_id}" value="{attendance_break3_in}" class="timepicker"/></td>
+									<td><input type="text" name="break3_out[{employee_id}]" id="break3_out_{employee_id}" value="{attendance_break3_out}" class="timepicker"/></td>
+								</tr>
+								<!--EndEmployeeValues-->
+								<tr>
+									<td colspan="9">
+										<button id="submit" class="btn btn-info marginR10" name="submit" type="submit">Save</button>
+									</td>
+								</tr>	
+                                </tbody>
+                            </table>
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div id="myModal1" class="modal fade hide">
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function()
+{	
+	$('.timepicker').timepicker();	
+});
+</script>

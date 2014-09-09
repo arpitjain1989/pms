@@ -1,0 +1,55 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="span8">
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Total Active Employees : </b>{total_active_employees}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Designation wise employee summary</span>
+					<a href="designation_wise_employee_summary.php?action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;font-size:14px;" class="icon16 entypo-icon-export" title="Download Designation Wise Employees">&nbsp;Designation Wise Employees</span>
+					</a>
+				</h4>
+			</div>
+			<div class="content noPad clearfix">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblDesignationWiseEmployeeSummary">
+					<thead>
+						<tr>
+							<th>Designation</th>
+							<th>No. Of Active Employees</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillDesignationWiseEmployeesBlock-->
+						<tr class="odd gradeX">
+							<td><a href="designation_wise_employees.php?id={designation_id}">{designation_name}</a></td>
+							<td>{employee_count}</td>
+						</tr>
+						<!--EndFillDesignationWiseEmployeesBlock-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('#tblDesignationWiseEmployeeSummary').dataTable({
+		"sPaginationType": "full_numbers",
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"bLengthChange": false,
+		"iDisplayLength": 100
+	});
+</script>

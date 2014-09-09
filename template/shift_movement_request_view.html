@@ -1,0 +1,358 @@
+<form name="frmshiftmovementrequest" id="frmshiftmovementrequest" method="post" action="shift_movement_request_view.php" onsubmit="javascript:  return fnvalidate();">
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayMovementInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Employee Name:</b></label>
+						<label class="form-label span3 clsleft">{employeename}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Movement Date:</b></label>
+						<label class="form-label span3 clsleft">{movementdate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Movement Time:</b></label>
+						<label class="form-label span3 clsleft">{movementfrom} - {movementto}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Compensation Date:</b></label>
+						<label class="form-label span3 clsleft">{compensationdate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Compensation Time:</b></label>
+						<label class="form-label span3 clsleft">{compensationfrom} - {compensationto}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reason:</b></label>
+						<label class="form-label span3 clsleft">{reason}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginAdminNoteBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Note * :</b></label>
+						<label class="form-label span6 clsleft">This shift movement is added by Admin.</label>
+					</div>
+				</div>
+			</div>
+			<!--EndAdminNoteBlock-->
+			<!--BeginTLStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Teamleader's Approval:</b></label>
+						<label class="form-label span3 clsleft">{tlapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Teamleader's Comment:</b></label>
+						<label class="form-label span3 clsleft">{lt_comments}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndTLStatusViewBlock-->
+			<!--BeginManagersStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Manager's Approval:</b></label>
+						<label class="form-label span3 clsleft">{managerapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Manager's Comment:</b></label>
+						<label class="form-label span3 clsleft">{manager_comments}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndManagersStatusViewBlock-->
+			<!--BeginDelegatedTLStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate teamleader's Approval:</b></label>
+						<label class="form-label span3 clsleft">{delegatedtlapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate teamleader's delegate Comment:</b></label>
+						<label class="form-label span3 clsleft">{delegatedtl_comment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegatedTLStatusViewBlock-->
+			<!--BeginDelegatedManagersStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate manager's Approval:</b></label>
+						<label class="form-label span3 clsleft">{delegatedmanagerapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate manager's delegate Comment:</b></label>
+						<label class="form-label span3 clsleft">{delegatedmanager_comment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegatedManagersStatusViewBlock-->
+			<!--BeginTLStatusBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Teamleader's Approval:</b></label>
+						<select name='approvedby_tl' id='approvedby_tl'>
+							<option value=''>Please select</option>
+							<option value='1'>Approve</option>
+							<option value='2'>Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{approvedby_tl}" != "")
+								$("#approvedby_tl").val("{approvedby_tl}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayDeligationBlock-->
+			<!--div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated To:</b></label>
+						<select name='delegatedto' id='delegatedto'>
+							<option value=''>Please select</option-->
+							<!--BeginFillDelegateBlock-->
+							<!--option value='{delegate_to_id}'>{delegate_to_name}</option-->
+							<!--EndFillDelegateBlock-->
+						<!--/select>
+					</div>
+				</div>
+			</div-->
+			<!--EndDisplayDeligationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Teamleader's Comment:</b></label>
+						<textarea class="span4" name="lt_comments" id="lt_comments">{lt_comments}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndTLStatusBlock-->
+			<!--BeginManagersStatusBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Manager's Approval:</b></label>
+						<select name='approvedby_manager' id='approvedby_manager'>
+							<option value=''>Please select</option>
+							<option value='1'>Approve</option>
+							<option value='2'>Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{approvedby_manager}" != "")
+								$("#approvedby_manager").val("{approvedby_manager}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayDeligationBlock-->
+			<!--div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated To:</b></label>
+						<select name='delegatedto' id='delegatedto'>
+							<option value=''>Please select</option-->
+							<!--BeginFillDelegateBlock-->
+							<!--option value='{delegate_to_id}'>{delegate_to_name}</option-->
+							<!--EndFillDelegateBlock-->
+						<!--/select>
+					</div>
+				</div>
+			</div-->
+			<!--EndDisplayDeligationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Manager's Comment:</b></label>
+						<textarea class="span4" name="manager_comments" id="manager_comments">{manager_comments}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndManagersStatusBlock-->
+			<!--BeginDelegatedTLStatusBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated teamleader's Approval:</b></label>
+						<select name='delegatedtl_status' id='delegatedtl_status'>
+							<option value=''>Please select</option>
+							<option value='1'>Approve</option>
+							<option value='2'>Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{delegatedtl_status}" != "")
+								$("#delegatedtl_status").val("{delegatedtl_status}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated teamleader's Comment:</b></label>
+						<textarea class="span4" name="delegatedtl_comment" id="delegatedtl_comment">{delegatedtl_comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegatedTLStatusBlock-->
+			<!--BeginDelegatedManagersStatusBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated manager's Approval:</b></label>
+						<select name='delegatedmanager_status' id='delegatedmanager_status'>
+							<option value=''>Please select</option>
+							<option value='1'>Approve</option>
+							<option value='2'>Unapprove</option>
+						</select>
+						<script type="text/javascript">
+							if("{delegatedmanager_status}" != "")
+								$("#delegatedmanager_status").val("{delegatedmanager_status}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated manager's Comment:</b></label>
+						<textarea class="span4" name="delegatedmanager_comment" id="delegatedmanager_comment">{delegatedmanager_comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegatedManagersStatusBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span6 controls">
+								<input type="hidden" name="hShiftMovementRequest" id="hShiftMovementRequest" value="ShiftMovementRequest" />
+								<input type="hidden" name="id" id="id" value="{id}" />
+								<input type="hidden" name="ltype" id="ltype" value="{ltype}" />
+								
+								<!--BeginDisplayDelegatedTeamLeaderBlock-->
+								<input type="hidden" name="delegatedtl_id" id="delegatedtl_id" value="{curdelegatedtl_id}" />
+								<!--EndDisplayDelegatedTeamLeaderBlock-->
+								
+								<!--BeginDisplayDelegatedManagerBlock-->
+								<input type="hidden" name="delegatedmanager_id" id="delegatedmanager_id" value="{curdelegatedmanager_id}" />
+								<!--EndDisplayDelegatedManagerBlock-->
+								
+								<!--BeginCancelButtonBlock-->
+								<button id="submit" class="btn btn-info marginR10" name="submit" type="submit">Save</button>
+								<!--EndCancelButtonBlock-->
+								<button id="cancel" class="btn btn-info marginR10" onclick="window.location='shift_movement_request.php'" name="cancel" type="button">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayMovementInformationBlock-->
+			<!--BeginDisplayNoMovementBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						Shift movement information not found
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoMovementBlock-->
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+	function fnvalidate()
+	{
+		if($.trim($("#ltype").val()) == "6")
+		{
+			if(document.getElementById("approvedby_manager"))
+			{
+				if(!checkblank($("#approvedby_manager"),"Please select Approval Status")) return false;
+				if(!checkblank($("#manager_comments"),"Please enter Comment")) return false;
+			}
+			else if(document.getElementById("delegatedmanager_status"))
+			{
+				if(!checkblank($("#delegatedmanager_status"),"Please select Approval Status")) return false;
+				if(!checkblank($("#delegatedmanager_comment"),"Please enter Comment")) return false;
+			}
+		}
+		else if($.trim($("#ltype").val()) == "7" || $.trim($("#ltype").val()) == "13")
+		{
+			if(document.getElementById("approvedby_tl"))
+			{
+				if(!checkblank($("#approvedby_tl"),"Please select Approval Status")) return false;
+				if(!checkblank($("#lt_comments"),"Please enter Comment")) return false;
+			}
+			else if(document.getElementById("delegatedtl_status"))
+			{
+				if(!checkblank($("#delegatedtl_status"),"Please select Approval Status")) return false;
+				if(!checkblank($("#delegatedtl_comment"),"Please enter Comment")) return false;
+			}
+		}
+		
+		/*if(document.getElementById("delegatedto"))
+		{
+			if(($.trim($("#ltype").val()) == "6" && $("#approvedby_manager").val() == "1") || ($.trim($("#ltype").val()) == "7" && $("#approvedby_tl").val() == "1"))
+			{
+				if(!checkblank($("#delegatedto"),"Please select Delegated To")) return false;
+			}
+			else
+			{
+				if($("#delegatedto").val() != "")
+				{
+					alert("Cannot delegate if leave not approved");
+					$("#delegatedto").focus();
+					return false;
+				}
+			}
+		}*/
+	}
+
+</script>

@@ -1,0 +1,108 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Quality Parameter:</b><br>Select the parameter for quality form type.
+			</li>
+			<li>
+				<b>Quality AFD:</b><br>Enter the parameter for quality form type.
+			</li>
+			<!--li>
+				<b>Points:</b><br>Enter the points for the parameter for quality form type.
+			</li-->
+			<li>
+				<b>Is Active:</b><br>Select if the ADF for the parameter is active or inactive.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmQualityAfd" id="frmQualityAfd" class="form-horizontal seperator" method="post" action="quality_afd.php" onsubmit="return fnValidate();">
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Quality Parameter:</label>
+					<select name="parameterid" id="parameterid" class="span4">
+						<option value="">Please select</option>
+						<!--BeginFillQualityParameterBlock-->
+						<option value="{parameter_id}">{parameter_name}</option>
+						<!--EndFillQualityParameterBlock-->
+					</select>
+					<script type="text/javascript">
+						if("{parameterid}" != "")
+							$("#parameterid").val("{parameterid}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Quality AFD:</label>
+					<input class="span4" name="title" id="title" type="text" value="{title}" />
+				</div>
+			</div>
+		</div>
+		<!--div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Points:</label>
+					<input class="span4" name="points" id="points" type="text" value="{points}" />
+				</div>
+			</div>
+		</div-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Is Active:</label>
+					<select class="span4" name="isactive" id="isactive">
+						<option value="0">Active</option>
+						<option value="1">Inactive</option>
+					</select>
+					<script type="text/javascript">
+						if("{isactive}" != "")
+							$("#isactive").val("{isactive}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SaveQualityAFD" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='quality_afd_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	/*$(function(){
+		$("#points").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d]+/, ''));
+		});
+	});*/
+
+	function fnValidate()
+	{
+		if(!checkblank($("#parameterid"),"Please select Quality Parameter")) return false;
+		if(!checkblank($("#title"),"Please enter Quality AFD")) return false;
+		/*if(!checkblank($("#points"),"Please enter Points")) return false;*/
+	}
+	
+</script>

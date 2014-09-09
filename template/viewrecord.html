@@ -1,0 +1,114 @@
+<div id="content" class="clearfix" style="margin-left: 0px;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+				
+				<div class="box">
+					<div class="title">
+						<h4>
+							<span class="icon16 brocco-icon-grid"></span><span>Leveling Entries</span>
+						</h4>
+					</div>
+					<div class="content">
+						<input type="hidden" name="hdnaction" id="hdnaction" value="hdnsubmit" />
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="required">Date</label>
+									<select name="date" id="date">
+										<option value="">Please Select</option>
+										<!--BeginFillFormDate-->
+										<option value="{formdate}">{formdate}</option>
+										<!--EndFillFormDate-->
+									</select>
+									<script type="text/javascript">
+										if($("{newdate}") != "")
+											$("#date").val("{newdate}");
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="required">Form Type</label>
+									<select name="formtype" id="formtype">
+										<option value="">Please Select</option>
+										<!--BeginFillFormType-->
+										<option value="{form_id}">{form_type}</option>
+										<!--EndFillFormType-->
+									</select>
+									<script type="text/javascript">
+										if($("{formid}") != "")
+											$("#formtype").val("{formid}");
+									</script>
+								</div>
+							</div>
+						</div> 
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<div class="form-actions">
+										<div class="span3"></div>
+										<div class="span9 controls">
+											<button type="button" id="getdata" class="btn marginR10">View Records</button>
+											<button type="button" class="btn marginR10" onclick="javascript: document.location.href='qaform.php'">Cancel</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid" id="ajaxdatahere"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function validateform()
+{
+	var valid = true
+	if($.trim($("#date").val()) == '')
+	{
+		alert('Please select Date');
+		$("#date").focus();
+		valid = false;
+		return false;
+	}
+	if($.trim($("#formtype").val()) == '')
+	{
+		alert('Please select form type');
+		$("#formtype").focus();
+		valid = false;
+		return false;
+	}
+	return valid;
+}
+
+$(document).ready(function()
+{
+	var d = new Date();
+	var n = d.getTime(); 
+	
+	if($.trim($("#date").val()) != '' && $.trim($("#formtype").val()) != '')
+	{
+		$('#ajaxdatahere').load('employeerecord.php?date=' +$("#date").val() +'&ftype=' +$("#formtype").val()+"&t="+n);
+	}
+
+	$("#getdata").click(function()
+	{
+		if(validateform())
+		{
+			$('#ajaxdatahere').load('employeerecord.php?date=' +$("#date").val() +'&ftype=' +$("#formtype").val()+"&t="+n);
+		}
+	})
+});
+</script>

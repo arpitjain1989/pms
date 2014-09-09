@@ -1,0 +1,73 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="project_name" id="project_name" value="{id}" />
+				<input type="hidden" name="project_id" id="project_id" value="{projectid}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="username" class = "required">Form fields:</label>
+							<div style="float:left;">
+							<!--BeginFormFieldValues-->
+							<input type="checkbox" name="formid[]" value="{fieldid}" id="formid" {check}>{title}<br />
+							<!--EndFormFieldValues-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='form.php?id={projectid}'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$("#submit").click(function() 
+{
+	if($("#title").val() == '')
+	{
+		alert('Please insert name.');
+		$("#title").focus();
+		return false;
+	}
+	if($("#owner").val() == '')
+	{
+		alert('Please insert owner.');
+		$("#owner").focus();
+		return false;
+	}
+	if($("#client").val() == '')
+	{
+		alert('Please insert client.');
+		$("#contact").focus();
+		return false;
+	}
+	if($("#form").val() == '')
+	{
+		alert('Please insert Form.');
+		$("#form").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

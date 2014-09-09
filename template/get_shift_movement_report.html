@@ -1,0 +1,248 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>{smorcomp}</span>
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+				
+				<!--BeginFillShiftMovementBlock-->
+				<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th style="white-space:nowrap;font-size: 17px;">Employee Name</th>
+							<th style="white-space:nowrap;font-size: 17px;">Reporting Head</th>
+							<th style="white-space:nowrap;font-size: 17px;">Movement Date</th>
+							<th style="white-space:nowrap;font-size: 17px;">Movement Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillMovementInformation-->
+						<tr class="odd gradeX">
+							<td>{emp_name}</td>
+							<td>{teamLeader_name}</td>
+							<td>{mov_date}</td>
+							<td>{MovementTime}</td>
+						</tr>
+						<!--EndFillMovementInformation-->
+					</tbody>
+				</table>
+								
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#attendanceTbl').dataTable({
+							"sPaginationType": "full_numbers",
+							"bJQueryUI": false,
+							"bAutoWidth": false,
+							"bLengthChange": false,
+							"aaSorting": [[ 1, "desc" ]]
+						});
+					});
+				</script>
+				
+				<!--EndFillShiftMovementBlock-->
+
+				<!--BeginFillShiftMovementCompensationBlock-->
+				<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th style="white-space:nowrap;font-size: 17px;">Employee Name</th>
+							<th style="white-space:nowrap;font-size: 17px;">Reporting Head</th>
+							<th style="white-space:nowrap;font-size: 17px;">Movement Date</th>
+							<th style="white-space:nowrap;font-size: 17px;">Movement Time</th>
+							<th style="white-space:nowrap;font-size: 17px;">Componsation Date</th>
+							<th style="white-space:nowrap;font-size: 17px;">Componsation Time</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillMovementInformation1-->
+						<tr class="odd gradeX">
+							<td>{emp_name}</td>
+							<td>{temale_name}</td>
+							<td>{mov_date}</td>
+							<td>{MovementTime}</td>
+							<td>{comp_date}</td>
+							<td>{MovementCompTime}</td>
+						</tr>
+						<!--EndFillMovementInformation1-->
+					</tbody>
+				</table>
+				
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#attendanceTbl').dataTable({
+							"sPaginationType": "full_numbers",
+							"bJQueryUI": false,
+							"bAutoWidth": false,
+							"bLengthChange": false,
+							"aaSorting": [[ 1, "desc" ]]
+						});
+					});
+				</script>
+				<!--EndFillShiftMovementCompensationBlock-->
+					
+				<!--BeginFillAdminLeaveBlock-->
+				<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Employee Name</th>
+							<th>Reporting head</th>
+							<th>From Date</th>
+							<th>To Date</th>
+							<th>Reason</th>
+							<th>Status</th>
+							<th>Added Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillAdminLeaveInformation-->
+						<tr class="odd gradeX">
+							<td>{admin_leave_name}</td>
+							<td>{admin_leave_reporting_head}</td>
+							<td>{admin_leave_startdate}</td>
+							<td>{admin_leave_enddate}</td>
+							<td>{admin_leave_reason}</td>
+							<td>{admin_leave_status}</td>
+							<td>{admin_leave_addeddate}</td>
+						</tr>
+						<!--EndFillAdminLeaveInformation-->
+					</tbody>
+				</table>
+				
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#attendanceTbl').dataTable({
+							"sPaginationType": "full_numbers",
+							"bJQueryUI": false,
+							"bAutoWidth": false,
+							"bLengthChange": false,
+							"aaSorting": [[ 2, "desc" ]],
+							"aoColumns": [
+								null,
+								null,
+								{ "sType": "date-uk" }, 
+								{ "sType": "date-uk" }, 
+								null,
+								null,
+								{ "sType": "date-uk" }
+							]
+						});
+					});
+				</script>
+				<!--EndFillAdminLeaveBlock-->
+
+				<!--BeginFillAdminHalfLeaveBlock-->
+				<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Employee Name</th>
+							<th>Reporting head</th>
+							<th>Date</th>
+							<th>Halfday for</th>
+							<th>Reason</th>
+							<th>Status</th>
+							<th>Added Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillAdminHalfLeaveInformation-->
+						<tr class="odd gradeX">
+							<td>{admin_halfleave_name}</td>
+							<td>{admin_halfleave_reporting_head}</td>
+							<td>{admin_halfleave_startdate}</td>
+							<td>{admin_halfleave_halfdayfor}</td>
+							<td>{admin_halfleave_reason}</td>
+							<td>{admin_halfleave_status}</td>
+							<td>{admin_halfleave_addeddate}</td>
+						</tr>
+						<!--EndFillAdminHalfLeaveInformation-->
+					</tbody>
+				</table>
+				
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#attendanceTbl').dataTable({
+							"sPaginationType": "full_numbers",
+							"bJQueryUI": false,
+							"bAutoWidth": false,
+							"bLengthChange": false,
+							"aaSorting": [[ 2, "desc" ]],
+							"aoColumns": [
+								null,
+								null,
+								{ "sType": "date-uk" }, 
+								null,
+								null,
+								null,
+								{ "sType": "date-uk" }
+							]
+						});
+					});
+				</script>
+				<!--EndFillAdminHalfLeaveBlock-->
+
+				<!--BeginFillAdminSpecialLeaveBlock-->
+				<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Employee Name</th>
+							<th>Reporting head</th>
+							<th>Date</th>
+							<th>Leave Type</th>
+							<th>Reason</th>
+							<th>Status</th>
+							<th>Added Date</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillAdminSpecialLeaveInformation-->
+						<tr class="odd gradeX">
+							<td>{admin_special_leave_name}</td>
+							<td>{admin_special_leave_reporting_head}</td>
+							<td>{admin_special_leave_lwpdate}</td>
+							<td>{admin_special_leave_title}</td>
+							<td>{admin_special_leave_reason}</td>
+							<td>{admin_special_leave_status}</td>
+							<td>{admin_special_leave_addeddate}</td>
+						</tr>
+						<!--EndFillAdminSpecialLeaveInformation-->
+					</tbody>
+				</table>
+				
+				<script type="text/javascript">
+					$(document).ready(function(){
+						$('#attendanceTbl').dataTable({
+							"sPaginationType": "full_numbers",
+							"bJQueryUI": false,
+							"bAutoWidth": false,
+							"bLengthChange": false,
+							"aaSorting": [[ 2, "desc" ]],
+							"aoColumns": [
+								null,
+								null,
+								{ "sType": "date-uk" }, 
+								null,
+								null,
+								null,
+								{ "sType": "date-uk" }
+							]
+						});
+					});
+				</script>
+				<!--EndFillAdminSpecialLeaveBlock-->
+				
+				<!--BeginPleaseSelectBlock-->
+				<div style="padding-left: 16px;padding-top: 9px;"><b>Please select Movment / Compensation.</b></div>
+				<!--EndPleaseSelectBlock-->
+					
+				
+				<!--BeginNoDisplayShiftMovement-->
+				<!--No data found.-->
+				<!--EndNoDisplayShiftMovement-->
+			</div>
+		</div>
+	</div>
+</div>
+

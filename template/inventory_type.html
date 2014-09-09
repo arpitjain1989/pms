@@ -1,0 +1,83 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Inventory type:</b><br>Enter the type of the inventory.
+			</li>
+			<li>
+				<b>Description:</b><br>Enter the description for the inventory type.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frminventorytype" id="frminventorytype" class="form-horizontal seperator" method="post" action="inventory_type.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Inventory type:</label>
+					<input class="span4" name="type" id="type" type="text" value="{type}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" class = "required">
+					Description:
+					</label>
+					<textarea class="span4" name="description" id="description" type="text">{description}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" class = "required">
+					Attributes:
+					</label>
+					<label class="form-label span4 clsleft">
+						<!--BeginFillInventoryMainAttributesBlock-->
+						<div>
+							<input type="checkbox" name="inventoryattributes[]" id="inventoryattributes_{attribute_id}" value="{attribute_id}" {checked_txt} /> {attribute_name}
+						</div>
+						<!--EndFillInventoryMainAttributesBlock-->
+						<!--BeginFillNoInventoryMainAttributesBlock-->
+						No attributes available
+						<!--EndFillNoInventoryMainAttributesBlock-->
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="InventoryType" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='inventory_type_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	function fnValidate()
+	{
+		if(!checkblank($("#type"),"Please enter Inventory type")) return false;
+	}
+	
+</script>

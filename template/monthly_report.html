@@ -1,0 +1,162 @@
+		<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+		<div class="row-fluid">
+			<div class="span12">
+				<form id="frmMonthlyReport" name="frmMonthlyReport" method="post" action="monthly_report_view.php">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">
+								Month:
+								</label>
+								<select name='month' id='month'>
+									<option value="01">January</option>
+									<option value="02">Feburary</option>
+									<option value="03">March</option>
+									<option value="04">April</option>
+									<option value="05">May</option>
+									<option value="06">June</option>
+									<option value="07">July</option>
+									<option value="08">August</option>
+									<option value="09">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+								<script type="text/javascript">
+									//alert('{premonth}');
+									if("{premonth}" != "")
+									{
+										$("#month").val("{premonth}");
+										$.uniform.update("#month");
+									}
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">
+								Year:
+								</label>
+								<select name='year' id='year'>
+									<!--BeginDisplayYearBlock-->
+									<option value="{curyr}">{curyr}</option>
+									<!--EndDisplayYearBlock-->
+								</select>
+								<script type="text/javascript">
+									if("{preyear}" != "")
+									{
+										$("#year").val("{preyear}");
+										$.uniform.update("#year");
+									}
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<button type="submit" id="getdata" class="btn marginR10">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='attendance.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Report table</span>
+							<a href="monthly_report_view.php?action=export" target="_blank">
+								<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+							</a>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth"  style="overflow:scroll;">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblattendance">
+							<thead>
+								<tr>
+									<th>Employee Code</th>
+									<th>Name</th>
+									<th>Reporting Head</th>
+									<th>P</th>
+									<th>Total PLT </th>
+									<th>Break Exceed </th>
+									<th>PPL</th>
+									<th>UHL</th>
+									<th>PHL</th>
+									<th>WO</th>
+									<th>PH</th>
+									<th>PH ENCHE</th>
+									<th>SPL</th>
+									<th>HA</th>
+									<th>HLWP</th>
+									<th>A</th>
+									<th>PLWP</th>
+									<th>ULWP</th>
+									<th>UPL</th>
+									<th>TOTAL</th>
+									<!--th>Days (-/+)</th-->
+									<th>Pay Days</th>
+									<th>Opening Leaves Balance(PL)</th>
+									<th>Leaves Earn(PL)</th>
+									<th>Leave Consumed(TOTAL)</th>
+									<th>Closing Leaves Balance(PL)</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillReport-->
+								<tr class="odd gradeX">
+									<td>{employee_code}</td>
+									<td><a href='temp_view_attendance.php?id={employee_id}&month={premonth}&year={preyear}'>{name}</a></td>
+									<td>{reporting_head}</td>
+									<td>{present}</td>
+									<td>{total_plt}</td>
+									<td>{break_exceeds}</td>
+									<td>{ppl}</td>
+									<td>{uhl}</td>
+									<td>{phl_taken}</td>
+									<td>{wo}</td>
+									<td>{ph}</td>
+									<td>{enche}</td>
+									<td>{spl}</td>
+									<td>{ha}</td>
+									<td>{hlwp}</td>
+									<td>{abs}</td>
+									<td>{plwp}</td>
+									<td>{ulwp}</td>
+									<td>{upl}</td>
+									<td>{total_present}</td>
+									<!--td>{deducted_days}</td-->
+									<td>{pay_days}</td>
+									<td>{opening_leave}</td>
+									<td>{total_earn_leave}</td>
+									<td>{pl_taken}</td>
+									<td>{closing_balance}</td>
+								</tr>
+								<!--EndFillReport-->
+							</tbody>
+						</table>
+						
+					</div>
+				</div>
+				
+				<!-- End .box -->
+			</div>
+			<!-- End .span12 -->
+		</div>
+		<!-- End .row-fluid -->
+		<script type="text/javascript">
+			$('#tblattendance').dataTable({
+				"bJQueryUI": false,
+				"bAutoWidth": false,
+				"iDisplayLength": 500,
+				"bLengthChange": false,
+			});
+		</script>
+

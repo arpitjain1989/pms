@@ -1,0 +1,711 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Employee code: </b><br>Enter the employee code for the employee you are adding.
+			</li>
+			<li>
+				<b>Name: </b><br>Enter the name for the employee you are adding.
+			</li>
+			<li>
+				<b>Username: </b><br>Enter the username for the employee you are adding.
+			</li>
+			<li>
+				<b>Contact No: </b><br>Enter the contact number for the employee you are adding.
+			</li>
+			<li>
+				<b>Address: </b><br>Enter the address for the employee you are adding.
+			</li>
+			<li>
+				<b>Department: </b><br>Select the department for the employee you are adding.
+			</li>
+			<li>
+				<b>Designation: </b><br>Select the designation for the employee you are adding.
+			</li>
+			<li>
+				<b>Reporting Head: </b><br>Enter the reporting head for the employee you are adding.
+			</li>
+			<li>
+				<b>Password: </b><br>Enter the password for the employee you are adding.
+			</li>
+			<li>
+				<b>Role: </b><br>Select the role for the employee you are adding.
+			</li>
+			<li>
+				<b>Opening Leave Balance: </b><br>Enter the opeaning leave balance for the employee you are adding.
+			</li>
+			<li>
+				<b>Shift Timings: </b><br>Select the shift timing for the employee you are adding.
+			</li>
+			<li>
+				<b>Status: </b><br>Select the status for the employee you are adding. To delete the demployee, de-activate the employee
+			</li>
+			<li>
+				<b>Not to incl in Head Count / Attrition: </b><br>Check if the employee is not to be included in head count and attrition calculation.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<div class="row-fluid">
+	<div class="span12">
+	<span style="color:#ED7A53;">{message}</span>
+	<!--BeginFillErrors-->
+		<span style="color:#ED7A53;">{error}</span>
+	<!--EndFillErrors-->
+		<form class="form-horizontal seperator" method="post" action="" autocomplete="off" >
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+		<input type="hidden" name="id" id="id" value="{employeeid}" />
+		<input type="hidden" name="hdnteamleader" id="hdnteamleader" value="{teamleader_id}" />
+		<input type="hidden" name="hdnRctMail" id="hdnRctMail" value="{rct_mail_send}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Status:</label>
+					<Select name="status" id="status">
+					<option value="0">Active</option>
+					<option value="1">Deactive</option>
+					</Select>
+					<script type="text/javascript">
+						if("{status}" != "")
+							$("#status").val("{status}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="date_of_joining">Date of Joining:</label>
+					<input type="text" id="date_of_joining" name="date_of_joining" class="span4 text" value="{d_of_join}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="emp_code" class = "required">Employee code:</label>
+					<input class="span4" name="employee_code" id="employee_code" type="text" value="{employee_code}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">Name:</label>
+					<input class="span4" name="name" id="name" type="text" value="{name}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="father_husband_name">Fathers / Husband Name :</label>
+					<input type="text" id="father_husband_name" name="father_husband_name" class="span4 text" value="{father_husband_name}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Permanent Address:</label>
+					<textarea class="span4" name="address" id="address">{address}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="current_address">Current Address :</label>
+					<input type="text" id="current_address" name="current_address" class="span4 text" value="{current_address}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="location">Location :</label>
+					<input type="text" id="location" name="location" class="span4 text" value="{location}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="city">City :</label>
+					<input type="text" id="city" name="city" class="span4 text" value="{city}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="zip">Zip :</label>
+					<input type="text" id="zip" name="zip" class="span4 text" value="{zip}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="dob">Date of Birth :</label>
+					<input type="text" id="dob" name="dob" class="span4 text" value="{d_birth}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">TeamLeader:</label>
+					<div id="divteamleader">
+					
+					</div>
+					<!--<input class="span4" name="teamleader" id="teamleader" type="text" value="{teamleader}" />-->
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5">Shift Timings:</label>
+					<Select name="shiftid" id="shiftid">
+						<option value="">Please select</option>
+						<!--BeginFillShiftTimings-->
+						<option value="{shifttimings_id}">{shifttimings}</option>
+						<!--EndFillShiftTimings-->
+					</Select>
+					<script type="text/javascript">
+						if("{shiftid}" != "")
+							$("#shiftid").val("{shiftid}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Opening Leave Balance:</label>
+					<input class="span4" name="leave_bal" id="leave_bal" type="text" value="{leave_bal}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="gender">Gender :</label>
+					<div class="span4 controls">   
+						<select name="gender" id="gender">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Male
+							<option value='2'/>Female
+						</select>
+						<script type="text/javascript">
+							if("{gender}" != "")
+								$("#gender").val("{gender}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="emergency_contact_name">Emergency Contact Name :</label>
+					<input type="text" id="emergency_contact_name" name="emergency_contact_name" class="span4 text" value="{emergency_contact_name}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="relation">Emergency Contact Relation :</label>
+					<input type="text" id="relation" name="relation" class="span4 text" value="{relation}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="emergency_contact">Emergency Contact Number:</label>
+					<input type="text" id="emergency_contact" name="emergency_contact" class="span4 text" value="{emergency_contact}"/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="phone_number">Phone Number :</label>
+					<input type="text" id="phone_number" name="phone_number" class="span4 text" value="{phone_number}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Mobile No:</label>
+					<input class="span4" name="contact" id="contact" type="text" value="{contact}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="company_mobile_no">Company Mobile No. :</label>
+					<input type="text" id="company_mobile_no" name="company_mobile_no" class="span4 text" value="{company_mobile_no}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Official Email:</label>
+					<input class="span4" name="email" id="email" type="text" value="{email}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="official_email">Personal Email :</label>
+					<input type="text" id="official_email" name="official_email" class="span4 text" value="{official_email}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="qualification">Final Qualification :</label>
+					<input type="text" id="qualification" name="qualification" class="span4 text" value="{qualification}"/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="experience">Experience :</label>
+					<input type="text" id="experience" name="experience" class="span4 text" value="{experience}"/>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Department:</label>
+					<select name="department" id="department">
+					<!--BeginDepartmentValues-->
+					<option value="{department_id}">{department_title}</option>
+					<!--EndDepartmentValues-->		
+					</select>
+					
+					<script type="text/javascript">
+						if("{dep_id}" != "")
+							$("#department").val("{dep_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Current Designation:</label>
+					<select name="designation" id="designation" onchange="fnGetReportingHead()">
+					<option value="">Please select</option>
+					<!--BeginDesignationValues-->
+					<option value="{designation_id}">{designation_title}</option>
+					<!--EndDesignationValues-->		
+					</select>
+					<script type="text/javascript">
+						if("{des_id}" != "")
+							$("#designation").val("{des_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="old_designation">Last Designation: </label>
+					{old_designation}
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="blood_group">Blood Group :</label>
+					<input type="text" id="blood_group" name="blood_group" class="span4 text" value="{blood_group}"/>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="current_salary_ctc">Current ctc :</label>
+					<input type="text" id="current_salary_ctc" name="current_salary_ctc" class="span4 text" value="{current_salary_ctc}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="start_ctc">Last CTC: </label>
+					{start_ctc}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="id_card">Id Card :</label>
+					<div class="span4 controls">   
+						<select name="id_card" id="id_card">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Yes
+							<option value='2'/>No
+						</select>
+						<script type="text/javascript">
+							if("{id_card}" != "")
+								$("#id_card").val("{id_card}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="date_of_joining">Induction:</label>
+					<Select name="induction" id="induction">
+					<option value="0">Please Select</option>
+					<option value="1">Attend</option>
+					<option value="2">Pending</option>
+					</Select>
+					<script type="text/javascript">
+						if("{induction}" != "")
+							$("#induction").val("{induction}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="employee_reference_detail">Employee Reference Details :</label>
+					<select id="e1" name="employee_reference_detail" class="span4 nostyle">
+						 <option value="" selected="selected" />Please select</option>
+						<!--BeginFillEmployeeReference-->
+						<option value="{emp_id}">{emp_name}</option><!--EndFillEmployeeReference-->
+					</select>
+					<script type="text/javascript">
+						//alert({employee_reference_detail});
+							if("{employee_reference_detail}" != "")
+								$("#e1").val("{employee_reference_detail}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="pf_no">PF NO. GJ/SRT/ 35455 :</label>
+					<input type="text" id="pf_no" name="pf_no" class="span4 text" value="{pf_no}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="esic_no">ESIC NO.39/31084/90 :</label>
+					<input type="text" id="esic_no" name="esic_no" class="span4 text" value="{esic_no}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="icici_bank_ac_no">ICICI Bank Account no. :</label>
+					<input type="text" id="icici_bank_ac_no" name="icici_bank_ac_no" class="span4 text" value="{icici_bank_ac_no}"/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">Username:</label>
+					<input class="span4" name="username" id="username" type="text" value="{username}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Password:</label>
+					<input class="span4" name="password" id="password" type="password" value="" placeholder="{password123}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="name">Role:</label>
+					<select name="role" id="role">
+					<!--BeginRolesValues-->
+					<option value="{id}">{title}</option>
+					<!--EndRolesValues-->
+					</select>
+					<script type="text/javascript">
+						if("{role}" != "")
+							$("#role").val("{role}");
+					</script>
+				</div>
+			</div>
+		</div>
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="retention_bonus_scheme">10% Deduction or Retention bonus Scheme :</label>
+					<div class="span4 controls">   
+						<select name="retention_bonus_scheme" id="retention_bonus_scheme">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Yes
+							<option value='2'/>No
+						</select>
+						<script type="text/javascript">
+							if("{retention_bonus_scheme}" != "")
+								$("#retention_bonus_scheme").val("{retention_bonus_scheme}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="retention_amount">Retention Amount :</label>
+					<input type="text" id="retention_amount" name="retention_amount" class="span4 text" value="{retention_amount}"/>
+				</div>
+			</div>
+		</div>
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="offer_letter_issued">Offer Letter Issued :</label>
+					<div class="span4 controls">   
+						<select name="offer_letter_issued" id="offer_letter_issued">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Yes
+							<option value='2'/>No
+						</select>
+						<script type="text/javascript">
+							if("{offer_letter_issued}" != "")
+								$("#offer_letter_issued").val("{offer_letter_issued}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div-->
+		
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="terminated_absconding_resigned">Terminated / Absconding / Resigned :</label>
+					<div class="span4 controls">   
+						<select name="terminated_absconding_resigned" id="terminated_absconding_resigned">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Terminated
+							<option value='2'/>Absconding
+							<option value='3'/>Resigned
+						</select>
+						<script type="text/javascript">
+							if("{terminated_absconding_resigned}" != "")
+								$("#terminated_absconding_resigned").val("{terminated_absconding_resigned}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="date_of_resign_terminate">Date of Resignation letter / Termination :</label>
+					<input type="text" id="date_of_resign_terminate" name="date_of_resign_terminate" class="span4 text" value="{d_of_res_ter}"/>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="reason_of_leaving">Reason of Leaving :</label>
+					<textarea id="reason_of_leaving" name="reason_of_leaving" class="span4 uniform">{reason_of_leaving}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="relieving_date_by_manager">Relieving date by Operation Manager / HR :</label>
+					<input type="text" id="relieving_date_by_manager" name="relieving_date_by_manager" class="span4 text" value="{rel_date_by_manager}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="rct_mail_send">RCT mail send :</label>
+					<input type="checkbox" name="rct_mail_send" id="rct_mail_send" value="1">
+					<script type="text/javascript">
+						if($("#hdnRctMail").val() == '1')
+						{
+							$("#rct_mail_send").attr("checked","checked");
+							$("#rct_mail_send").uniform();
+						}
+						
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<!--<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="issues_relieving_offer_letter">Issued Relieving letter & Experience letter :</label>
+					<div class="span4 controls">   
+						<select name="issues_relieving_offer_letter" id="issues_relieving_offer_letter">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Yes
+							<option value='2'/>No
+						</select>
+						<script type="text/javascript">
+							if("{issues_relieving_offer_letter}" != "")
+								$("#issues_relieving_offer_letter").val("{issues_relieving_offer_letter}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="not_include_head_count">Not to incl in Head Count / Attrition :</label>
+					<input type="checkbox" name="not_include_head_count" id="not_include_head_count" value="1">
+					<script type="text/javascript">
+						if("{not_include_head_count}" == '1')
+						{
+							$("#not_include_head_count").attr("checked","checked");
+							//$("#not_include_head_count").uniform();
+						}
+					</script>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='employee.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+	<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$("#submit").click(function()
+{
+	if($("#employee_code").val() == '')
+	{
+		alert('Please insert Employee code.');
+		$("#employee_code").focus();
+		return false;
+	}
+	if($("#name").val() == '')
+	{
+		alert('Please insert name.');
+		$("#name").focus();
+		return false;
+	}
+	if($("#email").val() == '')
+	{
+		alert('Please insert email.');
+		$("#email").focus();
+		return false;
+	}
+	else if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Email not valid.");
+			return false;
+		}
+	}
+	if($("#contact").val() == '')
+	{
+		alert('Please insert contact.');
+		$("#contact").focus();
+		return false;
+	}
+	if($("#address").val() == '')
+	{
+		alert('Please insert address.');
+		$("#address").focus();
+		return false;
+	}
+});
+return true;
+});
+
+function  fnGetReportingHead()
+{
+	console.log('designationajax.php?designation=' +$("#designation").val());
+	$('#divteamleader').load('designationajax.php?designation=' +$("#designation").val(),'',function(data){
+	//alert(data);
+	//alert($("#teamleader").html());
+	//alert($("#hdnteamleader").val());
+		$("#teamleader").val($("#hdnteamleader").val());
+		$("#teamleader").uniform();
+		//alert($("#teamleader").val());
+	});
+}
+
+$("#date_of_joining,#date_of_resign_terminate,#relieving_date_by_manager,#dob").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+
+$(document).ready(function(){
+			$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+	   fnGetReportingHead();
+	   
+	});
+$(document).ready(function() { $("#e1").select2({
+	 placeholder: "Select Please",
+	 placeholderOption : 'first',
+	  minimumInputLength: 2	 }); });	
+</script>

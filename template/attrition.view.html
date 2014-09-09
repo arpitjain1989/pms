@@ -1,0 +1,392 @@
+<!-- Build page from here: -->
+<input type="hidden" value="{session_designation}" name="session_designation" id="session_designation"/>
+
+<input type="hidden" value="{session_id}" name="session_id" id="session_id"/>
+<input type="hidden" value="{leave_taker_designation}" name="designation" id="designation"/>
+
+
+<div class="row-fluid seperator">
+	<div class="span12">
+		<div class="form-row row-fluid">
+			<div class="span7">
+				<div class="row-fluid">
+					<label class="form-label span7"><b>Employee Name:</b></label>
+					<label class="form-label span4 clsleft">{emplname}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span7">
+				<div class="row-fluid">
+					<label class="form-label span7"><b>Reporting Head:</b></label>
+					<label class="form-label span5 clsleft">{repHead}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span7">
+				<div class="row-fluid">
+					<label class="form-label span7"><b>date:</b></label>
+					<label class="form-label span5 clsleft">{attDate}</label>
+				</div>
+			</div>
+		</div>
+		<form name="attritionview" id="attritionview" action="attrition.view.php" method="post">
+			<input type="hidden" name="hdnaction" id="hdnaction" value="update">
+			<input type="hidden" name="hdnid" id="hdnid" value="{attrition_id}">
+			<input type="hidden" name="hdndesignation" id="hdndesignation" value="{session_designation}">
+			<input type="hidden" name="hdnsessionUType" id="hdnsessionUType" value="{session_userType}">
+			<input type="hidden" name="status" id="status" value="{status}">
+			
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Status (By Team Leader):</b></label>
+						<label class="form-label span5 clsleft">{tlstatus}</label>						
+					</div>
+				</div>
+			</div>
+			<!--BeginFillTemaLeaderEditable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By Team Leader):</b></label>
+						<input type="text" id="tlholddate" name="tlholddate" class="span4 text" value=""/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By Team Leader):</b></label>
+						<textarea id="tlholdcomment" name="tlholdcomment" class="span4 text"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillTemaLeaderEditable-->
+			<!--BeginFillTemaLeaderReadable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By Team Leader):</b></label>
+						<label class="form-label span5 clsleft">{tlhold}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By Team Leader):</b></label>
+						<label class="form-label span5 clsleft">{tlholdcomment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillTemaLeaderReadable-->
+
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Status (By Manager):</b></label>
+						<label class="form-label span5 clsleft">{managerstatus}</label>						
+					</div>
+				</div>
+			</div>
+			<!--BeginFillManagerEditable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By Manager):</b></label>
+						<input type="text" id="managerholddate" name="managerholddate" class="span4 text" value=""/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By Manager):</b></label>
+						<textarea id="managerholdcomment" name="managerholdcomment" class="span4 text"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillManagerEditable-->
+			<!--BeginFillManagerReadable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By Manager):</b></label>
+						<label class="form-label span5 clsleft">{mnhold}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By Manager):</b></label>
+						<label class="form-label span5 clsleft">{managerholdcomment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillManagerReadable-->
+
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Status (By Admin):</b></label>
+						<label class="form-label span5 clsleft">{adminstatus}</label>						
+					</div>
+				</div>
+			</div>
+			<!--BeginFillAdminEditable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"><b>Hold till date(By Admin):</b></label>
+						<input type="text" id="adminholddate" name="adminholddate" class="span4 text" value=""/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"><b>Comment (By Admin):</b></label>
+						<textarea id="adminholdcomment" name="adminholdcomment" class="span4 text"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillAdminEditable-->
+			<!--BeginFillAdminReadable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By Admin):</b></label>
+						<label class="form-label span5 clsleft">{adminhold}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By Admin):</b></label>
+						<label class="form-label span5 clsleft">{adminholdcomment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillAdminReadable-->
+			
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Status (By HR):</b></label>
+						<label class="form-label span5 clsleft">{hrstatus}</label>						
+					</div>
+				</div>
+			</div>
+			<!--BeginFillHrReadable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By HR):</b></label>
+						<label class="form-label span5 clsleft">{hrhold}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By HR):</b></label>
+						<label class="form-label span5 clsleft">{hrholdcomment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillHrReadable-->
+			<!--BeginFillHrEditable-->
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Hold till date(By HR):</b></label>
+						<input type="text" id="hrholddate" name="hrholddate" class="span4 text"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span7">
+					<div class="row-fluid">
+						<label class="form-label span7"> <b>Comment (By HR):</b></label>
+						<textarea id="hrholdcomment" name="hrholdcomment" class="span4 text"></textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillHrEditable-->
+
+			<!--BeginDisplayActionButtons-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span6 controls">
+								<button id="submit" class="btn btn-info marginR10" name="submit" type="submit">Save</button>
+								<button id="cancel" class="btn btn-info marginR10" onclick="window.location='attrition_list.php'" name="cancel" type="button">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayActionButtons-->
+			<!--BeginDisplayBackButtons-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='attrition_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayBackButtons-->
+		</form>
+	</div>
+<!-- End .row-fluid -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#tlholddate,#managerholddate,#adminholddate,#hrholddate").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+
+		$("#submit").click(function()
+		{
+			var date = new Date();
+			var enterdate = $("#tlholddate").val();
+			var start_date_formated = new Date(enterdate);
+
+			if($("#hdnsessionUType").val() == 'admin')
+			{
+				if($("#status").val() == '2')
+				{
+					if($("#adminholddate").val() == '' || $("#adminholddate").val() == '00:00:00')
+					{
+						alert('Please select hold date.');
+						$("#adminholddate").focus();
+						return false;
+						
+					}
+					else
+					{
+						var enterdate = $("#adminholddate").val();
+						var start_date_formated = new Date(enterdate);
+						if(start_date_formated < date)
+						{
+							alert('Hold date must be greater than today date.');
+							$("#adminholddate").focus();
+							return false;	
+						}
+					}
+					
+					if($.trim($("#adminholdcomment").val()) == '')
+					{
+						alert('Please enter comment.');
+						$("#adminholdcomment").focus();
+						return false;
+					}
+				}
+			}
+			else if($("#hdnsessionUType").val() == 'hradmin')
+			{
+				if($("#status").val() == '2')
+				{
+					if($("#hrholddate").val() == '' || $("#hrholddate").val() == '')
+					{
+						alert('Please select hold date.');
+						$("#hrholddate").focus();
+						return false;
+						
+					}
+					else
+					{
+						var enterdate = $("#hrholddate").val();
+						var start_date_formated = new Date(enterdate);
+						if(start_date_formated < date)
+						{
+							alert('Hold date must be greater than today date.');
+							$("#hrholddate").focus();
+							return false;
+						}
+					}
+					
+					if($.trim($("#hrholdcomment").val()) == '')
+					{
+						alert('Please enter comment.');
+						$("#hrholdcomment").focus();
+						return false;
+					}
+				}
+			}
+			else if($("#hdnsessionUType").val() == 'manager')
+			{
+				if($("#status").val() == '2')
+				{
+					if($("#managerholddate").val() == '' || $("#managerholddate").val() == '')
+					{
+						alert('Please select hold date.');
+						$("#managerholddate").focus();
+						return false;
+						
+					}
+					else
+					{
+						var enterdate = $("#managerholddate").val();
+						var start_date_formated = new Date(enterdate);
+						if(start_date_formated < date)
+						{
+							alert('Hold date must be greater than today date.');
+							$("#managerholddate").focus();
+							return false;
+						}
+					}
+					if($.trim($.trim($("#managerholdcomment").val())) == '')
+					{
+						alert('Please enter comment.');
+						$("#managerholdcomment").focus();
+						return false;
+					}
+				}
+			}
+			else if($("#hdnsessionUType").val() == 'tl')
+			{
+				if($("#status").val() == '2')
+				{
+					if($("#tlholddate").val() == '' || $("#tlholddate").val() == '')
+					{
+						alert('Please select hold date.');
+						$("#tlholddate").focus();
+						return false;
+						
+					}
+					else
+					{
+						var enterdate = $("#tlholddate").val();
+						var start_date_formated = new Date(enterdate);
+						if(start_date_formated < date)
+						{
+							alert('Hold date must be greater than today date.');
+							$("#tlholddate").focus();
+							return false;
+						}
+					}
+					
+					if($.trim($("#tlholdcomment").val()) == '')
+					{
+						alert('Please enter comment.');
+						$("#tlholdcomment").focus();
+						return false;
+					}
+				}
+			}
+		});
+
+	});
+</script>

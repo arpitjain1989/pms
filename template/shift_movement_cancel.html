@@ -1,0 +1,122 @@
+	<div class="row-fluid">
+		<div class="span12">
+
+			<!--BeginDisplayMessageBlock-->
+			<div class="alert {message_class}">
+				<button type="button" class="close" data-dismiss="alert">x</button>
+				<strong>{message}</strong>
+			</div>
+			<!--EndDisplayMessageBlock-->
+			<form id="frmSearchAttendance" name="frmSearchAttendance" method="post" action="shift_movement_cancel.php">
+
+			<input type="hidden" name="action" id="action" value="LeaveSearch" />
+			<input type="hidden" name="teamleader_id" id="teamleader_id" value="{teamleader}" />
+			<input type="hidden" name="agents_id" id="agents_id" value="{agents}" />
+
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Month:
+						</label>
+						<select name='month' id='month'>
+							<option value="01">January</option>
+							<option value="02">Feburary</option>
+							<option value="03">March</option>
+							<option value="04">April</option>
+							<option value="05">May</option>
+							<option value="06">June</option>
+							<option value="07">July</option>
+							<option value="08">August</option>
+							<option value="09">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<script type="text/javascript">
+							if("{premonth}" != "")
+							{
+								$("#month").val("{premonth}");
+								$.uniform.update("#month");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Year:
+						</label>
+						<select name='year' id='year'>
+							<!--BeginDisplayYearBlock-->
+							<option value="{curyr}">{curyr}</option>
+							<!--EndDisplayYearBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{preyear}" != "")
+							{
+								$("#year").val("{preyear}");
+								$.uniform.update("#year");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" id="getdata" class="btn marginR10">Search</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='attendance.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+			<div class="box gradient">
+				<div class="title">
+					<h4><span>Shift Movement Request</span></h4>
+				</div>
+				<div class="content noPad clearfix">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+						<thead>
+							<tr>
+								<th>Employee Name</th>
+								<th>Teamleader Name</th>
+								<th>Movement Date</th>
+								<th>Movement Time</th>
+								<th>Compensation Date</th>
+								<th>Compensation Time</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillShiftMovements-->
+							<tr class="odd gradeX {trclass}">
+								<td>{employeename}</td>
+								<td>{teamleadername}</td>
+								<td>{movementdate}</td>
+								<td>{movementfrom} - {movementto}</td>
+								<td>{compensationdate}</td>
+								<td>{compensationfrom} - {compensationto}</td>
+								<td>
+									<a href="shift_movement_cancel_view.php?id={id}" name="view" id="view" title="View Shift Movement" class="tip"><span class="icon12 brocco-icon-search"></span></a>
+								</td>
+							</tr>
+							<!--EndFillShiftMovements-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+
+<!-- End .row-fluid -->

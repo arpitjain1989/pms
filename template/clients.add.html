@@ -1,0 +1,103 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="id" id="id" value="{id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name" class = "required">Name:</label>
+							<input class="span4" name="name" id="name" type="text" value="{name}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="display_name" class = "required">Display Name:</label>
+							<input class="span4" name="display_name" id="display_name" type="text" value="{display_name}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="email">email:</label>
+							<input class="span4" name="email" id="email" type="text" value="{email}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="contact">Contact No:</label>
+							<input class="span4" name="contact" id="contact" type="text" value="{contact}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='clients.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+ $("#contact").keyup(function() {
+    $(this).val($(this).val().replace(/[^\d]+/, ''));
+  });
+	$("#submit").click(function() 
+	{
+		if($("#name").val() == '')
+		{
+			alert('Please insert name.');
+			$("#name").focus();
+			return false;
+		}
+		if($("#display_name").val() == '')
+		{
+			alert('Please insert display name.');
+			$("#display_name").focus();
+			return false;
+		}
+		if($("#email").val() == '')
+		{
+			alert('Please insert email.');
+			$("#email").focus();
+			return false;
+		}
+		else if($("#email").val() != '')
+		{
+			if( !emailReg.test( $("#email").val() ) ) 
+			{
+				$("#email").focus();
+				alert("Email not valid.");
+				return false;
+			}
+		}
+		if($("#contact").val() == '')
+		{
+			alert('Please insert contact.');
+			$("#contact").focus();
+			return false;
+		}
+	});
+	return true;
+});
+</script>

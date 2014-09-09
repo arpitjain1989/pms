@@ -1,0 +1,87 @@
+<!-- Build page from here: -->
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+
+			<!--BeginDisplayInsufficientWorkHours-->
+			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="box gradient">
+						<div class="title">
+							<h4><span>Insufficient work hours for {date}</span></h4>
+						</div>
+						<div class="content noPad clearfix">
+							<table id="workhoursTable" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+								<thead>
+									<tr>
+										<th>Employee Name</th>
+										<th>Work hours</th>
+										<th>Late coming</th>
+										<th>Break exceed</th>
+										<th>Approve</th>
+										<!--th>Additional Minutes</th-->
+									</tr>
+								</thead>
+								<tbody>
+									<!--BeginDisplayWorkHours-->
+									<tr class="odd gradeX">
+										<td><a href="insufficient_workhours.php?search=Attendance&id={employeeid}&date={date}" target="_blank">{employeename}</a></td>
+										<td>{workhours}</td>
+										<td>{LateTime}</td>
+										<td>{BreakExceed}</td>
+										<td>
+											<input type="hidden" name="attendanceid[]" id="attendanceid_{attendanceid}" value="{attendanceid}" />
+											<input type="checkbox" name="chkapprove_{attendanceid}" id="chkapprove_{attendanceid}" value="{attendanceid}" {strchecked} />
+										</td>
+										<!--td>
+											<input type="text" name="additionalminutes_{attendanceid}" id="additionalminutes_{attendanceid}" value="{additionaltime}" />
+										</td-->
+									</tr>
+									<!--EndDisplayWorkHours-->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<input type="hidden" name="action" id="action" value="SaveWorkHours" />
+								<button type="submit" class="btn marginR10">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='workhours_calendar.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayInsufficientWorkHours-->
+			<!--BeginDisplayNoInsufficientWorkHours-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								No insufficient work hours
+							</div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='workhours_calendar.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoInsufficientWorkHours-->
+		</form>
+	</div>
+</div>

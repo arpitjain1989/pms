@@ -1,0 +1,77 @@
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Expired Requisition</span>
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblExpiredRequisition">
+					<thead>
+						<tr>
+							<th>User Name</th>
+							<th>Requisition For</th>
+							<th>Project Name</th>
+							<th>Till Date</th>
+							<th>Added on</th>
+							<th>Approval Date</th>
+							<th>Approved By</th>
+							<th>Is Closed</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillExpiredRequisitionList-->
+						<tr class="odd gradeX">
+							<td>{name}</td>
+							<td>{requisition_for_title}</td>
+							<td>{project_name}</td>
+							<td>{till_date}</td>
+							<td>{addeddate}</td>
+							<td>{addeddate}</td>
+							<td>{approved_by}</td>
+							<td>{isclosed_text}</td>
+							<td>
+								<a href="it_expired_requisition_view.php?id={requisitionid}" name="view" id="view" title="View Expired Requisition" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillExpiredRequisitionList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblExpiredRequisition').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 3, "desc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				{ "sType": "date-uk" }, 
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				null
+			]
+		});
+	});
+</script>

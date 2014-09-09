@@ -1,0 +1,18 @@
+PLWP    Planned Leave without Pay - done
+ULWP    Unplanned Leave without Pay - done
+A		absend	 - done
+PPL		Paid Leave   - done
+UPL		Unplanned paid leave  --done
+PLT		Late Coming - done
+HL		Half Day Leave -done
+PLT+M 	
+HA		Half Day Absent - done
+HLWP	Half Day LWP  - done
+WO		Weekly Off -done
+PH		Public Holiday -done
+NJ
+AWOL
+UHL		Unplanned Half day Leave - done
+PHL		Planned Half day leave - done
+break exceed - done
+

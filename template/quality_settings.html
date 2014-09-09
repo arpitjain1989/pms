@@ -1,0 +1,88 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Quality Master:</b><br>Please select the Quality Master.
+			</li>
+			<li>                                                    
+				<b>Leveling Status:</b><br>Please select the Leveling Status for the current leveling.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmQualitySettings" id="frmQualitySettings" class="form-horizontal seperator" method="post" action="quality_settings.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+				
+				<div class="row-fluid">
+					<label class="form-label span3">Quality Master:</label>
+					<select class="span4" name="master_id" id="master_id">
+						<option value="">Please Select</option>
+						<!--BeginDisplayQualityMasterBlock-->
+						<option value="{employee_id}">{employee_name}</option>
+						<!--EndDisplayQualityMasterBlock-->
+					</select>
+					<script type="text/javascript">
+						if("{master_id}" != "")
+							$("#master_id").val("{master_id}");
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Leveling Status:</label>
+					<select class="span4" name="leveling_status" id="leveling_status">
+						<option value="0">Active</option>
+						<option value="1">Inactive</option>
+					</select>
+					<script type="text/javascript">
+						if("{leveling_status}" != "")
+							$("#leveling_status").val("{leveling_status}");
+					</script>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SaveQualitySettings" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='quality_formtype_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	function fnValidate()
+	{
+		if(!checkblank($("#master_id"),"Please enter Quality Master")) return false;
+	}
+	
+</script>

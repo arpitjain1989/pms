@@ -1,0 +1,81 @@
+		<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+		<form id="form" name="form" action="" method="post">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+		<input type="hidden" name="hdnprojectid" id="hdnprojectid" value="{projectid}"/>
+		
+		<span class="message">{message}</span>
+		<span class="right">
+			<a href="form.add.php?id={projectid}">
+				<h4>
+					<span class="icon16 entypo-icon-add"></span>
+					Add Form Field
+				</h4>
+			</a>
+		</span>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4> <span>Form table</span> </h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th style="width: 20px;"><input type='checkbox' name='chkall' id='chkall' /></th>
+									<th>Fields</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillFormValues-->
+								<tr class="odd gradeX ">
+									<td><input type="checkbox" id="chk" name="chk[]" value="{project_field_id}" class="chkone"/></td>
+									<td>{title}</td>
+								</tr>
+								<!--EndFillFormValues-->
+							</tbody>
+						</table>
+					</div>
+					
+						<span class="btn btn-danger">
+							<span class="icon16 icomoon-icon-cancel-2 white"></span>
+							<input type="submit" name="delete" id="delete" value="Delete" />
+						</span>
+				</div>
+				<!-- End .box -->
+			</div>
+			<!-- End .span12 -->
+		</div>
+		</form>
+		<!-- End .row-fluid -->
+		<!-- Page end here -->
+		
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$("input[type='checkbox']").uniform();
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$("input[type='checkbox']").uniform();
+		});
+	});
+</script>

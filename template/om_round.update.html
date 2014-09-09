@@ -1,0 +1,388 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="om_round.update.php">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+				<input type="hidden" name="id" id="id" value="{cand_id}" />
+				<input type="hidden" name="des_id" id="des_id" value="{des_id}" />
+				<input type="hidden" name="lowest" id="lowest" value="{lowest}" />
+				<input type="hidden" name="highest" id="highest" value="{highest}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="name" class = "required">Candidate Name:</label>
+							{cand_name}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="applied_for" class = "required">Position applied for:</label>
+							{des_title}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="interview_date">Date of Interview:</label>
+							{reg_date}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="reference">Reference:</label>
+							{refer}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="job_experience">Job Experience (in year):</label>
+							{total_experience}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="rel_job_experience">Related Job Experience:</label>
+							{rel_job_exp}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="education">Education:</label>
+							{education}
+						</div>
+					</div>
+				</div>
+	
+
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="education">Interviewer(Hr):</label>
+							{interviewerName}
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span6" for="education"><b>IQ Test Reviews </label></b>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">IQ Score(%):</label>
+						{iq_score}
+					</div>
+				</div>
+
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span7" for="education"><b>{interviewerName} Review for the candidate</label></b>
+							
+						</div>
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Initiative:</label>
+						{initiative}
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Communication & Listening:</label>
+						{communication_listening}
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Attitute:</label>
+						{attitute}
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Comments:</label>
+						{hrcomments}
+					</div>
+				</div>
+				<!--BeginFillTestEvaluationBlock-->
+				<!--div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span7" for="education"><b> {exam_title} Review for the candidate</label></b>
+							
+						</div>
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Total Marks:</label>
+						{emp_marks}
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Candidate Marks:</label>
+						{emp_get_marks}
+					</div>
+				</div-->
+				<!--EndFillTestEvaluationBlock-->
+				<!--BeginFillMarksBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span6" for="education"><b>{exam_title} Reviews </label></b>
+					
+				</div>
+			</div>
+			<!--BeginFillSubCategoryBlock-->
+			<div class="row-fluid">
+				<label class="form-label span5" for="education"><b>Exam Type:</b></label>
+				<b>{title_sub}</b>
+			</div>
+			<div class="row-fluid">
+				<label class="form-label span5" for="name">Marks Earned :</label>
+				{getMarks}
+			</div>
+			<!--EndFillSubCategoryBlock-->
+		</div>
+
+
+		<!--EndFillMarksBlock-->
+				<!--BeginFillManagerCommnetsBlock-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span8" for="education"><b>{oper_man_name} Review for the candidate</label></b>
+							
+						</div>
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Status:</label>
+						{oper_stat}
+					</div>
+					<div class="row-fluid">
+						<label class="form-label span5" for="education">Comments:</label>
+						{oper_comments}
+					</div>
+				</div>
+				<!--EndFillManagerCommnetsBlock-->
+				
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="opmcomment">Comments:</label>
+							<textarea id="opmcomment" class="span5 elastic uniform" style="overflow: hidden; height: 63px;" rows="3" name="opmcomment">{operation_comments}</textarea>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="status">Status:</label>
+							<div class="span4 controls">   
+								<select name="status" id="status">
+									<option value='' selected="selected" />Please select
+									<option value='1' >Select</option>
+									<option value='2'>Reject</option>
+									<option value='3'>Hold</option>
+									<option value='4'>Declined</option>
+								</select>
+								<script type="text/javascript">
+									if("{ops_status}" != "")
+										$("#status").val("{ops_status}");
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="showHide">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span5" for="salary_offered">Salary offered <b><!--BeginFillExpectecSalary-->[ {lowest} - {highest} ]<!--EndFillExpectecSalary--></b>:</label>
+								<input id="salary_offered" class="span4 text" type="text" value="{salary_offered}" name="salary_offered">
+							</div>
+						</div>
+					</div>
+
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span5" for="exp_date_of_joining">Expected date of joining:</label>
+								<input type="text" id="exp_date_of_joining" name="exp_date_of_joining" class="span4 text" value="{exp_date_of_joining}" />
+							</div>
+						</div>
+					</div>
+
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span5" for="teamleader_by_manager">TeamLeader:</label>
+								<select id='teamleader_by_manager' name='teamleader_by_manager' onchange="javascript: fnChangeShift($(this));" >
+									<option value=''>Please select</option>
+									<!--BeginFillEmployeeTeamleader-->
+									<option value='{team_lead_id}'>{team_lead_name}</option>
+									<!--EndFillEmployeeTeamleader-->
+								</select>
+								<script type="text/javascript">
+									if("{teamleader_by_manager}" != "")
+										$("#teamleader_by_manager").val("{teamleader_by_manager}");
+								</script>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span5" for="shift_timning_by_manager">Shift Timing:</label>
+								<div id='shiftId'>
+									<select id='shift_timning_by_manager' name='shift_timning_by_manager'>
+										<option value='0'>Please select</option>
+										<!--BeginFillShifts-->
+										<option value='{shift_id}'>{shift_name}</option>
+										<!--EndFillShifts-->
+									</select>
+								</div>
+								<script type="text/javascript">
+									if("{shift_timning_by_manager}" != "")
+										$("#shift_timning_by_manager").val("{shift_timning_by_manager}");
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--BeginFillSubmitButton-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='om_round.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--EndFillSubmitButton-->
+				<!--BeginFillCancelButton-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='om_round.php'">Back</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--EndFillCancelButton-->
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		
+<script type="text/javascript">
+	function fnChangeShift($obj)
+	{
+		$("#shiftId").load("shift_times.php?v="+escape($obj.val())+"&d="+$("#des_id").val(),"",function(){
+			$("#shift_timning_by_manager").uniform();
+		});
+	}
+
+$(document).ready(function(){
+	//alert($("#status").val());
+	if($("#status").val() == '1')
+	{
+		$("#showHide").css("display", "block");
+	}
+	else
+	{
+		$("#showHide").css("display", "none");
+	}
+
+	$('#status').change(function() {
+		//alert('hello');
+		if($("#status").val() == '1')
+		{
+			$("#showHide").css("display", "block");
+		}
+		else
+		{
+			$("#showHide").css("display", "none");
+		}
+	});
+	//fnChangeShift();
+	$("#exp_date_of_joining").datepicker({
+				dateFormat: 'yy-mm-dd',
+				showOtherMonths:true
+			});
+			
+$("#submit").click(function() 
+{
+	//alert($("#status").val());
+	if($("#opmcomment").val() == '')
+	{
+		alert('Please insert comments.');
+		$("#opmcomment").focus();
+		return false;
+	}
+	if($("#status").val() == '')
+	{
+		alert('Please select status.');
+		$("#status").focus();
+		return false;
+	}
+	else if($("#status").val() == '1')
+	{
+		//alert('hello');
+		//alert($("#salary_offered").val());
+		if($("#salary_offered").val() == '')
+		{
+			alert('Please enter salary offered.');
+			$("#salary_offered").focus();
+			return false;
+		}
+		/*else if(($("#salary_offered").val() > $("#lowest").val()) && ($("#salary_offered").val() < $("#highest").val()))
+		{
+			
+			return true;
+		}
+		else
+		{
+			alert('Please Enter salary offered between ' + $("#lowest").val() + ' and ' + $("#highest").val());
+			return false;
+		}*/
+		if($("#exp_date_of_joining").val() == '')
+		{
+			alert('Please enter expected date of joining.');
+			$("#exp_date_of_joining").focus();
+			return false;
+		}
+		if($("#teamleader_by_manager").val() == '')
+		{
+			alert('Please select reporting head.');
+			$("#teamleader_by_manager").focus();
+			return false;
+		}
+		//alert($("#shift_timning_by_manager").val());
+		if($("#shift_timning_by_manager").val() == '0')
+		{
+			alert('Please enter shift timning.');
+			$("#shift_timning_by_manager").focus();
+			return false;
+		}
+	}
+});
+return true;
+});
+</script>

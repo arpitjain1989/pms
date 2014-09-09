@@ -1,0 +1,383 @@
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+
+		<div class="span8">
+			<form id="frmSearchAttrition" name="frmSearchAttrition" method="post" action="rep_attrition.php">
+
+				<input type="hidden" name="action" id="action" value="AttritionSearch" />
+				<!--input type="hidden" name="team_member_id" id="team_member_id" value="{team_member}" />
+				<input type="hidden" name="team_leaders" id="team_leaders" value="{reportingHeads}" /-->
+				
+				<!--BeginDisplayReportingHeadHiddenBlock-->
+				<input type="hidden" name="reporting_head[]" id="reporting_head" value="{reporting_head}" />
+				<!--EndDisplayReportingHeadHiddenBlock-->
+				
+				<!--input type="hidden" name="agents_id" id="agents_id" value="{agents}" /-->
+
+				<!--div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">
+							Date From:
+							</label>
+							<input type="text" id="start_date" name="start_date" class="span2 text" value="{start_date}" readonly="readonly" style="cursor:pointer" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">
+							Date To:
+							</label>
+							<input type="text" id="end_date" class="span2 text" value="{end_date}" name="end_date" readonly="readonly" style="cursor:pointer" />
+						</div>
+					</div>
+				</div-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span4" for="task_done_by">Reporting Heads:</label>
+							<select id="e2" name="reporting_head[]" class="span4 nostyle" multiple="multiple">
+								<!--BeginFillReportingHeadsBlock-->
+								<option  {selected_heads} value="{reporting_head_id}">{reporting_head_title}</option>
+								<!--EndFillReportingHeadsBlock-->
+							</select>
+							<script type="text/javascript">
+								if("{priority}" != "")
+									$("#priority").val("{priority}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span4">
+							Month:
+							</label>
+							<select name='month' id='month'>
+								<option value="01">January</option>
+								<option value="02">Feburary</option>
+								<option value="03">March</option>
+								<option value="04">April</option>
+								<option value="05">May</option>
+								<option value="06">June</option>
+								<option value="07">July</option>
+								<option value="08">August</option>
+								<option value="09">September</option>
+								<option value="10">October</option>
+								<option value="11">November</option>
+								<option value="12">December</option>
+							</select>
+							<script type="text/javascript">
+								if("{month}" != "")
+								{
+									$("#month").val("{month}");
+									//$.uniform.update("#month");
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span4">
+							Year:
+							</label>
+							<select name='year' id='year'>
+								<!--BeginDisplayYearBlock-->
+								<option value="{curyr}">{curyr}</option>
+								<!--EndDisplayYearBlock-->
+							</select>
+							<script type="text/javascript">
+								if("{year}" != "")
+								{
+									$("#year").val("{year}");
+									//$.uniform.update("#year");
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" id="getdata" class="btn marginR10">Search</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='rep_attrition.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div>
+			<a href="rep_attrition_list.php"><h2>Yearly Attrition till {yearly_attrition_till_date_text} : {final_annual_attrition}%</h2></a>
+			<h2>Monthly Attrition : {final_monthly_attrition}%</h2>
+			<h2>Average Monthly Head Count : {display_average_head_count}</h2>
+			<a href="rep_attrition_joinees_list.php"><h2>YTD Joinees till {ytd_joinees_till_date_text} : {display_total_joinees_till_date}</h2></a>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4><span>Joineers and leavers for {yearly_attrition_till_date_text}</span></h4>
+					</div>
+					
+					<div>
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#leaversTab" data-toggle="tab">Leavers</a></li>
+							<li><a href="#joinersTab" data-toggle="tab">Joiners</a></li>
+						</ul>
+						
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="leaversTab">
+								<div class="row-fluid">
+									<div class="span12">
+										<div class="title">
+											<h4>
+												<span>Total leavers {total_leavers_count} for {leavers_for}</span>
+											</h4>
+										</div>
+										<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:auto;">
+											<table id="leaversTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+												<thead>
+													<tr>
+														<th>Date Of Joining</th>
+														<th>Employee code</th>
+														<th>Employee Name</th>
+														<th>Date of leaving</th>
+														<th>Terminate / Resigned</th>
+														<th>Reason for leaving</th>
+														<th>No of months worked</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!--BeginDisplayEmployeeBlog-->
+													<tr class="odd gradeX">
+														<td>{doj}</td>
+														<td>{e_code}</td>
+														<td>{e_name}</td>
+														<td>{date_of_leaving}</td>
+														<td>{termination_resi}</td>
+														<td>{reason_leav}</td>
+														<td>{no_of_month_work}</td>
+													</tr>
+													<!--EndDisplayEmployeeBlog-->
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="joinersTab">
+								<div class="row-fluid">
+									<div class="span12">
+										<div class="title">
+											<h4>
+												<span>Total joiners {total_joiners_count} for {joiners_for}</span>
+											</h4>
+										</div>
+										<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:auto;">
+											<table id="joinersTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+												<thead>
+													<tr>
+														<th>Date Of Joining</th>
+														<th>Employee code</th>
+														<th>Employee Name</th>
+													</tr>
+												</thead>
+												<tbody>
+													<!--BeginDisplayJoinersBlog-->
+													<tr class="odd gradeX">
+														<td>{joiners_doj}</td>
+														<td>{joiners_e_code}</td>
+														<td>{joiners_e_name}</td>
+													</tr>
+													<!--EndDisplayJoinersBlog-->
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Summary for tenured leavers</span>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:auto;">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th>< 3 Months</th>
+									<th>>= 3 Months and < 6 Months</th>
+									<th>>= 6 Months and < 12 Months</th>
+									<th>>= 12 Months</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="odd gradeX">
+									<td>{month_work1}</td>
+									<td>{month_work2}</td>
+									<td>{month_work3}</td>
+									<td>{month_work4}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Summary for leavers</span>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:auto;">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<!--BeginFillLeaversTypeBlock-->
+									<th>{leavers_type_text}</th>
+									<!--EndFillLeaversTypeBlock-->
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="odd gradeX">
+									<!--BeginFillLeaversTypeDetailsBlock-->
+									<td><a href="#" onclick="javascript: fnViewDetails('{leavers_type_count_id}', '0'); return false;">{leavers_type_count}</a></td>
+									<!--EndFillLeaversTypeDetailsBlock-->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--BeginMultipleTeamleaderBlock-->
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+							<span>Detail for filtered employee</span>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:auto;">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th>Reporting Head</th>
+									<th>Monthly Attrition</th>
+									<th>Yearly Attrition</th>
+									<!--BeginFillLeaversTypeForHeadsBlock-->
+									<th>{leavers_type_for_heads}</th>
+									<!--EndFillLeaversTypeForHeadsBlock-->
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginMutilpleTeamleaderData-->
+								<tr class="odd gradeX">
+									<td>{reporting_h}</td>
+									<td>{month_attr}</td>
+									<td>{year_attr}</td>
+									<!--BeginFillLeaversTypeDetailsForHeadsBlock-->
+									<td><a href="#" onclick="javascript: fnViewDetails('{leavers_type_id}', '{reporting_h_id}'); return false;">{leavers_type_counts_for_heads}</a></td>
+									<!--EndFillLeaversTypeDetailsForHeadsBlock-->
+								</tr>
+								<!--EndMutilpleTeamleaderData-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--EndMultipleTeamleaderBlock-->
+	</div>
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$("#e2").select2();
+
+		$('#leaversTbl').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"iDisplayLength": 200,
+			"aaSorting": [[ 3, "asc" ]],
+			"aoColumns": [
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				null
+			]
+		});
+
+		$('#joinersTbl').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"iDisplayLength": 200,
+			"aaSorting": [[ 0, "asc" ]],
+			"aoColumns": [
+				{ "sType": "date-uk" }, 
+				null,
+				null
+			]
+		});
+		
+		$('#myTab a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		});
+
+		$('#myTab a:first').tab('show');
+	});
+	
+	function fnViewDetails(detailsFor, headId)
+	{
+		var page = "leavers_details.php?a="+escape(detailsFor)+"&id="+escape(headId);
+		var $dialog = $('<div></div>')
+		.dialog({
+		   autoOpen: false,
+		   modal: true,
+		   height: 525,
+		   width: 500,
+		   title: "Leavers details"
+		}).html('<iframe style="border: 0px; " src="' + page + '" width="100%" height="100%"></iframe>');
+		$dialog.dialog('open');
+	}
+	
+</script>

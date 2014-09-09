@@ -1,0 +1,247 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Leave For:</b><br>Select the employee for whom the leave form is added.
+			</li>
+			<li>
+				<b>Leave balance:</b><br>Displays the leave balance for the selected employee.
+			</li>
+			<li>
+				<b>Date:</b><br>Select the date for when you want to add a half day leave.
+			</li>
+			<li>                                                    
+				<b>Half Day For:</b><br>Please select weather the leave is taken for the first half or second half of the day.
+			</li>
+			<li>                                                    
+				<b>No of days:</b><br>The number of days you will be on leave.
+			</li>
+			<li>                                                    
+				<b>Reason for Leave:</b><br>Let us know the reason you want to take the leave.
+			</li>
+			<li>                                                    
+				<b>Address while on leave:</b><br>Enter your address while you will be on leave, so that we can communicate.
+			</li>
+			<li>                                                    
+				<b>Contact number while on Leave:</b><br>Enter your contact number while you will be on leave, so that we can communicate.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> 
+		<span style="color:#ED7A53;">{message}</span>
+
+		<form class="form-horizontal seperator" method="post" action="" onsubmit="return fnValidate();" >
+
+			<input type="hidden" name="hdnaction" id="hdnaction" value="AdminHalfLeaveAdd" />
+
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Leave For:</label>
+						<label class="form-label span3 clsleft">
+							<select name="employee_id" id="employee_id" class="nostyle" style="width:300px;" onchange="javascript: fnGetDetails($(this));">
+								<option value="">Please select</option>
+								<!--BeginFillLeaveForBlock-->
+								<option value="{leave_form_id}">{leave_form_name}</option>
+								<!--EndFillLeaveForBlock-->
+							</select>
+						</label>
+					</div>
+				</div>
+			</div>			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Leave balance:</label>
+						<label class="form-label span3 clsleft" id="lblLeaveBalance">-</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4">Date:</label>
+						<input type="text" id="start_date" name="start_date" class="span4 text" value="{startdate}" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						No of days:
+						</label>
+						<input class="span4" name="nodays" id="nodays" type="text" value="0.5" readonly="readonly" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Half Day For:
+						</label>
+						<select name='halfdayfor' id='halfdayfor'>
+							<option value=''>Please select</option>
+							<option value='1'>First half</option>
+							<option value='2'>Second half</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Reason for Leave:
+						</label>
+						<textarea id="reason" name="reason" class="span4 uniform"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Address while on leave:
+						</label>
+						<textarea id="address" name="address" class="span4 uniform"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4" class = "required">
+						Contact number while on Leave:
+						</label>
+						<input class="span4" name="contact" id="contact" type="text"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='admin_half_leave_form.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		});
+ 		 
+		$("#start_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+		
+		$("#employee_id").select2({
+			placeholder: "Select Please",
+			placeholderOption : 'first'
+		});
+	});
+	
+	function fnGetDetails($obj)
+	{
+		$("#address").val('');
+		$("#contact").val('');
+		$("#lblLeaveBalance").html('-');
+
+		$.ajax({
+			url: 'getdetails.php',
+			data: 'id='+$obj.val(),
+			dataType: 'json',
+			async: false,
+			success: function(data){
+				$("#address").val(data.ad);
+				$("#contact").val(data.ph);
+				$("#lblLeaveBalance").html(data.leave_bal);
+			}
+		});
+	}
+
+	function fnValidate()
+	{
+		if(!checkblank($("#employee_id"),"Please select Leave For")) return false;
+		if(!checkblank($("#start_date"),"Please enter Start Date")) return false;
+		if(!checkblank($("#halfdayfor"),"Please enter half day for")) return false; 
+		if($("#leave_balance").val()==0)
+		{
+		
+			alert("No leave Balance. Can't Add Half Day leave ");
+			return false; 
+		}
+
+		var date = new Date();
+
+		var firstDay = new Date(date.getFullYear(), date.getMonth() + 1);
+		var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		var eighthDay = new Date(date.getFullYear(), date.getMonth(), 8);
+
+		var oneDay = 24*60*60*1000;
+
+		var start = $.trim($("#start_date").val()).split('-');
+		var year = start[0];
+		var month = parseInt(start[1],10) - 1;
+		var day = start[2];
+
+		var startdate = $("#start_date").val();
+		var start_date_formated = new Date(startdate);
+
+		var Date1 = new Date (year,month,day);
+
+		var attendanceMonthYr = year+'-'+parseInt(start[1],10);
+		var curMonthYr = date.getFullYear()+'-'+(parseInt(date.getMonth(),10) + 1)
+
+		if(attendanceMonthYr < curMonthYr && date >= eighthDay)
+		{
+			alert("Cannot add leave for the previous month");
+			$("#start_date").focus();
+			return false; 
+		}
+
+		/* Start date of leave cannot be greater than 100 days from current date */
+		var CurDate = new Date (date.getFullYear(),date.getMonth(),date.getDate());
+		var CheckDays = Math.floor((Date1.getTime() - CurDate.getTime())/(1000*60*60*24));
+
+		if(CheckDays > 100)
+		{
+			alert("Cannot apply leave so much in advance");
+			return false;
+		}
+
+		if(!checkblank($("#nodays"),"Please enter No. Of days")) return false;
+		if(!checkfloat($("#nodays"),"Invalid No. Of days")) return false;
+
+		if ($.trim($("#nodays").val()) == '') 
+	    {
+			alert("Invalid no of days."); $("#nodays").focus(); return false;  
+		}
+
+		if(!checkblank($("#reason"),"Please enter Reason for Leave")) return false;
+		if(!checkblank($("#address"),"Please enter Address while on leave")) return false;
+		if(!checkblank($("#contact"),"Please enter Contact number while on Leave")) return false;
+
+	}
+
+</script>

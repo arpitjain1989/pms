@@ -1,0 +1,51 @@
+<div id="content" class="clearfix" style="margin-bottom: 0;margin-left: 0;margin-right: 0;padding: 0;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box">
+					<div class="title">
+						<h4>
+							<span class="icon16 brocco-icon-grid"></span><span>Level Report : {date}</span>
+						</h4>
+					</div>
+					<div class="content newdivforemployeerecord" style="overflow-x:auto;">
+						<table class="responsive table table-bordered">
+							<thead>
+								<tr>
+									<th>Record Id</th>
+									<!--BeginFillParameter-->
+									<th>{title}</th>
+									<!--EndFillParameter-->
+									<th>Options</th>
+								</tr>
+							</thead>
+							<tbody>
+							<!--BeginFillRecords-->
+							<tr>
+								<td>{recordid}</td>
+								<!--BeginFillAfds-->
+								<td>{haserrorinfo} 
+								<!--BeginShowErrorInfo-->
+								|| {title} 
+								<!--EndShowErrorInfo-->
+								<!--BeginShowComment-->
+								|| {comment}
+								<!--EndShowComment-->
+								</td>
+								<!--EndFillAfds-->
+								<td><a href="qaform.php?action=updatepage&recid={formdataid}&date={date}&ftype={ftype}">Edit</a></td>
+							</tr>
+							<!--EndFillRecords-->
+							<!--BeginFillNoRecord-->
+							<tr>
+								<td colspan="5">Record not marked</td>
+							</tr>
+							<!--EndFillNoRecord-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,142 @@
+<div id="content" class="clearfix" style="margin-left: 0px;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+
+				<div class="box">
+					<div class="title">
+						<h4>
+							<span class="icon16 brocco-icon-grid"></span><span>Quality Leveling Edit</span>
+						</h4>
+					</div>
+					<div class="content">
+						
+						<form name="frmLevelingEditList" id="frmLevelingEditList" action="leveling_edit_list.php" method="post" onsubmit="javascript: return fnValidateForm();">
+
+							<input type="hidden" name="action" id="action" value="SearchLevelingEdit" />
+
+							<div class="form-row row-fluid">
+								<div class="span12">
+									<div class="row-fluid">
+										<label class="form-label span3" for="required">Date</label>
+										<select name="search_date" id="search_date">
+											<option value="">Please Select</option>
+											<!--BeginFillFormDate-->
+											<option value="{formdate}">{formdate}</option>
+											<!--EndFillFormDate-->
+										</select>
+										<script type="text/javascript">
+											if("{search_date}" != "")
+												$("#search_date").val("{search_date}");
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-row row-fluid">
+								<div class="span12">
+									<div class="row-fluid">
+										<label class="form-label span3" for="required">Form Type</label>
+										<select name="search_formtype" id="search_formtype">
+											<option value="">Please Select</option>
+											<!--BeginFillQualityFormTypesList-->
+											<option value="{form_id}">{form_type}</option>
+											<!--EndFillQualityFormTypesList-->
+										</select>
+										<script type="text/javascript">
+											if("{search_formtype}" != "")
+												$("#search_formtype").val("{search_formtype}");
+										</script>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-row row-fluid">
+								<div class="span12">
+									<div class="row-fluid">
+										<div class="form-actions">
+											<div class="span3"></div>
+											<div class="span9 controls">
+												<button type="submit" id="btnSubmit" class="btn marginR10">Search</button>
+												<button type="cancel" id="btnCancel" class="btn marginR10" onclick="document.location.href='dashboard.php'">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+
+						<div class="box gradient">
+							<div class="title">
+								<h4><span>Leveling Enteries</span></h4>
+							</div>
+							<div class="content noPad clearfix flexiblewidth">
+								<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblQualityLeveling">
+									<thead>
+										<tr>
+											<th>User name</th>
+											<th>Record Id</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+									<tbody>
+										<!--BeginFillQualityLevelingList-->
+										<tr class="odd gradeX">
+											<td>{user_name}</td>
+											<td>{record_id}</td>
+											<td>
+												<a href="leveling_edit.php?action=update&recid={formdetail_id}&date={form_date}&ftype={form_id}" name="update" id="update" title="Update Quality Form Types" class="tip">
+													<span class="icon12 icomoon-icon-pencil-2"></span>
+												</a>
+											</td>
+										</tr>
+										<!--EndFillQualityLevelingList-->
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function fnValidateForm()
+	{
+		var valid = true
+		if($.trim($("#search_date").val()) == '')
+		{
+			alert('Please select Date');
+			$("#search_date").focus();
+			valid = false;
+			return false;
+		}
+		if($.trim($("#search_formtype").val()) == '')
+		{
+			alert('Please select form type');
+			$("#search_formtype").focus();
+			valid = false;
+			return false;
+		}
+		return valid;
+	}
+
+	$(document).ready(function(){
+		$('#tblQualityLeveling').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 1, "desc" ]]
+		});
+	});
+
+</script>

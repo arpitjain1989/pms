@@ -1,0 +1,85 @@
+<form id="frmshiftmovementlist" name="frmshiftmovementlist" action="" method="post">
+	
+	<!--BeginEmergencyShiftMovement-->
+	<span class="right">
+		<a href="emergency_shift_movement.php">
+			<h4><span class="icon16 entypo-icon-add"></span> Add New Emergency Shift Movement </h4>
+		</a>
+	</span>
+	<!--EndEmergencyShiftMovement-->
+	
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<!--BeginDisplayMessageBlock-->
+			<div class="alert {message_class}">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{message}</strong>
+			</div>
+			<!--EndDisplayMessageBlock-->
+
+			<div class="box gradient">
+				<div class="title">
+					<h4><span>Emergency Shift Movement</span></h4>
+				</div>
+				<div class="content noPad clearfix">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="example">
+						<thead>
+							<tr>
+								<th>Employee Name</th>
+								<th>Movement Date</th>
+								<th>Movement Time</th>
+								<th>Compensation Date</th>
+								<th>Compensation Time</th>
+								<th>First Reporting Head</th>
+								<th>Second Reporting Head</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillShiftMovements-->
+							<tr class="odd gradeX {trclass}">
+								<td>{employeename}</td>
+								<td>{movementdate}</td>
+								<td>{movementfrom} - {movementto}</td>
+								<td>{compensationdate}</td>
+								<td>{compensationfrom} - {compensationto}</td>
+								<td>{tlapproval}</td>
+								<td>{managerapproval}</td>
+								<td>
+									<a href="emergency_shift_movement_view.php?id={id}" name="view" id="view" title="View Emergency Shift Movement" class="tip"><span class="icon12 brocco-icon-search"></span></a>
+								</td>
+							</tr>
+							<!--EndFillShiftMovements-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+<!-- End .row-fluid -->
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#example').dataTable( {
+		"sPaginationType": "full_numbers",
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"bLengthChange": false,
+		"aaSorting": [[ 1, "desc" ]],
+		"aoColumns": [
+			null,
+			{ "sType": "date-uk" }, 
+			null,
+			{ "sType": "date-uk" }, 
+			null,
+			null,
+			null,
+			null
+		]
+	});
+});
+</script>

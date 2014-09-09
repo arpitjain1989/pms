@@ -1,0 +1,111 @@
+	<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Reporting Head: </b><br>Select Reporting head for the employee.
+			</li>
+			<li>
+				<b>Effective from: </b><br>Select the date from which the reporting head is effective.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<div class="row-fluid">
+	<div class="span12">
+	<span style="color:#ED7A53;">{message}</span>
+	<!--BeginFillErrors-->
+		<span style="color:#ED7A53;">{error}</span>
+	<!--EndFillErrors-->
+		<form class="form-horizontal seperator" method="post" action="report_head_history.add.php" autocomplete="off" >
+		<input type="hidden" name="hdnaction" id="hdnaction" value="edit" />
+		<input type="hidden" name="id" id="id" value="{hid}" />
+		<input type="hidden" name="uid" id="uid" value="{eId}" />
+		<input type="hidden" name="hdnteamleader" id="hdnteamleader" value="{teamleader_id}" />
+		<input type="hidden" name="hdnRctMail" id="hdnRctMail" value="{rct_mail_send}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="date_of_joining">Employee Name:</label>
+					{eName}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="username" class = "required">Reporting Head:</label>
+					<select name="rep_head" id="rep_head">
+						<option value='' selected="selected" />Please select
+						<!--BeginReportingHeadValues-->
+						<option value="{employee_id}">{employee_name}</option>
+						<!--EndReportingHeadValues-->
+					</select>
+					<script type="text/javascript">
+							if($('{reporting_head}') != '')
+							{
+								$("#rep_head").val("{reporting_head}");
+							}
+						</script>
+					
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span5" for="father_husband_name">Effective from :</label>
+					<input type="text" id="effective_date" name="effective_date" class="span4 text" value="{eff_date}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span4"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='employee.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+	<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$("#submit").click(function()
+{
+	if($("#rep_head").val() == '')
+	{
+		alert('Please insert Reporting Head.');
+		$("#rep_head").focus();
+		return false;
+	}
+	if($("#effective_date").val() == '')
+	{
+		alert('Please insert Effective Date.');
+		$("#effective_date").focus();
+		return false;
+	}
+});
+return true;
+});
+
+$("#effective_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+</script>

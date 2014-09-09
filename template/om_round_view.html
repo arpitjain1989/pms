@@ -1,0 +1,98 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+
+<form id="candidate_list" name="candidate_list" action="" method="post">
+	<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+	<div class="row-fluid">
+		<div class="span12">
+			<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+			<div class="box gradient">
+				<div class="title">
+					<h4><span>OM Round Candidate List</span></h4>
+				</div>
+				<div class="content noPad clearfix">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="example">
+						<thead>
+							<tr>
+								<th><input type='checkbox' name='chkall' id='chkall' /></th>
+								<th>Registration Date</th>
+								<th>Name</th>
+								<th>Post Applied for</th>
+								<th>Manager</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillRctSheetValues-->
+							<tr class="odd gradeX">
+								<td><input type="checkbox" id="chk" name="chk[]" value="{cand_id}" class="chkone"/></td>
+								<td>{reg_date}</td>
+								<td>{name}</td>
+								<td>{des_title}</td>
+								<td>{mana_name}</td>
+								<td>{mana_status}</td>
+							</tr>
+							<!--EndFillRctSheetValues-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+<!-- End .row-fluid -->
+<!-- Page end here -->
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$("input[type='checkbox']").uniform();
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$("input[type='checkbox']").uniform();
+		});
+	});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#example').dataTable( {
+		"sPaginationType": "full_numbers",
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"bLengthChange": false,
+		"aaSorting": [[ 1 , "desc" ]],
+		"aoColumns": [
+			null,
+			{ "sType": "date-uk" },
+			null,
+			null,
+			null,
+			null
+		]
+	});
+});
+</script>

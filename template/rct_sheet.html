@@ -1,0 +1,313 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+
+<form id="candidate_list" name="candidate_list" action="" method="post">
+	<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+	<div class="row-fluid">
+		<div class="span12">
+			<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+			<div class="box gradient">
+				<div class="title">
+					<h4> <span>RCT Search </span> </h4>
+				</div>
+				<div class="content noPad clearfix">
+
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Month:</label>
+								<select name='month' id='month'>
+									<option value="01">January</option>
+									<option value="02">Feburary</option>
+									<option value="03">March</option>
+									<option value="04">April</option>
+									<option value="05">May</option>
+									<option value="06">June</option>
+									<option value="07">July</option>
+									<option value="08">August</option>
+									<option value="09">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
+								</select>
+								<script type="text/javascript">
+								if("{curmonth}" != "")
+								{
+									$("#month").val("{curmonth}");
+									//$.uniform.update("#month");
+								}
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">
+								Year:
+								</label>
+								<select name='year' id='year'>
+									<!--BeginDisplayYearBlock-->
+									<option value="{curyr}">{curyr}</option>
+									<!--EndDisplayYearBlock-->
+								</select>
+								<script type="text/javascript">
+									if("{curyear}" != "")
+									{
+										$("#year").val("{curyear}");
+										//$.uniform.update("#year");
+									}
+								</script>
+							</div>
+						</div>
+					</div>
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">
+								Status:
+								</label>
+								<select name="final_hr_status" id="final_hr_status">
+									<option value='' selected="selected">Please select</option>
+									<option value='1'>Declined</option>
+									<option value='2'>FRT</option>
+									<option value='3'>Future Prospect</option>
+									<option value='4'>Shortlisted</option>
+									<option value='9'>Hired</option>
+									<option value='5'>Hold</option>
+									<option value='6'>Rejected</option>
+									<option value='7'>Test</option>
+								</select>
+								<script type="text/javascript">
+									if("{curStatus}" != "")
+									{
+										$("#final_hr_status").val("{curStatus}");
+									}
+								</script>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span4 controls">
+										<button type="submit" id="getdata" class="btn marginR10">Search</button>
+										<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='rct_sheet.php'">Cancel</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4><span>RCT Candidates</span></h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="example" style="color:black;">
+							<thead>
+								<tr>
+									<th>Date of registration</th>
+									<th>Name of the Candidate</th>
+									<th>Mobile</th>
+									<th>Source</th>
+									<th>Division</th>
+									<th>Post Applied For</th>
+									<th>HR status</th>
+									<th>Test status</th>
+									<th>OM status</th>
+									<th>Final Status</th>
+									<th>Final Remarks</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillRctSheetInfo-->
+								<tr class="odd gradeX" style="background-color:{fcolor}">
+									<td>{registartion_date}</td>
+									<td>{name}</td>
+									<td>{mobile}</td>
+									<td>{rct_source_name}</td>
+									<td>{division_title}</td>
+									<td>{des_title}</td>
+									<td>{hr_status}</td>
+									<td>{test_status}</td>
+									<td>{operations_status}</td>
+									<td>{final_status}</td>
+									<td>{final_remarks}</td>
+								</tr>
+								<!--EndFillRctSheetInfo-->
+								<!--BeginFillNoRecords-->
+								<tr class="odd gradeX">
+									<td colspan='10'>{noRecord}</td>
+								</tr>
+								<!--EndFillNoRecords-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4><span>RCT Summary</span></h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" style="color:black;">
+							<thead>
+								<tr>
+									<th>Total candidates</th>
+									<th>{total_candidate}</th>
+								</tr>
+							</thead>
+							
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4><span>RCT Summary</span></h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<!--<div class="span4" style="margin-left: 10px;;float:left;">
+								<span style="font-weight:bold">Employee Reference</span>
+								<span style="float:right;margin-right: 30px;">{EmployeeReferenceCount}</span>
+						</div>-->
+					<!--BeginFillRctSource-->
+						<div class="span4" style="margin-left: 10px;;float:left;">
+								<span style="font-weight:bold">{source_title}</span>
+								<span style="float:right;margin-right: 30px;">{sourceCount}</span>
+						</div>
+					<!--EndFillRctSource-->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span7">
+				<div class="box gradient">
+					<div class="title">
+						<h4><span>RCT Division Summary</span></h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" style="color:black;">
+							<thead>
+								<tr>
+									<th></th>
+									<!--BeginFillRctDivision-->
+									<th>{division_title}</th>
+									<!--EndFillRctDivision-->
+									
+								</tr>
+							</thead>
+								<tr>
+									<th>Total</td>
+									<!--BeginFillRctDivision8-->
+									<th style="text-align:center;">{divisionCount}</td>
+									<!--EndFillRctDivision8-->
+								</tr>
+								<tr style="background-color: #79BAEC;">
+									<td>Shortlisted</td>
+									<!--BeginFillRctDivision1-->
+									<td style="text-align:center;">{rctShortlistedCount}</td>
+									<!--EndFillRctDivision1-->
+								</tr>
+								<tr style="background-color: #1E9E1E;">
+									<td>Hired</td>
+									<!--BeginFillRctDivision9-->
+									<td style="text-align:center;">{rctHiredCount}</td>
+									<!--EndFillRctDivision9-->
+								</tr>
+								<tr style="background-color: #FF6464;">
+									<td>Rejected</td>
+									<!--BeginFillRctDivision2-->
+									<td style="text-align:center;">{rctRejectedCount}</td>
+									<!--EndFillRctDivision2-->
+								</tr>
+								<tr style="background-color: #F5F500;">
+									<td>Declined</td>
+									<!--BeginFillRctDivision3-->
+									<td style="text-align:center;">{rctDeclinedCount}</td>
+									<!--EndFillRctDivision3-->
+								</tr>
+								<tr>
+									<td>Hold</td>
+									<!--BeginFillRctDivision4-->
+									<td style="text-align:center;">{rctHoldCount}</td>
+									<!--EndFillRctDivision4-->
+								</tr>
+								<tr>
+									<td>Test</td>
+									<!--BeginFillRctDivision5-->
+									<td style="text-align:center;">{rctTestCount}</td>
+									<!--EndFillRctDivision5-->
+								</tr>
+								<tr>
+									<td>FRT</td>
+									<!--BeginFillRctDivision6-->
+									<td style="text-align:center;">{rctFRTCount}</td>
+									<!--EndFillRctDivision6-->
+								</tr>
+								<tr>
+									<td>Future Prospect</td>
+									<!--BeginFillRctDivision7-->
+									<td style="text-align:center;">{rctFutureProspectsCount}</td>
+									<!--EndFillRctDivision7-->
+								</tr>
+						</table>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+		
+<!-- End .row-fluid -->
+<!-- Page end here -->
+<script type="text/javascript">
+$(document).ready(function(){
+	
+		$('#example').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 0, "desc" ]],
+			"aoColumns": [
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				null,
+				null,
+				null, 
+				null, 
+				null,
+				null,
+				null
+			]
+		});
+	});
+</script>

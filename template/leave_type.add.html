@@ -1,0 +1,106 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Leave Type:</b><br>Enter the leave type.
+			</li>
+			<li>
+				<b>Description:</b><br>Enter the description for the leave type.
+			</li>
+			<li>
+				<b>Color:</b><br>Select the color for the leave type.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+		<input type="hidden" name="id" id="id" value="{departmentid}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Leave Type:
+					</label>
+					<input class="span4" name="title" id="title" type="text" value="{title}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="name">Description:</label>
+					<textarea class="span4" name="description" id="description">{description}</textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="name">Color:</label>
+					
+					<input type="hidden" name="color" id="color" value="{color}" />
+					<div id="colorSelector" style="float: left;"><div style="background-color: #0000ff"></div></div>
+				
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='leave_type.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#colorSelector').ColorPicker({
+		color: $("#color").val(),
+		onShow: function (colpkr) {
+			$(colpkr).fadeIn(500);
+			return false;
+		},
+		onHide: function (colpkr) {
+			$(colpkr).fadeOut(500);
+			return false;
+		},
+		onChange: function (hsb, hex, rgb) {
+			$('#colorSelector div').css('backgroundColor', '#' + hex);
+			$("#color").val('#' + hex);
+		}
+		
+	});
+
+	$("#submit").click(function() 
+	{
+		if($("#title").val() == '')
+		{
+			alert('Please insert Title.');
+			return false;
+		}
+	});
+
+	if( $("#color").val() == "")
+		$('#colorSelector div').css('backgroundColor', '#FF0000');
+	else
+		$('#colorSelector div').css('backgroundColor', $("#color").val());
+});
+</script>

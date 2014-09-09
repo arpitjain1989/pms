@@ -1,0 +1,92 @@
+		<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+		<form id="employee" name="employee" action="" method="post">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+		<span class="message">{message}</span>
+		<!--input type="button" id="add" name="add" value="Add" class="addbutton" onclick="window.location='task.add.php'"/-->
+		<span class="right">
+		<a href="task.add.php"><h4><span class="icon16 entypo-icon-add"></span>Add New Task</h4></a>
+		</span>
+		
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4> <span>Task table</span> </h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th><input type='checkbox' name='chkall' id='chkall' /></th>
+									<th>Task Title</th>
+									<th>Description</th>
+									<th>Project </th>
+									<th>Job Type</th>
+									<th>Team Leader</th>
+									<th>Options</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillTaskValues-->
+								<tr class="odd gradeX">
+									<td><input type="checkbox" id="chk" name="chk[]" value="{task_id}" class="chkone"/></td>
+									<td>{task_title}</td>
+									<td>{task_desc}</td>
+									<td>{proj_title}</td>
+									<td>{job_title}</td>
+									<td>{team_leader}</td>
+									<td><a href="task.view.php?id={task_id}" name="view" id="view" title="View task" class="tip"><span class="icon12 brocco-icon-search"></span></a> 
+									<a href="task.add.php?id={task_id}&action=update" name="view" id="view" title="Edit task" class="tip"><span class="icon12 icomoon-icon-pencil-2"></span></a></td>
+								</tr>
+								<!--EndFillTaskValues-->
+							</tbody>
+							<!--BeginFillNoRecords-->
+							
+							<!--EndFillNoRecords-->
+						</table>
+					</div>
+					<!--BeginFillHideDelete-->
+					<span class="btn btn-danger">
+						<span class="icon16 icomoon-icon-cancel-2 white"></span>
+						<input type="submit" name="delete" id="delete" value="Delete" />
+					</span>
+					
+					<!--EndFillHideDelete-->
+				</div>
+				<!-- End .box -->
+			</div>
+			<!-- End .span12 -->
+		</div>
+		</form>
+		<!-- End .row-fluid -->
+		<!-- Page end here -->
+		
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$("input[type='checkbox']").uniform();
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$("input[type='checkbox']").uniform();
+		});
+	});
+</script>

@@ -1,0 +1,163 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form id="frmSearchAttendance" name="frmSearchAttendance" method="post" action="attendance_view_all.php">
+
+			<input type="hidden" name="action" id="action" value="AttendanceSearch" />
+			<input type="hidden" name="teamleader_id" id="teamleader_id" value="{teamleader}" />
+			<input type="hidden" name="agents_id" id="agents_id" value="{agents}" />
+
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Month:
+						</label>
+						<select name='month' id='month'>
+							<option value="01">January</option>
+							<option value="02">Feburary</option>
+							<option value="03">March</option>
+							<option value="04">April</option>
+							<option value="05">May</option>
+							<option value="06">June</option>
+							<option value="07">July</option>
+							<option value="08">August</option>
+							<option value="09">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<script type="text/javascript">
+							if("{cur_month}" != "")
+							{
+								$("#month").val("{cur_month}");
+								$.uniform.update("#month");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Year:
+						</label>
+						<select name='year' id='year'>
+							<!--BeginDisplayYearBlock-->
+							<option value="{curyr}">{curyr}</option>
+							<!--EndDisplayYearBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{cur_year}" != "")
+							{
+								$("#year").val("{cur_year}");
+								$.uniform.update("#year");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" id="getdata" class="btn marginR10">Search</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='attendance.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4>
+						<span class="icon16 brocco-icon-grid"></span>
+						<span>Attendance Report : </span>
+						</h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th style="white-space:nowrap;font-size: 17px;">Date</th>
+									<th style="white-space:nowrap;font-size: 17px;">Leave type</th>
+									<th style="white-space:nowrap;font-size: 17px;">In Time</th>
+									<th style="white-space:nowrap;font-size: 17px;">Out Time</th>
+									<th style="white-space:nowrap;font-size: 17px;">1st Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">1st Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">2nd Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">2nd Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">3rd Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">3rd Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">4th Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">4th Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">5th Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">5th Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">Late time</th>
+									<th style="white-space:nowrap;font-size: 17px;">Break exceed</th>
+									<th style="white-space:nowrap;font-size: 17px;">Shift Time</th>
+									<th style="white-space:nowrap;font-size: 17px;">Date</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillAttendanceInformation-->
+								<tr class="odd gradeX">
+									<td style="white-space:nowrap;">{attendance_date}</td>
+									<td>{LeaveType}</td>
+									<td>{in_time}</td>
+									<td>{out_time}</td>
+									<td>{break1_in}</td>
+									<td>{break1_out}</td>
+									<td>{break2_in}</td>
+									<td>{break2_out}</td>
+									<td>{break3_in}</td>
+									<td>{break3_out}</td>
+									<td>{break4_in}</td>
+									<td>{break4_out}</td>
+									<td>{break5_in}</td>
+									<td>{break5_out}</td>
+									<td>{late_time}</td>
+									<td {showred}>{break_exceed_time}</td>
+									<td>{shift_time}</td>
+									<td>{attendance_date}</td>
+								</tr>
+								<!--EndFillAttendanceInformation-->
+							</tbody>
+							<tfoot>
+								<tr>
+									<th style="white-space:nowrap;font-size: 17px;">Date</th>
+									<th style="white-space:nowrap;font-size: 17px;">Leave type</th>
+									<th style="white-space:nowrap;font-size: 17px;">In Time</th>
+									<th style="white-space:nowrap;font-size: 17px;">Out Time</th>
+									<th style="white-space:nowrap;font-size: 17px;">1st Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">1st Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">2nd Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">2nd Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">3rd Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">3rd Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">4th Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">4th Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">5th Break Start</th>
+									<th style="white-space:nowrap;font-size: 17px;">5th Break Stop</th>
+									<th style="white-space:nowrap;font-size: 17px;">Late time</th>
+									<th style="white-space:nowrap;font-size: 17px;">Break exceed</th>
+									<th style="white-space:nowrap;font-size: 17px;">Shift Time</th>
+									<th style="white-space:nowrap;font-size: 17px;">Date</th>
+									
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End .span12 -->
+</div>

@@ -1,0 +1,200 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Earn Marks: </b><br>Chose the earn mark for every criteria.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="test_round.add.php">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+		<input type="hidden" name="id" id="id" value="{EmpTestid}" />
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="username" class = "required">
+					Employee Name:
+					</label>
+					{emp_name}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="mobile" class = "required">
+					Mobile:
+					</label>
+					{emp_mobile}
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span7" for="education"><b>IQ Test Reviews </label></b>
+				</div>
+				<div class="row-fluid">
+					<label class="form-label span3" for="name">IQ Score(%):</label>
+					<label class="form-label span1" for="name">{exam_iq_score}</label>
+				</div>
+			</div>
+		</div>
+		
+		<!--BeginFillMarksBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span7" for="education"><b>{exam_title} Reviews </label></b>
+					
+				</div>
+			</div>
+			<!--BeginFillSubCategoryBlock-->
+			<div class="row-fluid">
+				<label class="form-label span3" for="education"><b>Exam criteria:</b></label>
+				<b>{title_sub}</b>
+			</div>
+			<div class="row-fluid">
+				<label class="form-label span3" for="name">Marks Earned:</label>
+				<select name="crieteria[{test_main_id}][{test_ids}]" id="crieteria_{test_main_id}_{test_ids}">
+					<option value='' selected="selected" />Please select
+					<!--BeginFillCriteriaOptionBox-->
+					<option value='{criet_id}'/>{title_crite} :: {title_desc}
+					<!--EndFillCriteriaOptionBox-->
+				</select>
+				<script type="text/javascript">
+					if("{getMarks}" != "")
+						$("#crieteria_{test_main_id}_{test_ids}").val("{getMarks}");
+				</script>
+			</div>
+			<!--EndFillSubCategoryBlock-->
+		</div>
+
+				
+		
+		<input type='hidden' name='exam_id[]' id='exam_id[]' value='{exam_id}' />
+		<!--EndFillMarksBlock-->
+
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="hrcomments">Remarks:</label>
+					<textarea id="test_hr_remarks" class="span9 elastic uniform" style="overflow: hidden; height: 63px;" rows="3" name="test_hr_remarks">{hr_remark_for_test}</textarea>
+				</div>
+			</div>
+		</div>
+				
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="recommend_test">Recommend for OM Round:</label>
+					<div class="span8 controls">   
+						<select name="recommend_om_round" id="recommend_om_round">
+							<option value='' selected="selected" />Please select
+							<option value='1' />Yes
+							<option value='2'/>No
+							<option value='3'/>Declined
+						</select>
+						<script type="text/javascript">
+							if("{recommond_for_om_round}" != "")
+								$("#recommend_om_round").val("{recommond_for_om_round}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" for="recommend_test">Manager:</label>
+					<div class="span8 controls">   
+						<select name="recommend_om" id="recommend_om">
+							<option value='' selected="selected" />Please select
+							<!--BeginFillEmployeeManager-->
+							<option value='{man_id}' />{man_name}
+							<!--EndFillEmployeeManager-->
+						</select>
+						<script type="text/javascript">
+							if("{cand_recommend_om}" != "")
+								$("#recommend_om").val("{cand_recommend_om}");
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--BeginFillSubmitButton-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='test_round.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--EndFillSubmitButton-->
+		<!--BeginFillCancelButton-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='test_round.php'">Back</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--EndFillCancelButton-->
+		</form>
+	</div>
+	<!-- End .span12 -->
+</div>
+<!-- End .row-fluid -->
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#marks").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+$("#submit").click(function() 
+{
+	if($("#test_hr_remarks").val() == '')
+	{
+		alert('Please insert HR Remarks.');
+		return false;
+	}
+	if($('#recommend_om_round').val() == '' ||  $('#recommend_om_round').val() == '2' )
+	{
+		if($('#recommend_om').val() != '' )
+		{
+			alert('First chose Recommend for OM Round yes.');
+			$('#recommend_om_round').focus();
+			return false;
+		}
+	}
+	else if($('#recommend_om_round').val() == '1' )
+	{
+		if($('#recommend_om').val() == '' )
+		{
+			alert('First chose Recommend for OM Round no.');
+			$('#recommend_om_round').focus();
+			return false;
+		}
+	}
+});
+return true;
+});
+</script>

@@ -1,0 +1,163 @@
+<div id="content" class="clearfix" style="margin-left: 0px;">
+	<div class="contentwrapper">
+		<div class="row-fluid">
+			<div class="span12">
+				
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+
+				<div class="box">
+					<div class="title">
+						<h4>
+							<span class="icon16 brocco-icon-grid"></span> <span>{form_type} AFDs</span>
+						</h4>
+					</div>
+					<div class="content">
+						<form class="form-horizontal" id="frmLevelingEdit" action="leveling_edit.php" name="frmLevelingEdit" onsubmit="return validateform()" method="post"/>
+							<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+							<input type="hidden" name="id" id="id" value="{formdataid}" />
+
+							<div class="form-row row-fluid newrowaqform">
+								<div class="span12">
+									<div class="row-fluid">
+										<label class="form-label span3">Record Id</label>
+										<input class="span9 recordid" id="recordid" name="recordid" type="text" value="{recordid}"/>
+										<span>* Allowed characters a-z, A-Z, 0-9</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-row row-fluid newrowaqform">
+								<div class="span12">
+									<div class="row-fluid">
+										<label class="form-label span3">Leveling Date</label>
+										<input class="span4" id="insert_date" name="insert_date" type="text" value="{insert_date}" readonly="readonly" style="cursor:pointer;"/>
+									</div>
+								</div>
+							</div>
+							<!--BeginFillParameters-->
+							<div class="form-row row-fluid newrowaqform">
+								<div class="span12">
+									<div class="row-fluid">
+										<fieldset class="qanewfieldset">
+										<legend class="qanewlegend">{paratitle}</legend>
+										
+										<div class="span12">
+											<div class="row-fluid">
+												<label class="form-label span3" >Correct</label>
+												<select name="para[{para_id}]" id="para_{para_id}">
+													<option value="">Please Select</option>
+													<option value="1">Yes</option>
+													<option value="2">No</option>
+												</select>
+												<input type="hidden" name="paraid[]" id="paraid_{para_id}" value="{para_id}"/>
+												<input type="hidden" name="formDetailId[{para_id}]" id="formDetailId_{para_id}" value="{newafdid}"/>
+												<script type="text/javascript">
+													if($("{haserror}") != "")
+														$("#para_{para_id}").val("{haserror}");
+												</script>
+												<span style="position: absolute; width: 420px;">
+													<label class="form-label span3" style="">Comment</label>
+													<textarea rows="2" name="comment[{para_id}]" id="comment_{para_id}" style="float: left;width: 200px;">{comment}</textarea>
+												</span>
+											</div>
+										</div>
+										
+										<div class="span12">
+											<div class="row-fluid">
+												<label class="form-label span3" for="required">Choose Afd</label>
+												<select name="afd[{para_id}]" id="afd_{para_id}">
+													<option value="">Please Select</option>
+													<!--BeginAfdValues-->
+													<option value="{afdid}">{afdtitle}</option>
+													<!--EndAfdValues-->
+												</select>
+												<script type="text/javascript">
+												if($("{afd}") != "")
+													$("#afd_{para_id}").val("{afd}");
+												</script>
+											</div>
+										</div>
+										
+										</fieldset>
+									</div>
+								</div>
+							</div>
+							<!--EndFillParameters-->
+							<div class="form-row row-fluid">
+								<div class="span12">
+									<div class="row-fluid">
+										<div class="form-actions">
+											<div class="span3"></div>
+											<div class="span9 controls">
+												<button type="submit" class="btn btn-info marginR10">Save changes</button>
+												<button type="button" class="btn btn-info" onclick="window.location='leveling_edit_list.php'">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--BeginDisplayFormAFDBlock-->
+	<script type="text/javascript">
+		
+		$(function(){
+			$("#insert_date").datepicker({
+				dateFormat: 'yy-mm-dd',
+				showOtherMonths:true
+			});
+		});
+		
+		function validateform()
+		{
+			var valid = true;
+			if($.trim($("#recordid").val()) == '')
+			{
+				alert('Please insert Record Id');
+				$("#recordid").focus();
+				return false;
+			}
+			$("input[name='paraid[]']").each(function(){
+				if($("#para_"+$(this).val()).val() == '')
+				{
+					alert('Please select correct status for parameter');
+					$("#para_"+$(this).val()).focus();
+					valid=false;
+					return false;
+				}
+				else if($("#para_"+$(this).val()).val() == '2')
+				{
+					if($("#afd_"+$(this).val()).val() == '')
+					{
+						alert('Please select Afds');
+						$("#afd_"+$(this).val()).focus();
+						valid=false;
+						return false;
+					}
+				}
+				else if($("#para_"+$(this).val()).val() == '1')
+				{
+					if($("#afd_"+$(this).val()).val() != '')
+					{
+						alert('You cannot select the afd.');
+						$("#afd_"+$(this).val()).focus();
+						valid = false;
+						return false;
+					}
+				}
+			});
+			
+			return valid;
+		}
+	</script>
+	<!--EndDisplayFormAFDBlock-->
+</div>
+

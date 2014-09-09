@@ -1,0 +1,136 @@
+<div class="row-fluid seperator">
+	<div class="span12">
+		<!--BeginDisplayTicketInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Ticket Id:</b></label>
+					<label class="form-label span3 clsleft">{id}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Issue Category:</b></label>
+					<label class="form-label span3 clsleft">{issue_category}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Issue:</b></label>
+					<label class="form-label span3 clsleft">{issue}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>User Name:</b></label>
+					<label class="form-label span3 clsleft">{user_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Reporting Head:</b></label>
+					<label class="form-label span3 clsleft">{reporting_head_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Priority:</b></label>
+					<label class="form-label span3 clsleft">{priority}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Ticket raised date time:</b></label>
+					<label class="form-label span3 clsleft">{ticket_raised_date}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Estimated resolution time:</b></label>
+					<label class="form-label span3 clsleft">{estimated_resolution_time}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Location:</b></label>
+					<label class="form-label span3 clsleft">{location_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Ticket Description:</b></label>
+					<label class="form-label span3 clsleft">{description}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="page-header">
+						<h4>Ticket History</h4>
+					</div>
+					<table class="responsive table table-bordered" width="100%">
+						<thead>
+						<tr>
+							<th>Date</th>
+							<th>Updated by</th>
+							<th>Status</th>
+							<th>Description</th>
+						</tr>
+						</thead>
+						<tbody>
+						<!--BeginFillStatusHistoryBlock-->
+						<tr>
+							<td>{resolution_date}</td>
+							<td>{resolved_by_name}</td>
+							<td>{resolution_status_text}</td>
+							<td>{resolution_description}</td>
+						</tr>
+						<!--EndFillStatusHistoryBlock-->
+						</tbody>
+					</table>					
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayTicketInformationBlock-->
+		<!--BeginDisplayNoTicketInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>No ticket information found.</b></label>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayNoTicketInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='call_history.php'">Back</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,233 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="candidate.update.php">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="update" />
+				<input type="hidden" name="id" id="id" value="{cand_id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name" class = "required">Candidate Name:</label>
+							{cand_name}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="mobile" class = "required">Mobile:</label>
+							{mobile}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="applied_for" class = "required">Position applied for:</label>
+							{des_title}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="interview_date">Date of Interview:</label>
+							{reg_date}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="reference">Reference:</label>
+							{refer}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="job_experience">Job Experience (in year):</label>
+							{total_experience}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="rel_job_experience">Related Job Experience:</label>
+							{rel_job_exp}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="education">Education:</label>
+							{education}
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span5" for="education"><b>IQ Test Reviews </label></b>
+						</div>
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">IQ Score(%):</label>
+							<label class="form-label span1" for="name">{iq_score}</label>
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="initiative">Initiative:</label>
+							<input class="span4" name="initiative" id="initiative" type="text" value="{reg_initiative}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="communication_listening">Communications / Listening Skills:</label>
+							<input class="span4" name="communication_listening" id="communication_listening" type="text" value="{communication_listening}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="attitute">Attitude:</label>
+							<input class="span4" name="attitute" id="attitute" type="text" value="{reg_attitute}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="hrcomments">HR EVALUATION & COMMENTS:</label>
+							<textarea id="hrcomments" class="span9 elastic uniform" style="overflow: hidden; height: 63px;" rows="3" name="hrcomments">{reg_hrcomments}</textarea>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="recommend_test">Recommend for Test:</label>
+							<div class="span8 controls">   
+								<select name="recommend_test" id="recommend_test">
+									<option value='' selected="selected" />Please select
+									<option value='1'>Yes</option>
+									<option value='2'>No</option>
+									<option value='3'>Hold</option>
+									<option value='4'>Declined</option>
+									<option value='5'>Future Prospect</option>
+								</select>
+								<script type="text/javascript">
+									if("{reg_recommend_test}" != "")
+										$("#recommend_test").val("{reg_recommend_test}");
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="interviewer">Interviewer:</label>
+							<div class="span8 controls">   
+								<select name="interviewer" id="interviewer">
+									<option value='' selected="selected" />Please select
+									<!--BeginFillInterviewer-->
+									<option value='{interviewer_id}'>{interviewer_name}</option>
+									<!--EndFillInterviewer-->
+								</select>
+								<script type="text/javascript">
+									if("{interviewer_taker}" != "")
+										$("#interviewer").val("{interviewer_taker}");
+								</script>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--BeginFillSubmitButton-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='candidate_list.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--EndFillSubmitButton-->
+				<!--BeginFillCancelButton-->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='candidate_list.php'">Back</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--EndFillCancelButton-->
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	/*if($("#initiative").val() == '')
+	{
+		alert('Please insert initiative.');
+		$("#initiative").focus();
+		return false;
+	}
+	if($("#communication_listening").val() == '')
+	{
+		alert('Please insert communication/listening skills.');
+		$("#communication_listening").focus();
+		return false;
+	}
+	if($("#attitute").val() == '')
+	{
+		alert('Please insert attitute.');
+		$("#attitute").focus();
+		return false;
+	}*/
+	if($("#hrcomments").val() == '')
+	{
+		alert('Please insert your comments.');
+		$("#hrcomments").focus();
+		return false;
+	}
+	if($("#recommend_test").val() == '')
+	{
+		alert('Please chose if candidate is applicable for test.');
+		$("#recommend_test").focus();
+		return false;
+	}
+	if($("#interviewer").val() == '')
+	{
+		alert('Please select interviewer.');
+		$("#interviewer").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

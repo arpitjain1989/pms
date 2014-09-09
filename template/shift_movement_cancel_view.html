@@ -1,0 +1,150 @@
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayMovementInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Movement Date:</b></label>
+						<label class="form-label span3 clsleft">{movementdate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Movement Time:</b></label>
+						<label class="form-label span3 clsleft">{movementfrom} - {movementto}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Compensation Date:</b></label>
+						<label class="form-label span3 clsleft">{compensationdate}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Compensation Time:</b></label>
+						<label class="form-label span3 clsleft">{compensationfrom} - {compensationto}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reason:</b></label>
+						<label class="form-label span3 clsleft">{reason}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginTLStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Teamleader's Approval:</b></label>
+						<label class="form-label span3 clsleft">{tlapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Teamleader's Comment:</b></label>
+						<label class="form-label span3 clsleft">{lt_comments}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndTLStatusViewBlock-->
+			<!--BeginManagersStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Manager's Approval:</b></label>
+						<label class="form-label span3 clsleft">{managerapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Manager's Comment:</b></label>
+						<label class="form-label span3 clsleft">{manager_comments}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndManagersStatusViewBlock-->
+			<!--BeginDelegatedTLStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated Teamleader's Approval:</b></label>
+						<label class="form-label span3 clsleft">{delegatedtlapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated Teamleader's Comment:</b></label>
+						<label class="form-label span3 clsleft">{delegatedtl_comment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegatedTLStatusViewBlock-->
+			<!--BeginDelegatedManagersStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated Manager's Approval:</b></label>
+						<label class="form-label span3 clsleft">{delegatedmanagerapproval}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegated Manager's Comment:</b></label>
+						<label class="form-label span3 clsleft">{delegatedmanager_comment}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDelegatedManagersStatusViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span6 controls">
+							<form action="shift_movement_cancel.php" method="post" name="shift_movement_cancel" >
+								<input type="hidden" name="hShiftMovementRequest" id="hShiftMovementRequest" value="ShiftMovementRequest" />
+								<input type="hidden" name="id" id="id" value="{id}" />
+								<input type="hidden" name="ltype" id="ltype" value="{ltype}" />
+								<input type="hidden" name="hdnAction" id="hdnAction" value="cancel">
+								<!--BeginCancelButtonBlock-->
+								<button id="submit" class="btn btn-info marginR10" name="submit" type="submit" onclick="return confirm('Attendance needs to be saved after cancellation. Are you sure you want to continue?');">cancel shift movement request</button>
+								<!--EndCancelButtonBlock-->
+								<button id="cancel" class="btn btn-info marginR10" onclick="window.location='shift_movement_cancel.php'" name="cancel" type="button">Back</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayMovementInformationBlock-->
+			<!--BeginDisplayNoMovementBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						Shift movement information not found
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoMovementBlock-->
+		</div>
+	</div>
+
+

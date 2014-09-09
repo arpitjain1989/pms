@@ -1,0 +1,125 @@
+<span class="dropdown pull-right">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+		<span class="icon16 entypo-icon-help"></span>Help
+	</a>
+	<ul class="dropdown-menu" style="top:35px;">
+		<li class="menu">
+			<ul>
+				<li>                                                    
+					<b>Requisition for:</b><br>Enter the requisition for inventory / access.
+				</li>
+				<li>
+					<b>Project:</b><br>Enter the name of the project for which requisition is made.
+				</li>
+				<li>
+					<b>Remarks:</b><br>Enter the remarks for the requisition.
+				</li>
+				<li>
+					<b>Requirement Type:</b><br>Enter the remarks for the requisition.
+				</li>
+			</ul>
+		</li>
+	</ul>
+</span>
+
+<form name="frmrequisition" id="frmrequisition" class="form-horizontal seperator" method="post" action="requisition.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Request for a </label>
+					<select name="requisition_for" id="requisition_for">
+						<option value="">Please select</option>
+						<!--BeginFillRequisitionForBlock-->
+						<option value="{requisition_for_id}">{requisition_for_name}</option>
+						<!--EndFillRequisitionForBlock-->
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">To be used for project</label>
+					<input type="text" name="project_name" id="project_name" class="span3" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Remarks</label>
+					<textarea name="remarks" id="remarks" class="span3"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">This requirement is </label>
+					<select name="request_type" id="request_type" onchange="javascript: fnChangeRequestType();">
+						<option value="">Please select</option>
+						<option value="1">Permanent</option>
+						<option value="2">Temporary</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid" id="divTillDate">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Till date</label>
+					<input type="text" name="till_date" id="till_date" class="span3" readonly="readonly" style="cursor:pointer;" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="SaveRequisition" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='requisition_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#till_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+		
+		fnChangeRequestType();
+	});
+
+	function fnChangeRequestType()
+	{
+		if($("#request_type").val() == "2")
+			$("#divTillDate").show();
+		else
+			$("#divTillDate").hide();
+	}
+
+	function fnValidate()
+	{
+		if(!checkblank($("#requisition_for"),"Please select Requisition For")) return false;
+		if(!checkblank($("#project_name"),"Please enter proect")) return false;
+		if(!checkblank($("#request_type"),"Please select the Requirement type")) return false;
+		if($("#request_type").val() == "2")
+		{
+			if(!checkblank($("#till_date"),"Please select Till Date")) return false;
+		}
+	}
+
+</script>

@@ -1,0 +1,170 @@
+	<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+				
+				<form class="form-horizontal seperator" method="post" action="" autocomplete="off">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="id" id="id" value="{emp_id}" />
+				<input type="hidden" name="hdnteamleader" id="hdnteamleader" value="{teamleader}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Employee code:</label>
+							<label class="form-label span3 clsleft">{employee_code}</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Name:</label>
+							<input class="span4" name="name" id="name" type="text" value="{name}" readonly="readonly">
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Username:</label>
+							<input class="span4" name="username" id="username" type="text" value="{username}"  readonly="readonly"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Email:</label>
+							<input class="span4" name="email" id="email" type="text" value="{email}"  readonly="readonly" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Contact No:</label>
+							<input class="span4" name="contact" id="contact" type="text" value="{contact}"  readonly="readonly"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Address:</label>
+							<textarea class="span4" name="address" id="address"  readonly="readonly">{address}</textarea>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Password:</label>
+							<input class="span4" name="password" id="password" type="password" value="" placeholder="{password123}"  />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3">Leave Balance:</label>
+							<label class="form-label span3 clsleft">{pending_leave_balance}</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit" >Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='employee.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+	<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+ var passlength = $("#password").length;
+ 
+$("#submit").click(function()
+{
+	//alert($('#password').val().length);
+	/*if($("#employee_code").val() == '')
+	{
+		alert('Please insert Employee code.');
+		$("#employee_code").focus();
+		return false;
+	}*/
+	if($("#name").val() == '')
+	{
+		alert('Please insert name.');
+		$("#name").focus();
+		return false;
+	}
+	if($("#email").val() == '')
+	{
+		alert('Please insert email.');
+		$("#email").focus();
+		return false;
+	}
+	else if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Email not valid.");
+			return false;
+		}
+	}
+	if($("#contact").val() == '')
+	{
+		alert('Please insert contact.');
+		$("#contact").focus();
+		return false;
+	}
+	if($("#address").val() == '')
+	{
+		alert('Please insert address.');
+		$("#address").focus();
+		return false;
+	}
+	if($("#password").val() != '')
+	{
+		if($('#password').val().length < 6)
+		{
+			alert('Password must be atleast 6 character long.');
+			$("#password").focus();
+			return false;
+		}
+	}
+	
+});
+return true;
+});
+
+$(document).ready(function(){
+			$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+	  // fnGetReportingHead();
+	   
+	});
+
+</script>

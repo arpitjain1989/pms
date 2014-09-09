@@ -1,0 +1,457 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="candidates.update.php" enctype="multipart/form-data">
+					<input type='hidden' name='hdnaction' id='hdnaction' value='update' />
+					<input type='hidden' name='id' id='id' value='{candidate_id}' />
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="division">Division </label>
+									
+									<select id="dev_id" name="dev_id">
+										<option value="">Please select</option>
+										<!--BeginFillAllDivision-->
+										<option value="{rct_div_id}">{rct_div_title}</option>
+										<!--EndFillAllDivision-->
+									</select>
+									<script type="text/javascript">
+										if("{dev_id}" != "")
+										//alert('{designation_id}');
+											$("#dev_id").val("{dev_id}");
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="postApplied">Post Applied For</label>
+									
+									<select id="des_id" name="des_id">
+										<option value="">Please select</option>
+										<!--BeginFillAllDesignation-->
+										<option value="{des_id}">{des_title}</option>
+										<!--EndFillAllDesignation-->
+									</select>
+									<script type="text/javascript">
+										if("{designation_id}" != "")
+										//alert('{designation_id}');
+											$("#des_id").val("{designation_id}");
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="required">Advertisement Reference For</label>
+									<select id="rctsource" name="rctsource">
+										<option value="">Please select</option>
+										<option value="0">Employee Reference</option>
+										<!--BeginFillRCTSourceValues-->
+										<option value="{rct_id}">{rct_title}</option>
+										<!--EndFillRCTSourceValues-->
+									</select>
+									<script type="text/javascript">
+										if("{rctsource}" != "")
+											$("#rctsource").val("{rctsource}");
+									</script>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="name">Full Name</label>
+									<input class="span9" id="name" name="name" type="text" value="{name}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="address">Address</label>
+									<textarea id="address" name="address" class="span9 elastic uniform" rows="3" style="overflow: hidden; height: 71px;">{address}</textarea>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="area">Area</label>
+									<input class="span9" id="area" name="area" type="text" value="{area}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="city">City</label>
+									<input class="span9" id="city" name="city" type="text" value="{city}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="zip">Zip</label>
+									<input class="span9" id="zip" name="zip" type="text" value="{zip}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="dob">Date of Birth (yyyy-mm-dd)</label>
+									<input type="text" id="dob" name="dob" class="span9 text" value="{reg_dob_date}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="email">Email</label>
+									<input class="span9" id="email" name="email" type="text" value="{email}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="mobile">Mobile</label>
+									<input class="span9" id="mobile" name="mobile" type="text" value="{mobile}" />
+								</div>
+							</div>
+						</div>
+					   <div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="phnumber">Phone Number</label>
+									<input class="span9" id="phnumber" name="phnumber" type="text" value="{phnumber}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="graduation_degree">Under Graduate / Graduate (Degree / Diploma):</label>
+									<input class="span9" id="graduation_degree" name="graduation_degree" type="text" value="{graduation_degree}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="graduation_institute">Name of the Institute</label>
+									<input class="span9" id="graduation_institute" name="graduation_institute" type="text" value="{graduation_institute}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="totExperience">Total Experience (No of Yrs)</label>
+									<input class="span9" id="totExperience" name="totExperience" type="text" value="{totExperience}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="relExperience">Relevant Experience</label>
+									<input class="span9" id="relExperience" name="relExperience" type="text" value="{relExperience}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="currEmployer">Current Employer</label>
+									<input class="span9" id="currEmployer" name="currEmployer" type="text" value="{currEmployer}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="currDesignation">Current Designation</label>
+									<input class="span9" id="currDesignation" name="currDesignation" type="text" value="{currDesignation}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="repoting_head">Reporting to (Designation)</label>
+									<input class="span9" id="repoting_head" name="repoting_head" type="text" value="{repoting_head}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="reason_leave">Reason for Leaving</label>
+									<input class="span9" id="reason_leave" name="reason_leave" type="text" value="{reason_leave}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="current_salary">Current Salary (Per Month)</label>
+									<input class="span9" id="current_salary" name="current_salary" type="text" value="{current_salary}"/>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="expected_salary">Expected Salary (Per Month)</label>
+									<input class="span9" id="expected_salary" name="expected_salary" type="text" value="{expected_salary}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="expected_joining_date">Expected Date of Joining (yyyy-mm-dd)</label>
+									<input type="text" id="expected_joining_date" name="expected_joining_date" class="span9 text" value="{reg_expt_date}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="occupation_FH">Father / Husband Occupation</label>
+									<input class="span9" id="occupation_FH" name="occupation_FH" type="text" value="{occupation_FH}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="marital_status">Marital Status</label>
+									<div class="span8 controls">   
+										<select name="marital_status" id="marital_status">
+											<option value='' selected="selected" />Please select
+											<option value='0' />Single
+											<option value='1'/>Married
+										</select>
+										<script type="text/javascript">
+										if("{marital_status}" != "")
+											$("#marital_status").val("{marital_status}");
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="passport">Passport</label>
+									<div class="span8 controls">   
+										<select name="passport" id="passport">
+											<option value='' selected="selected" />Please select
+											<option value='0' />Yes
+											<option value='1'/>No
+										</select>
+										<script type="text/javascript">
+										if("{passport}" != "")
+											$("#passport").val("{passport}");
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="internation_visa">International Visa (if any)</label>
+									<input class="span9" id="internation_visa" name="internation_visa" type="text" value="{internation_visa}" />
+								</div>
+							</div>
+						</div>
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<label class="form-label span3" for="reference_trans">Any Reference in Trans Form</label>
+									<div class="span9 controls">
+										<select id="e1" name="reference_trans" class="span4 nostyle">
+											 <option value="" selected="selected" />Please select</option>
+											<!--BeginFillEmployeeReference-->
+											<option value="{emp_id}">{emp_name}</option><!--EndFillEmployeeReference-->
+										</select>
+										<script type="text/javascript">
+										if("{reference_trans}" != "")
+											$("#e1").val("{reference_trans}");
+										</script>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+								   <label class="form-label span3" for="reference_trans">Resume</label>
+									<input type="file" name="file" size="50" value=''/><span style='padding-left:5px;'>{resume}</span>
+								</div>
+							</div>
+						</div>
+
+						
+						
+						<div class="form-row row-fluid">
+							<div class="span12">
+								<div class="row-fluid">
+									<div class="form-actions">
+									<div class="span3"></div>
+									<div class="span9 controls">
+										<button type="submit" class="btn marginR10" id='submit'>Save changes</button>
+										<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='candidates.php'">Back</button>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		
+<script type="text/javascript">
+$(document).ready(function(){
+$("#submit").click(function() 
+{
+	var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	var email = $("#email").val();
+	
+	if($("#des_id").val() == '')
+	{
+		alert('Please chose post name you applied for.');
+		$("#des_id").focus();
+		return false;
+	}
+	if($("#rctsource").val() == '')
+	{
+		alert('Please insert your rctsource.');
+		$("#rctsource").focus();
+		return false;
+	}
+	if($("#name").val() == '')
+	{
+		alert('Please insert your name.');
+		$("#name").focus();
+		return false;
+	}
+	if($("#address").val() == '')
+	{
+		alert('Please insert your address.');
+		$("#address").focus();
+		return false;
+	}
+	if($("#area").val() == '')
+	{
+		alert('Please insert your area and city.');
+		$("#area").focus();
+		return false;
+	}
+	if($("#dob").val() == '')
+	{
+		alert('Please insert your date of birth.');
+		$("#dob").focus();
+		return false;
+	}
+	/*if($("#email").val() == '')
+	{
+		alert('Please insert your email.');
+		$("#email").focus();
+		return false;
+	}*/
+	if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Please enter valid email.");
+			return false;
+		}
+	}
+	/*if($("#phnumber").val() == '')
+	{
+		alert('Please insert your phone number.');
+		$("#phnumber").focus();
+		return false;
+	}
+	if($("#expected_salary").val() == '')
+	{
+		alert('Please insert your expected salary.');
+		$("#expected_salary").focus();
+		return false;
+	}
+	if($("#marital_status").val() == '')
+	{
+		alert('Please insert your marital status.');
+		$("#marital_status").focus();
+		return false;
+		
+	}
+	if($("#passport").val() == '')
+	{
+		alert('Please chose passport.');
+		$("#passport").focus();
+		return false;
+		
+	}
+	if($("#expected_joining_date").val() == '')
+	{
+		alert('Please insert your expected date of joining.');
+		$("#expected_joining_date").focus();
+		return false;
+		
+	}*/
+});
+return true;
+});
+
+$(document).ready(function()
+	{
+	
+			$("#phnumber").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#totExperience").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#current_salary").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#expected_salary").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+			});
+			
+			$("#expected_joining_date,#dob").datepicker({
+				dateFormat: 'yy-mm-dd',
+				showOtherMonths:true
+			});
+	});
+	
+$(document).ready(function(){
+		$("#contact").keyup(function() {
+   		 $(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+ 		 });
+		
+	});
+	$(document).ready(function() { $("#e1").select2({
+		placeholder: "Select Please",
+		placeholderOption : 'first',
+		allowClear : true,
+		minimumInputLength: 2	 });
+	});
+</script>

@@ -1,0 +1,647 @@
+<!-- Build page from here: -->
+<input type="hidden" value="{session_designation}" name="session_designation" id="session_designation"/>
+
+<!--input type="hidden" value="{session_id}" name="session_id" id="session_id"/-->
+<input type="hidden" value="{leave_taker_designation}" name="designation" id="designation"/>
+
+
+<div class="row-fluid seperator">
+	<div class="span7">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Employee Name:</b></label>
+					<label class="form-label span4 clsleft">{emplo_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Reporting Head:</b></label>
+					<label class="form-label span5 clsleft">{reportingHead}</label>
+				</div>
+			</div>
+		</div>
+		<!--BeginPhLabel-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Use public holiday:</b></label>
+					<label class="form-label span3 clsleft">Yes</label>
+				</div>
+			</div>
+		</div>
+		<!--EndPhLabel-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>No of days:</b></label>
+					<label class="form-label span4 clsleft">{actual_nods}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Start date:</b></label>
+					<label class="form-label span5 clsleft">{new_start_date}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>End date:</b></label>
+					<label class="form-label span5 clsleft">{new_end_date}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Is Emergency:</b></label>
+					<label class="form-label span5 clsleft">{isemergency}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Reason:</b></label>
+					<label class="form-label span6 clsleft">{actual_reason}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Address While on Leave:</b></label>
+					<label class="form-label span5 clsleft">{leave_address}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>contact While on Leave:</b></label>
+					<label class="form-label span5 clsleft">{leave_contact}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span4"><b>Leave Apply Date:</b></label>
+					<label class="form-label span5 clsleft">{apply_actual_date}</label>
+				</div>
+			</div>
+		</div>
+		<form name="leaverequest" id="leaverequest" action="" method="post" onsubmit="javascript: return fnValidate();">
+			<input type="hidden" name="hdnaction" id="hdnaction" value="update">
+			<input type="hidden" name="hdnid" id="hdnid" value="{leaves_id}">
+			<input type="hidden" name="employeeid" id="employeeid" value="{employee_id}">
+			<input type="hidden" value="{isactive}" name="isactive" id="isactive"/>
+			<!--input type="hidden" value="{session_delegateTeamleader}" name="session_delegateTeamleader" id="session_delegateTeamleader"/-->
+			<!--input type="hidden" value="{session_delegateManager}" name="session_delegateManager" id="session_delegateManager"/-->
+			<!--input type="hidden" value="{actual_Teamleader}" name="actual_Teamleader" id="actual_Teamleader"/-->
+			<!--input type="hidden" value="{actual_Designation}" name="actual_Designation" id="actual_Designation"/-->
+			
+			<!--BeginDisplayDelegatedTeamLeaderBlock-->
+			<input type="hidden" name="deligateTeamLeaderId" id="deligateTeamLeaderId" value="{curdeligateTeamLeaderId}" />
+			<!--EndDisplayDelegatedTeamLeaderBlock-->
+			
+			<!--BeginDisplayDelegatedManagerBlock-->
+			<input type="hidden" name="deligateManagerId" id="deligateManagerId" value="{curdeligateManagerId}" />
+			<!--EndDisplayDelegatedManagerBlock-->
+			
+			<!--BeginFillTemaLeaderEditable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by TL:</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="status" id="status">
+								<option value="">Please select</option>
+								<option value="1">Approved</option>
+								<option value="2">Reject</option>
+							</select>
+						</div>
+						<script type="text/javascript">
+						if($('{leave_status}') != '')
+						{
+							$("#status").val("{leave_status}");
+						}
+					</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by TL:</b></label>
+						<textarea id="comment" class="span4 uniform" name="comment">{comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillTemaLeaderEditable-->
+			<!--BeginFillTemaLeaderReadable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by TL:</b></label>
+						<label class="form-label span4 clsleft">{status1}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by TL:</b></label>
+						<label class="form-label span4 clsleft">{comment1}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillTemaLeaderReadable-->
+			<!--BeginFillDeligationEditable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by delegate TL:</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="delegate_status" id="delegate_status">
+								<option value="">Please select</option>
+								<option value="1">Approved</option>
+								<option value="2">Reject</option>
+							</select>
+						</div>
+						<script type="text/javascript">
+							if($('{delegate_status}') != '')
+							{
+								$("#delegate_status").val("{delegate_status}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by delegate TL:</b></label>
+						<textarea id="delegate_comment" class="span4 uniform" name="delegate_comment">{delegate_comment}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillDeligationEditable-->
+
+			
+
+			<!--BeginFillDelegationReadable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by Delegate TL:</b></label>
+						<label class="form-label span4 clsleft">{status2}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by Delegate TL:</b></label>
+						<label class="form-label span4 clsleft">{comment2}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillDelegationReadable-->
+
+			<!--BeginFillManagerDeligationEditable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by delegate Manager:</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="manager_delegate_status" id="manager_delegate_status">
+								<option value="">Please select</option>
+								<option value="1">Approved</option>
+								<option value="2">Reject</option>
+							</select>
+						</div>
+						<script type="text/javascript">
+							if('{manager_delegate_status}' != '')
+							{
+								//alert("{manager_delegate_status}");
+								//alert({manager_delegate_status});
+								$("#manager_delegate_status").val("{manager_delegate_status}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by delegate Manager:</b></label>
+						<textarea id="manager_delegate_comment" class="span4 uniform" name="manager_delegate_comment">{comment3}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillManagerDeligationEditable-->
+
+			
+
+			<!--BeginFillManagerDelegationReadable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by Delegate Manager:</b></label>
+						<label class="form-label span4 clsleft">{status3}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by Delegate Manager:</b></label>
+						<label class="form-label span4 clsleft">{comment3}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillManagerDelegationReadable-->
+			
+			<!--BeginFillManagerEditable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by manager:</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="status_manager" id="status_manager">
+								<option value="">Please select</option>
+								<option value="1">Approved</option>
+								<option value="2">Reject</option>
+							</select>
+						</div>
+						
+						<script type="text/javascript">
+							//alert('{status_manager_readable}');
+						if($('{status_manager_readable}') != '')
+						{
+							$("#status_manager").val("{status_manager_readable}");
+						}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by manager:</b></label>
+						<textarea id="comment_manager" class="span4 uniform" name="comment_manager">{comment_manager_readable}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndFillManagerEditable-->
+			
+			<!--BeginFillDeligation-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Delegate to:</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="delegate" id="delegate">
+								<option value="">Please select</option>
+								<!--BeginFillDelegateEmployees-->
+								<option value="{delegated_employee_id}">{delegated_employee_name}</option>
+								<!--EndFillDelegateEmployees-->
+							</select>
+						</div>
+						<script type="text/javascript">
+						if($('{delegate}') != '')
+						{
+							$("#delegate").val("{delegate}");
+						}
+					</script>
+					</div>
+				</div>
+			</div>
+			<!--EndFillDeligation-->
+
+			<!--BeginFillManagerDeligation-->
+			<!--div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Delegate to(Manager):</b></label>
+						<div style="float: left;width: 210px;">
+							<select name="manager_delegate" id="manager_delegate" class="delegate">
+								<option value="">Please select</option-->
+								<!--BeginFillManagers-->
+								<!--option value="{id}">{name}</option-->
+								<!--EndFillManagers-->
+							<!--/select>
+						</div>
+						<script type="text/javascript">
+						/*if($('{manager_delegate}') != '')
+						{
+							//alert('{delegate}');
+							$("#manager_delegate").val("{manager_delegate}");
+						}*/
+					</script>
+					</div>
+				</div>
+			</div-->
+			<!--EndFillManagerDeligation-->
+
+			<!--BeginFillManagerReadable-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Status by manager:</b></label>
+						<label class="form-label span4 clsleft">{status_manager1}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Comment by manager:</b></label>
+						<label class="form-label span4 clsleft">{comment_manager1}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndFillManagerReadable-->
+			
+			<!--BeginDisplayAdminAddedBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Approval Status:</b></label>
+						<label class="form-label span4 clsleft">{status_manager1}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span4"><b>Approval Comment:</b></label>
+						<label class="form-label span4 clsleft">{comment_manager1}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span8"><b>This leave is added by admin</b></label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayAdminAddedBlock-->
+			
+			<!--BeginDisplayActionButtons-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span6 controls">
+								<button id="submit" class="btn btn-info marginR10" name="submit" type="submit">Save</button>
+								<button id="cancel" class="btn btn-info marginR10" onclick="window.location='leave_request.php'" name="cancel" type="button">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayActionButtons-->
+			<!--BeginDisplayBackButtons-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='leave_request.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayBackButtons-->
+		</form>
+	</div>
+	<div class="span5">
+		<div class="box">
+			<div class="title">
+				<h4> <span class="icon16 brocco-icon-list"></span> <span>Overall leave status of your team</span> </h4>
+				<a class="minimize" href="#" style="display: none;">Minimize</a> </div>
+			<div class="content">
+
+				<table class="responsive table table-bordered">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Days</th>
+							<th>Date</th>
+						</tr>
+					<!--BeginFillLeaveHistory-->
+					<tr>
+						<td>{empName}</td>
+						<td>{noofdays}</td>
+						<td>{hstart_date}<br/>{hend_date}</td>
+					</tr>
+					<!--EndFillLeaveHistory-->
+					<!--BeginFillNoLeaveHistory-->
+					<tr>
+						<td colspan="3">No record found.</td>
+					</tr>
+					<!--EndFillNoLeaveHistory-->
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="span5">
+		<div class="box">
+			<div class="title">
+				<h4> <span class="icon16 brocco-icon-list"></span> <span>Leave history of {emplo_name}</span> </h4>
+				<a class="minimize" href="#" style="display: none;">Minimize</a> </div>
+			<div class="content">
+				<label class="form-label span5"><b>Leave Balance:</b></label>{pending_leave}
+				<table class="responsive table table-bordered">
+					<thead>
+						<tr>
+							<th>Days</th>
+							<th>Dates</th>
+							<th>Status(TL)</th>
+							<th>Status(M)</th>
+
+						</tr>
+					<!--BeginFillLastThreeLeaves-->
+					<tr>
+						<td>{number_d}</td>
+						<td>{start_d}<br />
+						{end_d}</td>
+						<td>{Teamleader_status}</td>
+						<td>{manager_status}</td>
+					</tr>
+					<!--EndFillLastThreeLeaves-->
+					<!--BeginFillNoLastThreeLeaves-->
+					<tr>
+						<td colspan="4">No record found.</td>
+					</tr>
+					<!--EndFillNoLastThreeLeaves-->
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End .row-fluid -->
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#status_manager").change(function()
+	{
+		//alert($("#status_manager").val());
+		if ($("#status_manager").val() == '2' || $("#status_manager").val() == '0')
+		{
+			//alert("here"+$("#delegate").val());
+			$("#delegate").val('');
+			//alert($("#delegate").val());
+			$.uniform.update("#delegate");
+		}
+	});
+//alert('hello');
+//alert($("#status_manager").val());
+
+
+});
+
+
+function fnValidate()
+{
+	//alert($("#status_manager").val());
+	//alert($("#session_designation").val());
+
+	if(document.getElementById("status_manager") && $.trim($("#status_manager").val()) == "")
+	{
+		alert('Please select status.');
+		$("#status_manager").focus();
+		return false;
+	}
+	
+	if(document.getElementById("status") && $.trim($("#status").val()) == "")
+	{
+		alert('Please select status.');
+		$("#status").focus();
+		return false;
+	}
+	
+	if(document.getElementById("delegate_status") && $.trim($("#delegate_status").val()) == "")
+	{
+		alert('Please select status.');
+		$("#delegate_status").focus();
+		return false;
+	}
+
+	if(document.getElementById("manager_delegate_status") && $.trim($("#manager_delegate_status").val()) == "")
+	{
+		alert('Please select status.');
+		$("#manager_delegate_status").focus();
+		return false;
+	}
+	
+	if(document.getElementById("delegate"))
+	{
+		if(document.getElementById("status_manager"))
+		{
+			if($("#status_manager").val() == "1" && $("#delegate").val() == "")
+			{
+				alert("Please select the delegate");
+				$("#delegate").focus();
+				return false;
+			}
+			else if($("#status_manager").val() != "1" && $("#delegate").val() != "")
+			{
+				alert("Cannot select delegate if leave is not approved");
+				$("#delegate").focus();
+				return false;
+			}
+		}
+		else if(document.getElementById("manager_delegate_status"))
+		{
+			if($("#manager_delegate_status").val() == "1" && $("#delegate").val() == "")
+			{
+				alert("Please select the delegate");
+				$("#delegate").focus();
+				return false;
+			}
+			else if($("#manager_delegate_status").val() != "1" && $("#delegate").val() != "")
+			{
+				alert("Cannot select delegate if leave is not approved");
+				$("#delegate").focus();
+				return false;
+			}
+		}
+	}
+	
+	/*if($("#session_designation").val() == '17')
+	{
+		if(document.getElementById("manager_delegate"))
+		{
+			if($("#status_manager").val() == "1" )
+			{
+				if ($("#manager_delegate").val() == '')
+				{
+					alert('Please select delegate to Manager.');
+					return false;
+				}
+			}
+			else
+			{
+				//alert('else');
+				//alert($("#manager_delegate").val());
+				if ($("#manager_delegate").val() != '')
+				{
+					alert('Cannot delegate responsibility on reject.');
+					return false;
+				}
+			}
+		}
+	}
+	
+	if($("#status_manager").val() == "1" )
+	{
+		if(document.getElementById("delegate"))
+		{
+			if ($("#delegate").val() == '')
+			{
+				alert('Please select delegate to.');
+				return false;
+			}
+		}
+	}
+	if(($("#session_designation").val() == 6 || $("#session_designation").val() == 8 || $("#session_designation").val() == 17) &&  ($("#designation").val() == 7 || $("#designation").val() == 13))
+	{
+		if(document.getElementById("delegate"))
+		{
+			if ($("#status_manager").val() == "2")
+			{
+			//alert($("#delegate").val());
+				if ($("#delegate").val() != '')
+				{
+					alert('Cannot delegate responsibility on reject.');
+					return false;
+				}
+			}
+		}
+	}
+	if($("#session_delegateTeamleader").val() ==  $("#session_id").val())
+	{
+	
+		if ($("#delegate_status").val() == '0')
+		{
+	 			alert('Please select Status by delegate teamleader.');
+	 			$('#delegate_status').focus();
+				return false;
+		}
+	}*/
+	
+
+}
+</script>

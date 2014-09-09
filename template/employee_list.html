@@ -1,0 +1,63 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Employee list for reporting head : {employee_list_for}</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblEmployeeList">
+					<thead>
+						<tr>
+							<th>Employee code</th>
+							<th>Date of joining</th>
+							<th>Employee Name</th>
+							<th>Employee Contact</th>
+							<th>Reporting Head</th>
+							<th>Designation</th>
+							<th>Emergency Contact No.</th>
+							<th>Emergency Contact Person</th>
+							<th>E-Mail</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillEmployeeDetailsBlock-->
+						<tr class="odd gradeX {active}">
+							<td>{employee_code}</td>
+							<td style="white-space:nowrap;">{date_of_joining}</td>
+							<td>{name}</td>
+							<td>{employee_contact}</td>
+							<td>{reporting_head_name}</td>
+							<td>{designation_title}</td>
+							<td>{emergency_contact}</td>
+							<td>{emergency_contact_name} {contact_person_relation}</td>
+							<td>{email}</td>
+						</tr>
+						<!--EndFillEmployeeDetailsBlock-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblEmployeeList').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aoColumns": [
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null
+			]
+		});
+	});
+</script>
+

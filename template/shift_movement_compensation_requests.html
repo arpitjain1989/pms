@@ -1,0 +1,75 @@
+<form id="frmcompensationrequest" name="frmcompensationrequest" action="" method="post">
+	
+	<div class="row-fluid">
+		<div class="span12">
+			
+			<!--BeginDisplayMessageBlock-->
+			<div class="alert {message_class}">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>{message}</strong>
+			</div>
+			<!--EndDisplayMessageBlock-->
+
+			<div class="box gradient">
+				<div class="title">
+					<h4><span>Shift Movement Compensation Request</span></h4>
+				</div>
+				<div class="content noPad clearfix">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="example">
+						<thead>
+							<tr>
+								<th>Employee Name</th>
+								<th>Movement Date</th>
+								<th>Movement Time</th>
+								<th>Compensation Date</th>
+								<th>Compensation Time</th>
+								<!--th>Reporting Head Approval</th-->
+								<!--th>Options</th-->
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillShiftMovementsCompensation-->
+							<tr class="odd gradeX {trclass} {clsbold}">
+								<td>{employeename}</td>
+								<td>{movementdate}</td>
+								<td>{movementfrom} - {movementto}</td>
+								<td>{compensationdate}</td>
+								<td>{compensationfrom} - {compensationto}</td>
+								<!--td>{tlapproval}</td-->
+								<td style="white-space:nowrap;">
+									<!--a href="shift_movement_compensation_request_view.php?id={compensationid}" name="view" id="view" title="View Shift Movement Compensation Request" class="tip"><span class="icon12 brocco-icon-search"></span></a-->
+									<a href="shift_movement_compensation_request_view.php?id={compensationid}" name="view" id="view" title="View Shift Movement Compensation Request" class="tip">{final_status}</a>
+								</td>
+							</tr>
+							<!--EndFillShiftMovementsCompensation-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+<!-- End .row-fluid -->
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#example').dataTable({
+		"sPaginationType": "full_numbers",
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"bLengthChange": false,
+		"aaSorting": [[ 1, "desc" ]],
+		"aoColumns": [
+			null,
+			{ "sType": "date-uk" }, 
+			null,
+			{ "sType": "date-uk" }, 
+			null,
+			null
+		]
+	});
+});
+</script>

@@ -1,0 +1,89 @@
+		<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+		<form id="employee" name="employee" action="" method="post">
+		<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+		<span class="message">{message}</span>
+		<span class="right">
+			<a href="clients.add.php">
+				<h4>
+					<span class="icon16 entypo-icon-add"></span>
+					Add New Client
+				</h4>
+			</a>
+		</span>
+	<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4> <span>Clients table</span> </h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th><input type='checkbox' name='chkall' id='chkall' /></th>
+									<th>Name</th>
+									<th>Display Name</th>
+									<th>Email </th>
+									<th>Contact</th>
+									<th>Options</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillClientsValues-->
+								<tr class="odd gradeX">
+									<td><input type="checkbox" id="chk" name="chk[]" value="{id}" class="chkone"/></td>
+									<td>{name}</td>
+									<td>{display_name}</td>
+									<td>{email}</td>
+									<td>{contact}</td>
+									<td><a href="clients.view.php?id={id}" name="view" id="view" title="View Client" class="tip"><span class="icon12 brocco-icon-search"></span></a><a href="clients.add.php?id={id}&action=update" name="update" id="update" title="Update Client" class="tip"><span class="icon12 icomoon-icon-pencil-2"></span></a></td>
+								</tr>
+								<!--EndFillClientsValues-->
+							</tbody>
+							<!--BeginFillNoRecords-->
+							
+							<!--EndFillNoRecords-->
+						</table>
+						
+					</div>
+						<span class="btn btn-danger">
+							<span class="icon16 icomoon-icon-cancel-2 white"></span>
+							<input type="submit" name="delete" id="delete" value="Delete" />
+						</span>
+				</div>
+				<!-- End .box -->
+			</div>
+			<!-- End .span12 -->
+		</div>
+		</form>
+		<!-- End .row-fluid -->
+		
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#chkall").click(function(){
+
+			if($("#chkall").is(":checked"))
+			{
+				$(".chkone").attr("checked",$(this).attr("checked"));
+			}
+			else
+			{
+				$(".chkone").removeAttr("checked");
+				
+				$(".chkone").parents("span.checked").removeClass("checked");
+			}
+			
+			$("input[type='checkbox']").uniform();
+		});
+		
+		$(".chkone").click(function(){
+			if($(".chkone").length == $(".chkone:checked").length && $(".chkone:checked").length != 0)
+				$("#chkall").attr("checked","checked");
+			else
+				$("#chkall").removeAttr("checked");
+				
+			$("input[type='checkbox']").uniform();
+		});
+	});
+</script>

@@ -1,0 +1,31 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="content noPad clearfix flexiblewidth" id="demo">
+				<table cellpadding="2" cellspacing="1" border="1" class="responsive dynamicTable display table table-bordered" width="100%" id="tblHeadCountDetails">
+					<thead>
+						<tr>
+							<th>Employee Code</th>
+							<th>Employee Name</th>
+							<!--th>Reporting Head</th-->
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginDisplayEmployeesBlock-->
+						<tr>
+							<td>{employee_code}</td>
+							<td>{employee_name}</td>
+							<!--td>{reporting_head_name}</td-->
+						</tr>
+						<!--EndDisplayEmployeesBlock-->
+						<!--BeginDisplayNoRecordsBlock-->
+						<tr>
+							<td colspan='2' align='center'>No Records</td>
+						</tr>
+						<!--EndDisplayNoRecordsBlock-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

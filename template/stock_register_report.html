@@ -1,0 +1,79 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Stock Register Report Detail</span>
+					<a href="stock_register_report.php?type={type_id}&status={status_exp}&action=export" target="_blank">
+						<span style="float:right;margin-right:10px;width:auto;" class="icon16  entypo-icon-export" title="Export">&nbsp;Export</span>
+					</a>
+				</h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblStockRegisterList">
+					<thead>
+						<tr>
+							<th>Inventory Type</th>
+							<th>Inventory Make</th>
+							<th>Serial No</th>
+							<th>Unique Id</th>
+							<th>Location</th>
+							<th>Purchase date</th>
+							<th>Warranty</th>
+							<th>Warranty expiry</th>
+							<th>In Warranty</th>
+							<th>Status</th>
+							<th>Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillStockRegisterList-->
+						<tr class="odd gradeX">
+							<td>{type}</td>
+							<td>{make}</td>
+							<td>{serialno}</td>
+							<td>{uniqueid}</td>
+							<td>{location_name}</td>
+							<td>{purchasedate}</td>
+							<td>{warranty_text}</td>
+							<td>{warrenty_expiry}</td>
+							<td>{warranty_status_text}</td>
+							<td>{status_text}</td>
+							<td>
+								<a href="stock_register_report_view.php?id={id}" name="view" id="view" title="View Stock Register" class="tip">
+									<span class="icon12 brocco-icon-search"></span>
+								</a>
+							</td>
+						</tr>
+						<!--EndFillStockRegisterList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#tblStockRegisterList').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"iDisplayLength": 20,
+			"bLengthChange": false,
+			"aaSorting": [[ 4, "asc" ]],
+			"aoColumns": [
+				null,
+				null,
+				null,
+				null,
+				null,
+				{ "sType": "date-uk" },
+				null,
+				{ "sType": "date-uk" },
+				null,
+				null,
+				null
+			]
+		});
+	});
+</script>

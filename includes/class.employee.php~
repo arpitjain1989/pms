@@ -1,0 +1,893 @@
+<?php
+	include_once('db_mysql.php');
+	class employee extends DB_Sql
+	{
+		function __construct()
+		{
+		}
+
+		function fnInsertEmployee($arrEmployee)
+		{
+			//print_r($arrEmployee);die;
+			
+			$error = '';
+			if(isset($arrEmployee))
+			{
+			//print_r($arrEmployee);
+				if($arrEmployee['email'] != '')
+				{
+					$chkEmail = $this->fnCheckExist($arrEmployee,'insert','email');
+					if($chkEmail > 0)
+					{
+						$error .= 'Email already exists.<br />';
+					}
+				}
+				if($arrEmployee['username'] != '')
+				{
+					$chkUname = $this->fnCheckExist($arrEmployee,'insert','username');
+					if($chkUname > 0)
+					{
+						$error .= 'Username already exists.<br />';
+					}
+				}
+				if($arrEmployee['employee_code'] != '')
+				{
+					$chkEmp_code = $this->fnCheckExist($arrEmployee,'insert','employee_code');
+					if($chkEmp_code > 0)
+					{
+						$error .= 'Employee code already exists.<br />';
+					}
+				}
+				if($error == '')
+				{
+					$arrEmployee["password"] = md5($arrEmployee["password"]);
+					$this->insertArray('pms_employee',$arrEmployee);
+					return true;
+				}
+				else
+				{
+					$_SESSION['error'] = $error;
+					$_SESSION['arrEmp'] = $arrEmployee;
+					header("Location: employee.add.php?info=fail");
+					exit;
+				}
+			}
+		}
+
+		function fnCheckExist($arrEmployee,$action,$val)
+		{
+			if($action == 'insert')
+			{
+				$query = "SELECT `$val` FROM `pms_employee` WHERE `$val` = '".$arrEmployee[$val]."'";
+			}
+			else if($action == 'update')
+			{
+				$query = "SELECT `$val` FROM `pms_employee` WHERE `$val` = '".$arrEmployee[$val]."' AND `id`!='".$arrEmployee['id']."'";
+			}
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployeeValues[] = $this->fetchrow();
+				}
+			}
+			return count($arrEmployeeValues);
+		}
+
+		function fnGetAllEmployee()
+		{
+			$arrEmployeeValues = array();
+			$query = "SELECT * FROM `pms_employee`";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployeeValues[] = $this->fetchrow();
+				}
+			}
+			return $arrEmployeeValues;
+		}
+
+		function fnGetEmployeeById($id)
+		{
+			$arrEmployeeValues = array();
+			$query = "SELECT e . * , e.role, e.id AS emp_id, des.id AS des_id, d.id AS dep_id, des.title AS des_title, d.title AS dep_title, st.title AS shifttimings, e.teamleader, e1.id,e1.name as teamleader, e.designation, des.id, e.department,e.teamleader as teamleader_id
+FROM pms_employee AS e LEFT JOIN pms_employee AS e1 ON e.teamleader = e1.id LEFT JOIN pms_departments AS d ON e.department = d.id LEFT JOIN pms_designation AS des ON e.designation = des.id LEFT JOIN pms_shift_times st ON st.id = e.shiftid WHERE e.id = '".mysql_real_escape_string($id)."'";
+			//echo $query = "SELECT * ,role as role,employee.id AS emp_id,employee.teamleader as teamleader_id,designation.id as des_id,departments.id as dep_id, designation.title as des_title,departments.title as dep_title, st.title as shifttimings FROM `pms_employee` AS employee LEFT JOIN pms_departments AS departments ON employee.department =departments.id LEFT JOIN pms_designation AS designation ON employee.designation =designation.id LEFT JOIN pms_shift_times st ON st.id = employee.shiftid WHERE employee.id ='".mysql_real_escape_string($id)."'";
+			//$query = "SELECT * FROM `pms_employee` WHERE `id` = '".mysql_real_escape_string($id)."' ";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$arrEmployeeValues = $this->fetchrow();
+				}
+			}
+			return $arrEmployeeValues;
+		}
+
+		function fnUpdateEmployee($arrPost)
+		{
+			
+			//print_r($arrPost);die;
+			if(isset($arrPost["password"]) && $arrPost["password"] != '')
+			{
+				$arrPost["password"] = md5($arrPost["password"]);
+				//$this->updateArray('pms_admin',$arrPost);
+			}
+			else
+			{
+				unset($arrPost["password"]);
+			}
+			$error = '';
+			if(isset($arrPost))
+			{
+			//print_r($arrEmployee);
+				if($arrPost['email'] != '')
+				{
+					$chkEmail = $this->fnCheckExist($arrPost,'update','email');
+					if($chkEmail > 0)
+					{
+						$error .= 'Email already exists.<br />';
+					}
+				}
+				if($arrPost['username'] != '')
+				{
+					$chkUname = $this->fnCheckExist($arrPost,'update','username');
+					if($chkUname > 0)
+					{
+						$error .= 'Username already exists.<br />';
+					}
+				}
+				if($arrPost['employee_code'] != '')
+				{
+					$chkEmp_code = $this->fnCheckExist($arrPost,'update','employee_code');
+					if($chkEmp_code > 0)
+					{
+						$error .= 'Employee code already exists.<br />';
+					}
+				}
+				//echo $error; die;
+				if($error == '')
+				{
+						//echo 'hello1'; die;
+					$this->updateArray('pms_employee',$arrPost);
+					return true;
+				}
+				else
+				{
+					$_SESSION['error'] = $error;
+					header("Location: employee.add.php?id=".$arrPost['id']."&action=update&info=fail");
+					exit;
+				}
+			}
+		}
+
+		function fnUpdateProfile($arrPost)
+		{
+			
+			if(isset($arrPost["password"]) && $arrPost["password"] != '')
+			{
+				$arrPost["password"] = md5($arrPost["password"]);
+				//$this->updateArray('pms_admin',$arrPost);
+			}
+			else
+			{
+				unset($arrPost["password"]);
+			}
+			$error = '';
+			if(isset($arrPost))
+			{
+			//print_r($arrEmployee);
+				if($arrPost['email'] != '')
+				{
+					$chkEmail = $this->fnCheckExist($arrPost,'update','email');
+					if($chkEmail > 0)
+					{
+						$error .= 'Email already exists.<br />';
+					}
+				}
+				if($arrPost['username'] != '')
+				{
+					$chkUname = $this->fnCheckExist($arrPost,'update','username');
+					if($chkUname > 0)
+					{
+						$error .= 'Username already exists.<br />';
+					}
+				}
+				if($arrPost['employee_code'] != '')
+				{
+					$chkEmp_code = $this->fnCheckExist($arrPost,'update','employee_code');
+					if($chkEmp_code > 0)
+					{
+						$error .= 'Employee code already exists.<br />';
+					}
+				}
+				//echo $error; die;
+				if($error == '')
+				{
+						//echo 'hello1'; die;
+					$this->updateArray('pms_employee',$arrPost);
+					return true;
+				}
+				else
+				{
+					$_SESSION['error'] = $error;
+					header("Location: employee_profile.php?info=fail");
+					exit;
+				}
+			}
+		}
+
+		function fnDeleteEmployee($arrvalues)
+		{
+			if(isset($arrvalues[chk]))
+			{
+				foreach($arrvalues[chk] as $arrval)
+				{
+					$query = "DELETE FROM `pms_employee` WHERE `id` = '".mysql_real_escape_string($arrval)."'";
+					$this->query($query);
+				}
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		function fnGetDepartmentList()
+		{
+			$arrDepartments = array();
+			$query = "SELECT `id` as department_id, `title` as department_title FROM  `pms_departments`";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrDepartments[] = $this->fetchrow();
+				}
+			}
+			return $arrDepartments;
+		}
+
+		function fnGetDesignationList()
+		{
+			$arrDesignation = array();
+			$query = "SELECT `id` as designation_id, `title` as designation_title FROM  `pms_designation`";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrDesignation[] = $this->fetchrow();
+				}
+			}
+			return $arrDesignation;
+		}
+
+		/*function fnGetDepartmentName($name)
+		{
+			$arrDepName = array();
+			$query = "select `id` as dep_id FROM `pms_departments` WHERE `title` = '$name'";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrDepName[] = $this->fetchrow();
+				}
+			}
+			return $arrDepName;
+
+		}*/
+
+		/*function fnGetDesignationName($name)
+		{
+			$arrDesName = array();
+			$query = "select `id` as des_id FROM `pms_designation` WHERE `title` = '$name'";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrDesName[] = $this->fetchrow();
+				}
+			}
+			return $arrDesName;
+		}*/
+		function fnGetRole()
+		{
+			$arrRole = array();
+			$query = "select `id` as id,`title` as title FROM `pms_roles` ";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrRole[] = $this->fetchrow();
+				}
+			}
+			return $arrRole;
+		}
+
+		function fnGetEmployeeDetailById($id)
+		{
+			$arrEmployee = array();
+			$query = "select * FROM `pms_employee` WHERE id = '$id' ";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$arrEmployee = $this->fetchrow();
+				}
+			}
+			return $arrEmployee;
+		}
+
+		function fnGetEmployeesByDesignation($DesignationId = 0)
+		{
+			$arrEmployee = array();
+
+			$sSQL = "select * from pms_employee where designation in ($DesignationId)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployee[] = $this->fetchrow();
+				}
+			}
+
+			return $arrEmployee;
+		}
+
+		function fnGetEmployeeIdsByDesignation($DesignationId = 0)
+		{
+			$arrEmployee = array();
+
+			$sSQL = "select id from pms_employee where designation in ($DesignationId)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployee[] = $this->f("id");
+				}
+			}
+
+			return $arrEmployee;
+		}
+
+		function fnGetAllEmployeeByDesignationId($id)
+		{
+			$arrEmployee = array();
+			if($id == '5' || $id == '9' || $id == '10' || $id == '15' || $id == '16')
+			{
+				$query = "select `id` as employee_id,`name`  as employee_name FROM `pms_employee` WHERE designation in(7)";
+			}
+			else if($id == '7' || $id == '11' || $id == '12' || $id == '13')
+			{
+				$query = "select `id` as employee_id,`name`  as employee_name FROM `pms_employee` WHERE designation = '6'";
+			}
+			else if($id == '6')
+			{
+				$query = "select `id` as employee_id,`name`  as employee_name FROM `pms_employee` WHERE designation in (8, 17)";
+			}
+			else if($id == '14')
+			{
+				$query = "select `id` as employee_id,`name`  as employee_name FROM `pms_employee` WHERE designation = '13'";
+			}
+			//echo $query; die;
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployee[] = $this->fetchrow();
+				}
+			}
+			return $arrEmployee;
+		}
+
+		function fnGetReportingHead($id)
+		{
+			$query = "SELECT employee1.name as teamleadername FROM `pms_employee` AS employee INNER JOIN `pms_employee` AS employee1 ON employee.teamleader = employee1.id WHERE employee.id = '$id'";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$teamleader = $this->f('teamleadername');
+				}
+			}
+			if($teamleader != '')
+			{
+				return $teamleader;
+			}
+			else
+			{
+				return 0;
+			}
+		}
+
+		function fnGetReportingHeadById($id)
+		{
+			$query = "SELECT employee1.name as teamleadername FROM `pms_employee` AS employee INNER JOIN `pms_employee` AS employee1 ON employee.teamleader = employee1.id WHERE employee.id = '$id'";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$teamleader = $this->f('teamleadername');
+				}
+			}
+			if($teamleader != '')
+			{
+				return $teamleader;
+			}
+			else
+			{
+				$teamleader = 'Admin';
+				return $teamleader;
+			}
+		}
+
+		function fnGetReportingHeadId($id)
+		{
+			$TeamLeaderId = 0;
+
+			$sSQL = "SELECT teamleader FROM `pms_employee` WHERE id = '$id'";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$TeamLeaderId = $this->f('teamleader');
+				}
+			}
+			return $TeamLeaderId;
+		}
+
+		function fnGetReportingHeadDetails($id)
+		{
+			$query = "SELECT employee1.id as teamleaderid,employee1.email as eemail,employee1.name as ename FROM `pms_employee` AS employee INNER JOIN `pms_employee` AS employee1 ON employee.teamleader = employee1.id WHERE employee.id = '$id'";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$arrLeaveFormValues = $this->fetchrow();
+				}
+			}
+			return $arrLeaveFormValues;
+		}
+
+		function fnGetAllemployees($id)
+		{
+			$db = new DB_Sql;
+			$arrEmployees = array();
+
+			$cond = '';
+			if($id!=0)
+			{
+				$cond = " WHERE `teamleader`='$id'";
+			}
+
+			$query = "SELECT id FROM `pms_employee` $cond";
+			$db->query($query);
+
+			if($db->num_rows() > 0 )
+			{
+				while($db->next_record())
+				{
+					$arrEmployees[$db->f("id")] = $db->f("id");
+					if($id != $db->f("id"))
+					{
+						$tmpData = $this->fnGetAllemployees($db->f("id"));
+						$arrEmployees = $arrEmployees + $tmpData;
+					}
+				}
+			}
+
+			return $arrEmployees;
+		}
+
+		function fnGetDelegateEmployeeId($id)
+		{
+			$arrIds = array();
+			$date = date('Y-m-d');
+			$sSQL = "select `employee_id` from pms_leave_form where delegate='".$id."' and '$date' BETWEEN DATE_FORMAT(`start_date`,'%Y-%m-%d') AND DATE_FORMAT(`end_date`,'%Y-%m-%d')";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrIds[] = $this->f("employee_id");
+				}
+			}
+
+			return $arrIds;
+		}
+
+		function fnGetEmployeeByEmail($email)
+		{
+			$EmployeeId = 0;
+			$sSQL = "select id from pms_employee where email='".mysql_real_escape_string(trim($email))."'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$EmployeeId = $this->f("id");
+				}
+			}
+
+			return $EmployeeId;
+		}
+
+		function fnGetReportingHeads($EmployeeId)
+		{
+			$arrHeads = array();
+
+			$employeeInfo = $this->fnGetEmployeeDetailById($EmployeeId);
+
+			if($employeeInfo["teamleader"] != 0)
+			{
+				$employeeInfo = $this->fnGetEmployeeDetailById($employeeInfo["teamleader"]);
+
+				$arrHeads[] = array("name"=>$employeeInfo["name"],"email"=>$employeeInfo["email"]);
+
+				if($employeeInfo["teamleader"] != 0)
+				{
+					$employeeInfo = $this->fnGetEmployeeDetailById($employeeInfo["teamleader"]);
+
+					$arrHeads[] = array("name"=>$employeeInfo["name"],"email"=>$employeeInfo["email"]);
+				}
+			}
+
+			return $arrHeads;
+		}
+
+		function fnGetAllLeaveAvail($id)
+		{
+			$leaveBal = 0;
+			$sSQL = "select leave_bal from pms_employee where id='$id'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$leaveBal = $this->f("leave_bal");
+				}
+			}
+
+			return $leaveBal;
+		}
+
+		function fnGetEmployeeNameById($EmployeeId)
+		{
+			$EmployeeName = "";
+			$sSQL = "select name FROM `pms_employee` WHERE id = '$EmployeeId' ";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$EmployeeName = $this->f("name");
+				}
+			}
+			return $EmployeeName;
+		}
+
+		function fnGetEmployeeIdByName($EmployeeName)
+		{
+			$EmployeeId = 0;
+			$sSQL = "select id FROM `pms_employee` WHERE name = '".mysql_real_escape_string($EmployeeName)."' ";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$EmployeeId = $this->f("id");
+				}
+			}
+			return $EmployeeId;
+		}
+
+		function fnGetUnrosteredEmployees($employeeids)
+		{
+			$arrEmployee = array();
+
+			if(trim($employeeids) == "")
+				$employeeids = 0;
+
+			/* Fetch agents & tls */
+			$sSQL = "select id, teamleader from pms_employee where designation in (7,13,5,9,10,11,12,15,16) and id not in ($employeeids)";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployee[] = array("id"=>$this->f("id"), "tlid"=>$this->f("teamleader"));
+				}
+			}
+
+			return $arrEmployee;
+		}
+
+		function fnGetEmployeeShiftById($EmployeeId)
+		{
+			$EmployeeShiftId = "";
+			$sSQL = "select shiftid FROM `pms_employee` WHERE id = '$EmployeeId' ";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$EmployeeShiftId = $this->f("shiftid");
+				}
+			}
+			return $EmployeeShiftId;
+		}
+
+		function fnGetEmployeesByReportingHead($HeadId)
+		{
+			$arrEmployees = array();
+
+			$sSQL = "SELECT * FROM `pms_employee` where teamleader='".mysql_real_escape_string($HeadId)."' order by name";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0 )
+			{
+				while($this->next_record())
+				{
+					$arrEmployees[] = $this->fetchrow();
+				}
+			}
+
+			return $arrEmployees;
+		}
+
+		function fnGetEmployeesShiftByReportingHead($HeadId)
+		{
+			$shifts = array();
+
+			$sSQL = "select distinct shiftid from pms_employee where teamleader='".mysql_real_escape_string($HeadId)."'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$shifts[] = $this->f("shiftid");
+				}
+			}
+
+			return $shifts;
+		}
+		
+		function fnGetAllPhDetails($id)
+		{
+			$phs = array();
+			//$d = date_create();
+			//echo date_create($d->format('Y-m-1'))->format('Y-m-d');
+
+			$date = date('Y-m');
+			$start = $date.'-01';
+			$current_date = date('Y-m-d');
+			//echo $sSQL = "select id,title,holidaydate from pms_holidays where DATE_FORMAT(`holidaydate`,'%d-%m-%Y') between DATE_FORMAT('$start','%d-%m-%Y') and DATE_FORMAT('$current_date','%d-%m-%Y') ";die;
+			$sSQL = "select id,title,holidaydate from pms_holidays where DATE_FORMAT(`holidaydate`,'%Y-%m-%d') between '$start' and '$current_date'";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$phs[] = $this->f("holidaydate");
+				}
+			}
+		//print_r($phs);
+
+			return $phs;
+		}
+
+		function fnCheckPh($id,$phval)
+		{
+			$count = 0;
+			$query = "select in_time,out_time from `pms_attendance` where date_format(`date`,'%d-%m-%Y')=date_format('$phval','%d-%m-%Y') AND `user_id` = '$id' and ((`leave_id` != '10' and `in_time`!='00:00:00') or `in_time`!='00:00:00')";
+			$this->query($query);
+			if($this->num_rows() > 0)
+			{
+				if($this->next_record())
+				{
+					$in_time = $this->f("in_time");
+				}
+			}
+			if(count($in_time) > 0)
+			{
+				$count = count($in_time);
+			}
+			return $count;
+		}
+		
+		function fnCheckPhTakenOrLeave($id)
+		{
+			$count = 0;
+			$date = date('Y-m');
+			$start = $date;
+			$current_date = date('Y-m');
+			$month_end_date = $date;
+			$ids = array();
+			//echo $start;
+			//echo $current_date;
+			$count = 0;
+			//$query = "select id,nodays from `pms_leave_form` where (DATE_FORMAT(`start_date`,'%Y-%m') between '$start' and '$month_end_date' or DATE_FORMAT(`end_date`,'%Y-%m') between '$start' and '$month_end_date') and `ph`=1 and (`status_manager`='1' or (`status_manager`!= 2 and status = 1 ) or (`status_manager`= 0 and status = 0 ))";
+			$query = "select id,nodays from `pms_leave_form` where (DATE_FORMAT(`start_date`,'%Y-%m') between '$start' and '$month_end_date' or DATE_FORMAT(`end_date`,'%Y-%m') between '$start' and '$month_end_date') and `ph`=1 and `status_manager` IN(0,1)";
+			$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$ids[] = $this->f("id");
+					$count = $count + $this->f("nodays");
+				}
+			}
+			/*if(count($id) > 0)
+			{
+				$count = count($ids);
+			}*/
+		//	echo $count;
+			return $count;
+		}
+	
+		function fnGetAllTeamLeaders($id,$curdes,$session_des)
+		{
+			$arrAllTeamLeaders = array();
+		//	echo $id.'---'.$curdes.'======'.$session_des; die;
+			if(($session_des == 8 || $session_des == 17) && ($curdes == 6))
+			{
+				$query = "select id,name from `pms_employee` where designation = 6 and `id` != '$id'";
+			}
+			else 
+			{
+				$query = "select id,name from `pms_employee` where designation in (7,13) and `id` != '$id'";
+			}
+			//echo $query;
+				$this->query($query);
+
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrAllTeamLeaders[] = $this->fetchrow();
+				}
+			}
+
+			return $arrAllTeamLeaders;
+		}
+		
+		function fnGetDelegateTo($deligateTo)
+		{
+			$value = '';
+			$query = "SELECT name FROM `pms_employee` WHERE `id`='$deligateTo'";
+			$this->query($query);
+
+		if($this->num_rows() > 0)
+		{
+			if($this->next_record())
+			{
+				$value = $this->f('name');
+			}
+		}
+		return $value;
+		}
+		
+		function fnGetDirectReportingManagers()
+		{
+			$arrEmployee = array();
+
+			$sSQL = "select * from pms_employee where designation = '6' and id in (select distinct teamleader from pms_employee where designation in (5,9,10,11,12,15,16))";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployee[] = $this->fetchrow();
+				}
+			}
+
+			return $arrEmployee;
+		}
+
+		function fnGetTeamleadersByReportingHead($HeadId)
+		{
+			$arrEmployees = array();
+
+			$sSQL = "SELECT * FROM `pms_employee` where teamleader='".mysql_real_escape_string($HeadId)."' and designation in (7,13) order by name";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0 )
+			{
+				while($this->next_record())
+				{
+					$arrEmployees[] = $this->fetchrow();
+				}
+			}
+
+			return $arrEmployees;
+		}
+		
+		function fnGetAgentsByReportingHead($HeadId)
+		{
+			$arrEmployees = array();
+
+			$sSQL = "SELECT * FROM `pms_employee` where (teamleader='".mysql_real_escape_string($HeadId)."' or teamleader in (SELECT id FROM `pms_employee` where teamleader='".mysql_real_escape_string($HeadId)."' and designation in (7,13))) and designation in (5,9,10,11,12,14,15,16) order by name";
+			$this->query($sSQL);
+
+			if($this->num_rows() > 0 )
+			{
+				while($this->next_record())
+				{
+					$arrEmployees[] = $this->fetchrow();
+				}
+			}
+
+			return $arrEmployees;
+		}
+		
+		function fnGetEmployees($ManagerId, $TeamLeaderId, $AgentId, $shiftid, $startdate, $enddate)
+		{
+			$arrEmployee = array();
+			
+			if($AgentId != "" && $AgentId != 0)
+			{
+				$cond .= " and id='".mysql_real_escape_string($AgentId)."'";
+			}
+			else if($TeamLeaderId != "" && $TeamLeaderId != 0)
+			{
+				$cond .= " and teamleader='".mysql_real_escape_string($TeamLeaderId)."'";
+			}
+			else if($ManagerId != "" && $ManagerId != 0)
+			{
+				$cond .= " and (teamleader='".mysql_real_escape_string($ManagerId)."' or teamleader in (SELECT id FROM `pms_employee` where teamleader='".mysql_real_escape_string($ManagerId)."' and designation in (7,13)))";
+			}
+			
+			if($shiftid != "" && $shiftid != "0")
+			{
+				$cond .= " and id in (select distinct user_id from pms_attendance where shift_id = '".mysql_real_escape_string($shiftid)."' and date_format(date,'%Y-%m-%d') between '".mysql_real_escape_string($startdate)."' and '".mysql_real_escape_string($enddate)."')";
+			}
+
+			$sSQL = "select * from pms_employee where designation in (5,7,9,10,11,12,13,14,15,16) $cond order by name";
+			$this->query($sSQL);
+			if($this->num_rows() > 0)
+			{
+				while($this->next_record())
+				{
+					$arrEmployee[] = $this->fetchrow();
+				}
+			}
+			
+			return $arrEmployee;
+		}
+	}
+?>

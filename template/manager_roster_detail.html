@@ -1,0 +1,240 @@
+<!--BeginShowFormBlock-->
+<form name="frmmanagerroster" id="frmmanagerroster" class="form-horizontal seperator" method="post" action="manager_roster_detail.php">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box gradient">
+				<div class="title">
+					<h4><span>Weekly roster for {rosterforstr}</span></h4>
+				</div>
+				<div class="content noPad clearfix" style="overflow:scroll;">
+					<table id="rosterTable" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+						<thead>
+							<tr>
+								<th>Employee Name</th>
+								<!--BeginFillRosterDateBlock-->
+								<th>
+									{DisplayDate}
+									<input type="hidden" name="date_{curdt}" id="date_{curdt}" value="{dt}" />
+								</th>
+								<!--EndFillRosterDateBlock-->
+								<th>WeekOff</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillRosterInformation-->
+							<tr class="odd gradeX">
+								<td>{employeename}</td>
+								<!--BeginFillRosterDetails-->
+								<td>
+									<input type="hidden" name="shifttext_{employee_id}" id="shifttext_{employee_id}" value="{shifttext}" />
+									<span id="daystatus_{weekday}_{employee_id}" class="tip" title="{shiftinfo}">{daystatus}</span>
+									<input type="hidden" name="hdaystatus_{weekday}_{employee_id}" id="hdaystatus_{weekday}_{employee_id}" value="{daystatus}" />
+
+									<!--BeginDisplayWorkdayOption-->
+									<br/><span style="white-space:nowrap;">Working Day: <input type="checkbox" name="isworking_{weekday}_{employee_id}" id="isworking_{weekday}_{employee_id}" value="1" class="clsworkingday" {displayChecked} onclick="enche(this.value)"/></span><br />
+									<span id="span_{weekday}_{employee_id}"style="white-space:nowrap; display:none">Is Enche: <input type="checkbox" name="enche_{weekday}_{employee_id}" id="enche_{weekday}_{employee_id}" value="1" class="" {displayChecked} /></span>
+									<!--EndDisplayWorkdayOption-->
+
+									<!--BeginDisplayShiftChange-->
+									<br/>
+									<select id="shiftchange_{weekday}_{employee_id}" name="shiftchange_{weekday}_{employee_id}" {setdisabled}>
+										<!--BeginFillShiftChange-->
+										<option value="{shift_id}">{shift_name}</option>
+										<!--EndFillShiftChange-->
+									</select>
+									<script type="text/javascript">
+										if("{employeeshift}" != "")
+											$("#shiftchange_{weekday}_{employee_id}").val("{employeeshift}");
+									</script>
+									<!--EndDisplayShiftChange-->
+									<!--BeginDisplaySingleShift-->
+									<input type="hidden" id="shiftchange_{weekday}_{employee_id}" name="shiftchange_{weekday}_{employee_id}" value="{shift_id}" />
+									<!--EndDisplaySingleShift-->
+								</td>
+								<!--EndFillRosterDetails-->
+								<td>
+									<select name='weekoff_{employee_id}' id='weekoff_{employee_id}' onchange="javascript: fnchangeWeekoff($(this))" onclick="javascript: fnClickWeekOff($(this))">
+										<option value="0">Monday</option>
+										<option value="1">Tuesday</option>
+										<option value="2">Wednesday</option>
+										<option value="3">Thursday</option>
+										<option value="4">Friday</option>
+										<option value="5">Saturday</option>
+										<option value="6" selected='selected'>Sunday</option>
+									</select>
+								</td>
+							</tr>
+							<!--EndFillRosterInformation-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+	<div class="form-row row-fluid">
+		<div class="span12">
+			<div class="row-fluid">
+				<div class="form-actions">
+					<div class="span3"></div>
+					<div class="span4 controls">
+						<input type="hidden" name="action" id="action" value="SaveRoster" />
+						<input type="hidden" name="startdate" id="startdate" value="{startdate}" />
+						<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+						<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='manager_roster_list.php'">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script>
+	$(document).ready(function(){
+		$('#rosterTable').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"iDisplayLength": 100,
+			 "bFilter": false
+		});
+
+		$("input.clsworkingday").click(function(){
+			var arrids = $(this).attr("id").split("_");
+			if(document.getElementById("shiftchange_"+arrids[1]+"_"+arrids[2]))
+			{
+				if($(this).is(":checked"))
+				{
+					$("#shiftchange_"+arrids[1]+"_"+arrids[2]).removeAttr("disabled");
+				}
+				else
+				{
+					$("#shiftchange_"+arrids[1]+"_"+arrids[2]).attr("disabled","disabled");
+				}
+
+				$.uniform.update("#shiftchange_"+arrids[1]+"_"+arrids[2]);
+			}
+		});
+
+		$(".tip").qtip({
+			content: false,
+			position: {
+				my: 'bottom center',
+				at: 'top center',
+				viewport: $(window)
+			},
+			style: {
+				classes: 'ui-tooltip-tipsy'
+			}
+		});
+	});
+
+	function fnchangeWeekoff($obj)
+	{
+		var arrids = $obj.attr("id").split("_");
+
+		if($("#hdaystatus_"+$obj.val()+"_"+arrids[1]).val() == "P")
+		{
+			$("#daystatus_"+$obj.val()+"_"+arrids[1]).removeAttr("title").removeClass("tip").html("WO");
+			$("#daystatus_"+$obj.val()+"_"+arrids[1]).unbind();
+			$("#hdaystatus_"+$obj.val()+"_"+arrids[1]).val("WO");
+			
+			var displaystr = "";
+
+			/* Make ajax to check if PPL / PHL / SM added */
+			$.ajax({
+				url: 'fetch_leaveinformation.php',
+				data: 'id='+escape(arrids[1])+'&date='+escape($("#date_"+$obj.data("myval")).val()),
+				async: false,
+				success: function(data){
+					
+					displaystr = $.trim(data);
+					
+				}
+			});
+
+			/* if no leave / shift movement is added then swap weekof and p */
+			if(displaystr == "")
+			{
+				var tmpselect = $("#shiftchange_"+$obj.val()+"_"+arrids[1]).clone().attr("id","shiftchange_"+$obj.data("myval")+"_"+arrids[1]).attr("name","shiftchange_"+$obj.data("myval")+"_"+arrids[1]).removeAttr("style").addClass("adduniform");
+
+				//$("#shiftchange_"+$obj.val()+"_"+arrids[1]).remove();
+
+				$("#uniform-shiftchange_"+$obj.val()+"_"+arrids[1]).empty();
+				$("#uniform-shiftchange_"+$obj.val()+"_"+arrids[1]).remove();
+
+				$("#daystatus_"+$obj.data("myval")+"_"+arrids[1]).attr("title",$("#shifttext_"+arrids[1]).val()).addClass("tip").html("P").qtip({
+					content: false,
+					position: {
+						my: 'bottom center',
+						at: 'top center',
+						viewport: $(window)
+					},
+					style: {
+						classes: 'ui-tooltip-tipsy'
+					}
+				});
+				$("#hdaystatus_"+$obj.data("myval")+"_"+arrids[1]).val("P");
+
+				$("#hdaystatus_"+$obj.data("myval")+"_"+arrids[1]).after(tmpselect);
+				$("select.adduniform").uniform();
+				$("select.adduniform").removeClass("adduniform");
+			}
+			else
+			{
+				/* if an leave  / shift movement is taken, show that */
+				$("#daystatus_"+$obj.data("myval")+"_"+arrids[1]).html(displaystr);
+				$("#hdaystatus_"+$obj.data("myval")+"_"+arrids[1]).val(displaystr);
+
+				$("#uniform-shiftchange_"+$obj.val()+"_"+arrids[1]).empty();
+				$("#uniform-shiftchange_"+$obj.val()+"_"+arrids[1]).remove();
+			}
+		}
+		else
+		{
+			alert("Error: Week off can be added only on the days the employee is present");
+			$obj.val($obj.data("myval"));
+		}
+	}
+
+	function fnClickWeekOff($obj)
+	{
+		$obj.data("myval",$obj.val());
+	}
+	function enche(value)
+	{
+	//alert(value);
+	id = event.target.id;
+	encheId = id.replace("isworking","span");
+	//alert(encheId)
+	
+		if(value == 1)
+		{
+		$("#"+encheId).css("display","block");
+		}
+		else
+		{
+		$("#"+encheId).css("display","none");
+		}
+	
+	}
+
+</script>
+<!--EndShowFormBlock-->
+
+<!--BeginFormErrorBlock-->
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Weekly roster for {rosterforstr}</span></h4>
+			</div>
+		</div>
+		<div class="alert alert-error">
+			<strong>Roster already added for the upcomming week cannot add again.</strong>
+		</div>
+	</div>
+</div>
+<!--EndFormErrorBlock-->

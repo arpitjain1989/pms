@@ -1,0 +1,145 @@
+		<!-- Build page from here: -->
+		<div class="row-fluid">
+			<div class="span12">
+			<span style="color:#ED7A53;">{message}</span>
+				<form class="form-horizontal seperator" method="post" action="">
+				<input type="hidden" name="hdnaction" id="hdnaction" value="{action}" />
+				<input type="hidden" name="id" id="id" value="{id}" />
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="emp_code" class = "required">Billing Method:</label>
+							<input class="span4" name="title" id="title" type="text" value="{title}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="username" class = "required">Description:</label>
+							<input class="span4" name="description" id="description" type="text" value="{description}"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Main Billing Method:</label>
+							<Select name="root_id" id="root_id">
+							<option value="">Please select</option>
+							<!--BeginFillJob-->
+							<option value="{job_id}">{job_title}</option>
+							<!--EndFillJob-->
+							</Select>
+							<script type="text/javascript">
+							if($("{root_id}") != '')
+								$("#root_id").val("{root_id}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Has Target:</label>
+							<Select name="has_target" id="has_target">
+							<option value="0">Yes</option>
+							<option value="1">No</option>
+							</Select>
+							<script type="text/javascript">
+							if($("{has_target}") != '')
+								$("#has_target").val("{has_target}");
+							</script>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">target:</label>
+							<input class="span4" name="target" id="target" type="text" value="{target}" />
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<label class="form-label span3" for="name">Billable Hour:</label>
+							<input class="span4" name="billable_hour" id="billable_hour" type="text" value="{billable_hour}" />
+						</div>
+					</div>
+				</div> -->
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='job_type.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<!-- End .span12 -->
+		</div>
+		<!-- End .row-fluid -->
+		
+<script type="text/javascript">
+$(document).ready(function(){
+ var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+ var email = $("#email").val();
+$("#submit").click(function() 
+{
+	if($("#title").val() == '')
+	{
+		alert('Please insert Job Type.');
+		$("#title").focus();
+		return false;
+	}
+	if($("#description").val() == '')
+	{
+		alert('Please insert Description.');
+		$("#description").focus();
+		return false;
+	}
+	if($("#has_target").val() == '')
+	{
+		alert('Please select Has Target.');
+		$("#has_target").focus();
+		return false;
+	}
+	else if($("#has_target").val() != '')
+	{
+		if( $("#has_target").val() == '0' )  
+		{
+			if($("#target").val() == '')
+			{
+				alert('Please Insert Target.');
+				$("#has_target").focus();
+				return false;
+			}
+		}
+		else if($("#has_target").val() == '1')
+		{
+			if($("#target").val() != '')
+			{
+				alert('Plase Select Has Target yes first.');
+				$("#has_target").focus();
+				return false;
+			}
+		}
+	}
+	if($("#billable_hour").val() == '')
+	{
+		alert('Please insert Billable Hours.');
+		$("#billable_hour").focus();
+		return false;
+	}
+});
+return true;
+});
+</script>

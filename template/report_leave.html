@@ -1,0 +1,236 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form id="frmSearchAttendance" name="frmSearchAttendance" method="post" action="report_leave.php">
+
+			<input type="hidden" name="action" id="action" value="AttendanceSearch" />
+			<input type="hidden" name="team_member_id" id="team_member_id" value="{team_member}" />
+			<!--input type="hidden" name="agents_id" id="agents_id" value="{agents}" /-->
+			<input type="hidden" name="year" id="year" value="{year}" />
+			<input type="hidden" name="month" id="month" value="{month}" />
+
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Reporting Head:
+						</label>
+						<select name='reporting_head' id='reporting_head' onchange="javascript: fnChanageReportingHead();">
+							<option value=''>Please select</option>
+							 <!--BeginFillReportingHead-->
+							 <option value="{reporting_head_id}">{reporting_head_name}</option>
+							 <!--EndFillReportingHead-->
+						 </select>
+						 <script type="text/javascript">
+							if("{reporting_head}" != "")
+							{
+								$("#reporting_head").val("{reporting_head}");
+								$.uniform.update("#reporting_head");
+							}
+						 </script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Team Members:
+						</label>
+						<div id="divTeamMembers">
+							<select name='team_member' id='team_member'>
+								<option value=''>Please select</option>
+							 </select>
+						 </div>
+					</div>
+				</div>
+			</div>
+			<!--div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" for="agents">
+						Agents:
+						</label>
+						 <div id='divAgents'>
+							<select name='agents' id='agents'>
+								<option value=''>Please select</option>
+							 </select>
+						 </div>
+					</div>
+				</div>
+			</div-->
+			<!--<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Shifts:
+						</label>
+						<select name='shiftid' id='shiftid' onchange="javascript: fnChanageReportingHead();">
+							<option value=''>Please select</option>
+							 <!--BeginFillShiftInformation-->
+							<!-- <option value="{shift_id}">{shift_name}</option>
+							 <!--EndFillShiftInformation-->
+						<!-- </select>
+						 <script type="text/javascript">
+							if("{shiftid}" != "")
+								$("#shiftid").val("{shiftid}");
+						 </script>
+					</div>
+				</div>
+			</div>-->
+				<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Month:
+						</label>
+						<select name='month1' id='month1'>
+							<option value="01">January</option>
+							<option value="02">Feburary</option>
+							<option value="03">March</option>
+							<option value="04">April</option>
+							<option value="05">May</option>
+							<option value="06">June</option>
+							<option value="07">July</option>
+							<option value="08">August</option>
+							<option value="09">September</option>
+							<option value="10">October</option>
+							<option value="11">November</option>
+							<option value="12">December</option>
+						</select>
+						<script type="text/javascript">
+							if("{month1}" != "")
+							{
+							//alert("{month}")
+								$("#month1").val("{month1}");
+								//$.uniform.update("#month");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3">
+						Year:
+						</label>
+						<select name='year1' id='year1'>
+							<!--BeginDisplayYearBlock-->
+							<option value="{curyr}">{curyr}</option>
+							<!--EndDisplayYearBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{year1}" != "")
+							{
+								$("#year1").val("{year1}");
+								//$.uniform.update("#year");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" id="getdata" class="btn marginR10">Search</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='attendance.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<div class="row-fluid">
+			<div class="span12">
+				<div class="box gradient">
+					<div class="title">
+						<h4> <span>Attendance Information</span> </h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth" id="search_result" style="overflow:scroll;">
+						<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<th>Employee Name</th>
+									<th>Opening Leave Balance</th>
+									<th>Total Used Leave</th>
+									<th>Earned Leave</th>
+									<th>Closing Leave Balance</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillAttendanceInformation-->
+								<tr class="odd gradeX">
+									<td><a href="leave_history.php?id={employeeid}">{employeename}</a></td>
+									<td>{OpeningLeaveBalance}</td>
+									<td>{userLeave}</td>
+									<td>{EarnedLeave}</td>
+									<td>{ClosingLeaveBalance}</td>
+								</tr>
+								<!--EndFillAttendanceInformation-->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End .span12 -->
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		//$('#type').bind('change', function(ev) {});
+		$("#start_date,#end_date").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+		
+		$('#attendanceTbl').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"iDisplayLength": 200
+		});
+		
+		fnChanageReportingHead();
+		
+	});
+	
+	function fnChanageReportingHead()
+	{
+		$("#divTeamMembers").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+		$("#divTeamMembers").load("fill_data.php?action=fillteamleaders&reporting_headid="+escape($("#reporting_head").val())+"&year="+$("#year").val()+"&month="+$("#month").val(),"",function(data){
+			$("#team_member").val($("#team_member_id").val());
+			$("#team_member").uniform();
+
+			/*if($("#team_members").val() != "")
+			{
+				fnChangeTeamleader();
+			}
+			else
+			{
+				$("#divAgents").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+				$("#divAgents").load("fill_data.php?action=fillagents&managerid="+escape($("#manager").val()),"",function(data){
+					$("#agents").val($("#agents_id").val());
+					$("#agents").uniform();
+				});
+			}*/
+		});
+	}
+	
+	/*function fnChangeTeamleader()
+	{
+		$("#divAgents").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded'>");
+		$("#divAgents").load("fill_data.php?action=fillagents&teamleaderid="+escape($("#teamleader").val()),"",function(data){
+			$("#agents").val($("#agents_id").val());
+			$("#agents").uniform();
+		});
+	}*/
+	
+</script>

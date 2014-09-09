@@ -1,0 +1,111 @@
+<!-- Build page from here: -->
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Employee Name:</b><br>Select the employee name for reporting head history.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+<div class="row-fluid">
+	<div class="span12"> <span style="color:#ED7A53;">{message}</span>
+		<form class="form-horizontal seperator" method="post" action="report_head_history.php">
+			
+			<input type="hidden" name="hdnaction" id="hdnaction" value="search" />
+			<input type="hidden" name="userid" id="userid" value="{userid}" />
+			
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3" for="username" class = "required">
+						Employee Name:
+						</label>
+						<select id="e1" name="employee" class="span4 nostyle">
+							<option value="">Please select</option>
+							<!--BeginEmployeeValues-->
+							<option value="{empl_id}">{empl_name}</option>
+							<!--EndEmployeeValues-->
+						</select>
+						<script type="text/javascript">
+							if($('{employee}') != '')
+							{
+								$("#e1").val("{employee}");
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<button type="submit" id="getdata" class="btn marginR10">View</button>
+								<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--BeginInnerBlock-->
+		<div class="row-fluid">
+			<div class="span12">
+				<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+				<div class="box gradient">
+					<div class="title">
+						<h4><span>Employee table</span></h4>
+					</div>
+					<div class="content noPad clearfix flexiblewidth">
+						<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+							<thead>
+								<tr>
+									<!--th><input type='checkbox' name='chkall' id='chkall' /></th-->
+									<th>Employee Name</th>
+									<th>Reporting Head</th>
+									<th>Effective from</th>
+									<th>Options</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!--BeginFillEmployeeValues-->
+								<tr class="odd gradeX {active}">
+									<!--td><input type="checkbox" id="chk" name="chk[]" value="{emHistoryId}" class="chkone" /></td-->
+									<td>{employeeName}</td>
+									<td>{reportingHead}</td>
+									<td>{effectiveDate}</td>
+									<td><a href="report_head_history.add.php?id={emHistoryId}&action=update" name="update" id="update" title="Update Employee" class="tip"><span class="icon12 icomoon-icon-pencil-2"></span></a></td>
+								</tr>
+								<!--EndFillEmployeeValues-->
+							</tbody>
+						</table>
+					</div>
+					<!--span class="btn btn-danger">
+						<span class="icon16 icomoon-icon-cancel-2 white"></span>
+						<input type="submit" name="delete" id="delete" value="Delete" />
+					</span-->
+				</div>
+			</div>
+		</div>
+		<!--EndInnerBlock-->
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#e1").select2({
+		placeholder: "Select Please",
+		placeholderOption : 'first'
+	});
+});
+</script>

@@ -1,0 +1,173 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Vendor Name:</b><br>Enter the make of the vendor for the inventory.
+			</li>
+			<li>                                                    
+				<b>Contact Person.:</b><br>Enter the contact person of the vendor for the inventory.
+			</li>
+			<li>                                                    
+				<b>Contact No.:</b><br>Enter the contact no. of the vendor for the inventory.
+			</li>
+			<li>                                                    
+				<b>Address:</b><br>Enter the address of the vendor for the inventory.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frminventoryvendor" id="frminventoryvendor" class="form-horizontal seperator" method="post" action="inventory_vendor.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<input type="hidden" name="hcontact_person" id="hcontact_person" value="{hcontact_person}" />
+	<input type="hidden" name="hcontactno" id="hcontactno" value="{hcontactno}" />
+	<input type="hidden" name="haddress" id="haddress" value="{haddress}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Vendor Name:</label>
+					<input class="span4" name="vendor_name" id="vendor_name" type="text" value="{vendor_name}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="tblContactDetails">
+						<thead>
+							<tr>
+								<th>Contact Person</th>
+								<th>Contact No</th>
+								<th>Address</th>
+								<th>Option</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input class="span12" name="contact_person[]" id="contact_person_1" type="text" value="{contact_person}" />
+								</td>
+								<td>
+									<input class="span12" name="contactno[]" id="contactno_1" type="text" value="{contactno}" />
+								</td>
+								<td>
+									<textarea class="span12" name="address[]" id="address_1" type="text">{address}</textarea>
+								</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table><br/>
+					<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="javascript: fnAddContactRow();">Add New Contact</button>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="InventoryVendor" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='inventory_vendor_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	var k = 2;
+
+	$(document).ready(function(){
+		$("#contactno_1").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+		});
+		
+		if($.trim($("#hcontact_person").val()) != "" && $.trim($("#hcontactno").val()) != "" && $.trim($("#haddress").val()) != "")
+		{
+			var arrcontactperson = $.trim($("#hcontact_person").val()).split(",");
+			var arrcontactno = $.trim($("#hcontactno").val()).split(",");
+			var arraddress = $.trim($("#haddress").val()).split(",");
+			
+			$.each(
+				arrcontactperson,
+				function( intIndex, objValue ){
+					if(intIndex == 0)
+					{
+						curK = 1;
+					}
+					else
+					{
+						curK = k;
+						fnAddContactRow();
+					}
+
+					$("#contact_person_"+curK).val(objValue);
+					$("#contactno_"+curK).val(arrcontactno[intIndex]);
+					$("#address_"+curK).val(arraddress[intIndex]);
+				}
+			);
+		}
+	});
+
+	function fnAddContactRow()
+	{
+		var contact_person_entry = $("<input type='text'>").attr("name","contact_person[]").attr("id","contact_person_"+k).addClass("span12");
+		var contact_no_entry = $("<input type='text'>").attr("name","contactno[]").attr("id","contactno_"+k).addClass("span12").keyup(function() {
+			$(this).val($(this).val().replace(/[^\d()+-/ /,/]+/, ''));
+		});
+		var address_entry = $("<textarea>").attr("name","address[]").attr("id","address_"+k).addClass("span12");
+		var del_link = $("<a>").attr("title","Delete Contact").qtip({
+				content: false,
+				position: {
+					my: 'bottom center',
+					at: 'top center',
+					viewport: $(window)
+				},
+				style: {
+					classes: 'ui-tooltip-tipsy'
+				}
+			}).html($("<span>").addClass("icon12 silk-icon-trashcan").css("font-size","15px")).click(function(){
+				$(this).parents("tr").fadeOut('slow',function(){
+					$(this).remove();
+				});
+		});
+
+		var newtr = $("<tr>").append($("<td>").html(contact_person_entry)).append($("<td>").html(contact_no_entry)).append($("<td>").html(address_entry)).append($("<td>").css("vertical-align","middle").html(del_link));
+
+		$("#tblContactDetails").find("tr:last").after(newtr);
+		
+		k++;
+	}
+
+	function fnValidate()
+	{
+		if(!checkblank($("#vendor_name"),"Please enter Vendor Name")) return false;
+		
+		var flag = true;
+		
+		$("input[name='contact_person[]']").each(function(){
+			var curId = $(this).attr("id");
+			var arrId = curId.split("_");
+			var i = arrId.pop();
+			
+			if(!checkblank($("#contact_person_"+i),"Please enter Contact Person")) {flag = false; return false};
+			if(!checkblank($("#contactno_"+i),"Please enter Contact No.")) {flag = false; return false};
+			
+		});
+		
+		return flag;
+	}
+	
+</script>

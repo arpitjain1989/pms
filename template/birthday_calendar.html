@@ -1,0 +1,81 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+<form id="attendance" name="attendance" action="" method="post">
+	
+	<input type="hidden" name="type" id="type" value="{type}" />
+	<input type="hidden" name="requestedId" id="requestedId" value="{requestedId}" />
+	
+	
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box calendar gradient">
+				<div class="title">
+					<h4> <i class="icon16 brocco-icon-calendar"></i> <span>Calendar</span> </h4>
+					<!-- <a href="#" class="minimize">Minimize</a> -->
+				</div>
+				<div class="content noPad">
+					<div id="calendar"> </div>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+<!-- End .row-fluid -->
+<script type="text/javascript" src="plugins/fullcalendar/fullcalendar.min.js"></script>
+<script type="text/javascript">
+	
+	
+	$(function () {
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		//front page calendar
+		$('#calendar').fullCalendar({
+			//theme: true,
+			// weekends: false,
+			header: {
+				left: 'title,today',
+				center: 'prev,next',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			buttonText: {
+	        	prev: '<span class="icon24 icomoon-icon-arrow-left"></span>',
+	        	next: '<span class="icon24 icomoon-icon-arrow-right"></span>'
+	    	},
+			editable: false,
+			events: function(start, end, callback) {
+				var startstr = start.getFullYear()+"-"+zerofill((parseInt(start.getMonth(),10) + 1),2)+"-"+zerofill(start.getDate(),2);
+				var endstr = end.getFullYear()+"-"+zerofill((parseInt(end.getMonth(),10) + 1),2)+"-"+zerofill(end.getDate(),2);
+				//console.log("fetch_attendance_data.php?start"+startstr+"&end="+endstr+"&type="+$("#type").val()+"&requestedId="+$("#requestedId").val());
+				$.ajax({
+					url: './fetch_birthday_data.php',
+					dataType: 'json',
+					data: {
+						start:startstr,
+						end:endstr
+					},
+					success: function(doc) {
+						//console.log("fetch_attendance_data.php?start="+startstr+"&end="+endstr+"&type="+$("#type").val() + "&requestedId="+$("#requestedId").val());
+						var events = [];
+						$(doc).each(function() {
+							events.push({
+								id: $(this).attr('id'),
+								title: $(this).attr('title'),
+								start: $(this).attr('start'),
+								color: $(this).attr('color'),
+								textColor: "#000000"
+							});
+						});
+						callback(events);
+					}
+				});
+			},
+			viewDisplay: function(view) {
+				$("#calendar").find("td.fc-sun").css({"background":"none","background-color":"#E9DECC"});
+			}
+		});
+	});
+</script>

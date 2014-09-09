@@ -1,0 +1,74 @@
+<!-- Build page from here: Usual with <div class="row-fluid"></div> -->
+
+<form id="candidate_list" name="candidate_list" action="" method="post">
+	<input type="hidden" name="hdnaction" id="hdnaction" value="delete"/>
+	<div class="row-fluid">
+		<div class="span12">
+			<!--BeginDisplayMessageBlock-->
+				<div class="alert {message_class}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					<strong>{message}</strong>
+				</div>
+				<!--EndDisplayMessageBlock-->
+			<div class="box gradient">
+				<div class="title">
+					<h4> <span>Candidate List</span>
+						<!--BeginAllView-->
+						<a href="final_hr.php?info=all" style="float:right;margin-right:10px;">ALL</a>
+						<!--EndAllView-->
+						<!--BeginPendingView-->
+						<a href="final_hr.php?info=pending" style="float:right;margin-right:10px;">PENDING</a>
+						<!--EndPendingView-->
+					 </h4>
+				</div>
+				<div class="content noPad clearfix">
+					<table cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%" id="example">
+						<thead>
+							<tr>
+								<th><input type='checkbox' name='chkall' id='chkall' /></th>
+								<th>Name</th>
+								<th>Post Applied for</th>
+								<th>Date of Registration</th>
+								<th>Options</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillRctSheetValues-->
+							<tr class="odd gradeX">
+								<td><input type="checkbox" id="chk" name="chk[]" value="{cand_id}" class="chkone"/></td>
+								<td>{cand_name}</td>
+								<td>{des_title}</td>
+								<td>{registration_date}</td>
+								<td><a href="final_hr.update.php?id={cand_id}" name="update" id="update" title="Edit Candidate" class="tip"><span class="icon12 brocco-icon-search"></span></a></td>
+							</tr>
+							<!--EndFillRctSheetValues-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- End .box -->
+		</div>
+		<!-- End .span12 -->
+	</div>
+</form>
+<!-- End .row-fluid -->
+<!-- Page end here -->
+<script type="text/javascript">
+$(document).ready(function(){
+
+	$('#example').dataTable( {
+		"sPaginationType": "full_numbers",
+		"bJQueryUI": false,
+		"bAutoWidth": false,
+		"bLengthChange": false,
+		"aaSorting": [[ 3 , "desc" ]],
+		"aoColumns": [
+			null,
+			null,
+			null,
+			{ "sType": "date-uk" },
+			null
+		]
+	});
+});
+</script>

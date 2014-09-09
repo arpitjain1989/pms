@@ -1,0 +1,312 @@
+<div class="row-fluid seperator">
+	<div class="span12">
+		<!--BeginDisplayTicketInformationBlock-->
+		<form name="frmPendingTicket" id="frmPendingTicket" action="pending_ticket_view.php" method="post" onsubmit="javascript : return fnValidate();">
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Issue Category:</b></label>
+						<label class="form-label span3 clsleft">{issue_category}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Issue:</b></label>
+						<label class="form-label span3 clsleft">{issue}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>User Name:</b></label>
+						<label class="form-label span3 clsleft">{user_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting Head:</b></label>
+						<label class="form-label span3 clsleft">{reporting_head_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Priority:</b></label>
+						<label class="form-label span3 clsleft">{priority}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Ticket raised date time:</b></label>
+						<label class="form-label span3 clsleft">{ticket_raised_date}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Estimated resolution time:</b></label>
+						<label class="form-label span3 clsleft">{estimated_resolution_time}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Location:</b></label>
+						<label class="form-label span3 clsleft">{location_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Description:</b></label>
+						<label class="form-label span3 clsleft">{description}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Issue Status:</b></label>
+						<select name="status" id="status" onchange="javascript: fnChangeStatus();">
+							<option value="">Please select</option>
+							<!--BeginFillStatusBlock-->
+							<option value="{status_id}">{status_name}</option>
+							<!--EndFillStatusBlock-->
+						</select>
+						<script type="text/javascript">
+							if("{resolution_status}" != "")
+								$("#status").val("{resolution_status}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid" id="divAdditionalRequirements" style="display:none;">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Additional requirements:</b></label>
+						<select name="requirement_for" id="requirement_for" onchange="javascript: fnChangeRequirementFor();">
+							<option value="">Please select</option>
+							<option value="1">Time</option>
+							<option value="2">Asset</option>
+						</select>
+						<script type="text/javascript">
+							if("{requirement_for}" != "")
+								$("#requirement_for").val("{requirement_for}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid" id="divAdditionalTime" style="display:none;">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Additional time required:</b></label>
+						<input type="text" name="additional_time" id="additional_time" class="span3" value="{additional_time}" />
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid" id="divAdditionalAssets" style="display:none;">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Additional assets required:</b></label>
+						<select name="additional_asset" id="additional_asset">
+							<option value="">Please select</option>
+							<!--BeginFillAdditionalAssetsRequired-->
+							<option value="{additional_asset_id}">{additional_asset_name}</option>
+							<!--EndFillAdditionalAssetsRequired-->
+						</select>
+						<script type="text/javascript">
+							if("{additional_asset}" != "")
+								$("#additional_asset").val("{additional_asset}");
+						</script>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Remarks:</b></label>
+						<label class="form-label span3 clsleft">
+							<textarea name="remarks" id="remarks">{resolution_description}</textarea>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid" id="divReplaceItem">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Replace item:</b></label>
+						<select name="replace_item_id" id="replace_item_id" onchange="javascript: fnChangeReplaceItem();">
+							<option value="">Please select</option>
+							<!--BeginFillReplaceWithBlock-->
+							<option value="{location_inventory_id}">{location_inventory_type}</option>
+							<!--EndFillReplaceWithBlock-->
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid" id="divReplaceWith">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Replace with:</b></label>
+						<div id="divReplaceWithDropDown">
+							<select name="replace_with" id="replace_with">
+								<option value="">Please select</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<input type="hidden" name="action" id="action" value="UpdateResolutionStatus" />
+								<input type="hidden" name="ticket_id" id="ticket_id" value="{ticket_id}" />
+								<button type="submit" class="btn btn-info marginR10" name="back" id="back">Save</button>
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='pending_ticket_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--EndDisplayTicketInformationBlock-->
+		<!--BeginDisplayNoTicketInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>No ticket information found.</b></label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='pending_ticket_list.php'">Back</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayNoTicketInformationBlock-->
+	</div>
+</div>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		fnChangeStatus();
+	});
+
+	$("select").change(function(){$.uniform.update();});
+
+	function fnChangeStatus()
+	{
+		if($("#status").val() == "3")
+		{
+			/* In case of any additional requirements, display dropdown for the additional requirements for */
+			//$("#divAdditionalRequirements").show();
+			
+			/* Hide the blocks as ticket status is not resolved */
+			$("#divReplaceItem").hide();
+			$("#divReplaceWith").hide();
+			
+			$("#replace_item_id").val('');
+			$("#replace_with").val('');
+		}
+		else if($("#status").val() == "2")
+		{
+			/* Show replace item and replace with blocks when the ticket status is Resolved */
+			$("#divReplaceItem").show();
+			$("#divReplaceWith").show();
+			//$("#divAdditionalRequirements").hide();
+		}
+		else
+		{
+			//$("#divAdditionalRequirements").hide();
+			//alert(document.getElementById("requirement_for"));
+			//$("#requirement_for").val('');
+			//$.uniform.update("#requirement_for");
+			
+			/* Hide the blocks as ticket status is not resolved */
+			$("#divReplaceItem").hide();
+			$("#divReplaceWith").hide();
+			
+			$("#replace_item_id").val('');
+			$("#replace_with").val('');
+		}
+
+		/*fnChangeRequirementFor();*/
+	}
+
+	/*function fnChangeRequirementFor()
+	{
+		if($("#requirement_for").val() == "")
+		{
+			//If requirement for is not selected
+			$("#additional_time").val('');
+			$("#divAdditionalTime").hide();
+
+			$("#additional_assets").val('');
+			$("#divAdditionalAssets").hide();
+		}
+		else if($("#requirement_for").val() == "1")
+		{
+			//If additional time is needed
+			$("#divAdditionalTime").show();
+
+			$("#additional_assets").val('');
+			$("#divAdditionalAssets").hide();
+		}
+		else if($("#requirement_for").val() == "2")
+		{
+			//If additional assets are needed
+			$("#divAdditionalAssets").show();
+
+			$("#additional_time").val('');
+			$("#divAdditionalTime").hide();
+		}
+	}*/
+	
+	function fnChangeReplaceItem()
+	{
+		var replace_item_id = $("#replace_item_id").val();
+		
+		console.log("replace_item_id : "+replace_item_id);
+		$("#divReplaceWithDropDown").html("<img src='images/loaders/horizontal/063.gif' alt='Please wait while the data is loaded' style='margin-left:40%;'>");
+		$("#divReplaceWithDropDown").load("fill_stock_inventory_by_type.php?action=fillInventory&id="+escape(replace_item_id),"",function(){
+			$("#replace_with").uniform();
+		});
+	}
+	
+	function fnValidate()
+	{
+		if($("#status").val() == "2")
+		{
+			if($.trim($("#replace_item_id").val()) != "")
+			{
+				if(!checkblank($("#replace_with"),"Please select Replace with")) return false;
+			}
+		}
+		else if($("#status").val() == "3")
+		{
+			if(!checkblank($("#remarks"),"Please enter Remarks")) return false;
+		}
+	}
+
+</script>

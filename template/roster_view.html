@@ -1,0 +1,62 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4>
+					<span>Weekly roster from {startdate} to {enddate}</span>
+					<a href="print_roster.php?start={startdate}&end={enddate}&id={viewrosterid}" target="_blank">
+						<span style="float:right;margin-right:10px;" class="icon16 cut-icon-printer-2" title="Print Roster"></span>
+					</a>
+				</h4>
+			</div>
+			<div class="content noPad clearfix">
+				<table id="rosterTable" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Employee Name</th>
+							<!--BeginFillRosterDateBlock-->
+							<th>{DisplayDate}</th>
+							<!--EndFillRosterDateBlock-->
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillRosterInformation-->
+						<tr class="odd gradeX">
+							<td>{employeename}</td>
+							<!--BeginFillRosterDetails-->
+							<td style="white-space:nowrap"><span class="tip" title="{shiftinfo}">{daystatus}</span></td>
+							<!--EndFillRosterDetails-->
+						</tr>
+						<!--EndFillRosterInformation-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- End .box -->
+	</div>
+	<!-- End .span12 -->
+</div>
+<div class="form-row row-fluid">
+	<div class="span12">
+		<div class="row-fluid">
+			<div class="form-actions">
+				<div class="span3"></div>
+				<div class="span4 controls">
+					<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='roster_list.php'">Back</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+		$('#rosterTable').dataTable({
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"iDisplayLength": 100
+		});
+	});
+</script>

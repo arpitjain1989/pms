@@ -1,0 +1,76 @@
+<div class="row-fluid">
+	<div class="span12">
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Access rights for {designation}</span></h4>
+			</div>
+			<!--BeginDisplayIssueInformationBlock-->
+			<form name="frmissueaccess" id="frmissueaccess" method="post" action="issue_access_detail.php" onsubmit="javascript: return fnValidate();">
+				
+				<input type="hidden" name="designation_id" id="designation_id" value="{designation_id}" />
+				
+				<div class="content noPad clearfix">
+					<div class="form-row row-fluid">
+						<div class="span12">
+							<div class="row-fluid">
+								<label class="form-label span3">Issues:</label>
+								<label class="form-label span9 clsleft">
+									<!--BeginDisplayIssueCategory-->
+									<div>
+										<span><b>{issue_category_name}</b></span>
+										<!--BeginDisplayIssueBlock-->
+										<div class="marginL25">
+											<div>
+												<input type="checkbox" name="chkissue[]" id="chkissue_{issue_id}" value="{issue_id}" {setchecked} /> {issue_name}
+											</div>
+										</div>
+										<!--EndDisplayIssueBlock-->
+										<!--BeginDisplayNoIssueBlock-->
+										<div class="marginL25">No issues in this category.</div>
+										<!--EndDisplayNoIssueBlock-->
+										<br/>
+									</div>
+									<!--EndDisplayIssueCategory-->
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<div class="form-actions">
+								<div class="span3"></div>
+								<div class="span4 controls">
+									<input type="hidden" name="action" id="action" value="AllowIssueAccess" />
+									<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+									<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='dashboard.php'">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<script type="text/javascript">
+				function fnValidate()
+				{
+					if($("input[type='checkbox']:checked").length == 0)
+					{
+						alert("Please select at least 1 issue.");
+						return false
+					}
+				}
+			</script>
+			<!--EndDisplayIssueInformationBlock-->
+			<!--BeginDisplayNoIssueInformationBlock-->
+			<div class="content noPad clearfix">
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">No issue information found.</div>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoIssueInformationBlock-->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,424 @@
+<!-- Build page from here: -->
+<!--<span class="dropdown pull-right" style='margin-bottom:10px;'><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>
+				<b>Post Applied For:</b><br>Chose the post for you applyied.
+			</li>
+			<li>
+				<b>Advertisement Reference For:</b><br>Select the reference from you came.
+			</li>
+			<li>
+				<b>Full Name:</b><br>Enter your full name.
+			</li>
+			<li>
+				<b>Address:</b><br>Enter your permanent address.
+			</li>
+			
+			<li>
+				<b>Area & City:</b><br>Enter area and city where you live.
+			</li>
+			<li>
+				<b>Date of Birth:</b><br>Enter your birth date.
+			</li>
+			
+			<li>
+				<b>Email:</b><br>Enter your email.
+			</li>
+			<li>
+				<b>Mobile:</b><br>Enter your mobile number.
+			</li>
+			<li>
+				<b>Phone Number:</b><br>Enter your phone number.
+			</li>
+			<!--<li>
+				<b>Nationality:</b><br>Enter your Nationality.
+			</li>
+			<li>
+				<b>Native Place:</b><br>Enter your native place.
+			</li>
+			<li>
+				<b>Vehicle Number:</b><br>Enter your vehicle number.
+			</li>
+			<li>
+				<b>Emergency contact details : Details for emergency purpose</b>
+			</li>
+			<li>
+				<b>1. Name of the person :</b> Emergency contact person name
+			</li>
+			<li>
+				<b>2. Contact number :</b> Emergency contact person number
+			</li>
+			<li>
+				<b>3. Relationship status :</b> What relation you have with the emergency contact person 
+			</li>
+			<li>
+				<b>Qalification:</b><br>Enter ther qualification.
+			</li>
+			<li>
+				<b>Name of the Institute:</b><br>Name of institure where you complete your graduat or undergraduate in previous selection.
+			</li>
+			<li>
+				<b>Total Experience:</b><br>Enter total experience in digits or numbers only.
+			</li>
+			<li>
+				<b>Relevant Experience:</b><br>Enter Relevant Experience if any.
+			</li>
+			<li>
+				<b>Current Employer:</b><br>Enter Current Employer if any.
+			</li>
+			<li>
+				<b>Reporting to (Designation):</b><br>Enter your Reporting head name and his Designation of your current emloyer.
+			</li>
+			<li>
+				<b>Current Salary (Per Month):</b><br>Enter Current Salary Per Month.
+			</li>
+			<li>
+				<b>Expected Salary (Per Month):</b><br>Enter Expected Salary Per Month.
+			</li>
+			<!--<li>
+				<b>Expected Date of Joining:</b><br>Enter Expected Date of Joining in yyyy-mm-dd format like 2011-11-11.
+			</li>
+			<li>
+				<b>Father / Husband Occupation:</b><br>Enter your Father / Husband Occupation.
+			</li>
+			<li>
+				<b>Marital Status:</b><br>Select Marital Status.
+			</li>
+			<!--<li>
+				<b>Passport:</b><br>Chose you have password or not.
+			</li>
+			<li>
+				<b>Passport detials with expiry date:</b><br>Enter passport details with expiry date if you have a passport
+			</li>
+			<li>
+				<b>International Visa:</b><br>Enter International Visa if any.
+			</li>
+			<li>
+				<b>Pen card details:</b><br>Enter pen card details.
+			</li>
+			<li>
+				<b>Location:</b><br>Enter location.
+			</li>
+			<li>
+				<b>Any Reference in TransForm:</b><br>Enter name of any transform employee whom you know.
+			</li>
+		</ul>
+	</li>
+</ul></span>-->
+ <div class="row-fluid">
+
+                        <div class="span12">
+
+                            <div class="box">
+
+                                <div class="title">
+
+                                    <h4>
+                                        <span class="icon16 brocco-icon-grid"></span>
+                                        <span><b>                                    Personal History Form</span>
+                                    </h4>
+                                    
+                                </div>
+                                <div class="content">
+                                   
+                                    <form class="user_registration" id="user_registration" action="pers_history_form.php" method='post' enctype="multipart/form-data"/>
+                                    <input type='hidden' name='hdnaction' id='hdnaction' value='add' />
+                                    <input type="hidden" name="id" id="id" value="{e_id}" />
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="division">Name of the Team Member </label>
+                                                    {e_name}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="postApplied">Designation</label>
+                                                   {e_des}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="required">Reporting Head</label>
+                                                    {e_teamleader}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="dob">Date Of Birth</label> 
+                                                    <input class="span9" id="dob" name="dob" type="text" value="{e_dob}" readonly="readonly" style="cursor:pointer;"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="blood_group">Blood Group</label>
+                                                    <input class="span9" id="blood_group" name="blood_group" type="text" value="{e_bg}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phone_number">Contact Number(M)</label>
+                                                    <input class="span9" id="phone_number" name="phone_number" type="text" value="{e_mobile}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="contact">Contact Number(L)</label>
+													<input type="text" id="contact" name="contact" class="span9 text" value="{e_phone}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="email">Email</label>
+                                                    <input class="span9" id="official_email" name="official_email" type="text" value="{e_official_email}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="father_husband_name">Father/Husband Name</label>
+                                                    <input class="span9" id="father_husband_name" name="father_husband_name" type="text" value="{e_father_husband_name}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="phnumber">Emergency Contact  Details</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="e_contact_name">1. Name of the person </label>
+                                                    <input class="span9" id="emergency_contact_name" name="emergency_contact_name" type="text" value="{e_contact_name}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="e_contact_number">2. Contact Number</label>
+                                                    <input class="span9" id="emergency_contact" name="emergency_contact" type="text" value="{e_contact_number}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="relation">3. Relationship Status</label>
+                                                    <input class="span9" id="relation" name="relation" type="text" value="{e_emer_relation}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="nationality">Nationality</label>
+                                                    <input class="span9" id="nationality" name="nationality" type="text" value="{e_nationality}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="native_place">Native Place </label>
+                                                    <input class="span9" id="native_place" name="native_place" type="text" value="{e_native_place}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="vehicle_number">Vehicle Number </label>
+                                                    <input class="span9" id="vehicle_number" name="vehicle_number" type="text" value="{e_vehicle_no}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="passport_details">Passport Details with Expiry Date</label>
+                                                    <input class="span9" id="passport_details" name="passport_details" type="text" value="{e_passport}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="pan_card">Pan Card Details</label>
+                                                    <input class="span9" id="pan_card" name="pan_card" type="text" value="{e_pancard}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="location">Location</label>
+                                                    <input class="span9" id="location" name="location" type="text" value="{e_location}" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="current_address">Communication Address</label>
+                                                   <textarea id="current_address" name="current_address" class="span9 elastic uniform" rows="3" style="overflow: hidden; height: 71px;">{e_com_address}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+										<div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="address">Permanent Address </label>
+                                                   <textarea id="address" name="address" class="span9 elastic uniform" rows="3" style="overflow: hidden; height: 71px;">{e_per_address}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       <!-- <div class="form-row row-fluid">
+                                            <div class="span12">
+                                                <div class="row-fluid">
+                                                    <label class="form-label span3" for="occupation_FH">Father / Husband Occupation</label>
+                                                    <input class="span9" id="occupation_FH" name="occupation_FH" type="text" />
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-row row-fluid">
+											<div class="span12">
+												<div class="row-fluid">
+													<div class="form-actions">
+													<div class="span3"></div>
+													<div class="span9 controls">
+														<button type="submit" class="btn marginR10" id='submit'>Save changes</button>
+													</div>
+													</div>
+												</div>
+											</div>
+                                        </div>
+                                    </form>
+                                 
+                                </div>
+
+                            </div><!-- End .box -->
+
+                        </div><!-- End .span12 -->
+
+                    </div><!-- End .row-fluid -->  
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#dob").datepicker({
+					dateFormat: 'yy-mm-dd',
+					showOtherMonths:true,
+					changeYear:true,
+					changeMonth:true
+				});
+$("#submit").click(function() 
+{
+	/*var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+	var email = $("#email").val();
+
+	if($("#dev_id").val() == '')
+	{
+		alert('Please chose division name you want to apply.');
+		$("#dev_id").focus();
+		return false;
+	}
+	if($("#des_id").val() == '')
+	{
+		alert('Please chose post name you applied for.');
+		$("#des_id").focus();
+		return false;
+	}
+	if($("#rctsource").val() == '')
+	{
+		alert('Please insert your rctsource.');
+		$("#rctsource").focus();
+		return false;
+	}
+	else if($("#rctsource").val() == '0')
+	{
+		if($("#e1").val() == '')
+		{
+			alert('Please Enter employee name for the reference.');
+			$("#e1").focus();
+			return false;
+		}
+	}
+	if($("#name").val() == '')
+	{
+		alert('Please insert your name.');
+		$("#name").focus();
+		return false;
+	}
+	if($("#address").val() == '')
+	{
+		alert('Please insert your address.');
+		$("#address").focus();
+		return false;
+	}
+	if($("#area").val() == '')
+	{
+		alert('Please insert your area and city.');
+		$("#area").focus();
+		return false;
+	}
+	if($("#dob").val() == '')
+	{
+		alert('Please insert your date of birth.');
+		$("#dob").focus();
+		return false;
+	}
+	if($("#email").val() != '')
+	{
+		if( !emailReg.test( $("#email").val() ) ) 
+		{
+			$("#email").focus();
+			alert("Please enter valid email.");
+			return false;
+		}
+	}
+	if($("#mobile").val() == '')
+	{
+		alert('Please insert your mobile number.');
+		$("#mobile").focus();
+		return false;
+	}
+	if($("#marital_status").val() == '')
+	{
+		alert('Please insert your marital status.');
+		$("#marital_status").focus();
+		return false;
+		
+	}
+	if(! $('#checkbox').is(':checked'))
+		{
+        	alert("Please confirm the mention details!");
+			$("#checkbox").focus();
+			return false;
+		}*/
+});
+return true;
+});
+
+</script>

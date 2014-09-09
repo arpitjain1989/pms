@@ -1,0 +1,72 @@
+<span class="dropdown pull-right"><a href="#" class="dropdown-toggle" data-toggle="dropdown" id="helpbox">
+	<span class="icon16 entypo-icon-help"></span>Help
+</a>
+<ul class="dropdown-menu" style="top:35px;">
+	<li class="menu">
+		<ul>
+			<li>                                                    
+				<b>Holiday title:</b><br>Enter the title for the holiday.
+			</li>
+			<li>
+				<b>Holiday date:</b><br>Enter the date that is a holiday.
+			</li>
+		</ul>
+	</li>
+</ul></span>
+
+<form name="frmholiday" id="frmholiday" class="form-horizontal seperator" method="post" action="holiday.php" onsubmit="return fnValidate();" />
+
+	<input type="hidden" name="id" id="id" value="{id}" />
+
+	<div class="row-fluid">
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3">Holiday title:</label>
+					<input class="span4" name="title" id="title" type="text" value="{title}" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3" class = "required">
+					Holiday date:
+					</label>
+					<input class="span4" name="holidaydate" id="holidaydate" type="text" value="{holidaydate}" readonly="readonly" style="cursor:pointer;" />
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<input type="hidden" name="action" id="action" value="Holiday" />
+							<button type="submit" class="btn btn-info marginR10" name="submit" id="submit">Save</button>
+							<button type="button" class="btn btn-info marginR10" name="cancel" id="cancel" onclick="window.location='holiday_list.php'">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#holidaydate").datepicker({
+			dateFormat: 'yy-mm-dd',
+			showOtherMonths:true
+		});
+	});
+
+	function fnValidate()
+	{
+		if(!checkblank($("#title"),"Please enter Holiday title")) return false;
+		if(!checkblank($("#holidaydate"),"Please select Holiday date")) return false;
+	}
+	
+</script>

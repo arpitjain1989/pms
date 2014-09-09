@@ -1,0 +1,78 @@
+<!--BeginGatePassPrintScriptBlock-->
+<script type="text/javascript">
+	if("{server_url}" != "" && "{gatepass_for_stock_id}" != "")
+	{
+		printWin = window.open('{server_url}gatepass_print.php?id={gatepass_for_stock_id}',"Print Gatepass","width=200,height=100");
+	}
+</script>
+<!--EndGatePassPrintScriptBlock-->
+
+<span class="right">
+	<a href="stock_register.php">
+		<h4><span class="icon16 entypo-icon-add"></span>Add Stock</h4>
+	</a>
+</span>
+	
+<div class="row-fluid">
+	<div class="span12">
+
+		<!--BeginDisplayMessageBlock-->
+		<div class="alert {message_class}">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>{message}</strong>
+		</div>
+		<!--EndDisplayMessageBlock-->
+		
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Upload Stock Register CSV</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<div class="form-row row-fluid">
+					<div class="span12">
+						<div class="row-fluid">
+							<form name="frmUploadStockCSV" id="frmUploadStockCSV" method="post" action="stock_summary.php" enctype="multipart/form-data">
+								<label class="form-label span3">Stock CSV:</label>
+								<input type="file" name="stock_csv" id="stock_csv" />
+								<input type="hidden" name="action" id="action" value="UploadStockCsv" />
+								<button type="submit" class="btn btn-info marginR10" name="btnsubmit" id="btnsubmit">Upload</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="box gradient">
+			<div class="title">
+				<h4><span>Stock Register</span></h4>
+			</div>
+			<div class="content noPad clearfix flexiblewidth">
+				<table cellpadding="0" cellspacing="0" border="0" class="responsive dynamicTable display table table-bordered" width="100%">
+					<thead>
+						<tr>
+							<th>Inventory Type</th>
+							<th>Stock</th>
+							<th>In Use</th>
+							<th>Repair</th>
+							<th>Scrap</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--BeginFillStockRegisterSummaryList-->
+						<tr class="odd gradeX">
+							<td><a href="stock_register_list.php?type={type_id}" target="_blank">{type}</a></td>
+							<td><a href="stock_register_list.php?type={type_id}&status=0" target="_blank">{stock_count}</a></td>
+							<td><a href="stock_register_list.php?type={type_id}&status=1" target="_blank">{inuse_count}</a></td>
+							<td><a href="stock_register_list.php?type={type_id}&status=3" target="_blank">{repair_count}</a></td>
+							<td><a href="stock_register_list.php?type={type_id}&status=2" target="_blank">{scrap_count}</a></td>
+							<td><a href="stock_register_list.php?type={type_id}" target="_blank">{total_count}</a></td>
+						</tr>
+						<!--EndFillStockRegisterSummaryList-->
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,152 @@
+<form name="frmRequisitionRequest" id="frmRequisitionRequest" method="post" action="it_requisition_view.php" onsubmit="javascript: return fnValidate();">
+	<div class="row-fluid seperator">
+		<div class="span12">
+			<!--BeginDisplayRequisitionRequestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>User Name:</b></label>
+						<label class="form-label span3 clsleft">{name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Request For:</b></label>
+						<label class="form-label span3 clsleft">{requisition_for_title}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Project Name:</b></label>
+						<label class="form-label span3 clsleft">{project_name}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Remarks:</b></label>
+						<label class="form-label span3 clsleft">{remarks}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Requirement Type:</b></label>
+						<label class="form-label span3 clsleft">{request_type_text}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayTillDateBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Till Date:</b></label>
+						<label class="form-label span3 clsleft">{till_date}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayTillDateBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Approval Status:</b></label>
+						<label class="form-label span3 clsleft">{approval_status_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Reporting Head's Remarks:</b></label>
+						<label class="form-label span3 clsleft">{reporting_head_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<!--BeginDisplayDelegateViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate Approval Status:</b></label>
+						<label class="form-label span3 clsleft">{delegated_reporting_head_status_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Delegate Reporting Head's Remarks:</b></label>
+						<label class="form-label span3 clsleft">{delegated_reporting_head_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayDelegateViewBlock-->
+			<!--BeginDisplayItSupportViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>Requisition Closed:</b></label>
+						<label class="form-label span3 clsleft">{isclosed_text}</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>IT Support Remarks:</b></label>
+						<label class="form-label span3 clsleft">{it_support_remarks}</label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayItSupportViewBlock-->
+			<!--BeginEntryItSupportViewBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>IT Support Remarks:</b></label>
+						<textarea class="span3" name="it_support_remarks" id="it_support_remarks">{it_support_remarks}</textarea>
+					</div>
+				</div>
+			</div>
+			<!--EndEntryItSupportViewBlock-->
+			<!--EndDisplayRequisitionRequestInformationBlock-->
+			<!--BeginDisplayNoRequisitionRequestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<label class="form-label span3"><b>No requisition request information.</b></label>
+					</div>
+				</div>
+			</div>
+			<!--EndDisplayNoRequisitionRequestInformationBlock-->
+			<div class="form-row row-fluid">
+				<div class="span12">
+					<div class="row-fluid">
+						<div class="form-actions">
+							<div class="span3"></div>
+							<div class="span4 controls">
+								<!--BeginDisplaySubmitButtonBlock-->
+								<input type="hidden" name="id" id="id" value="{requisitionid}" />
+								<input type="hidden" name="action" id="action" value="CloseRequisition" />
+								<button type="submit" class="btn btn-info marginR10" name="btnSubmit" id="btnSubmit">Close Requisition</button>
+								<!--EndDisplaySubmitButtonBlock-->
+								<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='it_requisition_list.php'">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+	function fnValidate()
+	{
+		if(!checkblank($("#it_support_remarks"),"Please enter IT Support Remarks")) return false;
+	}
+</script>

@@ -1,0 +1,86 @@
+<!--<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/print.js"></script>-->
+
+<div id="printDiv">
+	<h3 style="text-align:center;">Shortlisted candidates</h3>
+	
+	<table cellpadding="1" cellspacing="0" border="0" width="100%" style="border:1px solid;font-size:14px;" id="example">
+		<tr bgcolor="#FFFFFF">
+			<th style="border:1px solid;">Name:</th>
+			<th  style="border:1px solid;">DOJ</th>
+			<th  style="border:1px solid;">Team Leader Name</th>
+			<th  style="border:1px solid;">Shift Time</th>
+			<th  style="border:1px solid;">Photos</th>
+			<th  style="border:1px solid;">SSC</th>
+			<th  style="border:1px solid;">HSC</th>
+			<th  style="border:1px solid;">LC</th>
+			<th  style="border:1px solid;">Graduation</th>
+			<th  style="border:1px solid;">PG</th>
+			<th  style="border:1px solid;">Additional Certificate</th>
+			<th  style="border:1px solid;">Id Proof</th>
+			<th  style="border:1px solid;">Address Proof</th>
+			<th  style="border:1px solid;">BGR</th>
+			<th  style="border:1px solid;">Pre. Co. Docs</th>
+		</tr>
+		<!--BeginDisplayJoineesInformationBlock-->
+		<tr bgcolor="#FFFFFF">
+			<td style="border:1px solid;">{emptitle}</td>
+			<td style="border:1px solid;">{exp_joining_date}</td>
+			<td style="border:1px solid;">{teamLeaderName}</td>
+			<td style="border:1px solid;">{recommendedShift}</td>
+			<td style="border:1px solid;">{photoes_class}</td>
+			<td style="border:1px solid;">{ssc_class}</td>
+			<td style="border:1px solid;">{hsc_class}</td>
+			<td style="border:1px solid;">{lc_class}</td>
+			<td style="border:1px solid;">{degree_class}{showNa4}</td>
+			<td style="border:1px solid;">{pg_class}{showNa5}</td>
+			<td style="border:1px solid;">{add_cert_class}</td>
+			<td style="border:1px solid;">{id_proof_class}{showNa7}</td>
+			<td style="border:1px solid;">{address_proof_class}{showNa8}</td>
+			<td style="border:1px solid;">{bgr_class}</td>
+			<td style="border:1px solid;">{prv_comp_doc_class}</td>
+		</tr>
+		<!--EndDisplayJoineesInformationBlock-->
+	</table>
+	
+</div>
+
+<!--<script type="text/javascript">
+	$(document).ready(function(){
+		$("#printDiv").print();
+	});
+</script>
+-->
+
+<script type="text/javascript">
+	window.print();
+/*$(document).ready(function(){
+	
+		$('#example').dataTable( {
+			"sPaginationType": "full_numbers",
+			"bJQueryUI": false,
+			"bAutoWidth": false,
+			"bLengthChange": false,
+			"aaSorting": [[ 1, "asc" ]],
+			"aoColumns": [
+				null,
+				{ "sType": "date-uk" }, 
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null,
+				null
+			]
+		});
+		
+	});
+	*/
+</script>

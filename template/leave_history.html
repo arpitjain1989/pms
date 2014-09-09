@@ -1,0 +1,36 @@
+<!--BeginTableValueFill-->
+<div class="row-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="box">
+				<div class="title">
+					<h4><span style="font-size:16px;"><b>{monthName} {year}</b></span> </h4>
+				</div>
+				<div class="content noPad" id="search_result">
+					<table id="attendanceTbl" cellpadding="0" cellspacing="0" border="0" class="responsive display table table-bordered" width="100%">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!--BeginFillLeaveInformation-->
+							<tr class="odd gradeX">
+								<td>{leave_date}</td>
+								<td>{leave_status}</td>
+							</tr>
+							<!--EndFillLeaveInformation-->
+							<!--BeginFillLeaveInformationNone-->
+							<tr class="odd gradeX">
+								<td colspan="5">No leaves taken</td>
+							</tr>
+							<!--EndFillLeaveInformationNone-->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--EndTableValueFill-->

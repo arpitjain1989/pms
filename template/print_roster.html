@@ -1,0 +1,32 @@
+<!--BeginDisplayRoster-->
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/print.js"></script>
+
+<div id="printDiv">
+	<h4>Weekly roster from {startdate} to {enddate}</h4>
+	<table cellpadding="3" cellspacing="1" border="0" width="100%" style="border:1px solid;">
+		<tr bgcolor="#FFFFFF">
+			<th style="border:1px solid;">Employee Name</th>
+			<!--BeginFillRosterDateBlock-->
+			<th style="border:1px solid;">{DisplayDate}</th>
+			<!--EndFillRosterDateBlock-->
+		</tr>
+		<!--BeginFillRosterInformation-->
+		<tr bgcolor="#FFFFFF">
+			<td style="border:1px solid;">{employeename}</td>
+			<!--BeginFillRosterDetails-->
+			<td style="white-space:nowrap;border:1px solid;" align="center"><b>{daystatus}</b><span style="font-size:12px;">{shiftinfo}</span></td>
+			<!--EndFillRosterDetails-->
+		</tr>
+		<!--EndFillRosterInformation-->
+	</table>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#printDiv").print();
+	});
+</script>
+<!--EndDisplayRoster-->
+<!--BeginDisplayNoRoster-->
+<div>Roster not found!</div>
+<!--EndDisplayNoRoster-->

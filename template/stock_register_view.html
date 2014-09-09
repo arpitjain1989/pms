@@ -1,0 +1,182 @@
+<div class="row-fluid seperator">
+	<div class="span12">
+		<!--BeginDisplayStockInformationBlock-->
+		<!--div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Item Name:</b></label>
+					<label class="form-label span3 clsleft">{item_name}</label>
+				</div>
+			</div>
+		</div-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Inventory Type:</b></label>
+					<label class="form-label span3 clsleft">{type}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Inventory Description:</b></label>
+					<label class="form-label span3 clsleft">{inventory_description}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Inventory Make:</b></label>
+					<label class="form-label span3 clsleft">{make}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Serial No.:</b></label>
+					<label class="form-label span3 clsleft">{serialno}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Unique Id.:</b></label>
+					<label class="form-label span3 clsleft">{uniqueid}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Inventory Location:</b></label>
+					<label class="form-label span3 clsleft">{location_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Vendor:</b></label>
+					<label class="form-label span3 clsleft">{vendor_name}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Inventory Attributes:</b></label>
+					<label class="form-label span3 clsleft">
+						<!--BeginDisplayInventoryAttributesBlock-->
+						<div><b>{inventory_attribute_name}</b> {inventory_sub_attribute_name}</div>
+						<!--EndDisplayInventoryAttributesBlock-->
+						
+						<!--BeginDisplayNoInventoryAttributesBlock-->
+						No inventory attributes selected
+						<!--EndDisplayNoInventoryAttributesBlock-->
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Purchase Date:</b></label>
+					<label class="form-label span3 clsleft">{purchasedate}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Invoice No.:</b></label>
+					<label class="form-label span3 clsleft">{invoice_no}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Warranty:</b></label>
+					<label class="form-label span3 clsleft">{warranty_text}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Warranty expiry:</b></label>
+					<label class="form-label span3 clsleft">{warrenty_expiry}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>In Warranty:</b></label>
+					<label class="form-label span3 clsleft">{warranty_status_text}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Status:</b></label>
+					<label class="form-label span3 clsleft">{status_text}</label>
+				</div>
+			</div>
+		</div>
+		<!--BeginDisplayRepairInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Sent to:</b></label>
+					<label class="form-label span3 clsleft">{sentto_vendor}</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Expected return date:</b></label>
+					<label class="form-label span3 clsleft">{expected_return_date}</label>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayRepairInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>Remarks:</b></label>
+					<label class="form-label span3 clsleft">{remarks}</label>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayStockInformationBlock-->
+		<!--BeginDisplayNoStockInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<label class="form-label span3"><b>No stock information.</b></label>
+				</div>
+			</div>
+		</div>
+		<!--EndDisplayNoStockInformationBlock-->
+		<div class="form-row row-fluid">
+			<div class="span12">
+				<div class="row-fluid">
+					<div class="form-actions">
+						<div class="span3"></div>
+						<div class="span4 controls">
+							<button type="button" class="btn btn-info marginR10" name="back" id="back" onclick="window.location='stock_register_list.php?type={inventory_type_id}'">Back</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
